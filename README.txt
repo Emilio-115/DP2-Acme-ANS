@@ -28,4 +28,5 @@ Planning for this project can be followed in its public GitHub project, in the f
 
 - Group tasks: https://github.com/users/Emilio-115/projects/3/views/3
 - Student 1 tasks: https://github.com/users/Emilio-115/projects/3/views/2
+- Student 2 tasks: https://github.com/users/Emilio-115/projects/3/views/4
 - Student 3 tasks: https://github.com/users/Emilio-115/projects/3/views/5
