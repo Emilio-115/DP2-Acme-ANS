@@ -23,3 +23,8 @@ the following resources:
 
 - **/fragments/**
  
+
+Planning for this project can be followed in its public GitHub project, in the following places:
+
+- Group tasks: https://github.com/users/Emilio-115/projects/3/views/3
+- Student 3 tasks: https://github.com/users/Emilio-115/projects/3/views/5
