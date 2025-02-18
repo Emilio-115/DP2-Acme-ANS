@@ -13,18 +13,19 @@ managing logistics for charter flights. This includes flight scheduling, booking
 crew management, incident reporting and resolution, as well as aircraft maintenance.
 
 It is based on a starter project, intended to be a core learning asset for the students
-who have enrolled the Design and Testing subject of the Software Engineering curriculum of the 
-University of Seville. This project helps them start working on their new information system 
+who have enrolled the Design and Testing subject of the Software Engineering curriculum of the
+University of Seville. This project helps them start working on their new information system
 projects.
 
 To get this project up and running, please follow the guideline in the theory/lab materials,
-taking into account that you must link the appropriate version of the Acme-Framework excluding 
+taking into account that you must link the appropriate version of the Acme-Framework excluding
 the following resources:
 
 - **/fragments/**
- 
+
 
 Planning for this project can be followed in its public GitHub project, in the following places:
 
 - Group tasks: https://github.com/users/Emilio-115/projects/3/views/3
+- Student 1 tasks: https://github.com/users/Emilio-115/projects/3/views/2
 - Student 3 tasks: https://github.com/users/Emilio-115/projects/3/views/5
