@@ -20,7 +20,10 @@
 	<acme:menu-left>
 		<acme:menu-option code="master.menu.anonymous" access="isAnonymous()">
 			<acme:menu-suboption code="master.menu.anonymous.favourite-link" action="http://www.example.com/"/>
-			<acme:menu-suboption code="master.menu.provider.student4-favourite-link" action="https://www.leagueoflegends.com/es-es/news/"/>
+			<acme:menu-suboption code="master.menu.anonymous.student1-favourite-link" action="https://eelslap.com/"/>
+			<acme:menu-suboption code="master.menu.anonymous.student2-favourite-link" action="https://cataas.com/"/>
+			<acme:menu-suboption code="master.menu.anonymous.student3-favourite-link" action="https://fasterthanli.me/"/>
+      <acme:menu-suboption code="master.menu.anonymous.student4-favourite-link" action="https://www.leagueoflegends.com/es-es/news/"/>
 		</acme:menu-option>
 
 		<acme:menu-option code="master.menu.administrator" access="hasRealm('Administrator')">
