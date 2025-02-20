@@ -15,6 +15,7 @@ master.menu.anonymous.favourite-link = Favourite link
 master.menu.anonymous.student1-favourite-link = FKR9503:Coronil Álvarez, José
 master.menu.anonymous.student2-favourite-link = 52078406N:Vázquez Cruz, Emilio Manuel
 master.menu.anonymous.student3-favourite-link = 31040387R:Milá de la Roca Dos Santos, Javier Ignacio
+master.menu.anonymous.student4-favourite-link = 77496014K:García Vizcaíno, Miguel
 
 # master.menu.administrator ###################################################
 
@@ -28,6 +29,7 @@ master.menu.administrator.shut-system-down = Shut system down
 
 master.menu.provider = Provider
 master.menu.provider.favourite-link = Favourite link
+
 
 # master.menu.consumer ##########################################################
 
