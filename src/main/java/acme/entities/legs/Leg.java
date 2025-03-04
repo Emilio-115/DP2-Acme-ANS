@@ -15,6 +15,7 @@ import javax.validation.Valid;
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
+import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidString;
 import acme.entities.aircrafts.Aircraft;
 import acme.entities.airlines.Airline;
@@ -43,15 +44,15 @@ public class Leg extends AbstractEntity {
 
 	@Mandatory
 	@ValidString(pattern = "^[0-9]{4}$")
-	private String				fightNumberDigits;
+	private String				flightNumberDigits;
 
 	@Mandatory
-	@Valid
+	@ValidMoment
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date				departureDate;
 
 	@Mandatory
-	@Valid
+	@ValidMoment
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date				arrivalDate;
 
@@ -61,16 +62,12 @@ public class Leg extends AbstractEntity {
 	private LegStatus			status;
 
 	@Mandatory
-
 	@Valid
-
 	@ManyToOne(optional = false)
 	private Airport				departureAirport;
 
 	@Mandatory
-
 	@Valid
-
 	@ManyToOne(optional = false)
 	private Airport				arrivalAirport;
 
@@ -97,6 +94,6 @@ public class Leg extends AbstractEntity {
 
 	@Transient
 	public String flightNumber() {
-		return this.airline.getIataCode() + this.fightNumberDigits;
+		return this.airline.getIataCode() + this.flightNumberDigits;
 	}
 }
