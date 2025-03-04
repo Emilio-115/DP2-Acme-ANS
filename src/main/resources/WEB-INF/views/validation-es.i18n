@@ -2,3 +2,5 @@
 
 acme.validation.phonenumber.message = Número de teléfono no válido
 acme.validation.iatacode.message = Código IATA no válido
+acme.validation.promotion-code.mismatch.message = El código de promoción ha de seguir el formato ABCD25
+acme.validation.promotion-code.last-two-digits-year.message = Los dos últimos dígitos del código de promoción han de ser del año actual
