@@ -1,12 +1,14 @@
 
-package acme.entities;
+package acme.entities.aircrafts;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.validation.Valid;
 
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
+import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
 import lombok.Getter;
@@ -30,32 +32,34 @@ public class Aircraft extends AbstractEntity {
 	 */
 	private static final long	serialVersionUID	= 1L;
 
-	@Automapped
 	@Mandatory
 	@ValidString(max = 50)
+	@Automapped
 	private String				model;
 
-	@Column(unique = true)
 	@Mandatory
 	@ValidString(max = 50)
+	@Column(unique = true)
 	private String				registrationNumber;
 
-	@Automapped
 	@Mandatory
 	@ValidNumber(min = 0)
+	@Automapped
 	private int					capacity;
 
-	@Automapped
 	@Mandatory
 	@ValidNumber(min = 2_000, max = 50_000)
+	@Automapped
 	private int					cargoWeight;
 
-	@Automapped
 	@Mandatory
+	@Valid
+	@Automapped
 	private AircraftStatus		status;
 
-	@Automapped
+	@Optional
 	@ValidString
+	@Automapped
 	private String				details;
 
 }
