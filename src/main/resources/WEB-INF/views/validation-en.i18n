@@ -3,3 +3,4 @@
 
 acme.validation.phonenumber.message = Invalid phone number
 acme.validation.iatacode.message = Invalid IATA code
+acme.validation.identifier.message = Invalid identifier
