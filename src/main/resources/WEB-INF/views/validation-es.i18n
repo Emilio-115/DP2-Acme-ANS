@@ -1,0 +1,4 @@
+# validation-es.i18n
+
+acme.validation.phonenumber.message = Número de teléfono no válido
+acme.validation.iatacode.message = Código IATA no válido
