@@ -46,6 +46,6 @@ public class Claim extends AbstractEntity {
 
 	@Mandatory
 	@Automapped
-	private boolean				indicator;
+	private boolean				isAccepted;
 
 }
