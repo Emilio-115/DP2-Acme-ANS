@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
@@ -33,10 +32,10 @@ public class Claim extends AbstractEntity {
 	@Mandatory
 	@ValidEmail
 	@Automapped
-	private String				email;
+	private String				passengerEmail;
 
 	@Mandatory
-	@ValidString(max = 255)
+	@ValidString
 	@Automapped
 	private String				description;
 
@@ -46,7 +45,7 @@ public class Claim extends AbstractEntity {
 	private ClaimType			type;
 
 	@Mandatory
-	@NotNull
-	private Boolean				validation;
+	@Automapped
+	private boolean				indicator;
 
 }
