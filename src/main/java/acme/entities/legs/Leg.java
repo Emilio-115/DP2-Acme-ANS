@@ -44,6 +44,7 @@ public class Leg extends AbstractEntity {
 
 	@Mandatory
 	@ValidString(pattern = "^[0-9]{4}$")
+	@Automapped
 	private String				flightNumberDigits;
 
 	@Mandatory
