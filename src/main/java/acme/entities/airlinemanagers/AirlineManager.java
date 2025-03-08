@@ -10,7 +10,7 @@ import acme.client.components.basis.AbstractRole;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.ValidMoment;
-import acme.client.components.validation.ValidString;
+import acme.constraints.ValidInitialsNumberIdentifier;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -36,10 +36,11 @@ public class AirlineManager extends AbstractRole {
 	private static final long	serialVersionUID	= 1L;
 
 	@Mandatory
-	@ValidString(pattern = "^[A-Z]{2-3}\\d{6}$")
+	@ValidInitialsNumberIdentifier
 	@Column(unique = true)
 	private String				identifier;
 
+	@Mandatory
 	@Automapped
 	private int					yearOfExpirience;
 
