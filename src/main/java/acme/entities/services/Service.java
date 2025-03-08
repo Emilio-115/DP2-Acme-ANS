@@ -54,6 +54,6 @@ public class Service extends AbstractEntity {
 	@Optional
 	@ValidMoney(min = 0)
 	@Automapped
-	private Money				recommended;
+	private Money				discount;
 
 }
