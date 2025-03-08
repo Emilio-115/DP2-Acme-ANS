@@ -4,3 +4,4 @@ acme.validation.phonenumber.message = Invalid phone number
 acme.validation.iatacode.message = Invalid IATA code
 acme.validation.promotion-code.mismatch.message = Promotion code does not follow format ABCD25
 acme.validation.promotion-code.last-two-digits-year.message = Promotion code's last two characters must be the current year's
+acme.validation.identifier.message = Invalid identifier
