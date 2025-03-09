@@ -53,4 +53,14 @@ public class Booking extends AbstractEntity {
 	@Automapped
 	private Integer				creditCardLastNibble;
 
+	//@Mandatory
+	//@Valid
+	//@ManyToOne
+	//private Customer customer;
+
+	//@Mandatory
+	//@Valid
+	//@ManyToOne
+	//private Flight flight;
+
 }
