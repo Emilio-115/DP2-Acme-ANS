@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>336</x>
-      <y>469</y>
+      <x>280</x>
+      <y>525</y>
       <w>364</w>
       <h>91</h>
     </coordinates>
@@ -17,14 +17,15 @@ Passenger
 +passportNumber: String {Mandatory,ValidPassportNumber,Automapped}
 +birthDate: Date {Mandatory,ValidMoment(past=true),Temporal(TIMESTAMP)}
 -specialNeeds: String {Optional,ValidString(max=50),Automapped}
-</panel_attributes>
+
+bg=green</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>308</x>
-      <y>35</y>
+      <x>252</x>
+      <y>91</y>
       <w>427</w>
       <h>112</h>
     </coordinates>
@@ -37,14 +38,15 @@ Customer
 +city: String {Mandatory,ValidString(max = 50), Automapped}
 +country: String {Mandatory,ValidString(max = 50), Automapped}
 -earnedPoints: String {Optional,ValidNumber(min = 0, max = 500000, fraction = 0),Automapped}
-</panel_attributes>
+
+bg=pink</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>315</x>
-      <y>210</y>
+      <x>259</x>
+      <y>266</y>
       <w>406</w>
       <h>91</h>
     </coordinates>
@@ -55,14 +57,16 @@ Booking
 +purchaseMoment: Date {Mandatory,ValidMoment(past=true),Automapped}
 +travelClass: TravelClass {Mandatory,Valid,Automapped}
 +price: Money {Mandatory,ValidMoney,Automapped}
--creditCardLastNibble: Integer {Optional,ValidNumber(min = 0, max = 9, fraction = 0)}</panel_attributes>
+-creditCardLastNibble: Integer {Optional,ValidNumber(min = 0, max = 9, fraction = 0)}
+
+bg=green</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>511</x>
-      <y>140</y>
+      <x>455</x>
+      <y>196</y>
       <w>70</w>
       <h>84</h>
     </coordinates>
@@ -75,8 +79,8 @@ made by &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>511</x>
-      <y>406</y>
+      <x>455</x>
+      <y>462</y>
       <w>91</w>
       <h>77</h>
     </coordinates>
@@ -89,20 +93,21 @@ associated to &gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>448</x>
-      <y>371</y>
+      <x>392</x>
+      <y>427</y>
       <w>147</w>
       <h>42</h>
     </coordinates>
     <panel_attributes>BookingRecord
--</panel_attributes>
+-
+bg=green</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>511</x>
-      <y>294</y>
+      <x>455</x>
+      <y>350</y>
       <w>91</w>
       <h>91</h>
     </coordinates>
@@ -115,8 +120,8 @@ associated to &gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>735</x>
-      <y>322</y>
+      <x>679</x>
+      <y>378</y>
       <w>406</w>
       <h>140</h>
     </coordinates>
@@ -132,14 +137,16 @@ Fligth
 +scheduledArrival(): Date
 +origin(): String
 +destiny(): String
-+numberOfLayovers(): int</panel_attributes>
++numberOfLayovers(): int
+
+bg=green</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>805</x>
-      <y>91</y>
+      <x>749</x>
+      <y>147</y>
       <w>112</w>
       <h>56</h>
     </coordinates>
@@ -147,14 +154,16 @@ Fligth
 TravelClass
 --
 ECONOMY
-BUSINESS</panel_attributes>
+BUSINESS
+
+bg=yellow</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>714</x>
-      <y>238</y>
+      <x>658</x>
+      <y>294</y>
       <w>245</w>
       <h>98</h>
     </coordinates>
