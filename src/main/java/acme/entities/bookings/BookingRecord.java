@@ -20,12 +20,12 @@ public class BookingRecord extends AbstractEntity {
 
 	@Mandatory
 	@Valid
-	@ManyToOne
+	@ManyToOne(optional = false)
 	private Booking				associatedBooking;
 
 	@Mandatory
 	@Valid
-	@ManyToOne
+	@ManyToOne(optional = false)
 	private Passenger			associatedPassenger;
 
 }
