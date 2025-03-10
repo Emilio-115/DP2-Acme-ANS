@@ -1,0 +1,55 @@
+
+package acme.constraints;
+
+import javax.validation.ConstraintValidatorContext;
+
+import acme.client.components.validation.AbstractValidator;
+import acme.client.components.validation.Validator;
+import acme.entities.trackingLogs.TrackingLog;
+import acme.entities.trackingLogs.TrackingLogStatus;
+
+@Validator
+public class TrackingLogValidator extends AbstractValidator<ValidTrackingLog, TrackingLog> {
+
+	@Override
+	protected void initialise(final ValidTrackingLog annotation) {
+		assert annotation != null;
+	}
+
+	@Override
+	public boolean isValid(final TrackingLog TL, final ConstraintValidatorContext context) {
+		assert context != null;
+
+		boolean result;
+
+		if (TL == null)
+			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
+		else {
+			TrackingLogStatus TLstatus = TL.getStatus();
+			{
+				double percentage = TL.getResolutionPercentage();
+				boolean correctStatusCompleted = percentage < 100.00 && TLstatus == TrackingLogStatus.PENDING;
+				boolean correctStatusUncompleted = percentage >= 100.00 && TLstatus != TrackingLogStatus.PENDING;
+
+				boolean correctStatus = correctStatusCompleted || correctStatusUncompleted;
+
+				super.state(context, correctStatus, "*", "acme.validation.job.duplicated-ticker.message");
+
+			}
+			{
+				String resolutionDescription = TL.getResolution();
+				boolean correctDescriptionCompleted = TLstatus != TrackingLogStatus.PENDING && resolutionDescription != "";
+				boolean correctDescriptionUncompleted = TLstatus == TrackingLogStatus.PENDING && resolutionDescription == "";
+
+				boolean correctDescription = correctDescriptionCompleted || correctDescriptionUncompleted;
+
+				super.state(context, correctDescription, "*", "acme.validation.job.duplicated-ticker.message");
+			}
+		}
+
+		result = !super.hasErrors(context);
+
+		return result;
+	}
+
+}

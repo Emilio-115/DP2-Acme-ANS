@@ -15,6 +15,7 @@ import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidScore;
 import acme.client.components.validation.ValidString;
+import acme.constraints.ValidTrackingLog;
 import acme.entities.claims.Claim;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,9 +23,10 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@ValidTrackingLog
 public class TrackingLog extends AbstractEntity {
 
-	private static final long	serialVersionUID		= 1L;
+	private static final long	serialVersionUID	= 1L;
 
 	@Mandatory
 	@ValidMoment(past = true)
@@ -39,7 +41,7 @@ public class TrackingLog extends AbstractEntity {
 	@Mandatory
 	@ValidScore
 	@Automapped
-	private Double				resolution;
+	private double				resolutionPercentage;
 
 	@Mandatory
 	@Valid
@@ -49,7 +51,7 @@ public class TrackingLog extends AbstractEntity {
 	@Mandatory
 	@ValidString
 	@Automapped
-	private String				resolutionDescription	= "";
+	private String				resolution;
 
 	@Mandatory
 	@Valid
