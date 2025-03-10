@@ -11,6 +11,7 @@ import acme.client.components.datatypes.Money;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
+import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidString;
 import acme.constraints.ValidInitialsNumberIdentifier;
 import acme.constraints.ValidPhoneNumber;
@@ -47,7 +48,7 @@ public class FlightCrewMember extends AbstractEntity {
 	private String								phoneNumber;
 
 	@Mandatory
-	@ValidString(max = 255)
+	@ValidString
 	@Automapped
 	private String								languageSkills;
 
@@ -62,7 +63,7 @@ public class FlightCrewMember extends AbstractEntity {
 	private Airline								employerAirline;
 
 	@Mandatory
-	@Valid
+	@ValidMoney
 	@Automapped
 	private Money								salary;
 
