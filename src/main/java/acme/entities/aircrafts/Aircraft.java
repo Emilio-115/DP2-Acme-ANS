@@ -3,6 +3,8 @@ package acme.entities.aircrafts;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+
 import javax.validation.Valid;
 
 import acme.client.components.basis.AbstractEntity;
@@ -11,6 +13,7 @@ import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
+import acme.entities.airlines.Airline;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,7 +25,7 @@ public class Aircraft extends AbstractEntity {
 	/**
 	 * An aircraft is a vehicle designed for air travel that belongs to an airline and is used to transport passengers
 	 * between cities or countries. The system must store the following data about them:
-	 * 
+	 *
 	 * Model (up to 50 characters)
 	 * Registration number (unique, up to 50 characters)
 	 * Its capacity as a number of passengers
@@ -61,5 +64,10 @@ public class Aircraft extends AbstractEntity {
 	@ValidString
 	@Automapped
 	private String				details;
+
+	@Mandatory
+	@Valid
+	@ManyToOne(optional = false)
+	private Airline				airline;
 
 }
