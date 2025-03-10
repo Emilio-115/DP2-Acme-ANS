@@ -1,4 +1,4 @@
 key,identifier,phoneNumber,physicalAddress,city,country,earnedPoints,key:user-account
-customer-01,RUE656720,+111111,887 Weeping Birch Trail,El Banco,Colombia,500000,user-account-customer-01
+customer-01,RUE656720,+100000,887 Weeping Birch Trail,El Banco,Colombia,500000,user-account-customer-01
 customer-02,KTM264651,+999999999999999,61 John Wall Place,Salingogan,Philippines,"",user-account-customer-02
-customer-03,HO150828,12345678,21 Continental Junction,San Antonio de Los Altos,Venezuela,2500,user-account-customer-03
+customer-03,IJN584872,100001,21 Continental Junction,San Antonio de Los Altos,Venezuela,2500,"user-account-customer-03"
