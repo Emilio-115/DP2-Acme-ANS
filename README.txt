@@ -33,7 +33,7 @@ D01
 - Student 1 tasks: https://github.com/users/Emilio-115/projects/3/views/2
 - Student 2 tasks: https://github.com/users/Emilio-115/projects/3/views/4
 - Student 3 tasks: https://github.com/users/Emilio-115/projects/3/views/5
-- Student 4 tasks: https://github.com/users/Emilio-115/projects/3/views/10
+- Student 4 tasks: https://github.com/users/Emilio-115/projects/3/views/6
 
 D02
 ###############
@@ -42,4 +42,4 @@ D02
 - Student 1 tasks: 
 - Student 2 tasks: https://github.com/users/Emilio-115/projects/3/views/8
 - Student 3 tasks: 
-- Student 4 tasks: https://github.com/users/Emilio-115/projects/3/views/6
+- Student 4 tasks: https://github.com/users/Emilio-115/projects/3/views/10
