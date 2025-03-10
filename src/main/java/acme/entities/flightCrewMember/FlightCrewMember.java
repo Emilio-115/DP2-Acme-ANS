@@ -24,17 +24,6 @@ import lombok.Setter;
 @Setter
 public class FlightCrewMember extends AbstractEntity {
 
-	/**
-	 * An aircraft is a vehicle designed for air travel that belongs to an airline and is used to transport passengers
-	 * between cities or countries. The system must store the following data about them:
-	 * 
-	 * Model (up to 50 characters)
-	 * Registration number (unique, up to 50 characters)
-	 * Its capacity as a number of passengers
-	 * Cargo weight (between 2K and 50K kgs)
-	 * Status, which reports on whether the aircraft is in active service or under maintenance
-	 * Optional details (up to 255 characters).
-	 */
 	private static final long					serialVersionUID	= 1L;
 
 	@Mandatory
