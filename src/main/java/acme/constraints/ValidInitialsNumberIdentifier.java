@@ -16,7 +16,7 @@ import javax.validation.constraints.Pattern;
 @Constraint(validatedBy = {})
 @ReportAsSingleViolation
 
-@Pattern(regexp = "^[A-Z]{2-3}\\d{6}$")
+@Pattern(regexp = "^[A-Z]{2,3}\\d{6}$")
 public @interface ValidInitialsNumberIdentifier {
 
 	String message() default "{acme.validation.identifier.message}";
