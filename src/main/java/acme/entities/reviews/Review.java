@@ -33,7 +33,7 @@ public class Review extends AbstractEntity {
 	@Mandatory
 	@ValidMoment(past = true)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date				moment;
+	private Date				postedAt;
 
 	@Mandatory
 	@ValidString(max = 50)
@@ -46,7 +46,7 @@ public class Review extends AbstractEntity {
 	private String				body;
 
 	@Optional
-	@ValidNumber(min = 0, max = 10, integer = 2)
+	@ValidNumber(min = 0, max = 10)
 	@Automapped
 	private Double				score;
 
