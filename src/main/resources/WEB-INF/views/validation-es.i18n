@@ -6,4 +6,6 @@ acme.validation.promotion-code.mismatch.message = El código de promoción ha de
 acme.validation.promotion-code.last-two-digits-year.message = Los dos últimos dígitos del código de promoción han de ser del año actual
 acme.validation.identifier.message = Indentificador no válido
 acme.validation.passport.message = Formato del pasaporte no válido
-
+acme.validation.locatorcode.message = Código localizador no válido
+acme.validation.percentage.message = Error en la relacion entre porcentaje y status en el tracking log
+acme.validation.resolutionDescription.message = Error en la relacion entre descripcion y status en el tracking log
