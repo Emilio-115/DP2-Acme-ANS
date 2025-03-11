@@ -5,18 +5,18 @@
     <id>UMLClass</id>
     <coordinates>
       <x>240</x>
-      <y>210</y>
-      <w>390</w>
+      <y>130</y>
+      <w>210</w>
       <h>130</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Form&gt;&gt;
-CustomersDashboard
+Statistics
 --
-+ lastFiveDestination: List&lt;String&gt;
-+ moneySpentInBookingsLastYear: Money
-+ numberBookingsByTravelClass: Map&lt;TravelClass, Integer&gt;
-+ bookingStatistics: Statistics
-+ passengerStatistics: Statistics
++ count: Integer
++ average: Double
++ minimum: Double
++ maximum: Double
++ standardDeviation: Double
 
 bg=cyan</panel_attributes>
     <additional_attributes/>
