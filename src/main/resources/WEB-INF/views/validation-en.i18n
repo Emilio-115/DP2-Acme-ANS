@@ -7,5 +7,3 @@ acme.validation.promotion-code.last-two-digits-year.message = Promotion code's l
 acme.validation.identifier.message = Invalid identifier
 acme.validation.passport.message = Invalid passport format
 acme.validation.locatorcode.message = Invalid locator code
-acme.validation.percentage.message = Error in the relation between percentage and status in the tracking log
-acme.validation.resolutionDescription.message = Error in the relation between description and status in the tracking log
