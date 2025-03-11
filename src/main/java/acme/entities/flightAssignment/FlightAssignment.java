@@ -56,7 +56,7 @@ public class FlightAssignment extends AbstractEntity {
 	@Mandatory
 	@ValidMoment(past = true)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date					moment;
+	private Date					updatedAt;
 
 	@Mandatory
 	@Valid
