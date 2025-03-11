@@ -25,16 +25,19 @@ import lombok.Setter;
 public class FlightCrewMember extends AbstractEntity {
 
 	/**
-	 * An aircraft is a vehicle designed for air travel that belongs to an airline and is used to transport passengers
-	 * between cities or countries. The system must store the following data about them:
+	 * The flight crew members are the people responsible for operating aircrafts
+	 * and ensuring passenger safety and comfort during a flight.
+	 * The system must store the following data about them:
 	 * 
-	 * Model (up to 50 characters)
-	 * Registration number (unique, up to 50 characters)
-	 * Its capacity as a number of passengers
-	 * Cargo weight (between 2K and 50K kgs)
-	 * Status, which reports on whether the aircraft is in active service or under maintenance
-	 * Optional details (up to 255 characters).
+	 * an employee code (unique, pattern "^[A-Z]{2-3}\d{6}$", where the first two or three letters correspond to their initials)
+	 * a phone number (pattern "^\+?\d{6,15}$")
+	 * their language skills (up to 255 characters)
+	 * their availability status ("AVAILABLE", "ON VACATION", "ON LEAVE")
+	 * the airline they are working for
+	 * and their salary.
+	 * Optionally, the system may store his or her years of experience.
 	 */
+
 	private static final long					serialVersionUID	= 1L;
 
 	@Mandatory

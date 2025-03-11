@@ -8,19 +8,16 @@ import java.lang.annotation.Target;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
-import javax.validation.ReportAsSingleViolation;
-import javax.validation.constraints.Pattern;
 
-@Target(ElementType.FIELD)
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = {})
-@ReportAsSingleViolation
+@Constraint(validatedBy = TrackingLogValidator.class)
 
-@Pattern(regexp = "^[A-Z]{2,3}\\d{6}$")
-public @interface ValidInitialsNumberIdentifier {
+public @interface ValidTrackingLog {
 
-	String message() default "{acme.validation.identifier.message}";
+	String message() default "";
 
 	Class<?>[] groups() default {};
 	Class<? extends Payload>[] payload() default {};
+
 }
