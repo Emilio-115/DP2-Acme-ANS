@@ -45,7 +45,7 @@ public class ActivityLogRecord extends AbstractEntity {
 	@Mandatory
 	@ValidMoment(past = true)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date				moment;
+	private Date				registeredAt;
 
 	@Mandatory
 	@ValidString(max = 50)
@@ -58,8 +58,8 @@ public class ActivityLogRecord extends AbstractEntity {
 	private String				description;
 
 	@Mandatory
-	@ValidNumber(min = 0, max = 10, fraction = 2, integer = 2)
+	@ValidNumber(min = 0, max = 10)
 	@Automapped
-	private float				severityLevel;
+	private int					severityLevel;
 
 }
