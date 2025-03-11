@@ -16,10 +16,10 @@ import javax.validation.constraints.Pattern;
 @Constraint(validatedBy = {})
 @ReportAsSingleViolation
 
-@Pattern(regexp = "^[A-Z]{2,3}\\d{6}$")
-public @interface ValidInitialsNumberIdentifier {
+@Pattern(regexp = "^[A-Z0-9]{6,9}$")
+public @interface ValidPassport {
 
-	String message() default "{acme.validation.identifier.message}";
+	String message() default "{acme.validation.passport.message}";
 
 	Class<?>[] groups() default {};
 	Class<? extends Payload>[] payload() default {};
