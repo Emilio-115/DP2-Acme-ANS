@@ -7,14 +7,15 @@ import javax.persistence.Entity;
 import javax.persistence.Transient;
 import javax.validation.Valid;
 
-import org.apache.commons.lang3.NotImplementedException;
-
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
+import acme.client.helpers.SpringHelper;
+import acme.entities.airports.Airport;
+import acme.entities.legs.LegRepository;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -62,27 +63,32 @@ public class Flight extends AbstractEntity {
 
 	@Transient
 	public Date scheduledDeparture() {
-		throw new NotImplementedException();
+		LegRepository legRepository = SpringHelper.getBean(LegRepository.class);
+		return legRepository.findFirstLegByFlight(this).getDepartureDate();
 	}
 
 	@Transient
 	public Date scheduledArrival() {
-		throw new NotImplementedException();
+		LegRepository legRepository = SpringHelper.getBean(LegRepository.class);
+		return legRepository.findLastLegByFlight(this).getArrivalDate();
 	}
 
 	@Transient
-	public String origin() {
-		throw new NotImplementedException();
+	public Airport origin() {
+		LegRepository legRepository = SpringHelper.getBean(LegRepository.class);
+		return legRepository.findFirstLegByFlight(this).getDepartureAirport();
 	}
 
 	@Transient
-	public String destiny() {
-		throw new NotImplementedException();
+	public Airport destiny() {
+		LegRepository legRepository = SpringHelper.getBean(LegRepository.class);
+		return legRepository.findLastLegByFlight(this).getArrivalAirport();
 	}
 
 	@Transient
 	public int numberOfLayovers() {
-		throw new NotImplementedException();
+		LegRepository legRepository = SpringHelper.getBean(LegRepository.class);
+		return (int) legRepository.countLegsByFlight(this);
 	}
 
 }
