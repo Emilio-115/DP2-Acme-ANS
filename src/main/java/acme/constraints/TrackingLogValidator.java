@@ -33,17 +33,17 @@ public class TrackingLogValidator extends AbstractValidator<ValidTrackingLog, Tr
 
 				boolean correctStatus = correctStatusCompleted || correctStatusUncompleted;
 
-				super.state(context, correctStatus, "*", "acme.validation.job.duplicated-ticker.message");
+				super.state(context, correctStatus, "*", "acme.validation.percentage.message");
 
 			}
 			{
 				String resolutionDescription = TL.getResolution();
-				boolean correctDescriptionCompleted = TLstatus != TrackingLogStatus.PENDING && resolutionDescription != "";
-				boolean correctDescriptionUncompleted = TLstatus == TrackingLogStatus.PENDING && resolutionDescription == "";
+				boolean correctDescriptionCompleted = TLstatus != TrackingLogStatus.PENDING && !resolutionDescription.isEmpty();
+				boolean correctDescriptionUncompleted = TLstatus == TrackingLogStatus.PENDING && resolutionDescription.isEmpty();
 
 				boolean correctDescription = correctDescriptionCompleted || correctDescriptionUncompleted;
 
-				super.state(context, correctDescription, "*", "acme.validation.job.duplicated-ticker.message");
+				super.state(context, correctDescription, "*", "acme.validation.resolutionDescription.message");
 			}
 		}
 
