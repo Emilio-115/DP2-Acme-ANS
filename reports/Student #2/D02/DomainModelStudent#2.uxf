@@ -12,11 +12,11 @@
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
 Passenger
 --
-+fullName: String {Mandatory,ValidString,Automapped}
-+email: String {Mandatory,ValidEmail,Automapped}
-+passportNumber: String {Mandatory,ValidPassportNumber,Automapped}
-+birthDate: Date {Mandatory,ValidMoment(past=true),Temporal(TIMESTAMP)}
--specialNeeds: String {Optional,ValidString(max=50),Automapped}
++ fullName: String {Mandatory,ValidString,Automapped}
++ email: String {Mandatory,ValidEmail,Automapped}
++ passportNumber: String {Mandatory,ValidPassportNumber,Automapped}
++ birthDate: Date {Mandatory,ValidMoment(past=true),Temporal(TIMESTAMP)}
+- specialNeeds: String {Optional,ValidString(max=50),Automapped}
 
 bg=yellow</panel_attributes>
     <additional_attributes/>
@@ -32,12 +32,12 @@ bg=yellow</panel_attributes>
     <panel_attributes>&lt;&lt;Role&gt;&gt;
 Customer
 --
-+identifier: String {Mandatory,ValidInitialsNumberIdentifier,Column(unique = true)}
-+phoneNumber: String {Mandatory,ValidPhoneNumber, Automapped}
-+physicalAddress: String {Mandatory,ValidString, Automapped}
-+city: String {Mandatory,ValidString(max = 50), Automapped}
-+country: String {Mandatory,ValidString(max = 50), Automapped}
--earnedPoints: Integer {Optional,ValidNumber(min = 0, max = 500000),Automapped}
++ identifier: String {Mandatory,ValidInitialsNumberIdentifier,Column(unique = true)}
++ phoneNumber: String {Mandatory,ValidPhoneNumber, Automapped}
++ physicalAddress: String {Mandatory,ValidString, Automapped}
++ city: String {Mandatory,ValidString(max = 50), Automapped}
++ country: String {Mandatory,ValidString(max = 50), Automapped}
+- earnedPoints: Integer {Optional,ValidNumber(min = 0, max = 500000),Automapped}
 
 bg=#CCDA9DD</panel_attributes>
     <additional_attributes/>
@@ -53,11 +53,11 @@ bg=#CCDA9DD</panel_attributes>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
 Booking
 --
-+locatorCode: String {Mandatory,ValidLocatorCode,Column(unique=true)}
-+purchaseMoment: Date {Mandatory,ValidMoment(past=true),Automapped}
-+travelClass: TravelClass {Mandatory,Valid,Automapped}
-+price: Money {Mandatory,ValidMoney,Automapped}
--creditCardLastNibble: String {Optional,Pattern(regex = "^\d{4}$"),Automapped}
++ locatorCode: String {Mandatory,ValidLocatorCode,Column(unique=true)}
++ purchaseMoment: Date {Mandatory,ValidMoment(past=true),Automapped}
++ travelClass: TravelClass {Mandatory,Valid,Automapped}
++ price: Money {Mandatory,ValidMoney,Automapped}
+- creditCardLastNibble: String {Optional,Pattern(regex = "^\d{4}$"),Automapped}
 
 bg=yellow</panel_attributes>
     <additional_attributes/>
