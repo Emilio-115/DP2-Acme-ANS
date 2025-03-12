@@ -13,3 +13,9 @@ user-account-administrator-02,true,"UserIdentity{name: 'Francisco', surname: 'Ga
 user-account-customer-01,true,"UserIdentity{name: 'Emilio', surname: 'Customer1', email: 'customer1@acme.com'}",customer1,customer1
 user-account-customer-02,true,"UserIdentity{name: 'Pepe', surname: 'โลเร็ม อิปซัม', email: 'customer2@acme.com'}",customer2,customer2
 user-account-customer-03,true,"UserIdentity{name: 'Javier', surname: '洛伦·伊普森', email: 'customer3@acme.com'}",customer3,customer3
+
+user-account-member-01,true,"UserIdentity{name: 'Agustín', surname: '之 თ乎可良 Æløzå', email: 'agustin@acme.com'}",member1,member1
+user-account-member-02,true,"UserIdentity{name: 'Pitbull', surname: 'Worldwide', email: 'pitbull@worldwide.com'}",member2,member2
+user-account-member-03,true,"UserIdentity{name: 'لوريم إيبسوم', surname: '之 თ乎可良 Æløzå', email: 'agustin@acme.com'}",member3,member3
+user-account-member-04,true,"UserIdentity{name: '<marquee>Hacked</marquee>', surname: 'Worldwide', email: 'pitbull@worldwide.com'}",member4,member4
+user-account-member-05,true,"UserIdentity{name: 'Azucena', surname: '<script>alert(‘Hacked!’);</script>', email: 'agustin@acme.com'}",member5,member5
