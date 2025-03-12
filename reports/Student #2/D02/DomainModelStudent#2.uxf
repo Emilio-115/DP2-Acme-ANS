@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="15.1">
-  <zoom_level>7</zoom_level>
+  <zoom_level>9</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>336</x>
-      <y>469</y>
-      <w>364</w>
-      <h>91</h>
+      <x>252</x>
+      <y>594</y>
+      <w>468</w>
+      <h>117</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
 Passenger
@@ -17,36 +17,38 @@ Passenger
 +passportNumber: String {Mandatory,ValidPassportNumber,Automapped}
 +birthDate: Date {Mandatory,ValidMoment(past=true),Temporal(TIMESTAMP)}
 -specialNeeds: String {Optional,ValidString(max=50),Automapped}
-</panel_attributes>
+
+bg=yellow</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>308</x>
-      <y>35</y>
-      <w>427</w>
-      <h>112</h>
+      <x>216</x>
+      <y>36</y>
+      <w>549</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Role&gt;&gt;
 Customer
 --
 +identifier: String {Mandatory,ValidInitialsNumberIdentifier,Column(unique = true)}
 +phoneNumber: String {Mandatory,ValidPhoneNumber, Automapped}
-+physicalAddres: String {Mandatory,ValidString, Automapped}
++physicalAddresd: String {Mandatory,ValidString, Automapped}
 +city: String {Mandatory,ValidString(max = 50), Automapped}
 +country: String {Mandatory,ValidString(max = 50), Automapped}
--earnedPoints: String {Optional,ValidNumber(min = 0, max = 500000, fraction = 0),Automapped}
-</panel_attributes>
+-earnedPoints: Integer {Optional,ValidNumber(min = 0, max = 500000),Automapped}
+
+bg=#CCDA9DD</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>315</x>
-      <y>210</y>
-      <w>406</w>
-      <h>91</h>
+      <x>207</x>
+      <y>261</y>
+      <w>558</w>
+      <h>117</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
 Booking
@@ -55,16 +57,18 @@ Booking
 +purchaseMoment: Date {Mandatory,ValidMoment(past=true),Automapped}
 +travelClass: TravelClass {Mandatory,Valid,Automapped}
 +price: Money {Mandatory,ValidMoney,Automapped}
--creditCardLastNibble: Integer {Optional,ValidNumber(min = 0, max = 9, fraction = 0)}</panel_attributes>
+-creditCardLastNibble: String {Optional,Pattern(regex = "^\d{4}$"),Automapped}
+
+bg=yellow</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>511</x>
-      <y>140</y>
-      <w>70</w>
-      <h>84</h>
+      <x>477</x>
+      <y>171</y>
+      <w>90</w>
+      <h>108</h>
     </coordinates>
     <panel_attributes>lt=x-&gt;
 m1=0..n 
@@ -75,10 +79,10 @@ made by &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>511</x>
-      <y>406</y>
-      <w>91</w>
-      <h>77</h>
+      <x>477</x>
+      <y>513</y>
+      <w>117</w>
+      <h>99</h>
     </coordinates>
     <panel_attributes>lt=&lt;-x
 m1=1
@@ -89,22 +93,24 @@ associated to &gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>448</x>
-      <y>371</y>
-      <w>147</w>
-      <h>42</h>
+      <x>396</x>
+      <y>468</y>
+      <w>189</w>
+      <h>54</h>
     </coordinates>
-    <panel_attributes>BookingRecord
--</panel_attributes>
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
+BookingRecord
+-
+bg=yellow</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>511</x>
-      <y>294</y>
-      <w>91</w>
-      <h>91</h>
+      <x>477</x>
+      <y>369</y>
+      <w>117</w>
+      <h>117</h>
     </coordinates>
     <panel_attributes>lt=&lt;-x
 m1=1
@@ -115,53 +121,46 @@ associated to &gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>735</x>
-      <y>322</y>
-      <w>406</w>
-      <h>140</h>
+      <x>909</x>
+      <y>351</y>
+      <w>90</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
 Fligth
---
-+tag: String {Mandatory,ValidString(max=50),Automapped}
-+requiresSelfTransfer: boolean {Mandatory,Automapped}
-+cost: Money {Mandatory,ValidMoney,Automapped}
--description: String {Optional,ValidString,Automapped}
---
-+scheduledDeparture(): Date
-+scheduledArrival(): Date
-+origin(): String
-+destiny(): String
-+numberOfLayovers(): int</panel_attributes>
+
+bg=yellow</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>805</x>
-      <y>91</y>
-      <w>112</w>
-      <h>56</h>
+      <x>855</x>
+      <y>108</y>
+      <w>144</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Enumeration&gt;&gt;
 TravelClass
 --
 ECONOMY
-BUSINESS</panel_attributes>
+BUSINESS
+
+bg=green</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>714</x>
-      <y>238</y>
-      <w>245</w>
-      <h>98</h>
+      <x>756</x>
+      <y>297</y>
+      <w>225</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>lt=x-&gt;
 m1= *
 m2=1
 reserve seats for &gt;</panel_attributes>
-    <additional_attributes>10.0;20.0;320.0;20.0;320.0;120.0</additional_attributes>
+    <additional_attributes>10.0;20.0;220.0;20.0;220.0;60.0</additional_attributes>
   </element>
 </diagram>

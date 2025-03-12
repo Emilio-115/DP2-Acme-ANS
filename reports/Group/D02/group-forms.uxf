@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>240</x>
+      <y>130</y>
+      <w>210</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Form&gt;&gt;
+Statistics
+--
++ count: Integer
++ average: Double
++ minimum: Double
++ maximum: Double
++ standardDeviation: Double
+
+bg=cyan</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
