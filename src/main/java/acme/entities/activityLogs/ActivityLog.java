@@ -40,11 +40,6 @@ public class ActivityLog extends AbstractEntity {
 	private static final long	serialVersionUID	= 1L;
 
 	@Mandatory
-	@Valid
-	@ManyToOne(optional = false)
-	private FlightAssignment	registeringAssignment;
-
-	@Mandatory
 	@ValidMoment(past = true)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date				registeredAt;
@@ -63,5 +58,10 @@ public class ActivityLog extends AbstractEntity {
 	@ValidNumber(min = 0, max = 10)
 	@Automapped
 	private int					severityLevel;
+
+	@Mandatory
+	@Valid
+	@ManyToOne(optional = false)
+	private FlightAssignment	registeringAssignment;
 
 }
