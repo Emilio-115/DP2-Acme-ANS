@@ -14,6 +14,7 @@ public class Statistics extends AbstractForm {
 	private Integer				count;
 	private Double				average;
 	private Double				minimum;
-	private Double				maximun;
+	private Double				maximum;
+	private Double				standardDeviation;
 
 }

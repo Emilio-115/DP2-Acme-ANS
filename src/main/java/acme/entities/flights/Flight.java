@@ -49,9 +49,8 @@ public class Flight extends AbstractEntity {
 	private String				tag;
 
 	@Mandatory
-	@Valid
 	@Automapped
-	private Boolean				requiresSelfTransfer;
+	private boolean				requiresSelfTransfer;
 
 	@Mandatory
 	@ValidMoney
@@ -62,11 +61,6 @@ public class Flight extends AbstractEntity {
 	@ValidString
 	@Automapped
 	private String				description;
-
-	@Mandatory
-	@Valid
-	@ManyToOne
-	private Airline				airline;
 
 
 	@Transient
@@ -98,5 +92,11 @@ public class Flight extends AbstractEntity {
 		LegRepository legRepository = SpringHelper.getBean(LegRepository.class);
 		return (int) legRepository.countLegsByFlight(this);
 	}
+
+
+	@Mandatory
+	@Valid
+	@ManyToOne
+	private Airline airline;
 
 }
