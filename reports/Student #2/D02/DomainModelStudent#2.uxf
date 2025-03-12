@@ -34,7 +34,7 @@ Customer
 --
 +identifier: String {Mandatory,ValidInitialsNumberIdentifier,Column(unique = true)}
 +phoneNumber: String {Mandatory,ValidPhoneNumber, Automapped}
-+physicalAddresd: String {Mandatory,ValidString, Automapped}
++physicalAddress: String {Mandatory,ValidString, Automapped}
 +city: String {Mandatory,ValidString(max = 50), Automapped}
 +country: String {Mandatory,ValidString(max = 50), Automapped}
 -earnedPoints: Integer {Optional,ValidNumber(min = 0, max = 500000),Automapped}
