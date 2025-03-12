@@ -1,5 +1,5 @@
 
-package acme.entities.airlinemanagers;
+package acme.realms;
 
 import java.util.Date;
 
