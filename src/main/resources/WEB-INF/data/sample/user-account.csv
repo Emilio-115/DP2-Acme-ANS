@@ -12,4 +12,4 @@ user-account-administrator-01,true,"UserIdentity{name: 'Juana', surname: 'თხ
 user-account-administrator-02,true,"UserIdentity{name: 'Francisco', surname: 'García ᏥᏲᏎᎭ', email: 'francisco@acme.com'}",administrator2,administrator2
 user-account-agent-01,true,"UserIdentity{name: 'Javier', surname: 'თხა თხა', email: 'javier@acme.com'}",agent1,agent1
 user-account-agent-02,true,"UserIdentity{name: 'Irene', surname: '之乎路可良 García', email: 'irene@acme.com'}",agent2,agent2
-user-account-manager-03,true,"UserIdentity{name: 'Paula', surname: 'коза Gómez', email: 'irene@acme.com'}",manager3,manager3
+user-account-manager3,true,"UserIdentity{name: 'Paula', surname: 'коза Gómez', email: 'irene@acme.com'}",manager4,manager4
