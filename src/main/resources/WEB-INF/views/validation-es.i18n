@@ -9,4 +9,4 @@ acme.validation.passport.message = Formato del pasaporte no válido
 acme.validation.locatorcode.message = Código localizador no válido
 acme.validation.percentage.message = Error en la relacion entre porcentaje y status en el tracking log
 acme.validation.resolutionDescription.message = Error en la relacion entre descripcion y status en el tracking log
-acme.validation.activity-log.registered-before-landing.message = Fecha de registro inválida: registrado antes de que el tramo de vuelo aterrizase
+acme.validation.activity-log.registered-before-landing.message = Fecha de registro inválida: registrado antes de que el segmento de vuelo aterrizase
