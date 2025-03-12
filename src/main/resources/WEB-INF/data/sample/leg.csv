@@ -7,5 +7,5 @@ leg-5,8464,2019/03/19 20:45,2019/03/20 21:46,ON_TIME,airport-01,airport-04,aircr
 leg-6,6746,2019/03/20 20:45,2019/03/21 21:46,DELAYED,airport-02,airport-01,aircraft-02,flight-03
 leg-7,9194,2019/03/21 20:45,2019/03/22 21:46,CANCELLED,airport-03,airport-02,aircraft-03,flight-03
 leg-8,4568,2019/03/22 20:45,2019/03/23 21:46,LANDED,airport-04,airport-03,aircraft-04,flight-04
-leg-9,9999,2019/03/23 20:45,2019/03/24 21:46,ON_TIME,airport-01,airport-04,aircraft-01,flight-05
-leg-10,0000,2019/03/24 20:45,2019/03/25 21:46,DELAYED,airport-02,airport-01,aircraft-02,flight-05
+leg-9,9999,2000/01/1 00:01,2200/12/31 23:58,ON_TIME,airport-01,airport-04,aircraft-01,flight-05
+leg-10,0000,2000/01/1 00:00,2200/12/31 23:59,DELAYED,airport-02,airport-01,aircraft-02,flight-05
