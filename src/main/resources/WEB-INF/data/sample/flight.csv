@@ -1,0 +1,11 @@
+key,tag,requiresSelfTransfer,cost,description,key:airline
+flight-01,the fastest,true,EUR 12.1,fjhdkslhfdhjafhjsdkahfjkasdhfksdahfjkdahfjksdahfjkasdhfjkdaslhfkjad,airline-01
+flight-02,the slowest,true,EUR 13.4,Ⲵ⮥⠤␬⡟▱₝⇩⪻⹀,airline-02
+flight-03,3.21111E+28,false,USD 93.01,⤮ⓞ⓭➉➜⎏⋇⢄⍍⾞⣥⚗⨌⫳⯝⓻⪪₱∽ⰣⅡ⊳ⱴ⩪⏼ⓟ⽃⭈⪻Ⲵ⮥⠤␬⡟▱₝⇩⪻⹀⹌⚤⠎⿐⺆⤢≮♤⎽⵷⼔◉⍺ ⯃⼥♟,airline-03
+flight-04,😶‍🌫️😶‍🌫️😶‍🌫️😶‍🌫️😶‍🌫️👍👍👍😍😍😍😍,false,USD 0.01,⌨♷⹲⸝⬶┼⹵⟃⩳⼍≫⇂⍯⁗⾅⠮⌯ℭ⻀⇢⯾∧⢫✮⥪⬭─╹⼍⊞⦠ⶆ⪝⿬ⴳ⳰⁓⳹⟃⮏┡⧮⯪⣑⾽⟅⎡⺹⸻⹆⛸⧈⳺⸆⇄⫾⑎⫻℁⦖②⾭⳩⪢ⲗ⪅⨇⵫⃋,airline-04
+flight-05,℮⼚℆⒒⡂▔∕₃⹮∤Ⰱ₮,true,USD 999999.99,就有草。,airline-01
+flight-06,⺺⁾⼭⦑▿≧ⷦ‗⎆⻀⣲⬌⅜⼵⤞⧤⮙➬₳✏⇒⮏☴⤘ℳ⯊,true,EUR 1000000.00,SELECT a FROM Airlines ,airline-02
+flight-07,⊮℁Ⲯ⑎⥌ⓟ⩆₁○Ⓔ⣌⌑⁀⸵↋╏⡪,false,EUR 00.00,🤣🤣🤣🤣🤣,airline-03
+flight-08,⺦ℶ≔⵼⩎⼘⪎⢴⨕⇻ⷙ⣥⚗⨌⫳⯝,false,EUR 49.13, سليمان، واستمرت لم أما. هذه زهاء,airline-04
+flight-09,the coolest,true,EUR 13.99,Ngamia,airline-01
+flight-10,Ⲵ⮥⠤␬⡟▱₝⇩⪻⹀,true,EUR 1344.88,AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,airline-02

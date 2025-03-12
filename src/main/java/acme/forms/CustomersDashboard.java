@@ -22,16 +22,8 @@ public class CustomersDashboard extends AbstractForm {
 
 	Map<TravelClass, Integer>	numberBookingsByTravelClass;
 
-	Double						countCostBooking;
-	Double						averageCostBooking;
-	Double						minimumCostBooking;
-	Double						maximumCostBooking;
-	Double						standardDeviationCostBooking;
+	Statistics					bookingCostStatistics;
 
-	Double						countPassengerBooking;
-	Double						averagePassengerBooking;
-	Double						minimumPassengerBooking;
-	Double						maximumPassengerBooking;
-	Double						standardDeviationPassengerBooking;
+	Statistics					bookingPassengerStatistics;
 
 }
