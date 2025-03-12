@@ -1,0 +1,6 @@
+key,description,is_accepted,passenger_email,registration_moment,type
+claim-01,"L",true,"acme@lorem-ipsum.org",2000/01/01 0:00,"OTHER_ISSUES"
+claim-02,"La",true,"a@b.e",2000/01/01 0:01,"OTHER_ISSUES"
+claim-03,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor",false,"lorem-ipsum@dolor.sit.amet.consectetur.adipiscing.elit.sed.do.eiusmod.tempor.incididunt.ut.labore.et.dolore.magna.aliqua.Ut.enim.ad.minim.veniam.quis.nostrud.exercitation.ullamco.laboris.nisi.ut.aliquip.ex.ea.commodo.consequat.duis.aute.irure.doloris.edu",2022/07/29 23:59,"SECURITY_INCIDENT"
+claim-04,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor*",false,"a@b.es",2011/04/16 0:00,"LUGGAGE_ISSUES"
+claim-05,"AYUDAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",true,"a@b.esx",2022/07/29 23:58,"FLIGHT_ISSUES"
