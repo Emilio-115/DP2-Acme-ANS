@@ -1,0 +1,7 @@
+key,key:associatedBooking,key:associatedPassenger
+booking-record-01,booking-01,passenger-01
+booking-record-02,booking-01,passenger-02
+booking-record-03,booking-02,passenger-02
+booking-record-04,booking-03,passenger-03
+booking-record-05,booking-04,passenger-04
+booking-record-06,booking-05,passenger-05
