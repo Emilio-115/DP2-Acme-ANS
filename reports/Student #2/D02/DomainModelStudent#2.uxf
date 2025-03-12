@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>7</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>336</x>
+      <y>469</y>
+      <w>364</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
+Passenger
+--
++fullName: String {Mandatory,ValidString,Automapped}
++email: String {Mandatory,ValidEmail,Automapped}
++passportNumber: String {Mandatory,ValidPassportNumber,Automapped}
++birthDate: Date {Mandatory,ValidMoment(past=true),Temporal(TIMESTAMP)}
+-specialNeeds: String {Optional,ValidString(max=50),Automapped}
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>308</x>
+      <y>35</y>
+      <w>427</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Role&gt;&gt;
+Customer
+--
++identifier: String {Mandatory,ValidInitialsNumberIdentifier,Column(unique = true)}
++phoneNumber: String {Mandatory,ValidPhoneNumber, Automapped}
++physicalAddres: String {Mandatory,ValidString, Automapped}
++city: String {Mandatory,ValidString(max = 50), Automapped}
++country: String {Mandatory,ValidString(max = 50), Automapped}
+-earnedPoints: String {Optional,ValidNumber(min = 0, max = 500000, fraction = 0),Automapped}
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>315</x>
+      <y>210</y>
+      <w>406</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
+Booking
+--
++locatorCode: String {Mandatory,ValidLocatorCode,Column(unique=true)}
++purchaseMoment: Date {Mandatory,ValidMoment(past=true),Automapped}
++travelClass: TravelClass {Mandatory,Valid,Automapped}
++price: Money {Mandatory,ValidMoney,Automapped}
+-creditCardLastNibble: Integer {Optional,ValidNumber(min = 0, max = 9, fraction = 0)}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>511</x>
+      <y>140</y>
+      <w>70</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>lt=x-&gt;
+m1=0..n 
+m2=1
+made by &gt;</panel_attributes>
+    <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>511</x>
+      <y>406</y>
+      <w>91</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-x
+m1=1
+m2= 1..*
+associated to &gt;</panel_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>448</x>
+      <y>371</y>
+      <w>147</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>BookingRecord
+-</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>511</x>
+      <y>294</y>
+      <w>91</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-x
+m1=1
+m2= 1..*
+associated to &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>735</x>
+      <y>322</y>
+      <w>406</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
+Fligth
+--
++tag: String {Mandatory,ValidString(max=50),Automapped}
++requiresSelfTransfer: boolean {Mandatory,Automapped}
++cost: Money {Mandatory,ValidMoney,Automapped}
+-description: String {Optional,ValidString,Automapped}
+--
++scheduledDeparture(): Date
++scheduledArrival(): Date
++origin(): String
++destiny(): String
++numberOfLayovers(): int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>805</x>
+      <y>91</y>
+      <w>112</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Enumeration&gt;&gt;
+TravelClass
+--
+ECONOMY
+BUSINESS</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>714</x>
+      <y>238</y>
+      <w>245</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>lt=x-&gt;
+m1= *
+m2=1
+reserve seats for &gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;320.0;20.0;320.0;120.0</additional_attributes>
+  </element>
+</diagram>
