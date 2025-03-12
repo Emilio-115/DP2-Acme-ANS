@@ -36,7 +36,7 @@ public class FlightCrewMemberDashboard extends AbstractForm {
 
 	List<FlightCrewMember>								crewmatesForLastLeg;
 
-	Map<FlightAssignmentStatus, List<FlightAssignment>>	numberBookingsByTravelClass;
+	Map<FlightAssignmentStatus, List<FlightAssignment>>	flightAssignmentsByStatus;
 
 	Statistics											lastMonthsFlightAssignmentStatistics;
 

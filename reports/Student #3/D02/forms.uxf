@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>260</x>
+      <y>230</y>
+      <w>540</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Form&gt;&gt;
+CustomersDashboard
+--
++ lastFiveDestinations: List&lt;String&gt;
++ legsWithLowSeverityIncidents: int
++ legsWithMediumSeverityIncidents: int
++ legsWithHighSeverityIncidents: int
++ crewmatesForLastLeg: List&lt;FlightCrewMember&gt;
++ flightAssignmentsByStatus: Map&lt;FlightAssignmentStatus, List&lt;FlightAssignment&gt;&gt;
++ lastMonthsFlightAssignmentStatistics: Statistics
+
+bg=cyan</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
