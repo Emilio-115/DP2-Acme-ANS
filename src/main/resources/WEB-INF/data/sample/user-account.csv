@@ -13,3 +13,8 @@ user-account-administrator-02,true,"UserIdentity{name: 'Francisco', surname: 'Ga
 user-account-agent-01,true,"UserIdentity{name: 'Javier', surname: 'თხა თხა', email: 'javier@acme.com'}",agent1,agent1
 user-account-agent-02,true,"UserIdentity{name: 'Irene', surname: '之乎路可良 García', email: 'irene@acme.com'}",agent2,agent2
 user-account-manager3,true,"UserIdentity{name: 'Paula', surname: 'коза Gómez', email: 'irene@acme.com'}",manager4,manager4
+user-account-member-01,true,"UserIdentity{name: 'Agustín', surname: '之 თ乎可良 Æløzå', email: 'agustin@acme.com'}",member1,member1
+user-account-member-02,true,"UserIdentity{name: 'Pitbull', surname: 'Worldwide', email: 'pitbull@worldwide.com'}",member2,member2
+user-account-member-03,true,"UserIdentity{name: 'لوريم إيبسوم', surname: '之 თ乎可良 Æløzå', email: 'agustin@acme.com'}",member3,member3
+user-account-member-04,true,"UserIdentity{name: '<marquee>Hacked</marquee>', surname: 'Worldwide', email: 'pitbull@worldwide.com'}",member4,member4
+user-account-member-05,true,"UserIdentity{name: 'Azucena', surname: '<script>alert(‘Hacked!’);</script>', email: 'agustin@acme.com'}",member5,member5
