@@ -1,0 +1,6 @@
+key,key:userAccount,employeeCode,phoneNumber,languageSkills,availabilityStatus,key:employerAirline,salary,yearsOfExperience
+crew-member-01,user-account-member-01,AB123456,20419007626508,"Good at English, decent at Spanish",AVAILABLE,airline-01,EUR 1234.56,5
+crew-member-02,user-account-member-02,XYZ387231,1234567,ⷷ⧐⺣⍦⧽⥀⒭⤈⛯ℵ⨃⊪▔⇿❥⿖⹙⑩⟱⛀ⲵ⎫₮Ⓩ☐⻠ⴱ♂⫪⺃╫⯗ⷳ⡽⑼⊞♫⭲◭⃱⭥☸⚢↍⩨⨕Ⰼⵟ⁋⢔,AVAILABLE,airline-02,EUR 42741,
+crew-member-03,user-account-member-03,ENL772556,+71253817,ⅻↀ℉℁ℑ⅀ℨ℥℡ⅶ⅍ℚℌℰⅳ℻℔Ⅽℚ℟ℓℏⅺ⅚ⅅⅯⅠℰℕ⅔Å⅌⅒Ⅾⅳℒ℁ↅↂ⅔℅ⅪↂⅧℍ⅀Ⅻ℧Ⅶↂ,AVAILABLE,airline-03,EUR 292137,
+crew-member-04,user-account-member-04,AB012346,+215010,™℧↉ℝℋℎⅆℾ℃⅁ℜⅢℏΩⅡⅦ↋ↅↄⅳℨⅳⅷ⅕ⅻ℺⅌ℤ⅀⅗ℹⅠⅫℋ℗℘ⅆ↋ⅰℨ⅀ⅈℕℯↄ⅛ℙ℆ↂↇ,AVAILABLE,airline-04,EUR 0.01,0
+crew-member-05,user-account-member-05,XYZ372232,+671635558335327,ⅰⅶ℻Ⅴ⅋ℑⅦⅇⅾⅨℍ℩ℹ⅖ℴ⅔ℬⅉⅻℙⅡℼ⅖ↆⅷⅲ⅄ℴ↉℠℀ⅾℾ℺℘Ⅸℯℷℷ℘ↈↅⅿℲⅾ⅟ↄℯ⅓℧,AVAILABLE,airline-01,EUR 21,75
