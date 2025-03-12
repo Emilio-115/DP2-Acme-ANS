@@ -1,5 +1,5 @@
 
-package acme.entities.activityLogRecord;
+package acme.entities.activityLogs;
 
 import java.util.Date;
 
@@ -22,7 +22,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class ActivityLogRecord extends AbstractEntity {
+public class ActivityLog extends AbstractEntity {
 
 	/**
 	 * An activity log records incidents that occur during a flight.
