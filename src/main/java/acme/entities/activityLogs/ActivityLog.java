@@ -1,5 +1,5 @@
 
-package acme.entities.activityLogRecord;
+package acme.entities.activityLogs;
 
 import java.util.Date;
 
@@ -15,6 +15,7 @@ import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
+import acme.constraints.activityLog.ValidActivityLog;
 import acme.entities.flightAssignment.FlightAssignment;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,7 +23,8 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class ActivityLogRecord extends AbstractEntity {
+@ValidActivityLog
+public class ActivityLog extends AbstractEntity {
 
 	/**
 	 * An activity log records incidents that occur during a flight.
