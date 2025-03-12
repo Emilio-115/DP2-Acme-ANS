@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <help_text>// Uncomment the following line to change the fontsize and font:
+fontsize=10
+// fontfamily=SansSerif //possible: SansSerif,Serif,Monospaced
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Welcome to UMLet!
+//
+// Double-click on elements to add them to the diagram, or to copy them
+// Edit elements by modifying the text in this panel
+// Hold Ctrl to select multiple elements
+// Use Ctrl+mouse to select via lasso
+//
+// Use +/- or Ctrl+mouse wheel to zoom
+// Drag a whole relation at its central square icon
+//
+// Press Ctrl+C to copy the whole diagram to the system clipboard (then just paste it to, eg, Word)
+// Edit the files in the "palettes" directory to create your own element palettes
+//
+// Select "Custom Elements &gt; New..." to create new element types
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// This text will be stored with each diagram;  use it for notes.</help_text>
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>150</x>
+      <y>10</y>
+      <w>420</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Role&gt;&gt;
+Assistance Agent
+{Some Properties}
+--
++employeeCode: String {Mandatory, ValidInitialsNumberIdentifier, Column(unique = true)}
++spokenLanguages: String {Mandatory, ValidString, Automapped}
++airline: Airline {Mandatory, Valid, ManyToOne}
++firstDay: Date {Mandatory, ValidMoment, Temporal(TemporalType.TIMESTAMP)}
+-bio: String {Optional, ValidString, Automapped}
+-salary: Money {Optional, ValidMoney, Automapped}
+-image: String {Optional, ValidUrl, Automapped}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>230</x>
+      <y>300</y>
+      <w>490</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
+Claim
+--
++registrationMoment: Date {Mandatory, ValidMoment(past = true), Temporal(TemporalType.TIMESTAMP)}
++passengerEmail: String {Mandatory, ValidEmail, Automapped}
++description: String {Mandatory, ValidString, Automapped}
++type: ClaimType {Mandatory, Valid, Automapped}
++isAccepted: boolean {Mandatory, Automapped}
++assistanceAgent: AssistanceAgent {Mandatory, Valid, ManyToOne}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>260</x>
+      <y>510</y>
+      <w>490</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
+Tracking Log
+--
++lastUpdateMoment: Date {Mandatory, ValidMoment(past = true), Temporal(TemporalType.TIMESTAMP)}
++undergoingStep: String {Mandatory, ValidString(max = 50), Automapped}
++resolutionPercentage: double {Mandatory, ValidScore, Automapped}
++status: TrackingLogStatus {Mandatory, Valid, Automapped}
++resolution: String {Mandatory, ValidString, Automapped}
++claim: Claim {Mandatory, Valid, ManyToOne}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>330</x>
+      <y>150</y>
+      <w>80</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>lt=x-&gt;
+associated
+m1=n
+m2=1</panel_attributes>
+    <additional_attributes>10.0;150.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>510</x>
+      <y>410</y>
+      <w>30</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=x-&gt;
+
+m1=n
+m2=1</panel_attributes>
+    <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>780</x>
+      <y>430</y>
+      <w>210</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Enumeration&gt;&gt;
+TrackingLogStatus
+--
+PENDING 
+ACCEPTED 
+REJECTED</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
