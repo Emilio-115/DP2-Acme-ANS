@@ -1,6 +1,8 @@
 
 package acme.entities.legs;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,4 +19,8 @@ public interface LegRepository extends JpaRepository<Leg, Integer> {
 
 	@Query("SELECT COUNT(l) FROM Leg l WHERE l.flight = :flight")
 	long countLegsByFlight(@Param("flight") Flight flight);
+
+	@Query("SELECT l FROM Leg l WHERE l.flight = :flight")
+	List<Leg> findAllLegsByFlight(@Param("flight") Flight flight);
+
 }
