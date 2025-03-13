@@ -1,0 +1,3 @@
+key,key:userAccount,bio,employee_code,first_day,image,salary,spoken_languages,key:airline
+assistance-agent-01,user-account-agent-01,"L","AB123456","2022/07/29 23:59","http://lorem.com/ipsum",EUR 234.64,"Español, Ingles, Frances",airline-01
+assistance-agent-02,user-account-agent-02,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor*",XY987654,"2000/01/01 0:00","ftp://a",EUR 1000.00,"Ingles, Frances, Ruso",airline-02
