@@ -1,11 +1,11 @@
 key,tag,requiresSelfTransfer,cost,description,key:airline
-flight-01,the fastest,true,EUR 12.1,fjhdkslhfdhjafhjsdkahfjkasdhfksdahfjkdahfjksdahfjkasdhfjkdaslhfkjad,airline-01
-flight-02,the slowest,true,EUR 13.4,Ⲵ⮥⠤␬⡟▱₝⇩⪻⹀,airline-02
-flight-03,3.21111E+28,false,USD 93.01,⤮ⓞ⓭➉➜⎏⋇⢄⍍⾞⣥⚗⨌⫳⯝⓻⪪₱∽ⰣⅡ⊳ⱴ⩪⏼ⓟ⽃⭈⪻Ⲵ⮥⠤␬⡟▱₝⇩⪻⹀⹌⚤⠎⿐⺆⤢≮♤⎽⵷⼔◉⍺ ⯃⼥♟,airline-03
-flight-04,😶‍🌫️😶‍🌫️😶‍🌫️😶‍🌫️😶‍🌫️👍👍👍😍😍😍😍,false,USD 0.01,⌨♷⹲⸝⬶┼⹵⟃⩳⼍≫⇂⍯⁗⾅⠮⌯ℭ⻀⇢⯾∧⢫✮⥪⬭─╹⼍⊞⦠ⶆ⪝⿬ⴳ⳰⁓⳹⟃⮏┡⧮⯪⣑⾽⟅⎡⺹⸻⹆⛸⧈⳺⸆⇄⫾⑎⫻℁⦖②⾭⳩⪢ⲗ⪅⨇⵫⃋,airline-04
+flight-01,Lo,true,EUR 12.1,A,airline-01
+flight-02,L,true,EUR 13.4,AB,airline-02
+flight-03,"Lorem ipsum dolor sit amet, consectetur adipiscing",false,USD 93.01,⤮ⓞ⓭➉➜⎏⋇⢄⍍⾞⣥⚗⨌⫳⯝⓻⪪₱∽ⰣⅡ⊳ⱴ⩪⏼ⓟ⽃⭈⪻Ⲵ⮥⠤␬⡟▱₝⇩⪻⹀⹌⚤⠎⿐⺆⤢≮♤⎽⵷⼔◉⍺ ⯃⼥♟,airline-03
+flight-04,😶‍🌫️😶‍🌫️😶‍🌫️😶‍🌫️😶‍🌫️👍👍👍😍😍😍😍,false,USD 0.01,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolorA",airline-04
 flight-05,℮⼚℆⒒⡂▔∕₃⹮∤Ⰱ₮,true,USD 999999.99,就有草。,airline-01
-flight-06,⺺⁾⼭⦑▿≧ⷦ‗⎆⻀⣲⬌⅜⼵⤞⧤⮙➬₳✏⇒⮏☴⤘ℳ⯊,true,EUR 1000000.00,SELECT a FROM Airlines,airline-02
+flight-06,'' or 'A' = 'A,true,EUR 1000000.00,'' or 'A' = 'A,airline-02
 flight-07,⊮℁Ⲯ⑎⥌ⓟ⩆₁○Ⓔ⣌⌑⁀⸵↋╏⡪,false,EUR 00.00,🤣🤣🤣🤣🤣,airline-03
-flight-08,<script>alert(‘Hacked!’);</script>,false,EUR 49.13,سليمان، واستمرت لم أما. هذه زهاء,airline-04
-flight-09,the coolest,true,EUR 13.99,<script>alert(‘Hacked!’);</script>,airline-01
-flight-10,Ⲵ⮥⠤␬⡟▱₝⇩⪻⹀,true,EUR 1344.88,AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,airline-02
+flight-08,<script>alert(‘Hacked!’);</script>,false,EUR 49.13,<marquee>Hacked</marquee>,airline-04
+flight-09,<marquee>Hacked</marquee>,true,EUR 13.99,<script>alert(‘Hacked!’);</script>,airline-01
+flight-10,"Lorem ipsum dolor sit amet, consectetur adipiscin",true,EUR 1344.88,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor",airline-02
