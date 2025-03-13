@@ -17,7 +17,6 @@ import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidString;
 import acme.client.helpers.SpringHelper;
 import acme.entities.airlines.Airline;
-import acme.entities.airports.Airport;
 import acme.entities.legs.LegRepository;
 import lombok.Getter;
 import lombok.Setter;
@@ -76,15 +75,15 @@ public class Flight extends AbstractEntity {
 	}
 
 	@Transient
-	public Airport origin() {
+	public String origin() {
 		LegRepository legRepository = SpringHelper.getBean(LegRepository.class);
-		return legRepository.findFirstLegByFlight(this).getDepartureAirport();
+		return legRepository.findFirstLegByFlight(this).getDepartureAirport().getCity();
 	}
 
 	@Transient
-	public Airport destiny() {
+	public String destiny() {
 		LegRepository legRepository = SpringHelper.getBean(LegRepository.class);
-		return legRepository.findLastLegByFlight(this).getArrivalAirport();
+		return legRepository.findLastLegByFlight(this).getArrivalAirport().getCity();
 	}
 
 	@Transient

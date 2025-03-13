@@ -20,8 +20,8 @@ Flight
 --
 + scheduledDeparture: Date {Transient}
 + scheduledArrival: Date {Transient}
-+ origin: Airport {Transient}
-+ destiny: Airport {Transient}
++ origin: String {Transient}
++ destiny: String {Transient}
 + numberOfLayovers: int {Transient}
 
 bg=yellow</panel_attributes>
