@@ -1,0 +1,9 @@
+key,name,timezone,closed_bucket,categories,address,country,locality
+recomendation-01,Meson del Duque,"Europe/Madrid",VeryLikelyOpen,Restaurante español,"Plaza Duquesa de Osuna, 1",ES,Osuna
+recomendation-02,Bar Conejo,"Europe/Madrid",LikelyOpen,Bar-Café-Restaurante,"Calle Jerez, 12",ES,Sanlúcar de Barrameda
+recomendation-03,Panorama Restaurant,"Asia/Colombo",VeryLikelyOpen,Pub,"Kottawa, 5",LK,Kottawa
+recomendation-04,Tilapia Joint Tema Community 10,"Africa/Accra",LikelyOpen,Tienda de delicatesen,"Tema 700",GH,Tema
+recomendation-05,Pasteleria Panad Y Bodega Huerfanos SRL,"America/Lima",VeryLikelyOpen,Restaurante español,"Jr. Azángaro 700",PE,Cercado de Lima
+recomendation-06,Karim's | करीम | کریم (Karim's),"Asia/Kolkata",LikelyOpen,Restaurante indio,"16 Jama Masjid",IN,New Delhi
+recomendation-07,Galeria Nacional de Londres (National Gallery),"Europe/London",VeryLikelyOpen,Galería de arte,"Trafalgar Sq",GB,London
+recomendation-08,Ikan Bakar Bamboo,"Asia/Makassar",LikelyOpen,Marisquería,"Jalan Gatot Subroto",ID,Samarinda
