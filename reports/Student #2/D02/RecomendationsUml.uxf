@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>220</x>
+      <y>120</y>
+      <w>390</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
+Recomendations
+--
++ name: String {Mandatory,ValidString,Automapped}
++ timezone: String {Mandatory,ValidString,Automapped}
++ closedBucket: String {Mandatory,ValidString,Automapped}
++ categories: String {Mandatory,ValidString,Automapped}
++ country: String {Mandatory,ValidString,Automapped}
++ locality: String {Mandatory,ValidString,Automapped}
++ address: String {Mandatory,ValidString,Automapped}
+
+bg=cyan</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
