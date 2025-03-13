@@ -1,0 +1,3 @@
+The visa requirements in the sample folder is a sample of 100 entries of this full CSV file, which is kept here to show that it was acquired and for safekeeping.
+
+The reason the full file is not used is that it takes the populator 141 seconds to load them to the database, so for the sake of the speed of development this had to be done.
