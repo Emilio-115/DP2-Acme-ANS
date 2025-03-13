@@ -27,11 +27,6 @@ public class Service extends AbstractEntity {
 	private static final long	serialVersionUID	= 1L;
 
 	@Mandatory
-	@Valid
-	@ManyToOne
-	private Airport				airport;
-
-	@Mandatory
 	@ValidString(max = 50)
 	@Automapped
 	private String				name;
@@ -55,5 +50,10 @@ public class Service extends AbstractEntity {
 	@ValidMoney(min = 0)
 	@Automapped
 	private Money				discount;
+
+	@Mandatory
+	@Valid
+	@ManyToOne
+	private Airport				airport;
 
 }

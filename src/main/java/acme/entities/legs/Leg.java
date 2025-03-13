@@ -62,26 +62,6 @@ public class Leg extends AbstractEntity {
 	@Automapped
 	private LegStatus			status;
 
-	@Mandatory
-	@Valid
-	@ManyToOne(optional = false)
-	private Airport				departureAirport;
-
-	@Mandatory
-	@Valid
-	@ManyToOne(optional = false)
-	private Airport				arrivalAirport;
-
-	@Mandatory
-	@Valid
-	@ManyToOne(optional = false)
-	private Aircraft			aircraft;
-
-	@Mandatory
-	@Valid
-	@ManyToOne(optional = false)
-	private Flight				flight;
-
 
 	@Transient
 	public int durationInHours() {
@@ -96,5 +76,27 @@ public class Leg extends AbstractEntity {
 	@Transient
 	public String flightNumber() {
 		return this.aircraft.getAirline().getIataCode() + this.flightNumberDigits;
+
 	}
+
+
+	@Mandatory
+	@Valid
+	@ManyToOne(optional = false)
+	private Airport		departureAirport;
+
+	@Mandatory
+	@Valid
+	@ManyToOne(optional = false)
+	private Airport		arrivalAirport;
+
+	@Mandatory
+	@Valid
+	@ManyToOne(optional = false)
+	private Aircraft	aircraft;
+
+	@Mandatory
+	@Valid
+	@ManyToOne(optional = false)
+	private Flight		flight;
 }

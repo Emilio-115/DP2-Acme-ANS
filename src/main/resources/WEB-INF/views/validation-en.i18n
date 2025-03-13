@@ -6,3 +6,7 @@ acme.validation.promotion-code.mismatch.message = Promotion code does not follow
 acme.validation.promotion-code.last-two-digits-year.message = Promotion code's last two characters must be the current year's
 acme.validation.identifier.message = Invalid identifier
 acme.validation.passport.message = Invalid passport format
+acme.validation.locatorcode.message = Invalid locator code
+acme.validation.percentage.message = Error in the relation between percentage and status in the tracking log
+acme.validation.resolutionDescription.message = Error in the relation between description and status in the tracking log
+acme.validation.activity-log.registered-before-landing.message = Invalid registeredAt date: registered before the respective leg landed
