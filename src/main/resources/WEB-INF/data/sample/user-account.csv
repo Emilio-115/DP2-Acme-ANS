@@ -10,6 +10,9 @@ user-account-manager-02,true,"UserIdentity{name: 'Juan', surname: 'इलाक�
 user-account-manager-03,true,"UserIdentity{name: 'Jacobo', surname: 'সালে যাত্রাবাড়িতে', email: 'jacobo@acme.com'}",manager3,manager3
 user-account-administrator-01,true,"UserIdentity{name: 'Juana', surname: 'თხა 之乎路可良', email: 'juana@acme.com'}",administrator1,administrator1
 user-account-administrator-02,true,"UserIdentity{name: 'Francisco', surname: 'García ᏥᏲᏎᎭ', email: 'francisco@acme.com'}",administrator2,administrator2
+user-account-agent-01,true,"UserIdentity{name: 'Javier', surname: 'თხა თხა', email: 'javier@acme.com'}",agent1,agent1
+user-account-agent-02,true,"UserIdentity{name: 'Irene', surname: '之乎路可良 García', email: 'irene@acme.com'}",agent2,agent2
+user-account-manager3,true,"UserIdentity{name: 'Paula', surname: 'коза Gómez', email: 'irene@acme.com'}",manager4,manager4
 user-account-customer-01,true,"UserIdentity{name: 'Emilio', surname: 'Customer1', email: 'customer1@acme.com'}",customer1,customer1
 user-account-customer-02,true,"UserIdentity{name: 'Pepe', surname: 'โลเร็ม อิปซัม', email: 'customer2@acme.com'}",customer2,customer2
 user-account-customer-03,true,"UserIdentity{name: 'Javier', surname: '洛伦·伊普森', email: 'customer3@acme.com'}",customer3,customer3
