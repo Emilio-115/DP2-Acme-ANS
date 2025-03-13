@@ -1,8 +1,12 @@
 key,average_dwell_time,discount,name,picture,promotion_code,key:airport
 service-01,10,EUR 0.00,"L","http://lorem.com/ipsum",ABCD-25,airport-01
-service-02,1,EUR 0.01,"La","ftp://a.b",WXYZ-25,airport-02
+service-02,01,EUR 0.01,"La","ftp://a.b",WXYZ-25,airport-02
 service-03,12,EUR 999999.99,"Lorem ipsum dolor sit amet, consectetur adipiscin","https://www.lorem-ipsum.org",MNTQ-25,airport-03
 service-04,30,EUR 1000000.00,"Lorem ipsum dolor sit amet, consectetur adipiscing","http://www.lorem-ipsum.org/dolor/sit.html",JPLK-25,airport-04
 service-05,34,EUR 100.20,"<marquee>Hacked</marquee>","http://example.org/a/b?",SETT-25,airport-02
 service-06,11,EUR 111.11,"洛伦·伊普森","http://example.org?a=1&b=2",FIZZ-25,airport-03
-service-07,17,EUR 122.12,"AYUDAAAAAAAAAA","http://example2.org",FNAT-25,airport-06
+service-07,17,EUR 122.12,"AYUDAAAAAAAAAA","http://example.org?",FNAT-25,airport-06
+service-08,19,USD 1223.15,"โลเร็ม อิปซัม","http://example.org?a",WRIT-25,airport-04
+service-09,20,EUR 12202.75,"لوريم إيبسوم","http://example.org/",FHET-25,airport-08
+service-10,28,EUR 99999.83,"<script>alert(‘Hacked!’);</script>","http://example.org/a",KORP-25,airport-10
+service-11,04,EUR 24561.40,"' or 'A' = 'A ","http://example.org/a/b",FLAM-25,airport-11

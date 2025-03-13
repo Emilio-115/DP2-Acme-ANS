@@ -1,9 +1,13 @@
-key,email,foundation_moment,iata_code,name,phone_number,type,website
+key,email,foundation_moment,iata_code,name,phone_number,type,website' or 'A' = 'A
 airline-01,"acme@lorem-ipsum.org","2000/01/01 0:00","DFR","A","666453","LUXURY","http://lorem.com/ipsum"
 airline-02,"a@b.e","2022/7/29 23:59","ADC","Ae","3456789","STANDARD","ftp://a.b"
 airline-03,"a@b.es","2000/01/01 0:01","TOP", "Lorem ipsum dolor sit amet, consectetur adipiscin","01234567891234","LOW_COST","https://www.lorem-ipsum.org"
 airline-04,"a@b.esx","2022/7/29 23:58","MID", "Lorem ipsum dolor sit amet, consectetur adipiscing","012345678912345","LOW_COST","http://www.lorem-ipsum.org/dolor/sit.html"
 airline-05,"lorem-ipsum@dolor.sit.amet.consectetur.adipiscing.elit.sed.do.eiusmod.tempor.incididunt.ut.labore.et.dolore.magna.aliqua.Ut.enim.ad.minim.veniam.quis.nostrud.exercitation.ullamco.laboris.nisi.ut.aliquip.ex.ea.commodo.consequat.duis.aute.irure.doloris.edu","2012/10/03 10:30","ZAC", "Lorem ipsum dolor sit amet, consectetur adipiscing","01678912345","LOW_COST","http://example.org/a/b?"
 airline-06,"airline@gmail.com","2011/11/11 11:11","RED", "Lorem, consectetur adipiscing","0121345","STANDARD","http://example.org?a=1&b=2"
-airline-07,"airline2@gmail.com","2012/12/12 12:12","BLU", "洛伦·伊普森","010021345","LUXURY","http://example.org"
-airline-08,"airline3@gmail.com","2001/01/01 13:13","AOE", "<marquee>Hacked</marquee>","011121345","LOW_COST","http://example2.org"
+airline-07,"airline2@gmail.com","2012/12/12 12:12","BLU", "洛伦·伊普森","010021345","LUXURY","http://example.org?"
+airline-08,"airline3@gmail.com","2011/11/16 13:13","AOE", "<marquee>Hacked</marquee>","011121345","LOW_COST","http://example.org?a"
+airline-09,"airline4@gmail.com","2012/07/19 17:15","REA", ' or 'A' = 'A,"112340112","STANDARD","http://example.org?a&b"
+airline-10,"airline5@gmail.com","2021/05/20 07:00","RRR", لوريم إيبسوم,"586021291","LUXURY","http://example.org/"
+airline-11,"airline6@gmail.com","2004/06/03 20:15","ORS", โลเร็ม อิปซัม,"481240121","LUXURY","http://example.org/a"
+airline-12,"airline7@gmail.com","2006/10/08 16:54","PFN", <script>alert(‘Hacked!’);</script>,"491051321","LOW_COST","http://example.org/a/b"
