@@ -11,3 +11,4 @@ acme.validation.percentage.message = Error in the relation between percentage an
 acme.validation.resolutionDescription.message = Error in the relation between description and status in the tracking log
 acme.validation.activity-log.registered-before-landing.message = Invalid registeredAt date: registered before the respective leg landed
 acme.validation.activity-log.arrival-before-departure.message = Invalid departureDate date, arrival must be after departure
+acme.validation.activity-log.overlapping-legs.message = Invalid dates of departure or arrival, legs cannot overlap

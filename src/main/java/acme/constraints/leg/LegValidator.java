@@ -1,11 +1,15 @@
 
 package acme.constraints.leg;
 
+import java.util.List;
+
 import javax.validation.ConstraintValidatorContext;
 
 import acme.client.components.validation.AbstractValidator;
 import acme.client.components.validation.Validator;
+import acme.client.helpers.SpringHelper;
 import acme.entities.legs.Leg;
+import acme.entities.legs.LegRepository;
 
 @Validator
 public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
@@ -23,13 +27,24 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 
 		if (leg == null)
 			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
+		else if (leg.getDepartureDate().after(leg.getArrivalDate()))
+			super.state(context, false, "departureDate", "acme.validation.activity-log.arrival-before-departure.message");
 		else {
-			var departureDate = leg.getDepartureDate();
-			var arrivalDate = leg.getArrivalDate();
+			LegRepository legRepository = SpringHelper.getBean(LegRepository.class);
+			List<Leg> legsOfFlight = legRepository.findAllLegsByFlight(leg.getFlight());
 
-			boolean departureBeforeArrival = departureDate.before(arrivalDate);
+			for (Leg l : legsOfFlight) {
 
-			super.state(context, departureBeforeArrival, "departureDate", "acme.validation.activity-log.arrival-before-departure.message");
+				if (leg.equals(l))
+					continue;
+
+				boolean areDatesBeforeDeparture = leg.getArrivalDate().before(l.getDepartureDate()) && leg.getDepartureDate().before(l.getDepartureDate());
+				boolean areDatesAfterArrival = leg.getArrivalDate().after(l.getArrivalDate()) && leg.getDepartureDate().after(l.getArrivalDate());
+
+				boolean areDatesCorrect = areDatesAfterArrival || areDatesBeforeDeparture;
+
+				super.state(context, areDatesCorrect, "dates", "acme.validation.activity-log.overlapping-legs.message");
+			}
 		}
 
 		result = !super.hasErrors(context);
