@@ -4,10 +4,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>342</x>
-      <y>387</y>
+      <x>369</x>
+      <y>441</y>
       <w>477</w>
-      <h>171</h>
+      <h>198</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
 Flight
@@ -30,9 +30,9 @@ bg=yellow</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>531</x>
-      <y>117</y>
-      <w>486</w>
+      <x>558</x>
+      <y>171</y>
+      <w>522</w>
       <h>153</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
@@ -52,8 +52,8 @@ bg=yellow</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>963</x>
-      <y>450</y>
+      <x>990</x>
+      <y>504</y>
       <w>189</w>
       <h>45</h>
     </coordinates>
@@ -65,8 +65,8 @@ bg=green</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>810</x>
-      <y>459</y>
+      <x>837</x>
+      <y>513</y>
       <w>171</w>
       <h>45</h>
     </coordinates>
@@ -79,8 +79,8 @@ is managed by &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>648</x>
-      <y>261</y>
+      <x>675</x>
+      <y>315</y>
       <w>90</w>
       <h>144</h>
     </coordinates>
@@ -93,8 +93,8 @@ is part of &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>981</x>
-      <y>261</y>
+      <x>1008</x>
+      <y>315</y>
       <w>126</w>
       <h>207</h>
     </coordinates>
@@ -107,8 +107,8 @@ is managed by &gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>207</x>
-      <y>135</y>
+      <x>234</x>
+      <y>189</y>
       <w>189</w>
       <h>45</h>
     </coordinates>
@@ -120,8 +120,8 @@ bg=green</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>207</x>
-      <y>216</y>
+      <x>234</x>
+      <y>270</y>
       <w>189</w>
       <h>54</h>
     </coordinates>
@@ -133,8 +133,8 @@ bg=green</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>387</x>
-      <y>144</y>
+      <x>414</x>
+      <y>198</y>
       <w>162</w>
       <h>45</h>
     </coordinates>
@@ -147,8 +147,8 @@ flown by &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>387</x>
-      <y>207</y>
+      <x>414</x>
+      <y>261</y>
       <w>162</w>
       <h>45</h>
     </coordinates>
@@ -161,8 +161,8 @@ departures from &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>387</x>
-      <y>234</y>
+      <x>414</x>
+      <y>288</y>
       <w>162</w>
       <h>45</h>
     </coordinates>
@@ -175,8 +175,8 @@ arrives at &gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>549</x>
-      <y>630</y>
+      <x>576</x>
+      <y>684</y>
       <w>540</w>
       <h>144</h>
     </coordinates>
@@ -194,8 +194,8 @@ bg=#CCDA9DD</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1035</x>
-      <y>486</y>
+      <x>1062</x>
+      <y>540</y>
       <w>90</w>
       <h>162</h>
     </coordinates>
@@ -208,8 +208,8 @@ works for &gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1044</x>
-      <y>117</y>
+      <x>1089</x>
+      <y>171</y>
       <w>189</w>
       <h>108</h>
     </coordinates>
@@ -222,6 +222,27 @@ CANCELLED
 LANDED
 
 bg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>72</x>
+      <y>666</y>
+      <w>477</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
+Weather
+--
++ city: int {Mandatory,ValidString, Automapped}
++ temperature: float {Mandatory,ValidNumber(fraction=1), Automapped}
++ precipitation: float {Mandatory,ValidNumber(fraction=1), Automapped}
++ windSpeed: float {Mandatory,ValidNumber(fraction=1), Automapped}
++ cloudCover: int {Mandatory,ValidNumber, Automapped}
++ snowfall: int {Mandatory,ValidNumber, Automapped}
++ pressure: float {Mandatory,ValidNumber(fraction=1), Automapped}
+bg=yellow</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
