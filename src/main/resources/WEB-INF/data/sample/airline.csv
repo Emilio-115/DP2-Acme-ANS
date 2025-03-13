@@ -1,4 +1,4 @@
-key,email,foundation_moment,iata_code,name,phone_number,type,website' or 'A' = 'A
+key,email,foundation_moment,iata_code,name,phone_number,type,website
 airline-01,"acme@lorem-ipsum.org","2000/01/01 0:00","DFR","A","666453","LUXURY","http://lorem.com/ipsum"
 airline-02,"a@b.e","2022/7/29 23:59","ADC","Ae","3456789","STANDARD","ftp://a.b"
 airline-03,"a@b.es","2000/01/01 0:01","TOP", "Lorem ipsum dolor sit amet, consectetur adipiscin","01234567891234","LOW_COST","https://www.lorem-ipsum.org"
