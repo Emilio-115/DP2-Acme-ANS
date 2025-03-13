@@ -235,7 +235,7 @@ bg=red</panel_attributes>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
 Weather
 --
-+ city: int {Mandatory,ValidString, Automapped}
++ city: int {Mandatory,ValidString(max=50), Automapped}
 + temperature: float {Mandatory,ValidNumber(fraction=1), Automapped}
 + precipitation: float {Mandatory,ValidNumber(fraction=1), Automapped}
 + windSpeed: float {Mandatory,ValidNumber(fraction=1), Automapped}

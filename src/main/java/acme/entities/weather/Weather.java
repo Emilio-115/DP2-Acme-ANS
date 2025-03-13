@@ -18,7 +18,7 @@ public class Weather extends AbstractEntity {
 	//city,temperature,precepitation,windSpeed,cloudCover,snowfall,pressure
 
 	@Mandatory
-	@ValidString
+	@ValidString(max = 50)
 	@Automapped
 	private String	city;
 
