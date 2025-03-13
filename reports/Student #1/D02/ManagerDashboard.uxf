@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>490</x>
+      <y>280</y>
+      <w>430</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Form&gt;&gt;
+Manager Dashboard
+--
++ ranking: int
++ yearsToRetire: int
++ onTimeRatio: float
++ delayedRatio: float
++ mostPopularAirport: Airport
++ leastPopularAirport: Airport
++ numberOfLegsByStatus: Map&lt;LegStatus, Integer&gt;
++ flightCostsStatistics: Statistics
+
+bg=cyan</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>970</x>
+      <y>320</y>
+      <w>210</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Enumeration&gt;&gt;
+LegStatus
+--
+ON_TIME
+DELAYED
+CANCELLED
+LANDED
+
+bg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
