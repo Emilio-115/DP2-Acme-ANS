@@ -6,7 +6,7 @@
     <coordinates>
       <x>252</x>
       <y>441</y>
-      <w>468</w>
+      <w>477</w>
       <h>99</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
@@ -44,9 +44,9 @@ bg=#CCDA9DD</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>207</x>
+      <x>288</x>
       <y>252</y>
-      <w>558</w>
+      <w>405</w>
       <h>99</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
@@ -123,16 +123,16 @@ bg=green</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>756</x>
+      <x>684</x>
       <y>243</y>
-      <w>171</w>
+      <w>243</w>
       <h>45</h>
     </coordinates>
     <panel_attributes>lt=x-&gt;
 m1= *
 m2=1
 assigns to &gt;</panel_attributes>
-    <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
+    <additional_attributes>10.0;20.0;250.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -221,5 +221,41 @@ bg=#bbffff</panel_attributes>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>297</x>
+      <y>630</y>
+      <w>396</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
+VisaRequirements
+--
++ origin: String {Mandatory, ValidString(max=50), Automapped}
++ destination: String {Mandatory, ValidString(max=50), Automapped}
++ origin: VisaRequirementType {Mandatory, Valid, Automapped}
+
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>873</x>
+      <y>639</y>
+      <w>162</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Enumeration&gt;&gt;
+VisaRequirementType
+--
+NOT_APPLICABLE
+VISA_REQUIRED
+VISA_FREE
+
+bg=green</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>
