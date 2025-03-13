@@ -19,8 +19,8 @@ public class ManagerDashboard extends AbstractForm {
 	int							yearsToRetire;
 	float						onTimeRatio;
 	float						delayedRatio;
-	Airport						mostPopularAirports;
-	Airport						lessPopularAirport;
+	Airport						mostPopularAirport;
+	Airport						leastPopularAirport;
 	Map<LegStatus, Integer>		numberOfLegsByStatus;
 	Statistics					flightCostsStatistics;
 }
