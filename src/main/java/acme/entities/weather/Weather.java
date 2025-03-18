@@ -17,38 +17,40 @@ import lombok.Setter;
 public class Weather extends AbstractEntity {
 	//city,temperature,precepitation,windSpeed,cloudCover,snowfall,pressure
 
+	private static final long	serialVersionUID	= 1L;
+
 	@Mandatory
 	@ValidString(max = 50)
 	@Automapped
-	private String	city;
+	private String				city;
 
 	@Mandatory
 	@ValidNumber(fraction = 1)
 	@Automapped
-	private double	temperature;
+	private double				temperature;
 
 	@Mandatory
 	@ValidNumber(fraction = 1)
 	@Automapped
-	private double	precipitation;
+	private double				precipitation;
 
 	@Mandatory
 	@ValidNumber(fraction = 1)
 	@Automapped
-	private double	windSpeed;
+	private double				windSpeed;
 
 	@Mandatory
 	@ValidNumber
 	@Automapped
-	private int		cloudCover;
+	private int					cloudCover;
 
 	@Mandatory
 	@ValidNumber
 	@Automapped
-	private int		snowfall;
+	private int					snowfall;
 
 	@Mandatory
 	@ValidNumber(fraction = 1)
 	@Automapped
-	private double	pressure;
+	private double				pressure;
 }
