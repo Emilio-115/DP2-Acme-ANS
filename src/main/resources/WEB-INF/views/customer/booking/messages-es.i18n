@@ -1,0 +1,5 @@
+customer.booking.list.title = Tus reservas
+
+customer.booking.list.label.locatorcode = Código localizador
+customer.booking.list.label.purchasemoment = Fecha de compra
+customer.booking.list.label.travelclass = Clase del viaje
