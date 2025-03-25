@@ -8,3 +8,5 @@
 	<acme:list-column code = "customer.booking.list.label.purchasemoment" path= "purchaseMoment"/>
 	<acme:list-column code = "customer.booking.list.label.travelclass" path= "travelClass"/>
 </acme:list>>
+
+<acme:button code="customer.booking.list.label.create" action="/customer/booking/create"/>
