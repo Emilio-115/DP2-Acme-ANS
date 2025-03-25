@@ -61,6 +61,10 @@ public class Flight extends AbstractEntity {
 	@Automapped
 	private String				description;
 
+	@Mandatory
+	@Automapped
+	private boolean				draftMode			= true;
+
 
 	@Transient
 	public Date scheduledDeparture() {
