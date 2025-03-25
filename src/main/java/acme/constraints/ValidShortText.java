@@ -9,19 +9,15 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import javax.validation.ReportAsSingleViolation;
-
-import acme.internals.components.validators.StringValidator;
+import javax.validation.constraints.Size;
 
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = StringValidator.class)
+@Constraint(validatedBy = {})
 @ReportAsSingleViolation
 
+@Size(max = 50)
 public @interface ValidShortText {
-
-	int min() default 0;
-	int max() default 50;
-	String pattern() default "";
 
 	String message() default "{acme.validation.short-text.message}";
 
