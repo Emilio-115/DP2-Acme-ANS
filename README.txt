@@ -43,3 +43,12 @@ D02
 - Student 2 tasks: https://github.com/users/Emilio-115/projects/3/views/8
 - Student 3 tasks: https://github.com/users/Emilio-115/projects/3/views/11
 - Student 4 tasks: https://github.com/users/Emilio-115/projects/3/views/10
+
+D03
+###############
+
+- Group tasks: https://github.com/users/Emilio-115/projects/3/views/13
+- Student 1 tasks: https://github.com/users/Emilio-115/projects/3/views/**
+- Student 2 tasks: https://github.com/users/Emilio-115/projects/3/views/**
+- Student 3 tasks: https://github.com/users/Emilio-115/projects/3/views/**
+- Student 4 tasks: https://github.com/users/Emilio-115/projects/3/views/18
