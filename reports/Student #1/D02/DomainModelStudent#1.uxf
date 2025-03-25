@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="15.1">
-  <zoom_level>8</zoom_level>
+  <zoom_level>20</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>528</x>
-      <y>336</y>
-      <w>424</w>
-      <h>176</h>
+      <x>1220</x>
+      <y>800</y>
+      <w>1060</w>
+      <h>460</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
-Flight
+Flight {ValidFlight}
 --
 + tag: String {Mandatory,ValidString(max=50),Automapped}
 + requiresSelfTransfer: boolean {Mandatory,Automapped}
@@ -30,14 +30,13 @@ bg=yellow</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>512</x>
-      <y>136</y>
-      <w>464</w>
-      <h>144</h>
+      <x>1180</x>
+      <y>280</y>
+      <w>1160</w>
+      <h>360</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
-@ValidLeg
-Leg
+Leg {ValidLeg}
 --
 + flightNumberDigits: String {Mandatory,ValidString(pattern="^[0-9]{4}$"),Automapped}
 + departureDate: Date {Mandatory,ValidMoment,Temporal(TemporalType.TIMESTAMP)}
@@ -54,10 +53,10 @@ bg=yellow</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>688</x>
-      <y>784</y>
-      <w>168</w>
-      <h>40</h>
+      <x>1620</x>
+      <y>2000</y>
+      <w>420</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
 Airline
@@ -67,38 +66,38 @@ bg=green</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>752</x>
-      <y>504</y>
-      <w>112</w>
-      <h>88</h>
+      <x>1780</x>
+      <y>1240</y>
+      <w>280</w>
+      <h>240</h>
     </coordinates>
     <panel_attributes>lt=&lt;-x
 m1=1
 m2= * 
 is managed by &gt;</panel_attributes>
-    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>712</x>
-      <y>272</y>
-      <w>80</w>
-      <h>80</h>
+      <x>1680</x>
+      <y>620</y>
+      <w>200</w>
+      <h>220</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-x
 m1=1
 m2=*
 is part of &gt;</panel_attributes>
-    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>224</x>
-      <y>152</y>
-      <w>168</w>
-      <h>40</h>
+      <x>460</x>
+      <y>320</y>
+      <w>420</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
 Aircraft
@@ -108,10 +107,10 @@ bg=green</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>224</x>
-      <y>224</y>
-      <w>168</w>
-      <h>48</h>
+      <x>460</x>
+      <y>500</y>
+      <w>420</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
 Airport
@@ -121,10 +120,10 @@ bg=green</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>384</x>
-      <y>160</y>
-      <w>144</w>
-      <h>40</h>
+      <x>860</x>
+      <y>340</y>
+      <w>360</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;-x
 m1=1
@@ -135,10 +134,10 @@ flown by &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>384</x>
-      <y>216</y>
-      <w>144</w>
-      <h>40</h>
+      <x>860</x>
+      <y>480</y>
+      <w>360</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;-x
 m1=1
@@ -149,10 +148,10 @@ r1=+ departureAirport</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>384</x>
-      <y>248</y>
-      <w>144</w>
-      <h>40</h>
+      <x>860</x>
+      <y>560</y>
+      <w>360</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;-x
 m1=1
@@ -163,18 +162,18 @@ r1=+ arrivalAirport</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>520</x>
-      <y>576</y>
-      <w>480</w>
-      <h>128</h>
+      <x>1200</x>
+      <y>1440</y>
+      <w>1200</w>
+      <h>320</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Role&gt;&gt;
-Airline Manager
+Airline Manager {ValidAirlineManager}
 --
 + identifier: String {Mandatory,ValidInitialsNumberIdentifier,Column(unique = true)}
-+ yearOfExpirience: int {Mandatory,Automapped}
++ yearOfExpirience: int {Mandatory,ValidNumber(min = 0, max = 120),Automapped}
 + birthDate: Date {Mandatory,ValidMoment(past = true),Temporal(TemporalType.TIMESTAMP)}
-+ pictureLink: String {Optional ,ValidUrl ,Automapped}
++ pictureLink: String {Optional,ValidUrl,Automapped}
 
 bg=#CCDA9DD</panel_attributes>
     <additional_attributes/>
@@ -182,24 +181,24 @@ bg=#CCDA9DD</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>768</x>
-      <y>696</y>
-      <w>80</w>
-      <h>104</h>
+      <x>1820</x>
+      <y>1740</y>
+      <w>200</w>
+      <h>300</h>
     </coordinates>
     <panel_attributes>lt=&lt;-x
 m1=1
 m2= * 
 works for &gt;</panel_attributes>
-    <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>984</x>
-      <y>136</y>
-      <w>168</w>
-      <h>96</h>
+      <x>2360</x>
+      <y>280</y>
+      <w>420</w>
+      <h>240</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Enumeration&gt;&gt;
 LegStatus
@@ -215,10 +214,10 @@ bg=red</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>40</x>
-      <y>640</y>
-      <w>424</w>
-      <h>152</h>
+      <x>0</x>
+      <y>1540</y>
+      <w>1060</w>
+      <h>380</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
 Weather
@@ -236,10 +235,10 @@ bg=yellow</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>544</x>
+      <x>1260</x>
       <y>40</y>
-      <w>112</w>
-      <h>56</h>
+      <w>280</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>arrivalDate debe 
 ser anterior a
@@ -250,10 +249,10 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>680</x>
+      <x>1600</x>
       <y>40</y>
-      <w>112</w>
-      <h>56</h>
+      <w>280</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>durationInHours se
 calcula con respecto
@@ -264,10 +263,10 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>312</x>
-      <y>312</y>
-      <w>184</w>
-      <h>104</h>
+      <x>680</x>
+      <y>760</y>
+      <w>460</w>
+      <h>260</h>
     </coordinates>
     <panel_attributes>Tanto scheduledDeparture como 
 origin son datos que provienen de 
@@ -281,10 +280,10 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>824</x>
-      <y>24</y>
-      <w>128</w>
-      <h>72</h>
+      <x>1960</x>
+      <y>0</y>
+      <w>320</w>
+      <h>180</h>
     </coordinates>
     <panel_attributes>flightNumber es la
 concatenación de
@@ -297,10 +296,10 @@ bg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>592</x>
-      <y>88</y>
-      <w>24</w>
-      <h>64</h>
+      <x>1380</x>
+      <y>160</y>
+      <w>60</w>
+      <h>160</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
@@ -308,10 +307,10 @@ bg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>736</x>
-      <y>88</y>
-      <w>24</w>
-      <h>64</h>
+      <x>1740</x>
+      <y>160</y>
+      <w>60</w>
+      <h>160</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
@@ -319,10 +318,10 @@ bg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>872</x>
-      <y>88</y>
-      <w>24</w>
-      <h>64</h>
+      <x>2080</x>
+      <y>160</y>
+      <w>60</w>
+      <h>160</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
@@ -330,10 +329,10 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>360</x>
-      <y>424</y>
-      <w>128</w>
-      <h>72</h>
+      <x>800</x>
+      <y>1040</y>
+      <w>320</w>
+      <h>180</h>
     </coordinates>
     <panel_attributes>numberOfLayovers se
 calcula contando
@@ -345,10 +344,10 @@ bg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>488</x>
-      <y>376</y>
-      <w>56</w>
-      <h>24</h>
+      <x>1120</x>
+      <y>920</y>
+      <w>140</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>50.0;10.0;10.0;10.0</additional_attributes>
@@ -356,10 +355,10 @@ bg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>480</x>
-      <y>456</y>
-      <w>64</w>
-      <h>24</h>
+      <x>1100</x>
+      <y>1120</y>
+      <w>160</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>60.0;10.0;10.0;10.0</additional_attributes>
@@ -367,10 +366,10 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1080</x>
-      <y>536</y>
-      <w>344</w>
-      <h>152</h>
+      <x>2600</x>
+      <y>1280</y>
+      <w>860</w>
+      <h>380</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Form&gt;&gt;
 Manager Dashboard
