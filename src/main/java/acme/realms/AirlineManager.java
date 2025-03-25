@@ -55,7 +55,7 @@ public class AirlineManager extends AbstractRole {
 
 	@Mandatory
 	@ValidMoment(past = true)
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date				birthDate;
 
 	@Optional

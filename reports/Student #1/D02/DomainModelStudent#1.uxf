@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="15.1">
-  <zoom_level>9</zoom_level>
+  <zoom_level>8</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>369</x>
-      <y>441</y>
-      <w>477</w>
-      <h>198</h>
+      <x>480</x>
+      <y>400</y>
+      <w>424</w>
+      <h>176</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
 Flight
@@ -15,7 +15,7 @@ Flight
 + tag: String {Mandatory,ValidString(max=50),Automapped}
 + requiresSelfTransfer: boolean {Mandatory,Automapped}
 + cost: Money {Mandatory,ValidMoney,Automapped}
-- description: String {Optional ,ValidString ,Automapped}
++ description: String {Optional ,ValidString ,Automapped}
 
 --
 + scheduledDeparture: Date {Transient}
@@ -30,12 +30,13 @@ bg=yellow</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>558</x>
-      <y>171</y>
-      <w>522</w>
-      <h>153</h>
+      <x>464</x>
+      <y>216</y>
+      <w>464</w>
+      <h>136</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
+@ValidLeg
 Leg
 --
 + flightNumberDigits: String {Mandatory,ValidString(pattern="^[0-9]{4}$"),Automapped}
@@ -43,8 +44,8 @@ Leg
 + arrivalDate: Date {Mandatory,ValidMoment,Temporal(TemporalType.TIMESTAMP)}
 + status: LegStatus {Mandatory,Valid,Automapped}
 --
-+ durationInHours: int {Transient}
-+ flightNumber: string {Transient}
++ durationInHours: int
++ flightNumber: string
 
 bg=yellow</panel_attributes>
     <additional_attributes/>
@@ -52,10 +53,10 @@ bg=yellow</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>990</x>
-      <y>504</y>
-      <w>189</w>
-      <h>45</h>
+      <x>640</x>
+      <y>832</y>
+      <w>168</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
 Airline
@@ -65,52 +66,38 @@ bg=green</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>837</x>
-      <y>513</y>
-      <w>171</w>
-      <h>45</h>
+      <x>704</x>
+      <y>568</y>
+      <w>112</w>
+      <h>88</h>
     </coordinates>
     <panel_attributes>lt=&lt;-x
 m1=1
 m2= * 
 is managed by &gt;</panel_attributes>
-    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>675</x>
-      <y>315</y>
-      <w>90</w>
-      <h>144</h>
+      <x>664</x>
+      <y>344</y>
+      <w>80</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-x
 m1=1
 m2=*
 is part of &gt;</panel_attributes>
-    <additional_attributes>10.0;140.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1008</x>
-      <y>315</y>
-      <w>126</w>
-      <h>207</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-x
-m1=1
-m2=*
-is managed by &gt;</panel_attributes>
-    <additional_attributes>10.0;210.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>234</x>
-      <y>189</y>
-      <w>189</w>
-      <h>45</h>
+      <x>176</x>
+      <y>232</y>
+      <w>168</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
 Aircraft
@@ -120,10 +107,10 @@ bg=green</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>234</x>
-      <y>270</y>
-      <w>189</w>
-      <h>54</h>
+      <x>176</x>
+      <y>304</y>
+      <w>168</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
 Airport
@@ -133,10 +120,10 @@ bg=green</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>414</x>
-      <y>198</y>
-      <w>162</w>
-      <h>45</h>
+      <x>336</x>
+      <y>240</y>
+      <w>144</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;-x
 m1=1
@@ -147,46 +134,46 @@ flown by &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>414</x>
-      <y>261</y>
-      <w>162</w>
-      <h>45</h>
+      <x>336</x>
+      <y>296</y>
+      <w>144</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;-x
 m1=1
 m2=*
-departures from &gt;</panel_attributes>
+r1=+ departureAirport</panel_attributes>
     <additional_attributes>10.0;20.0;160.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>414</x>
-      <y>288</y>
-      <w>162</w>
-      <h>45</h>
+      <x>336</x>
+      <y>328</y>
+      <w>144</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;-x
 m1=1
 m2=*
-arrives at &gt;</panel_attributes>
+r1=+ arrivalAirport</panel_attributes>
     <additional_attributes>10.0;20.0;160.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>576</x>
-      <y>684</y>
-      <w>540</w>
-      <h>144</h>
+      <x>472</x>
+      <y>640</y>
+      <w>480</w>
+      <h>128</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Role&gt;&gt;
 Airline Manager
 --
 + identifier: String {Mandatory,ValidInitialsNumberIdentifier,Column(unique = true)}
 + yearOfExpirience: int {Mandatory,Automapped}
-+ birthDate: Date {Mandatory,ValidMoment,Temporal(TemporalType.DATE)}
-- String: String {Optional ,ValidUrl ,Automapped}
++ birthDate: Date {Mandatory,ValidMoment(past = true),Temporal(TemporalType.TIMESTAMP)}
++ pictureLink: String {Optional ,ValidUrl ,Automapped}
 
 bg=#CCDA9DD</panel_attributes>
     <additional_attributes/>
@@ -194,24 +181,24 @@ bg=#CCDA9DD</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1062</x>
-      <y>540</y>
-      <w>90</w>
-      <h>162</h>
+      <x>720</x>
+      <y>760</y>
+      <w>80</w>
+      <h>88</h>
     </coordinates>
     <panel_attributes>lt=&lt;-x
 m1=1
 m2= * 
 works for &gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;160.0</additional_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1089</x>
-      <y>171</y>
-      <w>189</w>
-      <h>108</h>
+      <x>936</x>
+      <y>216</y>
+      <w>168</w>
+      <h>96</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Enumeration&gt;&gt;
 LegStatus
@@ -227,10 +214,10 @@ bg=red</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>72</x>
-      <y>666</y>
-      <w>477</w>
-      <h>171</h>
+      <x>0</x>
+      <y>616</y>
+      <w>424</w>
+      <h>152</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
 Weather
@@ -243,6 +230,160 @@ Weather
 + snowfall: int {Mandatory,ValidNumber, Automapped}
 + pressure: float {Mandatory,ValidNumber(fraction=1), Automapped}
 bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>496</x>
+      <y>120</y>
+      <w>112</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>arrivalDate debe 
+ser anterior a
+departureDate
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>632</x>
+      <y>120</y>
+      <w>112</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>durationInHours se
+calcula con respecto
+a las fechas de salida y llegada
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>256</x>
+      <y>376</y>
+      <w>184</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>Tanto scheduledDeparture como 
+origin son datos que provienen de 
+la primera leg asociada al flight,
+de la misma manera con
+scheduleArrival y destiny que 
+vienen de la última leg
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>776</x>
+      <y>104</y>
+      <w>128</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>flightNumber es la
+concatenación de
+ el IATA code de
+ su aerolinea y 
+ su flightNumberDigits
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>544</x>
+      <y>168</y>
+      <w>24</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>688</x>
+      <y>168</y>
+      <w>24</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>824</x>
+      <y>168</y>
+      <w>24</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>312</x>
+      <y>488</y>
+      <w>128</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>numberOfLayovers se
+calcula contando
+cuantas legs tiene 
+el vuelo
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>432</x>
+      <y>440</y>
+      <w>64</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>432</x>
+      <y>520</y>
+      <w>64</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1032</x>
+      <y>616</y>
+      <w>344</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Form&gt;&gt;
+Manager Dashboard
+--
++ ranking: int
++ yearsToRetire: int
++ onTimeRatio: float
++ delayedRatio: float
++ mostPopularAirport: Airport
++ leastPopularAirport: Airport
++ numberOfLegsByStatus: Map&lt;LegStatus, Integer&gt;
++ flightCostsStatistics: Statistics
+
+bg=cyan</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
