@@ -6,9 +6,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
+import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.bookings.Booking;
+import acme.entities.bookings.TravelClass;
 import acme.realms.Customer;
 
 @GuiService
@@ -49,8 +51,11 @@ public class CustomerBookingShowService extends AbstractGuiService<Customer, Boo
 	public void unbind(final Booking booking) {
 
 		Dataset dataset;
-		dataset = super.unbindObject(booking, "locatorCode", "purchaseMoment", "travelClass");
-
+		SelectChoices choices;
+		choices = SelectChoices.from(TravelClass.class, booking.getTravelClass());
+		dataset = super.unbindObject(booking, "locatorCode", "purchaseMoment", "travelClass", "creditCardLastNibble");
+		dataset.put("price", booking.price());
+		dataset.put("travelClasses", choices);
 		super.getResponse().addData(dataset);
 	}
 }
