@@ -1,0 +1,5 @@
+manager.flight.list.label.tag = Tag
+manager.flight.list.label.origin = Ciudad Origen
+manager.flight.list.label.destiny = Ciudad Destino
+manager.flight.list.label.departureDate = Fecha de Salida
+manager.flight.list.label.arrivalDate= Fecha de Llegada
