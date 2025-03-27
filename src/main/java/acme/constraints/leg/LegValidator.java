@@ -25,12 +25,14 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 
 		boolean result = true;
 
-		if (leg == null)
-			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
-		else if (leg.getDepartureDate().after(leg.getArrivalDate()))
-			super.state(context, false, "departureDate", "acme.validation.activity-log.arrival-before-departure.message");
+		LegRepository legRepository = SpringHelper.getBean(LegRepository.class);
+		boolean isAircraftBusy = legRepository.isAircrafBusy(leg, leg.getAircraft(), leg.getDepartureDate(), leg.getArrivalDate());
+
+		if (leg.getDepartureDate().after(leg.getArrivalDate()))
+			super.state(context, false, "departureDate", "acme.validation.leg.arrival-before-departure.message");
+		else if (isAircraftBusy)
+			super.state(context, false, "aircraft", "acme.validation.leg.busy-aircraft.message");
 		else {
-			LegRepository legRepository = SpringHelper.getBean(LegRepository.class);
 			List<Leg> legsOfFlight = legRepository.findAllLegsByFlight(leg.getFlight());
 
 			for (Leg l : legsOfFlight) {

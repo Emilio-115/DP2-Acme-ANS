@@ -16,14 +16,17 @@ import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidString;
 import acme.client.helpers.SpringHelper;
-import acme.entities.airlines.Airline;
+import acme.constraints.flight.ValidFlight;
+import acme.constraints.ValidShortText;
 import acme.entities.legs.LegRepository;
+import acme.realms.AirlineManager;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
+@ValidFlight
 public class Flight extends AbstractEntity {
 
 	/*
@@ -43,7 +46,7 @@ public class Flight extends AbstractEntity {
 	private static final long	serialVersionUID	= 1L;
 
 	@Mandatory
-	@ValidString(max = 50)
+	@ValidShortText
 	@Automapped
 	private String				tag;
 
@@ -60,6 +63,10 @@ public class Flight extends AbstractEntity {
 	@ValidString
 	@Automapped
 	private String				description;
+
+	@Mandatory
+	@Automapped
+	private boolean				draftMode			= true;
 
 
 	@Transient
@@ -95,7 +102,7 @@ public class Flight extends AbstractEntity {
 
 	@Mandatory
 	@Valid
-	@ManyToOne
-	private Airline airline;
+	@ManyToOne(optional = false)
+	private AirlineManager manager;
 
 }
