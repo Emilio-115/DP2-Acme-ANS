@@ -13,3 +13,4 @@ tracking-log-11,2012/05/13 13:16,"洛伦·伊普森",100.00,"REJECTED","洛伦·
 tracking-log-12,2011/05/19 17:17,"<marquee>Hacked</marquee>",100.00,"ACCEPTED","<marquee>Hacked</marquee>",claim-09
 tracking-log-13,2015/10/16 12:49,"<script>alert(‘Hacked!’);</script>",100.00,"REJECTED","<script>alert(‘Hacked!’);</script>",claim-10
 tracking-log-14,2003/02/28 13:20,"' or 'A' = 'A ",100.00,"REJECTED","' or 'A' = 'A ",claim-11
+tracking-log-15,2015/02/10 13:20,,80.0,"PENDING","Aun lo estos viendo",claim-12

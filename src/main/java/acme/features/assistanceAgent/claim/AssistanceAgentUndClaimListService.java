@@ -12,7 +12,7 @@ import acme.entities.claims.Claim;
 import acme.realms.AssistanceAgent;
 
 @GuiService
-public class AssistanceAgentClaimListService extends AbstractGuiService<AssistanceAgent, Claim> {
+public class AssistanceAgentUndClaimListService extends AbstractGuiService<AssistanceAgent, Claim> {
 
 	@Autowired
 	private AssistanceAgentClaimRepository repository;
@@ -39,7 +39,7 @@ public class AssistanceAgentClaimListService extends AbstractGuiService<Assistan
 		assistanceAgent = this.repository.findAssistanceAgentById(userAccountId);
 
 		id = assistanceAgent.getId();
-		completedClaims = this.repository.findClaimsByAssistanceAgent(id, true);
+		completedClaims = this.repository.findClaimsByAssistanceAgent(id, false);
 		super.getBuffer().addData(completedClaims);
 	}
 
