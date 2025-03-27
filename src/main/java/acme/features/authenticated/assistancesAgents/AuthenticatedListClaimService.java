@@ -13,10 +13,10 @@ import acme.client.services.AbstractGuiService;
 import acme.entities.claims.Claim;
 import acme.realms.AssistanceAgent;
 
-public class AuthenticatedAssistanceAgentListClaimService extends AbstractGuiService<Authenticated, Claim> {
+public class AuthenticatedListClaimService extends AbstractGuiService<Authenticated, Claim> {
 
 	@Autowired
-	private AuthenticatedAssistanceAgentRepository repository;
+	private AuthenticatedClaimRepository repository;
 
 
 	@Override
@@ -47,7 +47,7 @@ public class AuthenticatedAssistanceAgentListClaimService extends AbstractGuiSer
 	}
 
 	@Override
-	public void unbind(final List<Claim> claimList) {
+	public void unbind(final Claim claimList) {
 		Dataset dataset;
 
 		dataset = super.unbindObject(claimList, "registrationMoment", "passengerEmail", "description", "type", "isAccepted", "assistanceAgent", "leg");

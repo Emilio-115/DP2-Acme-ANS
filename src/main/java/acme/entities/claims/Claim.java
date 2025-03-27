@@ -54,6 +54,11 @@ public class Claim extends AbstractEntity {
 
 	@Mandatory
 	@Valid
+	@Automapped
+	private Boolean				completed;
+
+	@Mandatory
+	@Valid
 	@ManyToOne
 	private AssistanceAgent		assistanceAgent;
 
@@ -61,4 +66,5 @@ public class Claim extends AbstractEntity {
 	@Valid
 	@ManyToOne
 	private Leg					leg;
+
 }
