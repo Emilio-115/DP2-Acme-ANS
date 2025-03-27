@@ -1,28 +1,28 @@
 
-package acme.features.authenticated.claim;
+package acme.features.assistanceAgent.claim;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
-import acme.client.components.principals.Authenticated;
 import acme.client.services.AbstractGuiService;
+import acme.client.services.GuiService;
 import acme.entities.claims.Claim;
 import acme.realms.AssistanceAgent;
 
-public class AuthenticatedListClaimService extends AbstractGuiService<Authenticated, Claim> {
+@GuiService
+public class AssistanceAgentClaimListService extends AbstractGuiService<AssistanceAgent, Claim> {
 
 	@Autowired
-	private AuthenticatedClaimRepository repository;
+	private AssistanceAgentClaimRepository repository;
 
 
 	@Override
 	public void authorise() {
 		boolean status;
 
-		status = !super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class);
+		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class);
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -32,7 +32,7 @@ public class AuthenticatedListClaimService extends AbstractGuiService<Authentica
 		AssistanceAgent assistanceAgent;
 		int userAccountId;
 
-		List<Claim> completedClaims = new ArrayList<>();
+		List<Claim> completedClaims;
 		int id;
 
 		userAccountId = super.getRequest().getPrincipal().getAccountId();
@@ -40,15 +40,14 @@ public class AuthenticatedListClaimService extends AbstractGuiService<Authentica
 
 		id = assistanceAgent.getId();
 		completedClaims = this.repository.findClaimsByAssistanceAgent(id);
-
 		super.getBuffer().addData(completedClaims);
 	}
 
 	@Override
-	public void unbind(final Claim claimList) {
+	public void unbind(final Claim claim) {
 		Dataset dataset;
 
-		dataset = super.unbindObject(claimList, "registrationMoment", "passengerEmail", "description", "type", "isAccepted", "completed", "assistanceAgent", "leg");
+		dataset = super.unbindObject(claim, "registrationMoment", "isAccepted", "leg", "type");
 
 		super.getResponse().addData(dataset);
 	}
