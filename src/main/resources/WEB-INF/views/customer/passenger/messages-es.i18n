@@ -4,11 +4,11 @@ customer.passenger.form.title = Detalles del pasajero
 customer.passenger.list.label.fullname = Nombre completo
 customer.passenger.list.label.passportnumber = Pasaporte
 
-customer.passenger.form.label.locatorcode = Locator code
-customer.passenger.form.label.purchasemoment = Purchase moment
-customer.passenger.form.label.travelclass = Travel class
-customer.passenger.form.label.price = Price
-customer.passenger.form.label.creditcardlastnibble = Credit Card Last Nibble
+customer.passenger.form.label.fullname = Nombre completo
+customer.passenger.form.label.passportnumber = Pasaporte
+customer.passenger.form.label.email = Email
+customer.passenger.form.label.birthdate = Fecha de nacimiento
+customer.passenger.form.label.specialneeds = Necesidades especiales
 
 
-customer.passenger.list.label.create = Create
+customer.passenger.list.label.create = Crear
