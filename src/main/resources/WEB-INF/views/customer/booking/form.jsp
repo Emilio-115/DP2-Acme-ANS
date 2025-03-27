@@ -9,4 +9,5 @@
 	<acme:input-select code="customer.booking.form.label.travelclass" path="travelClass" choices="${travelClasses}"/>
 	<acme:input-money code="customer.booking.form.label.price" path="price"/>
 	<acme:input-textbox code="customer.booking.form.label.creditcardlastnibble" path="creditCardLastNibble"/>
+	<acme:button code="customer.booking.form.label.passenger" action="/customer/passenger/list?bookingId=${id}"/>
 </acme:form>

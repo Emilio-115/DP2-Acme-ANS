@@ -4,7 +4,12 @@ customer.booking.form.title = Detalles de la reserva
 customer.booking.list.label.locatorcode = Código localizador
 customer.booking.list.label.purchasemoment = Fecha de compra
 customer.booking.list.label.travelclass = Clase del viaje
-customer.booking.list.label.price = Precio
-customer.booking.list.label.creditcardlastnibble = Últimos 4 digitos T.Crédito
+
+customer.booking.form.label.locatorcode = Código localizador
+customer.booking.form.label.purchasemoment = Fecha de compra
+customer.booking.form.label.travelclass = Clase del viaje
+customer.booking.form.label.price = Precio
+customer.booking.form.label.creditcardlastnibble = Últimos 4 digitos T.Crédito
+customer.booking.form.label.passenger = Pasajeros
 
 customer.booking.list.label.create = Crear
