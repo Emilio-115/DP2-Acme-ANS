@@ -12,6 +12,7 @@ import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
 import acme.constraints.ValidInitialsNumberIdentifier;
 import acme.constraints.ValidPhoneNumber;
+import acme.constraints.ValidShortText;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -38,12 +39,12 @@ public class Customer extends AbstractRole {
 	private String				physicalAddress;
 
 	@Mandatory
-	@ValidString(max = 50)
+	@ValidShortText
 	@Automapped
 	private String				city;
 
 	@Mandatory
-	@ValidString(max = 50)
+	@ValidShortText
 	@Automapped
 	private String				country;
 
