@@ -38,7 +38,7 @@ public class AirlineManagerFlightService extends AbstractGuiService<AirlineManag
 	public void unbind(final Flight flight) {
 
 		Dataset dataset;
-		dataset = super.unbindObject(flight, "tag");
+		dataset = super.unbindObject(flight, "id");
 		dataset.put("origin", flight.origin());
 		dataset.put("destiny", flight.destiny());
 		dataset.put("departureDate", flight.scheduledDeparture());

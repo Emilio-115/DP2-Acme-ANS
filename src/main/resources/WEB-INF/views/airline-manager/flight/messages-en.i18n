@@ -1,4 +1,4 @@
-manager.flight.list.label.tag = Tag
+manager.flight.list.label.id = Id
 manager.flight.list.label.origin = Origin City
 manager.flight.list.label.destiny = Destiny City
 manager.flight.list.label.departureDate = Departure Date

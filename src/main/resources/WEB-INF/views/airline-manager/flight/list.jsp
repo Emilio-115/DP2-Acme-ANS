@@ -4,7 +4,7 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:list>
-	<acme:list-column code = "manager.flight.list.label.tag" path= "tag"/>
+	<acme:list-column code = "manager.flight.list.label.id" path= "id"/>
 	<acme:list-column code = "manager.flight.list.label.origin" path= "origin"/>
 	<acme:list-column code = "manager.flight.list.label.destiny" path= "destiny"/>
 	<acme:list-column code = "manager.flight.list.label.departureDate" path= "departureDate"/>
