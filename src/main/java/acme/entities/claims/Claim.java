@@ -60,5 +60,5 @@ public class Claim extends AbstractEntity {
 	@Mandatory
 	@Valid
 	@ManyToOne
-	private Leg					Leg;
+	private Leg					leg;
 }
