@@ -21,7 +21,7 @@ public class SelectChoicesHelper {
 		Iterator<E> iterator;
 
 		result = new SelectChoices();
-		result.add("0", "----", selected == null);
+		result.add("0", "----", selected == null || !source.contains(selected));
 		iterator = source.iterator();
 		while (iterator.hasNext()) {
 			E choice;
