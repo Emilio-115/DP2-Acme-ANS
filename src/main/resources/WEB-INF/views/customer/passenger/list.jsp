@@ -4,6 +4,7 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:list>
-	<acme:list-column code = "customer.passenger.list.label.fullname" path= "fullName"/>
+	<acme:list-column code = "customer.passenger.list.label.email" path= "email"/>
 	<acme:list-column code = "customer.passenger.list.label.passportnumber" path= "passportNumber"/>
+	<acme:list-column code = "customer.passenger.list.label.draftmode" path = "draftMode"/>
 </acme:list>>

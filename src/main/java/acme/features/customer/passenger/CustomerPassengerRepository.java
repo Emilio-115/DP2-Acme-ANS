@@ -18,4 +18,12 @@ public interface CustomerPassengerRepository extends AbstractRepository {
 	@Query("SELECT b FROM Booking b WHERE b.id = :bookingId AND b.customer.id = :customerId")
 	Optional<Booking> findBookingByIdAndCustomerId(Integer bookingId, Integer customerId);
 
+	@Query("SELECT p FROM Passenger p WHERE p.customer.id = :customerId")
+	List<Passenger> findPassengersByCustomerId(Integer customerId);
+
+	@Query("SELECT p FROM Passenger p WHERE p.id = :id AND p.customer.id = :customerId")
+	Optional<Passenger> findPassengerByIdAndCustomerId(Integer id, Integer customerId);
+
+	@Query("SELECT p FROM Passenger p WHERE p.id = :id")
+	Passenger findPassengerById(Integer id);
 }

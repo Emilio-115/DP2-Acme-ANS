@@ -9,4 +9,5 @@
 	<acme:input-email code="customer.passenger.form.label.email" path="email"/>
 	<acme:input-moment code="customer.passenger.form.label.birthdate" path="birthDate"/>
 	<acme:input-textarea code="customer.passenger.form.label.specialneeds" path="specialNeeds"/>
+	<acme:input-checkbox code="customer.passenger.form.label.draftmode" path="draftMode"/>
 </acme:form>
