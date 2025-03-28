@@ -11,7 +11,7 @@
 	
 	<jstl:choose>
 		<jstl:when test="${acme:anyOf(_command,'show|update|delete|publish')}">
-			<acme:input-moment code="customer.booking.form.label.purchasemoment" path="purchaseMoment"/>	
+			<acme:input-moment code="customer.booking.form.label.purchasemoment" path="purchaseMoment" readonly="true"/>	
 			<acme:input-select code = "customer.flight.form.label.tag" path= "flight" choices="${flightTagChoices}" />
 			<acme:input-textbox code = "customer.flight.form.label.origin" path= "origin" readonly="true"/>
 			<acme:input-textbox code = "customer.flight.form.label.destiny" path= "destiny" readonly="true"/>
