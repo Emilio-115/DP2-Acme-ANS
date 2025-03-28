@@ -21,7 +21,10 @@ public interface CustomerBookingRepository extends AbstractRepository {
 
 	Optional<Booking> findByIdAndCustomerId(Integer id, Integer customerId);
 
-	@Query("SELECT f FROM Flight f WHERE NOT EXISTS(SELECT l FROM Leg l WHERE l.flight = f AND l.departureDate <= :currentMoment)")
+	@Query("SELECT f FROM Flight f WHERE f.draftMode = false AND NOT EXISTS(SELECT l FROM Leg l WHERE l.flight = f AND l.departureDate <= :currentMoment)")
 	Collection<Flight> findAvailableFlights(Date currentMoment);
+
+	@Query("SELECT f FROM Flight f WHERE f.id = :id")
+	Flight findFlightById(Integer id);
 
 }

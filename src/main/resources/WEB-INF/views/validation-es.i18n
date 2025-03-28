@@ -16,4 +16,5 @@ acme.validation.leg.overlapping-legs.message = Fechas de salida o llegada no val
 acme.validation.leg.busy-aircraft.message = Avión no válido, el avión está ocupado durante ese rando de tiempo.
 acme.validation.booking.creditcardlastnibble = Los 4 números de la tarjeta de credito son obligatorios para publicar la reserva
 acme.validation.booking.passenger = Es necesario que la reserva tenga pasajeros para publicarla. 
-acme.validation.booking.locatorCode = El código localizador debe ser único.
+acme.validation.booking.locatorCode = El código localizador debe ser único
+acme.validation.booking.flight = Debes seleccionar un vuelo
