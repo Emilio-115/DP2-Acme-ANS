@@ -1,0 +1,19 @@
+flight-crew-member.flight-assignment.list.title = Asignaciones de Vuelo
+flight-crew-member.flight-assignment.form.title = Detalles de Asignación de Vuelo
+
+flight-crew-member.flight-assignment.list.label.employee-code = Código de empleado
+flight-crew-member.flight-assignment.list.label.flight-number = Número de vuelo
+flight-crew-member.flight-assignment.list.label.duty = Rol
+flight-crew-member.flight-assignment.list.label.status = Estado
+
+flight-crew-member.flight-assignment.form.label.flight-crew-member = Miembro de la tripulación de vuelo
+flight-crew-member.flight-assignment.form.label.leg = Segmento
+flight-crew-member.flight-assignment.form.label.duty = Rol
+flight-crew-member.flight-assignment.form.label.status = Estado
+flight-crew-member.flight-assignment.form.label.remarks = Observaciones
+
+flight-crew-member.flight-assignment.list.button.create = Crear
+flight-crew-member.flight-assignment.form.button.create = Crear
+flight-crew-member.flight-assignment.form.button.update = Actualizar
+flight-crew-member.flight-assignment.form.button.delete = Borrar
+flight-crew-member.flight-assignment.form.button.publish = Publicar

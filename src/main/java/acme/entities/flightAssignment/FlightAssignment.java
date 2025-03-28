@@ -63,6 +63,10 @@ public class FlightAssignment extends AbstractEntity {
 	@Automapped
 	private FlightAssignmentStatus	status;
 
+	@Mandatory
+	@Automapped
+	private boolean					draftMode;
+
 	@Optional
 	@ValidString
 	@Automapped
