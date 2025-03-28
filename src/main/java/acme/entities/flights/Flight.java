@@ -102,7 +102,7 @@ public class Flight extends AbstractEntity {
 	@Transient
 	public int numberOfLayovers() {
 		LegRepository legRepository = SpringHelper.getBean(LegRepository.class);
-		return (int) legRepository.countLegsByFlight(this);
+		return (int) legRepository.countLegsByFlight(this) - 1;
 	}
 
 

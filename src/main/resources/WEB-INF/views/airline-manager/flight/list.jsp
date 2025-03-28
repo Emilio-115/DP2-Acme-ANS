@@ -10,3 +10,7 @@
 	<acme:list-column code = "manager.flight.list.label.departureDate" path= "departureDate"/>
 	<acme:list-column code = "manager.flight.list.label.arrivalDate" path= "arrivalDate"/>
 </acme:list>
+
+<jstl:if test="${_command == 'list'}">
+	<acme:button code="manager.flight.list.button.create" action="/airline-manager/flight/create"/>
+</jstl:if>		

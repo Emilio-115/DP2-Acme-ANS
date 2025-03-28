@@ -1,5 +1,5 @@
 
-package acme.features.airlineManager.flights;
+package acme.features.airline_manager.flights;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import acme.entities.flights.Flight;
 import acme.realms.AirlineManager;
 
 @GuiService
-public class AirlineManagerFlightService extends AbstractGuiService<AirlineManager, Flight> {
+public class AirlineManagerFlightListService extends AbstractGuiService<AirlineManager, Flight> {
 
 	@Autowired
 	private AirlineManagerFlightRepository repository;
