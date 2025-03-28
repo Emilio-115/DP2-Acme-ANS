@@ -14,6 +14,7 @@ import acme.entities.flightAssignment.FlightAssignment;
 import acme.entities.flightAssignment.FlightAssignmentStatus;
 import acme.entities.flightAssignment.FlightCrewDuty;
 import acme.entities.legs.Leg;
+import acme.helpers.SelectChoicesHelper;
 import acme.realms.flightCrewMember.FlightCrewMember;
 
 public class FlightCrewMemberFlightAssignmentService extends AbstractGuiService<FlightCrewMember, FlightAssignment> {
@@ -33,7 +34,6 @@ public class FlightCrewMemberFlightAssignmentService extends AbstractGuiService<
 		status = flightAssignment.map(fa -> fa.isDraftMode()).orElse(false);
 
 		super.getResponse().setAuthorised(status);
-
 	}
 
 	@Override
@@ -68,7 +68,12 @@ public class FlightCrewMemberFlightAssignmentService extends AbstractGuiService<
 		dataset = super.unbindObject(flightAssignment, "remarks", "duty", "status", "draftMode");
 
 		{
-			List<FlightCrewMember> availableMembers = this.repository.findAvailableFlightCrewMembers();
+			List<FlightCrewMember> availableMembers;
+
+			if (!flightAssignment.isDraftMode())
+				availableMembers = this.repository.findAllCrewMembers();
+			else
+				availableMembers = this.repository.findAvailableFlightCrewMembers();
 
 			SelectChoices flightCrewMembers;
 			flightCrewMembers = SelectChoices.from(availableMembers, "employeeCode", flightAssignment.getFlightCrewMember());
@@ -77,10 +82,15 @@ public class FlightCrewMemberFlightAssignmentService extends AbstractGuiService<
 			dataset.put("flightCrewMembers", flightCrewMembers);
 		}
 		{
-			List<Leg> pendingLegs = this.repository.findLegsDepartingAfter(MomentHelper.getCurrentMoment());
+			List<Leg> pendingLegs;
+
+			if (!flightAssignment.isDraftMode())
+				pendingLegs = this.repository.findAllLegs();
+			else
+				pendingLegs = this.repository.findLegsDepartingAfter(MomentHelper.getCurrentMoment());
 
 			SelectChoices legs;
-			legs = SelectChoices.from(pendingLegs, "flightNumberDigits", flightAssignment.getLeg());
+			legs = SelectChoicesHelper.from(pendingLegs, Leg::flightNumber, flightAssignment.getLeg());
 
 			dataset.put("leg", legs.getSelected().getKey());
 			dataset.put("legs", legs);
