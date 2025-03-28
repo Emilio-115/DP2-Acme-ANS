@@ -4,14 +4,16 @@ assistance-agent.claim.form.title = Detalles de la Reclamacion
 assistance-agent.claim.list.label.registrationMoment = Momento de la reclamacion
 assistance-agent.claim.list.label.description = Descripcion
 assistance-agent.claim.list.label.isAccepted = Aceptado
-assistance-agent.claim.list.label.leg = Leg
+assistance-agent.claim.list.label.leg = Segmento
 assistance-agent.claim.list.label.type = Tipo
+assistance-agent.claim.list.label.customer = Nombre del cliente
 
 assistance-agent.claim.form.label.registrationMoment = Momento de la reclamacion
 assistance-agent.claim.form.label.passengerEmail = Email del pasajero
 assistance-agent.claim.form.label.description = Descripcion
 assistance-agent.claim.form.label.type = Tipo
 assistance-agent.claim.form.label.isAccepted = Aceptado
-assistance-agent.claim.form.label.leg = Fragmento
+assistance-agent.claim.form.label.leg = Segmento
+assistance-agent.claim.form.label.customer = Nombre del cliente
 
 assistance-agent.claim.list.label.create = Create

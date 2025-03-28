@@ -7,4 +7,6 @@
 	<acme:list-column code = "assistance-agent.claim.list.label.registrationMoment" path= "registrationMoment" width="25%"/>
 	<acme:list-column code = "assistance-agent.claim.list.label.isAccepted" path= "isAccepted" width="20%"/>
 	<acme:list-column code = "assistance-agent.claim.list.label.type" path= "type" width="20%"/>
+	<acme:list-column code = "assistance-agent.claim.list.label.leg" path= "leg" width="20%"/>
+	<acme:list-column code = "assistance-agent.claim.list.label.customer" path= "customer" width="20%"/>
 </acme:list>>

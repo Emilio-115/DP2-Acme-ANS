@@ -10,4 +10,6 @@
 	<acme:input-textbox code="assistance-agent.claim.form.label.description" path="description" />
 	<acme:input-textbox code="assistance-agent.claim.form.label.type" path="type"/>
 	<acme:input-textbox code="assistance-agent.claim.form.label.isAccepted" path="isAccepted"/>
+	<acme:input-textbox code="assistance-agent.claim.form.label.leg" path="leg"/>
+	<acme:input-textbox code="assistance-agent.claim.form.label.customer" path="customer"/>
 </acme:form>

@@ -10,6 +10,7 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.claims.Claim;
 import acme.realms.AssistanceAgent;
+import acme.realms.Customer;
 
 @GuiService
 public class AssistanceAgentClaimShowService extends AbstractGuiService<AssistanceAgent, Claim> {
@@ -49,6 +50,8 @@ public class AssistanceAgentClaimShowService extends AbstractGuiService<Assistan
 
 		Dataset dataset;
 		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "isAccepted", "completed", "leg");
+		Customer customer = claim.getCustomer();
+		dataset.put("customer", customer.getIdentity().getFullName());
 		super.getResponse().addData(dataset);
 	}
 }
