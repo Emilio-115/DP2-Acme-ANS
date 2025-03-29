@@ -14,7 +14,15 @@ acme.validation.activity-log.arrival-before-departure.message = Fecha de salida 
 acme.validation.short-text.message = Texto no válido, necesita ser igual o más corto de 50 caracteres
 acme.validation.leg.overlapping-legs.message = Fechas de salida o llegada no validas, los segmentos no pueden superponerse
 acme.validation.leg.busy-aircraft.message = Avión no válido, el avión está ocupado durante ese rando de tiempo.
+
+# acme.validation.booking #############################
+
 acme.validation.booking.creditcardlastnibble = Los 4 números de la tarjeta de credito son obligatorios para publicar la reserva
 acme.validation.booking.passenger = Es necesario que la reserva tenga pasajeros para publicarla. 
 acme.validation.booking.locatorCode = El código localizador debe ser único
 acme.validation.booking.flight = Debes seleccionar un vuelo
+acme.validation.booking.draftmode.message = No puedes añadir pasajeros a una reserva publicada.
+
+# acme.validation.bookingrecord #######################
+
+acme.validation.bookingrecord.passenger = El pasajero ya tiene una reserva para este vuelo.

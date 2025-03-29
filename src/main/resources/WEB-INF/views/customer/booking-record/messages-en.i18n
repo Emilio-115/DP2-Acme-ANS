@@ -1,0 +1,12 @@
+customer.booking-record.list.title = Bookings Records
+customer.booking-record.form.title = Add Passenger to a Booking
+
+customer.booking-record.list.label.locatorcode = Booking Locator Code
+customer.booking-record.list.label.passportnumber = Passenger Passport
+
+customer.booking-record.form.label.locatorcode = Booking Locator Code
+customer.booking-record.form.label.passportnumber = Passenger Passport
+
+
+customer.booking-record.form.label.create = Create
+

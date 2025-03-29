@@ -70,7 +70,6 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 		choices = SelectChoices.from(TravelClass.class, booking.getTravelClass());
 		flightChoices = SelectChoices.from(availableFlights, "tag", booking.getFlight());
 		dataset = super.unbindObject(booking, "locatorCode", "travelClass", "creditCardLastNibble");
-		//Si es publicado buscar todas las opciones
 
 		dataset.put("travelClasses", choices);
 		dataset.put("flight", choices.getSelected().getKey());
