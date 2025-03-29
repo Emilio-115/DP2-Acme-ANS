@@ -16,3 +16,4 @@ assistance-agent.claim.form.label.leg = Segmento
 assistance-agent.claim.form.label.customer = Nombre del cliente
 
 assistance-agent.claim.list.label.create = Create
+assistance-agent.claim.form.button.create = Create
