@@ -1,19 +1,17 @@
 assistance-agent.claim.list.title = My Claims
 assistance-agent.claim.form.title = Claims Details
 
-assistance-agent.claim.list.label.registrationMoment = Registration Moment
-assistance-agent.claim.list.label.isAccepted = Accepted
+assistance-agent.claim.list.label.registrationmoment = Registration moment
+assistance-agent.claim.list.label.isaccepted = Accepted
 assistance-agent.claim.list.label.leg = Leg
 assistance-agent.claim.list.label.type = Type
-assistance-agent.claim.list.label.customer = Customer Name
 
-assistance-agent.claim.form.label.registrationMoment = Registration Moment
-assistance-agent.claim.form.label.passengerEmail = Passenger Email
+assistance-agent.claim.form.label.registrationmoment = Registration moment
+assistance-agent.claim.form.label.passengeremail = Passenger Email
 assistance-agent.claim.form.label.description = Description
 assistance-agent.claim.form.label.type = Type
-assistance-agent.claim.form.label.isAccepted = Is Accepted
+assistance-agent.claim.form.label.isaccepted = Is Accepted
 assistance-agent.claim.form.label.leg = Leg
-assistance-agent.claim.form.label.customer = Customer Name
 
 assistance-agent.claim.form.label.create = Create
 assistance-agent.claim.list.label.create = Create
