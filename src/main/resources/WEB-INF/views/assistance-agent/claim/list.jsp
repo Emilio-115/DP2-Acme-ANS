@@ -8,6 +8,6 @@
 	<acme:list-column code = "assistance-agent.claim.list.label.isaccepted" path= "isAccepted" width="25%"/>
 	<acme:list-column code = "assistance-agent.claim.list.label.type" path= "type" width="25%"/>
 	<acme:list-column code = "assistance-agent.claim.list.label.leg" path= "leg" width="25%"/>
-</acme:list>>
+</acme:list>
 
 <acme:button code="assistance-agent.claim.list.label.create" action="/assistance-agent/claim/create"/>
