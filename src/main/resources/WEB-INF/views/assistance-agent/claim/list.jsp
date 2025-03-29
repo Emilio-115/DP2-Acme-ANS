@@ -10,4 +10,4 @@
 	<acme:list-column code = "assistance-agent.claim.list.label.leg" path= "leg" width="25%"/>
 </acme:list>>
 
-<acme:button code="assistance-agent.claim.form.label.create" action="/assistance-agent/claim/create"/>
+<acme:button code="assistance-agent.claim.list.label.create" action="/assistance-agent/claim/create"/>
