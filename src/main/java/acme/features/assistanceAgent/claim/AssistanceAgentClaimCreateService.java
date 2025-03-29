@@ -68,6 +68,7 @@ public class AssistanceAgentClaimCreateService extends AbstractGuiService<Assist
 		choices = SelectChoices.from(ClaimType.class, claim.getType());
 
 		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "isAccepted", "completed", "leg");
+		dataset.put("types", choices);
 
 		super.getResponse().addData(dataset);
 	}
