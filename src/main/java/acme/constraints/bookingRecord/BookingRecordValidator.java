@@ -27,7 +27,7 @@ public class BookingRecordValidator extends AbstractValidator<ValidBookingRecord
 
 		boolean bookingNotNull = value.getAssociatedBooking() != null;
 		if (bookingNotNull) {
-			boolean noExistingBookingRecord = bookingRepository.findBookingRecordByBookingAndPassenger(value.getAssociatedBooking().getId(), value.getAssociatedPassenger().getId()).isEmpty();
+			boolean noExistingBookingRecord = bookingRepository.findBookingRecordByBookingAndPassenger(value.getAssociatedBooking().getId(), value.getAssociatedPassenger().getId(), value.getId()).isEmpty();
 			super.state(context, noExistingBookingRecord, "associatedPassenger", "acme.validation.bookingrecord.passenger");
 		}
 		if (value.getAssociatedPassenger() != null) {
