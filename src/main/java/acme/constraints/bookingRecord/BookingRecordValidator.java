@@ -30,6 +30,10 @@ public class BookingRecordValidator extends AbstractValidator<ValidBookingRecord
 			boolean noExistingBookingRecord = bookingRepository.findBookingRecordByBookingAndPassenger(value.getAssociatedBooking().getId(), value.getAssociatedPassenger().getId()).isEmpty();
 			super.state(context, noExistingBookingRecord, "associatedPassenger", "acme.validation.bookingrecord.passenger");
 		}
+		if (value.getAssociatedPassenger() != null) {
+			boolean passengerNoDraftMode = !bookingRepository.findPassengerDrafModeById(value.getAssociatedPassenger().getId());
+			super.state(context, passengerNoDraftMode, "associatedPassenger", "acme.validation.bookingrecord.passenger.draftmode");
+		}
 
 		result = !super.hasErrors(context);
 		return result;

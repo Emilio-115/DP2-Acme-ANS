@@ -26,3 +26,5 @@ acme.validation.booking.draftmode.message = No puedes añadir pasajeros a una re
 # acme.validation.bookingrecord #######################
 
 acme.validation.bookingrecord.passenger = El pasajero ya tiene una reserva para este vuelo.
+acme.validation.bookingrecord.passenger.draftmode = El pasajero debe de estar publicado.
+acme.validation.bookingrecord.delete = No puedes eliminar el registro porque la reserva ya está publicada.

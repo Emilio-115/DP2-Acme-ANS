@@ -18,4 +18,7 @@ public interface BookingRepository extends AbstractRepository {
 	@Query("SELECT br FROM BookingRecord br WHERE br.associatedBooking.id = :bookingId AND br.associatedPassenger.id = :passengerId")
 	Optional<BookingRecord> findBookingRecordByBookingAndPassenger(Integer bookingId, Integer passengerId);
 
+	@Query("SELECT p.draftMode FROM Passenger p WHERE p.id = :id")
+	boolean findPassengerDrafModeById(Integer id);
+
 }

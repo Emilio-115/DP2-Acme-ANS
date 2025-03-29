@@ -16,7 +16,7 @@ import acme.entities.passengers.Passenger;
 import acme.realms.Customer;
 
 @GuiService
-public class CustomerBookingRecordShowService extends AbstractGuiService<Customer, BookingRecord> {
+public class CustomerBookingRecordDeleteService extends AbstractGuiService<Customer, BookingRecord> {
 
 	@Autowired
 	CustomerBookingRecordRepository repository;
@@ -24,14 +24,12 @@ public class CustomerBookingRecordShowService extends AbstractGuiService<Custome
 
 	@Override
 	public void authorise() {
-
 		int bookingRecordId = super.getRequest().getData("id", int.class);
 		int customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		boolean status;
 		Optional<BookingRecord> bookingRecord = this.repository.findByBookingRecordIdAndCustomerId(bookingRecordId, customerId);
 		status = bookingRecord.isPresent();
 		super.getResponse().setAuthorised(status);
-
 	}
 
 	@Override
@@ -42,8 +40,35 @@ public class CustomerBookingRecordShowService extends AbstractGuiService<Custome
 		super.getBuffer().addData(bookingRecord);
 
 	}
+
+	@Override
+	public void validate(final BookingRecord bookingRecord) {
+		boolean canDelete = bookingRecord.getAssociatedBooking().isDraftMode();
+		super.state(canDelete, "associatedBooking", "acme.validation.bookingrecord.delete");
+
+	}
+
+	@Override
+	public void perform(final BookingRecord bookingRecord) {
+
+		this.repository.delete(bookingRecord);
+
+	}
+
+	@Override
+	public void bind(final BookingRecord bookingRecord) {
+		int bookingId = super.getRequest().getData("associatedBooking", int.class);
+		int passengerId = super.getRequest().getData("associatedPassenger", int.class);
+		Booking associatedBooking = this.repository.findBookingById(bookingId);
+		Passenger associatedPassenger = this.repository.findPassengerById(passengerId);
+		super.bindObject(bookingRecord);
+		bookingRecord.setAssociatedBooking(associatedBooking);
+		bookingRecord.setAssociatedPassenger(associatedPassenger);
+	}
+
 	@Override
 	public void unbind(final BookingRecord bookingRecord) {
+
 		int customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		Dataset dataset;
 
@@ -61,10 +86,7 @@ public class CustomerBookingRecordShowService extends AbstractGuiService<Custome
 		dataset.put("associatedPassenger", passengerChoices.getSelected().getKey());
 		dataset.put("passengerChoices", passengerChoices);
 
-		dataset.put("canDelete", bookingRecord.getAssociatedBooking().isDraftMode());
-
 		super.getResponse().addData(dataset);
-
 	}
 
 }

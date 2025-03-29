@@ -15,4 +15,5 @@ customer.passenger.form.label.draftmode = Draftmode
 
 
 customer.passenger.list-all.label.create = Create
+customer.booking-record.form.label.create = Create
 

@@ -39,7 +39,7 @@ public class CustomerBookingRecordCreateService extends AbstractGuiService<Custo
 		Booking associatedBooking = bookingRecord.getAssociatedBooking();
 		if (associatedBooking != null) {
 			isValid = associatedBooking.isDraftMode();
-			super.state(!isValid, "associatedBooking", "acme.validation.booking.draftmode.message");
+			super.state(isValid, "associatedBooking", "acme.validation.booking.draftmode.message");
 		}
 
 	}
@@ -66,7 +66,7 @@ public class CustomerBookingRecordCreateService extends AbstractGuiService<Custo
 		int customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		Dataset dataset;
 
-		Collection<Booking> bookings = this.repository.findPublishedBookingsByCustomerId(customerId);
+		Collection<Booking> bookings = this.repository.findNonPublisedBookingsByCustomerId(customerId);
 		Collection<Passenger> passengers = this.repository.findPublishedPassengersByCustomerId(customerId);
 
 		SelectChoices bookingChoices;

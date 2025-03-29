@@ -13,8 +13,11 @@ import acme.entities.passengers.Passenger;
 
 public interface CustomerBookingRecordRepository extends AbstractRepository {
 
+	@Query("SELECT b FROM Booking b WHERE b.customer.id = :customerId")
+	List<Booking> findBookingsByCustomerId(Integer customerId);
+
 	@Query("SELECT b FROM Booking b WHERE b.customer.id = :customerId AND b.draftMode = true")
-	List<Booking> findPublishedBookingsByCustomerId(Integer customerId);
+	List<Booking> findNonPublisedBookingsByCustomerId(Integer customerId);
 
 	@Query("SELECT p FROM Passenger p WHERE p.customer.id = :customerId AND p.draftMode = false")
 	List<Passenger> findPublishedPassengersByCustomerId(Integer customerId);
