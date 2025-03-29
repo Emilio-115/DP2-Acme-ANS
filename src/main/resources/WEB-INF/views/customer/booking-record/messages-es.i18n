@@ -1,11 +1,11 @@
-customer.booking-record.list.title = Listar registros de pasajeros en reservas
-customer.booking-record.form.title = Añadir pasajero a uno reserva
+customer.booking-record.list.title = Lista de registros de pasajeros en reservas
+customer.booking-record.form.title = Registro de reserva
 
 customer.booking-record.list.label.locatorcode = Código localizador de la reserva
 customer.booking-record.list.label.passportnumber = Pasaporte del pasajero
 
 customer.booking-record.form.label.locatorcode = Código localizador de la reserva
 customer.booking-record.form.label.passportnumber = Pasaporte del pasajero
-
+customer.booking-record.form.button.delete = Borrar
 
 customer.booking-record.form.label.create = Create

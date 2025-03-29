@@ -6,7 +6,15 @@
 <acme:form>
 	<acme:input-select code="customer.booking-record.form.label.locatorcode" path="associatedBooking" choices = "${bookingChoices}"/>
 	<acme:input-select code="customer.booking-record.form.label.passportnumber" path="associatedPassenger" choices = "${passengerChoices}"/>
-	<jstl:if test="${_command == 'create'}">			
-		<acme:submit code="customer.booking-record.form.label.create" action="/customer/booking-record/create"/>
-	</jstl:if>
+	
+	<jstl:choose>	 
+
+		<jstl:when test="${_command == 'create'}">
+			<acme:submit code="customer.booking-record.form.label.create" action="/customer/booking-record/create"/>
+		</jstl:when>		
+	</jstl:choose>
 </acme:form>
+
+<jstl:if test="${acme:anyOf(_command, 'show|delete') && canDelete == true}">
+	<acme:submit code="customer.booking-record.form.button.delete" action="/customer/booking-record/delete"/>
+</jstl:if>
