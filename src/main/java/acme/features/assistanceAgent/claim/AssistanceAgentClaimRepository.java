@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import acme.client.repositories.AbstractRepository;
 import acme.entities.claims.Claim;
+import acme.entities.legs.Leg;
 import acme.realms.AssistanceAgent;
 
 public interface AssistanceAgentClaimRepository extends AbstractRepository {
@@ -19,6 +20,9 @@ public interface AssistanceAgentClaimRepository extends AbstractRepository {
 	List<Claim> findClaimsByAssistanceAgent(int id, boolean completed);
 
 	Optional<Claim> findByIdAndAssistanceAgentId(Integer id, Integer agentId);
+
+	@Query("select l from Leg l where l.id = :id AND l.status = LANDED")
+	Leg findLegById(int id);
 
 	@Query("select c from Claim c where c.id = :id")
 	Claim findClaimById(Integer id);

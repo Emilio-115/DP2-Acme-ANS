@@ -1,8 +1,6 @@
 
 package acme.features.assistanceAgent.claim;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
@@ -11,10 +9,11 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.claims.Claim;
 import acme.entities.claims.ClaimType;
+import acme.entities.legs.Leg;
 import acme.realms.AssistanceAgent;
 
 @GuiService
-public class AssistanceAgentUndClaimListService extends AbstractGuiService<AssistanceAgent, Claim> {
+public class AssistanceAgentClaimCreateService extends AbstractGuiService<AssistanceAgent, Claim> {
 
 	@Autowired
 	private AssistanceAgentClaimRepository repository;
@@ -22,27 +21,43 @@ public class AssistanceAgentUndClaimListService extends AbstractGuiService<Assis
 
 	@Override
 	public void authorise() {
-		boolean status;
-
-		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class);
-
-		super.getResponse().setAuthorised(status);
+		super.getResponse().setAuthorised(true);
 	}
 
 	@Override
 	public void load() {
+		Claim claim;
 		AssistanceAgent assistanceAgent;
-		int userAccountId;
 
-		List<Claim> completedClaims;
-		int id;
+		assistanceAgent = (AssistanceAgent) super.getRequest().getPrincipal().getActiveRealm();
 
-		userAccountId = super.getRequest().getPrincipal().getAccountId();
-		assistanceAgent = this.repository.findAssistanceAgentById(userAccountId);
+		claim = new Claim();
+		claim.setAssistanceAgent(assistanceAgent);
+		claim.setCompleted(false);
 
-		id = assistanceAgent.getId();
-		completedClaims = this.repository.findClaimsByAssistanceAgent(id, false);
-		super.getBuffer().addData(completedClaims);
+		super.getBuffer().addData(claim);
+	}
+
+	@Override
+	public void bind(final Claim claim) {
+		Leg leg;
+		int legId;
+
+		legId = super.getRequest().getData("leg", int.class);
+		leg = this.repository.findLegById(legId);
+
+		super.bindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "isAccepted");
+		claim.setLeg(leg);
+	}
+
+	@Override
+	public void validate(final Claim claim) {
+		;
+	}
+
+	@Override
+	public void perform(final Claim claim) {
+		this.repository.save(claim);
 	}
 
 	@Override

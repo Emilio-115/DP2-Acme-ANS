@@ -6,11 +6,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
+import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.claims.Claim;
+import acme.entities.claims.ClaimType;
 import acme.realms.AssistanceAgent;
-import acme.realms.Customer;
 
 @GuiService
 public class AssistanceAgentClaimShowService extends AbstractGuiService<AssistanceAgent, Claim> {
@@ -47,11 +48,13 @@ public class AssistanceAgentClaimShowService extends AbstractGuiService<Assistan
 
 	@Override
 	public void unbind(final Claim claim) {
-
+		SelectChoices choices;
 		Dataset dataset;
+
+		choices = SelectChoices.from(ClaimType.class, claim.getType());
+
 		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "isAccepted", "completed", "leg");
-		Customer customer = claim.getCustomer();
-		dataset.put("customer", customer.getIdentity().getFullName());
+
 		super.getResponse().addData(dataset);
 	}
 }

@@ -15,4 +15,5 @@ assistance-agent.claim.form.label.isAccepted = Is Accepted
 assistance-agent.claim.form.label.leg = Leg
 assistance-agent.claim.form.label.customer = Customer Name
 
-assistance-agent.claim.list.label.create = Create
+assistance-agent.claim.form.label.create = Create
+
