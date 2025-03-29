@@ -1,9 +1,9 @@
-key,key:flightCrewMember,key:leg,duty,updatedAt,status,remarks
-flight-assignment-1,crew-member-01,leg-1,PILOT,2000/01/01 0:00,CONFIRMED,L
-flight-assignment-2,crew-member-02,leg-1,COPILOT,2022/07/29 23:59,CONFIRMED,Lo
-flight-assignment-3,crew-member-03,leg-1,LEAD_ATTENDANT,2000/01/01 0:01,CONFIRMED,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor"
-flight-assignment-4,crew-member-04,leg-1,CABIN_ATTENDANT,2022/07/29 23:58,CONFIRMED,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor*"
-flight-assignment-5,crew-member-01,leg-2,PILOT,2000/01/01 0:00,PENDING,L
-flight-assignment-6,crew-member-02,leg-2,COPILOT,2022/07/29 23:59,CANCELLED,Lo
-flight-assignment-7,crew-member-03,leg-2,LEAD_ATTENDANT,2000/01/01 0:01,PENDING,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor"
-flight-assignment-8,crew-member-04,leg-2,CABIN_ATTENDANT,2022/07/29 23:58,CANCELLED,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor*"
+key,key:flightCrewMember,key:leg,duty,updatedAt,status,draftMode,remarks
+flight-assignment-1,crew-member-01,leg-1,PILOT,2000/01/01 0:00,CONFIRMED,false,L
+flight-assignment-2,crew-member-02,leg-1,COPILOT,2022/07/29 23:59,CONFIRMED,false,Lo
+flight-assignment-3,crew-member-03,leg-1,LEAD_ATTENDANT,2000/01/01 0:01,CONFIRMED,false,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor"
+flight-assignment-4,crew-member-04,leg-1,CABIN_ATTENDANT,2022/07/29 23:58,CONFIRMED,false,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor*"
+flight-assignment-5,crew-member-01,leg-2,PILOT,2000/01/01 0:00,PENDING,false,L
+flight-assignment-6,crew-member-02,leg-2,COPILOT,2022/07/29 23:59,CANCELLED,false,Lo
+flight-assignment-7,crew-member-03,leg-2,LEAD_ATTENDANT,2000/01/01 0:01,PENDING,false,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor"
+flight-assignment-8,crew-member-04,leg-2,CABIN_ATTENDANT,2022/07/29 23:58,CANCELLED,false,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor*"
