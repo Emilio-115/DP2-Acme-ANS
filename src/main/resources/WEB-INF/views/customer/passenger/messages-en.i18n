@@ -16,4 +16,6 @@ customer.passenger.form.label.draftmode = Draftmode
 
 customer.passenger.list-all.label.create = Create
 customer.passenger.form.label.create = Create
+customer.passenger.form.button.update = Update
+customer.passenger.form.button.delete = Delete
 

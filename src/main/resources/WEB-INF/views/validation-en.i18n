@@ -29,3 +29,6 @@ acme.validation.booking.draftmode.message = You can not add passengers to a publ
 acme.validation.bookingrecord.passenger = The passenger is already added to the booking.
 acme.validation.bookingrecord.delete = You can not delete because the booking is published.
 acme.validation.bookingrecord.passenger.draftmode = Passanger must be published.
+
+# acme.validation.passenger.update ####################
+acme.validation.passenger.update = You cannot update a published passenger 
