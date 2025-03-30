@@ -12,7 +12,7 @@
 	<jstl:if test="${acme:anyOf(_command,'show|update|delete|publish')}">
     	<acme:input-checkbox code="assistance-agent.claim.form.label.isaccepted" path="isAccepted" readonly="${readonly}"/>
 	</jstl:if>
-	<acme:input-integer code="assistance-agent.claim.form.label.leg" path="leg" readonly="${readonly}"/>
+	<acme:input-select code="assistance-agent.claim.form.label.leg" path="leg" choices = "${landedLegs}" readonly="${readonly}"/>
 	
 	<jstl:if test="${!readonly}">
 		<acme:submit code="assistance-agent.claim.form.button.create" action="/assistance-agent/claim/create"/>

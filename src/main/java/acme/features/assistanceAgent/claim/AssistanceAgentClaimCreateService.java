@@ -1,6 +1,8 @@
 
 package acme.features.assistanceAgent.claim;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
@@ -10,6 +12,7 @@ import acme.client.services.GuiService;
 import acme.entities.claims.Claim;
 import acme.entities.claims.ClaimType;
 import acme.entities.legs.Leg;
+import acme.entities.legs.LegStatus;
 import acme.realms.AssistanceAgent;
 
 @GuiService
@@ -43,11 +46,10 @@ public class AssistanceAgentClaimCreateService extends AbstractGuiService<Assist
 		Leg leg;
 		int legId;
 
-		legId = super.getRequest().getData("leg", int.class);
-		leg = this.repository.findLegById(legId);
+		//legId = super.getRequest().getData("leg", int.class);
+		//leg = this.repository.findLegById(legId, LegStatus.LANDED);
 
-		super.bindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "isAccepted");
-		claim.setLeg(leg);
+		super.bindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "leg");
 	}
 
 	@Override
@@ -64,11 +66,15 @@ public class AssistanceAgentClaimCreateService extends AbstractGuiService<Assist
 	public void unbind(final Claim claim) {
 		SelectChoices choices;
 		Dataset dataset;
+		SelectChoices legChoices;
+		List<Leg> legs = this.repository.findAllLandedLegs(LegStatus.LANDED);
 
 		choices = SelectChoices.from(ClaimType.class, claim.getType());
+		legChoices = SelectChoices.from(legs, "id", claim.getLeg());
 
-		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "isAccepted", "leg");
+		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "leg");
 		dataset.put("types", choices);
+		dataset.put("landedLegs", legChoices);
 		dataset.put("readonly", false);
 
 		super.getResponse().addData(dataset);
