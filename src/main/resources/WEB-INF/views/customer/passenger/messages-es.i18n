@@ -14,3 +14,6 @@ customer.passenger.form.label.draftmode = Borrador
 
 customer.passenger.list-all.label.create = Crear
 customer.passenger.form.label.create = Crear
+customer.passenger.form.button.update = Actualizar
+customer.passenger.form.button.delete = Borrar
+customer.passenger.form.button.publish = Publicar

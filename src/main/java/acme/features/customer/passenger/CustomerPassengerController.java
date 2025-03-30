@@ -31,6 +31,9 @@ public class CustomerPassengerController extends AbstractGuiController<Customer,
 	@Autowired
 	CustomerPassengerDeleteService	deleteService;
 
+	@Autowired
+	CustomerPassengerPublishService	publishService;
+
 
 	@PostConstruct
 	protected void initialise() {
@@ -42,6 +45,7 @@ public class CustomerPassengerController extends AbstractGuiController<Customer,
 		super.addBasicCommand("delete", this.deleteService);
 
 		super.addCustomCommand("list-all", "list", this.listAllService);
+		super.addCustomCommand("publish", "update", this.publishService);
 
 	}
 
