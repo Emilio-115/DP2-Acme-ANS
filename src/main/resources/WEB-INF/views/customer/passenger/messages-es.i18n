@@ -1,8 +1,9 @@
-customer.passenger.list.title = Pasajeros de la reserva
+customer.passenger.list.title = Pasajeros
 customer.passenger.form.title = Detalles del pasajero
 
 customer.passenger.list.label.email = Email
 customer.passenger.list.label.passportnumber = Pasaporte
+customer.passenger.list.label.birthdate = Fecha de nacimiento
 
 customer.passenger.form.label.fullname = Nombre completo
 customer.passenger.form.label.passportnumber = Pasaporte
@@ -11,5 +12,5 @@ customer.passenger.form.label.birthdate = Fecha de nacimiento
 customer.passenger.form.label.specialneeds = Necesidades especiales
 customer.passenger.form.label.draftmode = Borrador
 
-customer.passenger.list.label.create = Crear
-customer.booking-record.form.label.create = Crear
+customer.passenger.list-all.label.create = Crear
+customer.passenger.form.label.create = Crear

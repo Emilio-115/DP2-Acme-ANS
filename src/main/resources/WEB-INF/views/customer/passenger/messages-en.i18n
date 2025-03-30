@@ -1,9 +1,9 @@
-customer.passenger.list.title = Bookings Passengers
+customer.passenger.list.title = Passengers
 customer.passenger.form.title = Passenger Details
 
-customer.passenger.list.label.email = Email
 customer.passenger.list.label.passportnumber = Passport
 customer.passenger.list.label.draftmode = Draftmode
+customer.passenger.list.label.birthdate = Birthdate
 
 
 customer.passenger.form.label.fullname = Full Name
@@ -15,5 +15,5 @@ customer.passenger.form.label.draftmode = Draftmode
 
 
 customer.passenger.list-all.label.create = Create
-customer.booking-record.form.label.create = Create
+customer.passenger.form.label.create = Create
 
