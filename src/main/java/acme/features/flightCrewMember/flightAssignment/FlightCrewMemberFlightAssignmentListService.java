@@ -1,10 +1,6 @@
 
 package acme.features.flightCrewMember.flightAssignment;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
@@ -14,22 +10,9 @@ import acme.realms.flightCrewMember.FlightCrewMember;
 @GuiService
 public class FlightCrewMemberFlightAssignmentListService extends AbstractGuiService<FlightCrewMember, FlightAssignment> {
 
-	@Autowired
-	private FlightCrewMemberFlightAssignmentRepository repository;
-
-
 	@Override
 	public void authorise() {
 		super.getResponse().setAuthorised(true);
-	}
-
-	@Override
-	public void load() {
-		List<FlightAssignment> flightAssignments;
-
-		flightAssignments = this.repository.findFlightAssignments();
-
-		super.getBuffer().addData(flightAssignments);
 	}
 
 	@Override
