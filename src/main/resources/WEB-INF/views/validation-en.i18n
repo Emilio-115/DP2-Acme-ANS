@@ -9,9 +9,18 @@ acme.validation.passport.message = Invalid passport format
 acme.validation.locatorcode.message = Invalid locator code
 acme.validation.percentage.message = Error in the relation between percentage and status in the tracking log
 acme.validation.resolutionDescription.message = Error in the relation between description and status in the tracking log
+acme.validation.short-text.message = Invalid text, it needs to be shorter or equal than 50 characters
+
 acme.validation.activity-log.registered-before-landing.message = Invalid registeredAt date: registered before the respective leg landed
 acme.validation.activity-log.arrival-before-departure.message = Invalid departureDate date, arrival must be after departure
+
 acme.validation.airport.non-unique-iata-code.message = IATA code must be unique
-acme.validation.short-text.message = Invalid text, it needs to be shorter or equal than 50 characters
+
+acme.validation.flight-assignment.flight-crew-member-unavailable.message = Flight crew member is unavailable
+acme.validation.flight-assignment.leg-not-published.message = Leg is not published
+acme.validation.flight-assignment.flight-crew-member-busy.message = Flight crew member is busy for this leg
+acme.validation.flight-assignment.pilot-duty-taken.message = Pilot duty is already assigned for this leg
+acme.validation.flight-assignment.copilot-duty-taken.message = Copilot duty is already assigned for this leg
+
 acme.validation.leg.overlapping-legs.message = Invalid dates of departure or arrival, legs cannot overlap
 acme.validation.leg.busy-aircraft.message = Invalid aircraft, the aircraft is busy in that time range
