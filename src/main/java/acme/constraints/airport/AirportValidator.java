@@ -24,15 +24,19 @@ public class AirportValidator extends AbstractValidator<ValidAirport, Airport> {
 
 		boolean result = true;
 
-		AirportRepository airportRepository = SpringHelper.getBean(AirportRepository.class);
-		AirlineRepository airlineRepository = SpringHelper.getBean(AirlineRepository.class);
+		if (airport == null)
+			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
+		else {
+			AirportRepository airportRepository = SpringHelper.getBean(AirportRepository.class);
+			AirlineRepository airlineRepository = SpringHelper.getBean(AirlineRepository.class);
 
-		String iataCode = airport.getIataCode();
-		boolean isIataCodeTakenByAirports = airportRepository.isIataCodeTakenByAirports(iataCode, airport.getId());
-		boolean isIataCodeTakenByAirlines = airlineRepository.isIataCodeTakenByAirlines(iataCode);
-		boolean isIataCodeFree = !isIataCodeTakenByAirports && !isIataCodeTakenByAirlines;
+			String iataCode = airport.getIataCode();
+			boolean isIataCodeTakenByAirports = airportRepository.isIataCodeTakenByAirports(iataCode, airport.getId());
+			boolean isIataCodeTakenByAirlines = airlineRepository.isIataCodeTakenByAirlines(iataCode);
+			boolean isIataCodeFree = !isIataCodeTakenByAirports && !isIataCodeTakenByAirlines;
 
-		super.state(context, isIataCodeFree, "iataCode", "acme.validation.airport.non-unique-iata-code.message");
+			super.state(context, isIataCodeFree, "iataCode", "acme.validation.airport.non-unique-iata-code.message");
+		}
 
 		result = !super.hasErrors(context);
 
