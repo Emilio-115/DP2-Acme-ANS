@@ -17,25 +17,30 @@ public interface FlightCrewMemberFlightAssignmentRepository extends AbstractRepo
 	@Query("SELECT fa FROM FlightAssignment fa WHERE fa.id = :id")
 	Optional<FlightAssignment> findFlightAssignmentById(Integer id);
 
-	@Query("SELECT fa FROM FlightAssignment fa")
-	List<FlightAssignment> findFlightAssignments();
 	@Query("""
 		SELECT fa FROM FlightAssignment fa
-		WHERE fa.leg.departureTime >= :cutoff
+		WHERE fa.id = :id
+		AND fa.flightCrewMember.id = :flightCrewMemberId
+		""")
+	Optional<FlightAssignment> findFlightAssignmentByIdAndFlightCrewMemberId(Integer id, Integer flightCrewMemberId);
+
+	@Query("""
+		SELECT fa FROM FlightAssignment fa
+		WHERE fa.leg.departureDate >= :cutoff
 		AND fa.draftMode = false
 		""")
 	List<FlightAssignment> findPlannedFlightAssignments(Date cutoff);
 
 	@Query("""
 		SELECT fa FROM FlightAssignment fa
-		WHERE fa.leg.departureTime <= :cutoff
+		WHERE fa.leg.departureDate <= :cutoff
 		AND fa.draftMode = false
 		""")
 	List<FlightAssignment> findInProgressFlightAssignments(Date cutoff);
 
 	@Query("""
-		SELECT fa FROM FlightAssignment fa¡
-		AND fa.draftMode = true
+		SELECT fa FROM FlightAssignment fa
+		WHERE fa.draftMode = true
 		""")
 	List<FlightAssignment> findDraftFlightAssignments();
 
@@ -58,8 +63,20 @@ public interface FlightCrewMemberFlightAssignmentRepository extends AbstractRepo
 	@Query("select l from Leg l")
 	List<Leg> findAllLegs();
 
-	@Query("select l from Leg l where l.departureDate > :cutoff")
-	List<Leg> findLegsDepartingAfter(Date cutoff);
+	@Query("""
+		SELECT l FROM Leg l
+		WHERE l.departureDate > :cutoff
+		AND NOT EXISTS(
+			SELECT fa
+			FROM FlightAssignment fa
+			WHERE fa.id <> :flightAssignmentId
+			AND fa.draftMode = false
+			AND fa.status = 'CONFIRMED'
+			AND fa.flightCrewMember.id = :flightCrewMemberId
+			AND (fa.leg.departureDate <= l.arrivalDate AND fa.leg.arrivalDate >= l.departureDate)
+		)
+		""")
+	List<Leg> findLegsDepartingAfterWhereFlightCrewMemberIsFree(Date cutoff, Integer flightAssignmentId, Integer flightCrewMemberId);
 
 	@Query("SELECT fcm FROM FlightCrewMember fcm WHERE fcm.id = :id")
 	Optional<FlightCrewMember> findFlightCrewMemberById(Integer id);

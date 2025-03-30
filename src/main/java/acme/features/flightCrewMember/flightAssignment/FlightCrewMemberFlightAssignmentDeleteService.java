@@ -5,7 +5,7 @@ import acme.client.services.GuiService;
 import acme.entities.flightAssignment.FlightAssignment;
 
 @GuiService
-public class FlightCrewMemberFlightAssignmentDeleteService extends FlightCrewMemberFlightAssignmentService {
+public class FlightCrewMemberFlightAssignmentDeleteService extends FlightCrewMemberFlightAssignmentEditService {
 
 	@Override
 	public void validate(final FlightAssignment flightAssignment) {

@@ -14,28 +14,28 @@ import acme.realms.flightCrewMember.FlightCrewMember;
 public class FlightCrewMemberFlightAssignmentController extends AbstractGuiController<FlightCrewMember, FlightAssignment> {
 
 	@Autowired
-	private FlightCrewMemberFlightAssignmentListPlannedService		listPlannedService;
+	private FlightCrewMemberFlightAssignmentListPlannedService	listPlannedService;
 
 	@Autowired
-	private FlightCrewMemberFlightAssignmentListInProgressService	listInProgressService;
+	private FlightCrewMemberFlightAssignmentListDepartedService	listDepartedService;
 
 	@Autowired
-	private FlightCrewMemberFlightAssignmentListDraftsService		listDraftsService;
+	private FlightCrewMemberFlightAssignmentListDraftsService	listDraftsService;
 
 	@Autowired
-	private FlightCrewMemberFlightAssignmentShowService				showService;
+	private FlightCrewMemberFlightAssignmentShowService			showService;
 
 	@Autowired
-	private FlightCrewMemberFlightAssignmentCreateService			createService;
+	private FlightCrewMemberFlightAssignmentCreateService		createService;
 
 	@Autowired
-	private FlightCrewMemberFlightAssignmentUpdateService			updateService;
+	private FlightCrewMemberFlightAssignmentUpdateService		updateService;
 
 	@Autowired
-	private FlightCrewMemberFlightAssignmentDeleteService			deleteService;
+	private FlightCrewMemberFlightAssignmentDeleteService		deleteService;
 
 	@Autowired
-	private FlightCrewMemberFlightAssignmentPublishService			publishService;
+	private FlightCrewMemberFlightAssignmentPublishService		publishService;
 
 
 	@PostConstruct
@@ -47,7 +47,7 @@ public class FlightCrewMemberFlightAssignmentController extends AbstractGuiContr
 
 		super.addCustomCommand("publish", "update", this.publishService);
 		super.addCustomCommand("list-planned", "list", this.listPlannedService);
-		super.addCustomCommand("list-in-progress", "list", this.listInProgressService);
+		super.addCustomCommand("list-departed", "list", this.listDepartedService);
 		super.addCustomCommand("list-drafts", "list", this.listDraftsService);
 	}
 

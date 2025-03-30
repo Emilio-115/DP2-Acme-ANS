@@ -10,7 +10,7 @@ import acme.client.services.GuiService;
 import acme.entities.flightAssignment.FlightAssignment;
 
 @GuiService
-public class FlightCrewMemberFlightAssignmentListInProgressService extends FlightCrewMemberFlightAssignmentListService {
+public class FlightCrewMemberFlightAssignmentListDepartedService extends FlightCrewMemberFlightAssignmentListService {
 
 	@Autowired
 	private FlightCrewMemberFlightAssignmentRepository repository;

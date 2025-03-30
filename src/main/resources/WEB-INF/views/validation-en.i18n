@@ -18,6 +18,7 @@ acme.validation.airport.non-unique-iata-code.message = IATA code must be unique
 
 acme.validation.flight-assignment.flight-crew-member-unavailable.message = Flight crew member is unavailable
 acme.validation.flight-assignment.leg-not-published.message = Leg is not published
+acme.validation.flight-assignment.leg-departed.message = Leg has departed
 acme.validation.flight-assignment.flight-crew-member-busy.message = Flight crew member is busy for this leg
 acme.validation.flight-assignment.pilot-duty-taken.message = Pilot duty is already assigned for this leg
 acme.validation.flight-assignment.copilot-duty-taken.message = Copilot duty is already assigned for this leg

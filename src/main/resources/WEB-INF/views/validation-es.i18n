@@ -18,6 +18,7 @@ acme.validation.airport.non-unique-iata-code.message = El código IATA ha de ser
 
 acme.validation.flight-assignment.flight-crew-member-unavailable.message = El miembro de la tripulación de vuelo no está disponible
 acme.validation.flight-assignment.leg-not-published.message = El segmento no está publicado
+acme.validation.flight-assignment.leg-departed.message = El segmento ya ha despegado
 acme.validation.flight-assignment.flight-crew-member-busy.message = El miembro de tripulación de vuelo está ocupado durante este segmento
 acme.validation.flight-assignment.pilot-duty-taken.message = El rol de piloto ya ha sido asignado para este segmento
 acme.validation.flight-assignment.copilot-duty-taken.message = El rol de copiloto ya ha sido asignado para este segmento

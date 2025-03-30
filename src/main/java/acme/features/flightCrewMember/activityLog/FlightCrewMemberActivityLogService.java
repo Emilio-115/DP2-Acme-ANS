@@ -38,7 +38,7 @@ public class FlightCrewMemberActivityLogService extends AbstractGuiService<Fligh
 		FlightCrewMember flightCrewMember = (FlightCrewMember) super.getRequest().getPrincipal().getActiveRealm();
 
 		int activityLogId = super.getRequest().getData("id", int.class);
-		ActivityLog activityLog = this.repository.findByIdAndFlightCrewMemberId(activityLogId, flightCrewMember.getId()).get();
+		ActivityLog activityLog = this.repository.findByIdAndFlightCrewMemberId(activityLogId, flightCrewMember.getId()).orElse(null);
 
 		super.getBuffer().addData(activityLog);
 	}
