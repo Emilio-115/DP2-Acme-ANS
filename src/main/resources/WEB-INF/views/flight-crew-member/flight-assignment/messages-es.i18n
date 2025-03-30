@@ -16,3 +16,5 @@ flight-crew-member.flight-assignment.form.button.create = Crear
 flight-crew-member.flight-assignment.form.button.update = Actualizar
 flight-crew-member.flight-assignment.form.button.delete = Borrar
 flight-crew-member.flight-assignment.form.button.publish = Publicar
+flight-crew-member.flight-assignment.form.button.confirm = Confirmar asignación
+flight-crew-member.flight-assignment.form.button.cancel = Cancelar asignación

@@ -11,6 +11,13 @@ import acme.realms.flightCrewMember.FlightCrewMemberAvailabilityStatus;
 public class FlightCrewMemberFlightAssignmentPublishService extends FlightCrewMemberFlightAssignmentEditService {
 
 	@Override
+	public void bind(final FlightAssignment flightAssignment) {
+		flightAssignment.setDraftMode(false);
+
+		super.bind(flightAssignment);
+	}
+
+	@Override
 	public void validate(final FlightAssignment flightAssignment) {
 		{
 			FlightCrewMember flightCrewMember = (FlightCrewMember) super.getRequest().getPrincipal().getActiveRealm();
@@ -30,13 +37,6 @@ public class FlightCrewMemberFlightAssignmentPublishService extends FlightCrewMe
 			boolean legPending = departureDate.after(MomentHelper.getCurrentMoment());
 			super.state(legPending, "leg", "acme.validation.flight-assignment.leg-departed.message");
 		}
-	}
-
-	@Override
-	public void bind(final FlightAssignment flightAssignment) {
-		flightAssignment.setDraftMode(false);
-
-		super.bind(flightAssignment);
 	}
 
 	@Override

@@ -62,6 +62,8 @@ public class FlightCrewMemberFlightAssignmentEditService extends AbstractGuiServ
 
 	@Override
 	public void unbind(final FlightAssignment flightAssignment) {
+		FlightCrewMember flightCrewMember = (FlightCrewMember) super.getRequest().getPrincipal().getActiveRealm();
+
 		Dataset dataset;
 		dataset = super.unbindObject(flightAssignment, "remarks", "duty", "status", "draftMode");
 
@@ -70,10 +72,8 @@ public class FlightCrewMemberFlightAssignmentEditService extends AbstractGuiServ
 
 			if (!flightAssignment.isDraftMode())
 				pendingLegs = this.repository.findAllLegs();
-			else {
-				FlightCrewMember flightCrewMember = (FlightCrewMember) super.getRequest().getPrincipal().getActiveRealm();
+			else
 				pendingLegs = this.repository.findLegsDepartingAfterWhereFlightCrewMemberIsFree(MomentHelper.getCurrentMoment(), flightAssignment.getId(), flightCrewMember.getId());
-			}
 
 			SelectChoices legs;
 			legs = SelectChoicesHelper.from(pendingLegs, Leg::flightNumber, flightAssignment.getLeg());
@@ -92,6 +92,11 @@ public class FlightCrewMemberFlightAssignmentEditService extends AbstractGuiServ
 			statuses = SelectChoices.from(FlightAssignmentStatus.class, flightAssignment.getStatus());
 
 			dataset.put("statuses", statuses);
+		}
+		{
+			boolean canEdit = flightCrewMember.equals(flightAssignment.getFlightCrewMember());
+
+			dataset.put("canEdit", canEdit);
 		}
 
 		super.getResponse().addData(dataset);
