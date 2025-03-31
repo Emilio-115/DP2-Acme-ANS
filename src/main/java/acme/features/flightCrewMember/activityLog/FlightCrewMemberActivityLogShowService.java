@@ -8,7 +8,7 @@ import acme.entities.activityLogs.ActivityLog;
 import acme.realms.flightCrewMember.FlightCrewMember;
 
 @GuiService
-public class FlightCrewMemberActivityLogShowService extends FlightCrewMemberActivityLogService {
+public class FlightCrewMemberActivityLogShowService extends FlightCrewMemberActivityLogEditService {
 
 	@Override
 	public void authorise() {

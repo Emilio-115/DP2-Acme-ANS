@@ -45,7 +45,7 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 
 				boolean areDatesCorrect = areDatesAfterArrival || areDatesBeforeDeparture;
 
-				super.state(context, areDatesCorrect, "dates", "acme.validation.activity-log.overlapping-legs.message");
+				super.state(context, areDatesCorrect, "dates", "acme.validation.leg.overlapping-legs.message");
 			}
 		}
 

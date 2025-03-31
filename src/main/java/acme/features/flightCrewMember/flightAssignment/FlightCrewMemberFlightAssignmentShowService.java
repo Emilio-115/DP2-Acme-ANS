@@ -7,7 +7,7 @@ import acme.client.services.GuiService;
 import acme.entities.flightAssignment.FlightAssignment;
 
 @GuiService
-public class FlightCrewMemberFlightAssignmentShowService extends FlightCrewMemberFlightAssignmentService {
+public class FlightCrewMemberFlightAssignmentShowService extends FlightCrewMemberFlightAssignmentEditService {
 
 	@Override
 	public void authorise() {

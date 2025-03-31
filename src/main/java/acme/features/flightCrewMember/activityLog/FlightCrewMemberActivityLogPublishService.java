@@ -5,7 +5,14 @@ import acme.client.services.GuiService;
 import acme.entities.activityLogs.ActivityLog;
 
 @GuiService
-public class FlightCrewMemberActivityLogPublishService extends FlightCrewMemberActivityLogService {
+public class FlightCrewMemberActivityLogPublishService extends FlightCrewMemberActivityLogEditService {
+
+	@Override
+	public void bind(final ActivityLog activityLog) {
+		activityLog.setDraftMode(false);
+
+		super.bind(activityLog);
+	}
 
 	@Override
 	public void validate(final ActivityLog activityLog) {
@@ -13,8 +20,14 @@ public class FlightCrewMemberActivityLogPublishService extends FlightCrewMemberA
 	}
 
 	@Override
+	public void unbind(final ActivityLog activityLog) {
+		activityLog.setDraftMode(true);
+
+		super.unbind(activityLog);
+	}
+
+	@Override
 	public void perform(final ActivityLog activityLog) {
-		activityLog.setDraftMode(false);
 		this.repository.save(activityLog);
 	}
 }
