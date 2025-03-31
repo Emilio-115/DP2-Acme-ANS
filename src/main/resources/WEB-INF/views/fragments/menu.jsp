@@ -36,9 +36,12 @@
 		</acme:menu-option>
 		
 		<acme:menu-option code="master.menu.flight-crew-member" access="hasRealm('FlightCrewMember')">
-			<acme:menu-suboption code="master.menu.flight-crew-member.list-planned" action="/flight-crew-member/flight-assignment/list-planned"/>
-			<acme:menu-suboption code="master.menu.flight-crew-member.list-departed" action="/flight-crew-member/flight-assignment/list-departed"/>
-			<acme:menu-suboption code="master.menu.flight-crew-member.list-drafts" action="/flight-crew-member/flight-assignment/list-drafts"/>
+			<acme:menu-suboption code="master.menu.flight-crew-member.flight-assignment.list-planned" action="/flight-crew-member/flight-assignment/list-planned"/>
+			<acme:menu-suboption code="master.menu.flight-crew-member.flight-assignment.list-departed" action="/flight-crew-member/flight-assignment/list-departed"/>
+			<acme:menu-suboption code="master.menu.flight-crew-member.flight-assignment.list-drafts" action="/flight-crew-member/flight-assignment/list-drafts"/>
+			<acme:menu-separator/>
+			<acme:menu-suboption code="master.menu.flight-crew-member.activity-log.list-published" action="/flight-crew-member/activity-log/list"/>
+			<acme:menu-suboption code="master.menu.flight-crew-member.activity-log.list-drafts" action="/flight-crew-member/activity-log/list-drafts"/>
 		</acme:menu-option>
 
 		<acme:menu-option code="master.menu.provider" access="hasRealm('Provider')">
