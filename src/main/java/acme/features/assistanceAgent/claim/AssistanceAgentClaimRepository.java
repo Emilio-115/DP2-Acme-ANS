@@ -16,32 +16,32 @@ import acme.realms.AssistanceAgent;
 
 public interface AssistanceAgentClaimRepository extends AbstractRepository {
 
-	@Query("select aa from AssistanceAgent aa where aa.userAccount.id = :id")
+	@Query("SELECT aa FROM AssistanceAgent aa WHERE aa.userAccount.id = :id")
 	AssistanceAgent findAssistanceAgentById(int id);
 
-	@Query("select c from Claim c where assistanceAgent.id = :id AND c.completed = :completed")
+	@Query("SELECT c FROM Claim c WHERE assistanceAgent.id = :id AND c.completed = :completed")
 	List<Claim> findClaimsByAssistanceAgent(int id, boolean completed);
 
-	@Query("select c from Claim c where assistanceAgent.id = :id and c.id = :claimId")
+	@Query("SELECT c FROM Claim c WHERE assistanceAgent.id = :id AND c.id = :claimId")
 	Claim findClaimByAssistanceAgent(int id, int claimId);
 
 	Optional<Claim> findByIdAndAssistanceAgentId(Integer id, Integer agentId);
 
-	@Query("select l from Leg l where l.id = :id")
+	@Query("SELECT l FROM Leg l WHERE l.id = :id")
 	Leg findLegById(int id);
 
-	@Query("select c.leg from Claim c where c.id = :id")
+	@Query("SELECT c.leg FROM Claim c WHERE c.id = :id")
 	Leg findLegByClaimId(int id);
 
-	@Query("select l from Leg l where l.status = :st")
+	@Query("SELECT l FROM Leg l WHERE l.status = :st")
 	Collection<Leg> findAllLandedLegs(LegStatus st);
 
-	@Query("select l from Leg l")
+	@Query("SELECT l FROM Leg l")
 	Collection<Leg> findAllLegs();
 
-	@Query("select c from Claim c where c.id = :id")
+	@Query("SELECT c FROM Claim c WHERE c.id = :id")
 	Claim findClaimById(Integer id);
 
-	@Query("select tl from TrackingLog tl where tl.claim.id = :claimId")
+	@Query("SELECT tl FROM TrackingLog tl WHERE tl.claim.id = :claimId")
 	List<TrackingLog> findAllTrackingLogsByClaimId(int claimId);
 }

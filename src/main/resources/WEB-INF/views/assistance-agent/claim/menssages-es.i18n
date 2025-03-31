@@ -12,6 +12,7 @@ assistance-agent.claim.form.label.description = Descripcion
 assistance-agent.claim.form.label.type = Tipo
 assistance-agent.claim.form.label.isaccepted = Aceptado
 assistance-agent.claim.form.label.leg = Segmento
+assistance-agent.claim.form.label.draftMode = DraftMode
 
 assistance-agent.claim.list.label.create = Create
 assistance-agent.claim.form.button.create = Create

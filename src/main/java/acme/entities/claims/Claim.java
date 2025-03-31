@@ -59,6 +59,10 @@ public class Claim extends AbstractEntity {
 	private Boolean				completed;
 
 	@Mandatory
+	@Automapped
+	boolean						draftMode;
+
+	@Mandatory
 	@Valid
 	@ManyToOne
 	private AssistanceAgent		assistanceAgent;
