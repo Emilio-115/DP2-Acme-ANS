@@ -29,7 +29,7 @@ public class BookingValidator extends AbstractValidator<ValidBooking, Booking> {
 		Optional<String> foundLocatorCode = bookingRepository.findLocatorCodeFromDifferentBooking(value.getId(), value.getLocatorCode());
 		boolean flightNoDraftMode = !value.getFlight().isDraftMode();
 
-		super.state(context, flightNoDraftMode, "*", "acme.validation.booking.flight.draftMode");
+		super.state(context, flightNoDraftMode, "flight", "acme.validation.booking.flight.draftMode");
 
 		boolean locatorNotUsed = foundLocatorCode.isEmpty();
 
