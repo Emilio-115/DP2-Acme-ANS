@@ -44,15 +44,22 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 
 	@Override
 	public void bind(final Booking booking) {
-		super.bindObject(booking, "locatorCode", "purchaseMoment", "travelClass", "creditCardLastNibble");
+		int flightId = super.getRequest().getData("flight", int.class);
+		Flight flight = this.repository.findFlightById(flightId);
+
+		super.bindObject(booking, "locatorCode", "travelClass", "creditCardLastNibble");
+		booking.setPurchaseMoment(MomentHelper.getCurrentMoment());
+		booking.setFlight(flight);
 	}
 
 	@Override
 	public void validate(final Booking booking) {
 		boolean notPublished = booking.isDraftMode();
 		boolean hasPassengers = !this.repository.findPassengersByBookingId(booking.getId()).isEmpty();
+		boolean hasLastNibble = !booking.getCreditCardLastNibble().isBlank();
 		super.state(notPublished, "*", "acme.validation.update.draftMode");
 		super.state(hasPassengers, "*", "acme.validation.booking.passenger");
+		super.state(hasLastNibble, "*", "acme.validation.booking.creditcardlastnibble");
 	}
 
 	@Override

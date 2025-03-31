@@ -44,7 +44,12 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 
 	@Override
 	public void bind(final Booking booking) {
-		super.bindObject(booking, "locatorCode", "purchaseMoment", "travelClass", "creditCardLastNibble");
+		int flightId = super.getRequest().getData("flight", int.class);
+		Flight flight = this.repository.findFlightById(flightId);
+
+		super.bindObject(booking, "locatorCode", "travelClass", "creditCardLastNibble");
+		booking.setPurchaseMoment(MomentHelper.getCurrentMoment());
+		booking.setFlight(flight);
 	}
 
 	@Override
