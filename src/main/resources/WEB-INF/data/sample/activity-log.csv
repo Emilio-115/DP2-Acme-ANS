@@ -1,9 +1,9 @@
-key,key:registeringAssignment,registeredAt,incidentType,description,severityLevel
-activity-log-record-1,flight-assignment-5,2000/01/01 0:02,L,L,0
-activity-log-record-2,flight-assignment-5,2022/07/29 23:59,Lo,Lo,1
-activity-log-record-3,flight-assignment-5,2000/01/01 0:03,"Lorem ipsum dolor sit amet, consectetur adipiscin","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor",9
-activity-log-record-4,flight-assignment-5,2022/07/29 23:58,"Lorem ipsum dolor sit amet, consectetur adipiscing","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor*",10
-activity-log-record-5,flight-assignment-5,2000/01/01 0:02,لوريم إيبسوم,โลเร็ม อิปซัม,2
-activity-log-record-6,flight-assignment-5,2022/07/29 23:59,<marquee>Hacked</marquee>,<marquee>Hacked</marquee>,3
-activity-log-record-7,flight-assignment-5,2000/01/01 0:03,<script>alert(‘Hacked!’);</script>,<script>alert(‘Hacked!’);</script>,4
-activity-log-record-8,flight-assignment-5,2022/07/29 23:58,' or 'A' = 'A,' or 'A' = 'A,5
+key,key:registeringAssignment,registeredAt,incidentType,description,severityLevel,draftMode
+activity-log-record-1,flight-assignment-7,2000/01/01 0:02,L,L,0,false
+activity-log-record-2,flight-assignment-7,2022/07/29 23:59,Lo,Lo,1,false
+activity-log-record-3,flight-assignment-7,2000/01/01 0:03,"Lorem ipsum dolor sit amet, consectetur adipiscin","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor",9,false
+activity-log-record-4,flight-assignment-7,2022/07/29 23:58,"Lorem ipsum dolor sit amet, consectetur adipiscing","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor*",10,false
+activity-log-record-5,flight-assignment-7,2000/01/01 0:02,لوريم إيبسوم,โลเร็ม อิปซัม,2,false
+activity-log-record-6,flight-assignment-7,2022/07/29 23:59,<marquee>Hacked</marquee>,<marquee>Hacked</marquee>,3,false
+activity-log-record-7,flight-assignment-7,2000/01/01 0:03,<script>alert(‘Hacked!’);</script>,<script>alert(‘Hacked!’);</script>,4,false
+activity-log-record-8,flight-assignment-7,2022/07/29 23:58,' or 'A' = 'A,' or 'A' = 'A,5,true
