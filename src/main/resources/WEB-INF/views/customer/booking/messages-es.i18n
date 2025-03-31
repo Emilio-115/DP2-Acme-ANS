@@ -23,3 +23,5 @@ customer.booking.flight.form.label.numberOfLayovers = Numero de Escalas
 
 customer.booking.list.label.create = Crear
 customer.booking.form.button.create = Crear
+customer.booking.form.button.update = Actualizar
+customer.booking.form.button.delete = Borrar

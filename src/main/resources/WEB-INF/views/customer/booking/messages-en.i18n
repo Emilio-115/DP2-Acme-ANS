@@ -26,3 +26,5 @@ customer.booking.flight.form.label.numberOfLayovers = Number of Layovers
 
 customer.booking.list.label.create = Create
 customer.booking.form.button.create = Create
+customer.booking.form.button.update = Update
+customer.booking.form.button.delete = Delete

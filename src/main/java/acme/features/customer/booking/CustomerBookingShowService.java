@@ -65,7 +65,7 @@ public class CustomerBookingShowService extends AbstractGuiService<Customer, Boo
 
 		dataset.put("price", booking.price());
 		dataset.put("travelClasses", choices);
-		dataset.put("flight", choices.getSelected().getKey());
+		dataset.put("flight", flightChoices.getSelected().getKey());
 		dataset.put("flightTagChoices", flightChoices);
 
 		dataset.put("flightSelfTransfer", booking.getFlight().isRequiresSelfTransfer());
