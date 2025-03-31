@@ -13,4 +13,6 @@ acme.validation.activity-log.registered-before-landing.message = Invalid registe
 acme.validation.activity-log.arrival-before-departure.message = Invalid departureDate date, arrival must be after departure
 acme.validation.short-text.message = Invalid text, it needs to be shorter or equal than 50 characters
 acme.validation.leg.overlapping-legs.message = Invalid dates of departure or arrival, legs cannot overlap
-acme.validation.leg.busy-aircraft.message = Invalid aircraft, the aircraft is busy in that time range.
+acme.validation.leg.busy-aircraft.message = Invalid aircraft, the aircraft is busy in that time range
+acme.validation.leg.unique-flight-number.message = Invalid flight number, IATA code + Flight Number Digits must be unique
+

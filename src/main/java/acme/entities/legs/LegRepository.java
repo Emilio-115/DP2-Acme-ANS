@@ -49,4 +49,18 @@ public interface LegRepository extends JpaRepository<Leg, Integer> {
 		""")
 	public boolean islegOverlapping(Integer legId, Integer flightId, Date departureDate, Date arrivalDate);
 
+	@Query("""
+		SELECT
+			CASE
+				WHEN COUNT(l) > 0 THEN true
+				ELSE false
+			END
+		FROM Leg l
+		WHERE
+		l.id != :legId AND
+		l.aircraft.airline.id = :airlineId AND
+		l.flightNumberDigits = :flightNumberDigits
+		""")
+	public boolean isFlightNumberUsed(Integer legId, Integer airlineId, String flightNumberDigits);
+
 }

@@ -13,4 +13,5 @@ acme.validation.activity-log.registered-before-landing.message = Fecha de regist
 acme.validation.activity-log.arrival-before-departure.message = Fecha de salida no valida, la llegada debe ser despues de la salida
 acme.validation.short-text.message = Texto no válido, necesita ser igual o más corto de 50 caracteres
 acme.validation.leg.overlapping-legs.message = Fechas de salida o llegada no validas, los segmentos no pueden superponerse
-acme.validation.leg.busy-aircraft.message = Avión no válido, el avión está ocupado durante ese rando de tiempo.
+acme.validation.leg.busy-aircraft.message = Avión no válido, el avión está ocupado durante ese rango de tiempo
+acme.validation.leg.unique-flight-number.message = Número de vuelo no válido, codigo IATA + Digitos del número de vuelo deben ser únicos

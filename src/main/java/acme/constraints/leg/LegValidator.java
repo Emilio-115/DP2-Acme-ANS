@@ -29,17 +29,23 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 
 			boolean isAircraftBusy = legRepository.isAircrafBusy(leg.getId(), leg.getAircraft().getId(), leg.getDepartureDate(), leg.getArrivalDate());
 			super.state(context, !isAircraftBusy, "aircraft", "acme.validation.leg.busy-aircraft.message");
+
+			if (leg.getAircraft().getAirline() != null) {
+
+				boolean isFlightNumberUsed = legRepository.isFlightNumberUsed(leg.getId(), leg.getAircraft().getAirline().getId(), leg.getFlightNumberDigits());
+				super.state(context, !isFlightNumberUsed, "flightNumberDigits", "acme.validation.leg.unique-flight-number.message");
+			}
 		}
 
 		if (leg.getDepartureDate() != null) {
 			boolean isDepartureAfterArrival = leg.getDepartureDate().after(leg.getArrivalDate());
-			super.state(context, !isDepartureAfterArrival, "dates", "acme.validation.leg.arrival-before-departure.message");
+			super.state(context, !isDepartureAfterArrival, "departureDate", "acme.validation.leg.arrival-before-departure.message");
 		}
 
 		super.state(context, leg.getFlight() != null, "flight", "javax.validation.constraints.NotNull.message");
 		if (leg.getFlight() != null) {
 			boolean isLegOverlapping = legRepository.islegOverlapping(leg.getId(), leg.getFlight().getId(), leg.getDepartureDate(), leg.getArrivalDate());
-			super.state(context, !isLegOverlapping, "dates", "acme.validation.activity-log.overlapping-legs.message");
+			super.state(context, !isLegOverlapping, "departureDate", "acme.validation.leg.overlapping-legs.message");
 		}
 
 		result = !super.hasErrors(context);
