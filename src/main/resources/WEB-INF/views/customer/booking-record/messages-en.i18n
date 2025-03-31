@@ -9,4 +9,5 @@ customer.booking-record.form.label.passportnumber = Passenger Passport
 customer.booking-record.form.button.delete = Delete
 
 customer.booking-record.list.label.create = Create
+customer.booking-record.form.label.create = Create
 

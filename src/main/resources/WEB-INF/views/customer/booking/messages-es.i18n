@@ -4,6 +4,7 @@ customer.booking.form.title = Detalles de la reserva
 customer.booking.list.label.locatorcode = Código localizador
 customer.booking.list.label.purchasemoment = Fecha de compra
 customer.booking.list.label.travelclass = Clase del viaje
+customer.booking.flight.list.label.destiny = Destino
 
 customer.booking.form.label.locatorcode = Código localizador
 customer.booking.form.label.purchasemoment = Fecha de compra

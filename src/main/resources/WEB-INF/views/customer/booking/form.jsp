@@ -12,14 +12,14 @@
 	<jstl:choose>
 		<jstl:when test="${acme:anyOf(_command,'show|update|delete|publish')}">
 			<acme:input-moment code="customer.booking.form.label.purchasemoment" path="purchaseMoment" readonly="true"/>	
-			<acme:input-select code = "customer.flight.form.label.tag" path= "flight" choices="${flightTagChoices}" />
-			<acme:input-textbox code = "customer.flight.form.label.origin" path= "origin" readonly="true"/>
-			<acme:input-textbox code = "customer.flight.form.label.destiny" path= "destiny" readonly="true"/>
-			<acme:input-moment code = "customer.flight.form.label.departureDate" path= "departureDate" readonly="true"/>
-			<acme:input-moment code = "customer.flight.form.label.arrivalDate" path= "arrivalDate" readonly="true"/>
-			<acme:input-checkbox code = "customer.flight.form.label.requiresSelfTransfer" path= "flightSelfTransfer" readonly="true"/>
-			<acme:input-textbox code = "customer.flight.form.label.description" path= "flightDescription" readonly="true"/>
-			<acme:input-textbox code = "customer.flight.form.label.numberOfLayovers" path= "numberOfLayovers" readonly="true"/>
+			<acme:input-select code = "customer.booking.flight.form.label.tag" path= "flight" choices="${flightTagChoices}" />
+			<acme:input-textbox code = "customer.booking.flight.form.label.origin" path= "origin" readonly="true"/>
+			<acme:input-textbox code = "customer.booking.flight.form.label.destiny" path= "destiny" readonly="true"/>
+			<acme:input-moment code = "customer.booking.flight.form.label.departureDate" path= "departureDate" readonly="true"/>
+			<acme:input-moment code = "customer.booking.flight.form.label.arrivalDate" path= "arrivalDate" readonly="true"/>
+			<acme:input-checkbox code = "customer.booking.flight.form.label.requiresSelfTransfer" path= "flightSelfTransfer" readonly="true"/>
+			<acme:input-textbox code = "customer.booking.flight.form.label.description" path= "flightDescription" readonly="true"/>
+			<acme:input-textbox code = "customer.booking.flight.form.label.numberOfLayovers" path= "numberOfLayovers" readonly="true"/>
 			<acme:button code="customer.booking.form.label.passenger" action="/customer/passenger/list?bookingId=${id}"/>
 			<jstl:if test="${draftMode == true}">
 				<acme:submit code="customer.booking.form.button.update" action="/customer/booking/update"/>

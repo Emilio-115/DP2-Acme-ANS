@@ -8,4 +8,5 @@ customer.booking-record.form.label.locatorcode = Código localizador de la reser
 customer.booking-record.form.label.passportnumber = Pasaporte del pasajero
 customer.booking-record.form.button.delete = Borrar
 
-customer.booking-record.form.label.create = Create
+customer.booking-record.form.label.create = Crear
+customer.booking-record.list.label.create = Crear

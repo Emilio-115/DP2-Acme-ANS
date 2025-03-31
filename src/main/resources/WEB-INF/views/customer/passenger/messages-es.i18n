@@ -1,8 +1,8 @@
 customer.passenger.list.title = Pasajeros
 customer.passenger.form.title = Detalles del pasajero
 
-customer.passenger.list.label.email = Email
 customer.passenger.list.label.passportnumber = Pasaporte
+customer.passenger.list.label.draftmode = Modo borrador
 customer.passenger.list.label.birthdate = Fecha de nacimiento
 
 customer.passenger.form.label.fullname = Nombre completo

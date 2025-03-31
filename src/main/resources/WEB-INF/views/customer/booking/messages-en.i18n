@@ -4,7 +4,6 @@ customer.booking.form.title = Bookings Details
 customer.booking.list.label.locatorcode = Locator code
 customer.booking.list.label.purchasemoment = Purchase moment
 customer.booking.list.label.travelclass = Travel class
-customer.booking.flight.list.label.origin = Origin
 customer.booking.flight.list.label.destiny = Destiny
 
 customer.booking.form.label.locatorcode = Locator code
