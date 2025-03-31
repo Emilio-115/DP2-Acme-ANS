@@ -1,0 +1,21 @@
+manager.leg.list.label.id = Id
+manager.leg.list.label.departureAirport = Aeropuerto de Salida
+manager.leg.list.label.arrivalAirport = Aeropuerto de Llegada
+manager.leg.list.button.create = Crear
+
+manager.flight.form.label.id = Id
+manager.flight.form.label.origin = Ciudad Origen
+manager.flight.form.label.destiny = Ciudad Destino
+manager.flight.form.label.departureDate = Fecha de Salida
+manager.flight.form.label.arrivalDate= Fecha de Llegada
+manager.flight.form.label.tag = Etiqueta
+manager.flight.form.label.requiresSelfTransfer = Requiere Transporte Propio
+manager.flight.form.label.cost = Precio
+manager.flight.form.label.description = Descripción
+manager.flight.form.label.numberOfLayovers = Numero de Escalas
+manager.flight.form.label.draftMode = Modo Edición
+
+
+
+airline-manager.leg.list.title = Segmentos
+airline-manager.leg.list.title = Segmentos

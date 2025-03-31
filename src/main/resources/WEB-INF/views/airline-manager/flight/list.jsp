@@ -9,6 +9,7 @@
 	<acme:list-column code = "manager.flight.list.label.destiny" path= "destiny"/>
 	<acme:list-column code = "manager.flight.list.label.departureDate" path= "departureDate"/>
 	<acme:list-column code = "manager.flight.list.label.arrivalDate" path= "arrivalDate"/>
+	<acme:list-column code = "manager.flight.list.label.isPublished" path= "published"/>
 </acme:list>
 
 <jstl:if test="${_command == 'list'}">

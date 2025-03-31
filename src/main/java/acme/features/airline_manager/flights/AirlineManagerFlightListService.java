@@ -43,6 +43,7 @@ public class AirlineManagerFlightListService extends AbstractGuiService<AirlineM
 		dataset.put("destiny", flight.destiny());
 		dataset.put("departureDate", flight.scheduledDeparture());
 		dataset.put("arrivalDate", flight.scheduledArrival());
+		dataset.put("published", !flight.isDraftMode());
 		super.getResponse().addData(dataset);
 	}
 

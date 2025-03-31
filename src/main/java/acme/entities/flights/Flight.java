@@ -73,7 +73,7 @@ public class Flight extends AbstractEntity {
 	@Transient
 	public Date scheduledDeparture() {
 		LegRepository legRepository = SpringHelper.getBean(LegRepository.class);
-		Leg leg = legRepository.findFirstLegByFlightOrderByDepartureDate(this);
+		Leg leg = legRepository.findFirstLegByFlightIdOrderByDepartureDate(this.getId());
 		return leg != null ? leg.getArrivalDate() : null;
 	}
 
@@ -81,28 +81,28 @@ public class Flight extends AbstractEntity {
 	public Date scheduledArrival() {
 		LegRepository legRepository = SpringHelper.getBean(LegRepository.class);
 
-		Leg leg = legRepository.findFirstLegByFlightOrderByDepartureDateDesc(this);
+		Leg leg = legRepository.findFirstLegByFlightIdOrderByDepartureDateDesc(this.getId());
 		return leg != null ? leg.getArrivalDate() : null;
 	}
 
 	@Transient
 	public String origin() {
 		LegRepository legRepository = SpringHelper.getBean(LegRepository.class);
-		Leg leg = legRepository.findFirstLegByFlightOrderByDepartureDate(this);
+		Leg leg = legRepository.findFirstLegByFlightIdOrderByDepartureDate(this.getId());
 		return leg != null ? leg.getDepartureAirport().getCity() : "No Data";
 	}
 
 	@Transient
 	public String destiny() {
 		LegRepository legRepository = SpringHelper.getBean(LegRepository.class);
-		Leg leg = legRepository.findFirstLegByFlightOrderByDepartureDateDesc(this);
+		Leg leg = legRepository.findFirstLegByFlightIdOrderByDepartureDateDesc(this.getId());
 		return leg != null ? leg.getDepartureAirport().getCity() : "No Data";
 	}
 
 	@Transient
 	public int numberOfLayovers() {
 		LegRepository legRepository = SpringHelper.getBean(LegRepository.class);
-		return (int) legRepository.countLegsByFlight(this) - 1;
+		return (int) legRepository.countLegsByFlight(this.getId()) - 1;
 	}
 
 

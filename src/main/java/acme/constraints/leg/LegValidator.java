@@ -1,8 +1,6 @@
 
 package acme.constraints.leg;
 
-import java.util.List;
-
 import javax.validation.ConstraintValidatorContext;
 
 import acme.client.components.validation.AbstractValidator;
@@ -26,28 +24,15 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 		boolean result = true;
 
 		LegRepository legRepository = SpringHelper.getBean(LegRepository.class);
-		boolean isAircraftBusy = legRepository.isAircrafBusy(leg, leg.getAircraft(), leg.getDepartureDate(), leg.getArrivalDate());
 
-		if (leg.getDepartureDate().after(leg.getArrivalDate()))
-			super.state(context, false, "departureDate", "acme.validation.leg.arrival-before-departure.message");
-		else if (isAircraftBusy)
-			super.state(context, false, "aircraft", "acme.validation.leg.busy-aircraft.message");
-		else {
-			List<Leg> legsOfFlight = legRepository.findAllLegsByFlight(leg.getFlight());
+		boolean isAircraftBusy = legRepository.isAircrafBusy(leg.getId(), leg.getAircraft().getId(), leg.getDepartureDate(), leg.getArrivalDate());
+		super.state(context, !isAircraftBusy, "departureDate", "acme.validation.leg.busy-aircraft.message");
 
-			for (Leg l : legsOfFlight) {
+		boolean isDepartureAfterArrival = leg.getDepartureDate().after(leg.getArrivalDate());
+		super.state(context, !isDepartureAfterArrival, "aircraft", "acme.validation.leg.arrival-before-departure.message");
 
-				if (leg.equals(l))
-					continue;
-
-				boolean areDatesBeforeDeparture = leg.getArrivalDate().before(l.getDepartureDate()) && leg.getDepartureDate().before(l.getDepartureDate());
-				boolean areDatesAfterArrival = leg.getArrivalDate().after(l.getArrivalDate()) && leg.getDepartureDate().after(l.getArrivalDate());
-
-				boolean areDatesCorrect = areDatesAfterArrival || areDatesBeforeDeparture;
-
-				super.state(context, areDatesCorrect, "dates", "acme.validation.activity-log.overlapping-legs.message");
-			}
-		}
+		boolean isLegOverlapping = legRepository.islegOverlapping(leg.getId(), leg.getFlight().getId(), leg.getDepartureDate(), leg.getArrivalDate());
+		super.state(context, !isLegOverlapping, "dates", "acme.validation.activity-log.overlapping-legs.message");
 
 		result = !super.hasErrors(context);
 
