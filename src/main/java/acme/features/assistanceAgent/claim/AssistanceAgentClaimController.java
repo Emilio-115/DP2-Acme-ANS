@@ -28,6 +28,9 @@ public class AssistanceAgentClaimController extends AbstractGuiController<Assist
 	@Autowired
 	private AssistanceAgentClaimDeleteService	deleteService;
 
+	@Autowired
+	private AssistanceAgentClaimUpdateService	updateService;
+
 
 	@PostConstruct
 	protected void initialize() {
@@ -35,6 +38,7 @@ public class AssistanceAgentClaimController extends AbstractGuiController<Assist
 		super.addBasicCommand("show", this.showService);
 		super.addBasicCommand("create", this.createService);
 		super.addBasicCommand("delete", this.deleteService);
+		super.addBasicCommand("update", this.updateService);
 
 		super.addCustomCommand("undergoing", "list", this.showUndService);
 	}
