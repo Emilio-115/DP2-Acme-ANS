@@ -31,16 +31,16 @@ acme.validation.leg.busy-aircraft.message = Avión no válido, el avión está o
 # acme.validation.booking #############################
 
 acme.validation.booking.creditcardlastnibble = Los 4 números de la tarjeta de credito son obligatorios para publicar la reserva
-acme.validation.booking.passenger = Es necesario que la reserva tenga pasajeros para publicarla. 
+acme.validation.booking.passenger = Es necesario que la reserva tenga pasajeros para publicarla
 acme.validation.booking.locatorCode = El código localizador debe ser único
 acme.validation.booking.flight = Debes seleccionar un vuelo
-acme.validation.booking.draftmode.message = No puedes añadir pasajeros a una reserva publicada.
+acme.validation.booking.draftmode.message = No puedes añadir pasajeros a una reserva publicada
 
 # acme.validation.bookingrecord #######################
 
-acme.validation.bookingrecord.passenger = El pasajero ya tiene una reserva para este vuelo.
-acme.validation.bookingrecord.passenger.draftmode = El pasajero debe de estar publicado.
-acme.validation.bookingrecord.delete = No puedes eliminar el registro porque la reserva ya está publicada.
+acme.validation.bookingrecord.passenger = El pasajero ya tiene una reserva para este vuelo
+acme.validation.bookingrecord.passenger.draftmode = El pasajero debe de estar publicado
+acme.validation.bookingrecord.delete = No puedes eliminar el registro porque la reserva ya está publicada
 
 # acme.validation.passenger ####################
-acme.validation.passenger.update = No puedes actualizar un pasajero publicado. 
+acme.validation.passenger.update = No puedes actualizar un pasajero publicado

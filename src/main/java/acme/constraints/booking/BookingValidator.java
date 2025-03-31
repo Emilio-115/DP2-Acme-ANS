@@ -36,7 +36,7 @@ public class BookingValidator extends AbstractValidator<ValidBooking, Booking> {
 		super.state(context, !needCreditCardLastNibble, "creditCardLastNibble", "acme.validation.booking.creditcardlastnibble");
 
 		boolean needPassengers = !value.isDraftMode() && numberPassegers.equals(0L);
-		super.state(context, !needPassengers, "passengers", "acme.validation.booking.passenger");
+		super.state(context, !needPassengers, "*", "acme.validation.booking.passenger");
 
 		result = !super.hasErrors(context);
 		return result;

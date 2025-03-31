@@ -30,18 +30,18 @@ acme.validation.leg.busy-aircraft.message = Invalid aircraft, the aircraft is bu
 
 # acme.validation.booking ############################
 
-acme.validation.booking.creditcardlastnibble = Credit card last nibble is mandatory to publish the booking.
-acme.validation.booking.passenger = Passengers are necessary to publish the booking.
-acme.validation.booking.locatorCode = Locator code must be unique.
+acme.validation.booking.creditcardlastnibble = Credit card last nibble is mandatory to publish the booking
+acme.validation.booking.passenger = Passengers are necessary to publish the booking
+acme.validation.booking.locatorCode = Locator code must be unique
 acme.validation.booking.flight = You must select a flight
-acme.validation.booking.draftmode.message = You can not add passengers to a published booking.
+acme.validation.booking.draftmode.message = You can not add passengers to a published booking
 
 
 # acme.validation.bookingrecord #######################
 
-acme.validation.bookingrecord.passenger = The passenger is already added to the booking.
-acme.validation.bookingrecord.delete = You can not delete because the booking is published.
-acme.validation.bookingrecord.passenger.draftmode = Passanger must be published.
+acme.validation.bookingrecord.passenger = The passenger is already added to the booking
+acme.validation.bookingrecord.delete = You can not delete because the booking is published
+acme.validation.bookingrecord.passenger.draftmode = Passanger must be published
 
 # acme.validation.passenger.update ####################
 acme.validation.passenger.update = You cannot update a published passenger 

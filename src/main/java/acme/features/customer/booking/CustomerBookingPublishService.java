@@ -50,7 +50,9 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 	@Override
 	public void validate(final Booking booking) {
 		boolean notPublished = booking.isDraftMode();
-		super.state(notPublished, "draftMode", "acme.validation.update.draftMode");
+		boolean hasPassengers = !this.repository.findPassengersByBookingId(booking.getId()).isEmpty();
+		super.state(notPublished, "*", "acme.validation.update.draftMode");
+		super.state(hasPassengers, "*", "acme.validation.booking.passenger");
 	}
 
 	@Override
