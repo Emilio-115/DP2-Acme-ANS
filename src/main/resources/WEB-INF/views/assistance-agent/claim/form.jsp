@@ -16,6 +16,7 @@
     		<jstl:if test="${draftMode == true}">
     			<acme:submit code="assistance-agent.claim.form.button.delete" action="/assistance-agent/claim/delete"/>
     			<acme:submit code="assistance-agent.claim.form.button.update" action="/assistance-agent/claim/update"/>
+    			<acme:submit code="assistance-agent.claim.form.button.publish" action="/assistance-agent/claim/publish"/>
     		</jstl:if>
 		</jstl:when>
 		<jstl:when test="${_command == 'create'}">

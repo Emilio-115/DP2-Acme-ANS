@@ -14,7 +14,8 @@ assistance-agent.claim.form.label.isaccepted = Aceptado
 assistance-agent.claim.form.label.leg = Segmento
 assistance-agent.claim.form.label.draftMode = DraftMode
 
-assistance-agent.claim.list.label.create = Create
-assistance-agent.claim.form.button.create = Create
+assistance-agent.claim.list.label.create = Crear
+assistance-agent.claim.form.button.create = Crear
+assistance-agent.claim.form.button.publish = Publicar
 
 assistance-agent.claim.delete.claim-linked = La reclamacion esta ligada a algunos archivos de seguimiento

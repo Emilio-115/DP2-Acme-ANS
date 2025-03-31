@@ -18,5 +18,6 @@ assistance-agent.claim.form.button.create = Create
 assistance-agent.claim.list.label.create = Create
 assistance-agent.claim.form.button.delete = Delete
 assistance-agent.claim.form.button.update = Update
+assistance-agent.claim.form.button.publish = Publish
 
 assistance-agent.claim.delete.claim-linked = The claim is linked to one or various tracking logs
