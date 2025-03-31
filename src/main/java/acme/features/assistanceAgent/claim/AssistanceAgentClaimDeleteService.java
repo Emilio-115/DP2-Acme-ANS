@@ -2,7 +2,7 @@
 package acme.features.assistanceAgent.claim;
 
 import java.util.Collection;
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,39 +13,59 @@ import acme.client.services.GuiService;
 import acme.entities.claims.Claim;
 import acme.entities.claims.ClaimType;
 import acme.entities.legs.Leg;
+import acme.entities.trackingLogs.TrackingLog;
 import acme.realms.AssistanceAgent;
 
 @GuiService
-public class AssistanceAgentClaimShowService extends AbstractGuiService<AssistanceAgent, Claim> {
+public class AssistanceAgentClaimDeleteService extends AbstractGuiService<AssistanceAgent, Claim> {
 
 	@Autowired
-	private AssistanceAgentClaimRepository repository;
+	AssistanceAgentClaimRepository repository;
 
 
 	@Override
 	public void authorise() {
-		int agentId;
-		int claimId;
-		boolean status;
-
-		agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
-		claimId = super.getRequest().getData("id", int.class);
-
-		Optional<Claim> claim = this.repository.findByIdAndAssistanceAgentId(claimId, agentId);
-
-		status = claim.isPresent();
-
-		super.getResponse().setAuthorised(status);
+		super.getResponse().setAuthorised(true);
 	}
 
 	@Override
 	public void load() {
 		Claim claim;
-		int claimId = super.getRequest().getData("id", int.class);
+		int id;
 
-		claim = this.repository.findClaimById(claimId);
+		id = super.getRequest().getData("id", int.class);
+		claim = this.repository.findClaimById(id);
 
 		super.getBuffer().addData(claim);
+	}
+
+	@Override
+	public void validate(final Claim claim) {
+		boolean status;
+		int claimId = super.getRequest().getData("id", int.class);
+
+		List<TrackingLog> trackingLogs = this.repository.findAllTrackingLogsByClaimId(claimId);
+
+		status = trackingLogs.size() == 0;
+
+		super.state(status, "*", "assistance-agent.claim.delete.claim-linked");
+	}
+
+	@Override
+	public void bind(final Claim claim) {
+		int legId;
+		Leg leg;
+
+		legId = super.getRequest().getData("leg", int.class);
+		leg = this.repository.findLegById(legId);
+
+		super.bindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "isAccepted");
+		claim.setLeg(leg);
+	}
+
+	@Override
+	public void perform(final Claim claim) {
+		this.repository.delete(claim);
 	}
 
 	@Override
@@ -66,4 +86,5 @@ public class AssistanceAgentClaimShowService extends AbstractGuiService<Assistan
 
 		super.getResponse().addData(dataset);
 	}
+
 }

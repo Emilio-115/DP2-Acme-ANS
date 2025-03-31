@@ -15,4 +15,7 @@ assistance-agent.claim.form.label.leg = Leg
 
 assistance-agent.claim.form.button.create = Create
 assistance-agent.claim.list.label.create = Create
+assistance-agent.claim.form.button.delete = Delete
 
+
+assistance-agent.claim.delete.claim-linked = The claim is linked to one or various tracking logs

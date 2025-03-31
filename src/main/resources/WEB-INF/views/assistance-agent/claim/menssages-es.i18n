@@ -1,19 +1,19 @@
 assistance-agent.claim.list.title = Mis Reclamaciones
 assistance-agent.claim.form.title = Detalles de la Reclamacion
 
-assistance-agent.claim.list.label.registrationMoment = Momento de la reclamacion
-assistance-agent.claim.list.label.isAccepted = Aceptado
+assistance-agent.claim.list.label.registrationmoment = Momento de la reclamacion
+assistance-agent.claim.list.label.isaccepted = Aceptado
 assistance-agent.claim.list.label.leg = Segmento
 assistance-agent.claim.list.label.type = Tipo
-assistance-agent.claim.list.label.customer = Nombre del cliente
 
-assistance-agent.claim.form.label.registrationMoment = Momento de la reclamacion
-assistance-agent.claim.form.label.passengerEmail = Email del pasajero
+assistance-agent.claim.form.label.registrationmoment = Momento de la reclamacion
+assistance-agent.claim.form.label.passengeremail = Email del pasajero
 assistance-agent.claim.form.label.description = Descripcion
 assistance-agent.claim.form.label.type = Tipo
-assistance-agent.claim.form.label.isAccepted = Aceptado
+assistance-agent.claim.form.label.isaccepted = Aceptado
 assistance-agent.claim.form.label.leg = Segmento
-assistance-agent.claim.form.label.customer = Nombre del cliente
 
 assistance-agent.claim.list.label.create = Create
 assistance-agent.claim.form.button.create = Create
+
+assistance-agent.claim.delete.claim-linked = La reclamacion esta ligada a algunos archivos de seguimiento

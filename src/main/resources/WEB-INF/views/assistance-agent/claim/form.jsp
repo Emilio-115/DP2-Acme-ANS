@@ -9,11 +9,11 @@
 	<acme:input-textbox code="assistance-agent.claim.form.label.passengeremail" path="passengerEmail" readonly="${readonly}"/>
 	<acme:input-textarea code="assistance-agent.claim.form.label.description" path="description" readonly="${readonly}"/>
 	<acme:input-select code="assistance-agent.claim.form.label.type" path="type" choices="${types}" readonly="${readonly}"/>
+	<acme:input-select code="assistance-agent.claim.form.label.leg" path="leg" choices = "${landedLegs}" readonly="${readonly}"/>
 	<jstl:if test="${acme:anyOf(_command,'show|update|delete|publish')}">
     	<acme:input-checkbox code="assistance-agent.claim.form.label.isaccepted" path="isAccepted" readonly="${readonly}"/>
+    	<acme:submit code="assistance-agent.claim.form.button.delete" action="/assistance-agent/claim/delete"/>
 	</jstl:if>
-	<acme:input-select code="assistance-agent.claim.form.label.leg" path="leg" choices = "${landedLegs}" readonly="${readonly}"/>
-	
 	<jstl:if test="${!readonly}">
 		<acme:submit code="assistance-agent.claim.form.button.create" action="/assistance-agent/claim/create"/>
 	</jstl:if>

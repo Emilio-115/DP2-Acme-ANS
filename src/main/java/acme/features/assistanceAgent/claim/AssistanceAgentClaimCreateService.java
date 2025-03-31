@@ -1,7 +1,7 @@
 
 package acme.features.assistanceAgent.claim;
 
-import java.util.List;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -43,12 +43,6 @@ public class AssistanceAgentClaimCreateService extends AbstractGuiService<Assist
 
 	@Override
 	public void bind(final Claim claim) {
-		Leg leg;
-		int legId;
-
-		//legId = super.getRequest().getData("leg", int.class);
-		//leg = this.repository.findLegById(legId, LegStatus.LANDED);
-
 		super.bindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "leg");
 	}
 
@@ -67,7 +61,7 @@ public class AssistanceAgentClaimCreateService extends AbstractGuiService<Assist
 		SelectChoices choices;
 		Dataset dataset;
 		SelectChoices legChoices;
-		List<Leg> legs = this.repository.findAllLandedLegs(LegStatus.LANDED);
+		Collection<Leg> legs = this.repository.findAllLandedLegs(LegStatus.LANDED);
 
 		choices = SelectChoices.from(ClaimType.class, claim.getType());
 		legChoices = SelectChoices.from(legs, "id", claim.getLeg());
