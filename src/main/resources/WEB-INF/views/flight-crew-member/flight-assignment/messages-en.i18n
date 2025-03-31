@@ -1,0 +1,20 @@
+flight-crew-member.flight-assignment.list.title = Flight Assignments
+flight-crew-member.flight-assignment.form.title = Flight Assignment Details
+
+flight-crew-member.flight-assignment.list.label.employee-code = Employee code
+flight-crew-member.flight-assignment.list.label.flight-number = Flight number
+flight-crew-member.flight-assignment.list.label.duty = Duty
+flight-crew-member.flight-assignment.list.label.status = Status
+
+flight-crew-member.flight-assignment.form.label.leg = Leg
+flight-crew-member.flight-assignment.form.label.duty = Duty
+flight-crew-member.flight-assignment.form.label.status = Status
+flight-crew-member.flight-assignment.form.label.remarks = Remarks
+
+flight-crew-member.flight-assignment.list.button.create = Create
+flight-crew-member.flight-assignment.form.button.create = Create
+flight-crew-member.flight-assignment.form.button.update = Update
+flight-crew-member.flight-assignment.form.button.delete = Delete
+flight-crew-member.flight-assignment.form.button.publish = Publish
+flight-crew-member.flight-assignment.form.button.confirm = Confirm assignment
+flight-crew-member.flight-assignment.form.button.cancel = Cancel assignment
