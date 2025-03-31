@@ -9,14 +9,21 @@ public class FlightCrewMemberActivityLogPublishService extends FlightCrewMemberA
 
 	@Override
 	public void bind(final ActivityLog activityLog) {
-		super.bind(activityLog);
-
 		activityLog.setDraftMode(false);
+
+		super.bind(activityLog);
 	}
 
 	@Override
 	public void validate(final ActivityLog activityLog) {
 		;
+	}
+
+	@Override
+	public void unbind(final ActivityLog activityLog) {
+		activityLog.setDraftMode(true);
+
+		super.unbind(activityLog);
 	}
 
 	@Override

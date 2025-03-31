@@ -1,6 +1,6 @@
 key,key:flightCrewMember,key:leg,duty,updatedAt,status,draftMode,remarks
 flight-assignment-1,crew-member-01,leg-1,PILOT,2000/01/01 0:00,CONFIRMED,false,L
-flight-assignment-2,crew-member-01,leg-1,PILOT,2000/01/01 0:00,PENDING,false,L
+flight-assignment-2,crew-member-01,leg-1,PILOT,2000/01/01 0:00,CANCELLED,false,L
 flight-assignment-3,crew-member-01,leg-1,PILOT,2000/01/01 0:00,CONFIRMED,true,L
 flight-assignment-4,crew-member-02,leg-1,COPILOT,2022/07/29 23:59,CONFIRMED,false,Lo
 flight-assignment-5,crew-member-03,leg-1,LEAD_ATTENDANT,2000/01/01 0:01,CONFIRMED,false,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor"

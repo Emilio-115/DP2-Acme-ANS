@@ -28,12 +28,16 @@ public class ActivityLogValidator extends AbstractValidator<ValidActivityLog, Ac
 		}
 
 		var registeredAt = activityLog.getRegisteredAt();
-		if (registeredAt == null)
+		if (registeredAt == null) {
+			super.state(context, false, "registeredAt", "javax.validation.constraints.NotNull.message");
 			return false;
+		}
 
 		var registeringAssignment = activityLog.getRegisteringAssignment();
-		if (registeringAssignment == null)
+		if (registeringAssignment == null) {
+			super.state(context, false, "registeringAssignment", "javax.validation.constraints.NotNull.message");
 			return false;
+		}
 
 		boolean assignmentIsPublished = !registeringAssignment.isDraftMode();
 		super.state(context, assignmentIsPublished, "registeringAssignment", "acme.validation.activity-log.assignment-not-published.message");
@@ -42,12 +46,16 @@ public class ActivityLogValidator extends AbstractValidator<ValidActivityLog, Ac
 		super.state(context, assignmentIsConfirmed, "registeringAssignment", "acme.validation.activity-log.assignment-not-confirmed.message");
 
 		var leg = registeringAssignment.getLeg();
-		if (leg == null)
+		if (leg == null) {
+			super.state(context, false, "leg", "javax.validation.constraints.NotNull.message");
 			return false;
+		}
 
 		var arrivalDate = leg.getArrivalDate();
-		if (arrivalDate == null)
+		if (arrivalDate == null) {
+			super.state(context, false, "arrivalDate", "javax.validation.constraints.NotNull.message");
 			return false;
+		}
 
 		boolean registeredAfterLanding = registeredAt.after(arrivalDate);
 

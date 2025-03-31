@@ -39,7 +39,7 @@ public interface FlightCrewMemberActivityLogRepository extends AbstractRepositor
 		WHERE fa.id = :flightAssignmentId
 		AND fa.flightCrewMember.id = :flightCrewMemberId
 		AND fa.draftMode = false
-		AND fa.status = 'CONFIRMED'
+		AND fa.status = acme.entities.flightAssignment.FlightAssignmentStatus.CONFIRMED
 		""")
 	public Optional<FlightAssignment> findPublishedAndConfirmedFlightAssignmentByIdAndFlightCrewMemberId(Integer flightAssignmentId, Integer flightCrewMemberId);
 
@@ -55,7 +55,7 @@ public interface FlightCrewMemberActivityLogRepository extends AbstractRepositor
 		WHERE fa.flightCrewMember.id = :flightCrewMemberId
 		AND fa.leg.arrivalDate < :cutoff
 		AND fa.draftMode = false
-		AND fa.status = 'CONFIRMED'
+		AND fa.status = acme.entities.flightAssignment.FlightAssignmentStatus.CONFIRMED
 		""")
 	public List<FlightAssignment> findPublishedAndConfirmedFlightAssignmentsByFlightCrewMemberIdLandedBefore(Integer flightCrewMemberId, Date cutoff);
 

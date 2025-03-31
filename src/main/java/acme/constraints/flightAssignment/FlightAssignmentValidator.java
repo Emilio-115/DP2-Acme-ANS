@@ -23,6 +23,8 @@ public class FlightAssignmentValidator extends AbstractValidator<ValidFlightAssi
 	public boolean isValid(final FlightAssignment flightAssignment, final ConstraintValidatorContext context) {
 		assert context != null;
 
+		FlightAssignmentRepository repository = SpringHelper.getBean(FlightAssignmentRepository.class);
+
 		boolean result = true;
 
 		/*
@@ -33,38 +35,69 @@ public class FlightAssignmentValidator extends AbstractValidator<ValidFlightAssi
 		 * * No hay otro piloto confirmado
 		 * * No hay otra co-piloto confirmado
 		 */
-		if (flightAssignment == null)
+		if (flightAssignment == null) {
+			super.state(context, false, "leg", "javax.validation.constraints.NotNull.message");
 			return false;
+		}
 
 		var flightCrewMember = flightAssignment.getFlightCrewMember();
-		var leg = flightAssignment.getLeg();
+		if (flightCrewMember == null) {
+			super.state(context, false, "flightCrewMember", "javax.validation.constraints.NotNull.message");
+			return false;
+		}
 
-		if (leg != null) {
+		var leg = flightAssignment.getLeg();
+		if (leg == null) {
+			super.state(context, false, "leg", "javax.validation.constraints.NotNull.message");
+			return false;
+		}
+
+		var status = flightAssignment.getStatus();
+		if (status == null) {
+			super.state(context, false, "status", "javax.validation.constraints.NotNull.message");
+			return false;
+		}
+
+		var duty = flightAssignment.getDuty();
+		if (duty == null) {
+			super.state(context, false, "duty", "javax.validation.constraints.NotNull.message");
+			return false;
+		}
+
+		{
 			boolean legPublished = !leg.isDraftMode();
 
 			super.state(context, legPublished, "leg", "acme.validation.flight-assignment.leg-not-published.message");
 		}
 
-		boolean flightConfirmed = !flightAssignment.isDraftMode() && FlightAssignmentStatus.CONFIRMED.equals(flightAssignment.getStatus());
+		boolean flightPublishedAndNotCancelled = !flightAssignment.isDraftMode() && (status.equals(FlightAssignmentStatus.CONFIRMED) || status.equals(FlightAssignmentStatus.PENDING));
 
-		if (flightConfirmed && leg != null && flightCrewMember != null) {
-			FlightAssignmentRepository repository = SpringHelper.getBean(FlightAssignmentRepository.class);
+		if (flightPublishedAndNotCancelled) {
+			boolean legMemberDutyUnique = repository.isLegMemberDutyUnique(flightAssignment.getId(), leg.getId(), flightCrewMember.getId(), flightAssignment.getDuty());
+
+			super.state(context, legMemberDutyUnique, "leg", "acme.validation.flight-assignment.member-already-in-leg-with-duty.message");
+		}
+
+		boolean flightConfirmed = !flightAssignment.isDraftMode() && status.equals(FlightAssignmentStatus.CONFIRMED);
+
+		if (flightConfirmed) {
 
 			boolean flightCrewMemberFree = repository.isFlightCrewMemberFree(flightAssignment.getId(), flightCrewMember.getId(), leg.getDepartureDate(), leg.getArrivalDate());
 
 			super.state(context, flightCrewMemberFree, "leg", "acme.validation.flight-assignment.flight-crew-member-busy.message");
 
-			if (FlightCrewDuty.PILOT.equals(flightAssignment.getDuty())) {
+			if (duty.equals(FlightCrewDuty.PILOT)) {
 				boolean pilotDutyFree = repository.isDutyFree(flightAssignment.getId(), leg.getId(), FlightCrewDuty.PILOT);
 
 				super.state(context, pilotDutyFree, "duty", "acme.validation.flight-assignment.pilot-duty-taken.message");
 			}
 
-			else if (FlightCrewDuty.COPILOT.equals(flightAssignment.getDuty())) {
+			else if (duty.equals(FlightCrewDuty.COPILOT)) {
 				boolean copilotDutyFree = repository.isDutyFree(flightAssignment.getId(), leg.getId(), FlightCrewDuty.COPILOT);
 
 				super.state(context, copilotDutyFree, "duty", "acme.validation.flight-assignment.copilot-duty-taken.message");
 			}
+
 		}
 
 		result = !super.hasErrors(context);
