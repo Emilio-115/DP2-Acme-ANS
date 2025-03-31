@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import acme.client.repositories.AbstractRepository;
 import acme.entities.bookings.Booking;
+import acme.entities.bookings.BookingRecord;
 import acme.entities.flights.Flight;
 
 public interface CustomerBookingRepository extends AbstractRepository {
@@ -26,5 +27,8 @@ public interface CustomerBookingRepository extends AbstractRepository {
 
 	@Query("SELECT f FROM Flight f WHERE f.id = :id")
 	Flight findFlightById(Integer id);
+
+	@Query("SELECT br FROM BookingRecord br WHERE br.associatedBooking.id = :bookingId")
+	List<BookingRecord> findBookingRecordsByBookingId(Integer bookingId);
 
 }
