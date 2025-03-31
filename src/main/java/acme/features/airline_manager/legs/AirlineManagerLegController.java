@@ -28,6 +28,15 @@ public class AirlineManagerLegController extends AbstractGuiController<AirlineMa
 	@Autowired
 	private AirlineManagerLegDeleteService	deleteService;
 
+	@Autowired
+	private AirlineManagerLegCancelService	cancelService;
+
+	@Autowired
+	private AirlineManagerLegLandService	landService;
+
+	@Autowired
+	private AirlineManagerLegDelayService	delayService;
+
 
 	@PostConstruct
 	protected void initialise() {
@@ -37,6 +46,10 @@ public class AirlineManagerLegController extends AbstractGuiController<AirlineMa
 		super.addBasicCommand("show", this.showService);
 		super.addBasicCommand("update", this.updateService);
 		super.addBasicCommand("delete", this.deleteService);
+
+		super.addCustomCommand("land", "update", this.landService);
+		super.addCustomCommand("delay", "update", this.delayService);
+		super.addCustomCommand("cancel", "update", this.cancelService);
 
 	}
 

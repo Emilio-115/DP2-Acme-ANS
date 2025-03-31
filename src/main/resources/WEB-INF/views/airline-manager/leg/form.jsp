@@ -16,8 +16,10 @@
 
 	
 	<jstl:choose>	 
-		<jstl:when test="${_command == 'show' && draftMode == false}">
-			<acme:button code="manager.leg.form.button.legs" action="/airline-manager/leg/list?flightId=${flightId}"/>					
+		<jstl:when test="${_command == 'show' && draftMode == false && status=='ON_TIME'}">
+			<acme:submit code="manager.leg.form.button.mark-as-delayed" action="/airline-manager/leg/delay"/>					
+			<acme:submit code="manager.leg.form.button.cancel" action="/airline-manager/leg/cancel"/>					
+			<acme:submit code="manager.leg.form.button.mark-as-landed" action="/airline-manager/leg/land"/>					
 		</jstl:when>
 		<jstl:when test="${acme:anyOf(_command, 'show|update|delete|publish') && draftMode == true}">
 			<acme:submit code="manager.leg.form.button.update" action="/airline-manager/leg/update"/>

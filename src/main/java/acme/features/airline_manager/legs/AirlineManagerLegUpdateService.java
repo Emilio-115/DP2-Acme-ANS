@@ -53,6 +53,11 @@ public class AirlineManagerLegUpdateService extends AbstractGuiService<AirlineMa
 			Optional<Flight> optionalFlight = this.repository.findByIdAndManagerId(leg.getFlight().getId(), managerId);
 
 			status &= optionalFlight.isPresent();
+
+			if (optionalFlight.isPresent()) {
+				Flight flight = optionalFlight.get();
+				status &= flight.isDraftMode();
+			}
 		}
 
 		super.getResponse().setAuthorised(status);
@@ -74,18 +79,15 @@ public class AirlineManagerLegUpdateService extends AbstractGuiService<AirlineMa
 		super.bindObject(leg, "departureDate", "arrivalDate", "flightNumberDigits");
 
 		int departureAirportId = super.getRequest().getData("departureAirport", int.class);
-		Airport departureAirport = this.repository.findAirportById(departureAirportId).get();
-		this.repository.save(departureAirport);
+		Airport departureAirport = this.repository.findAirportById(departureAirportId).orElse(null);
 		leg.setDepartureAirport(departureAirport);
 
 		int arrivalAirportId = super.getRequest().getData("arrivalAirport", int.class);
-		Airport arrivalAirport = this.repository.findAirportById(arrivalAirportId).get();
-		this.repository.save(arrivalAirport);
+		Airport arrivalAirport = this.repository.findAirportById(arrivalAirportId).orElse(null);
 		leg.setArrivalAirport(arrivalAirport);
 
 		int aircraftId = super.getRequest().getData("aircraft", int.class);
-		Aircraft aircraft = this.repository.findAircraftById(aircraftId).get();
-		this.repository.save(aircraft);
+		Aircraft aircraft = this.repository.findAircraftById(aircraftId).orElse(null);
 		leg.setAircraft(aircraft);
 	}
 

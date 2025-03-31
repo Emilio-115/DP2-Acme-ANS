@@ -7,9 +7,8 @@
 	<acme:list-column code = "manager.leg.list.label.id" path= "id"/>
 	<acme:list-column code = "manager.leg.list.label.departureAirport" path= "departureAirport"/>
 	<acme:list-column code = "manager.leg.list.label.arrivalAirport" path= "arrivalAirport"/>
-	<acme:list-column code = "manager.leg.list.label.arrivalAirport" path= "flightId"/>
 </acme:list>
 
-<jstl:if test="${_command == 'list' && draftMode}">
+<jstl:if test="${_command == 'list' && $request.globals.draftMode==true}">
 	<acme:button code="manager.leg.list.button.create" action="/airline-manager/leg/create?flightId=${$request.globals.flightId}"/>
 </jstl:if>	

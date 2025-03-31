@@ -25,14 +25,22 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 
 		LegRepository legRepository = SpringHelper.getBean(LegRepository.class);
 
-		boolean isAircraftBusy = legRepository.isAircrafBusy(leg.getId(), leg.getAircraft().getId(), leg.getDepartureDate(), leg.getArrivalDate());
-		super.state(context, !isAircraftBusy, "departureDate", "acme.validation.leg.busy-aircraft.message");
+		if (leg.getAircraft() != null) {
 
-		boolean isDepartureAfterArrival = leg.getDepartureDate().after(leg.getArrivalDate());
-		super.state(context, !isDepartureAfterArrival, "aircraft", "acme.validation.leg.arrival-before-departure.message");
+			boolean isAircraftBusy = legRepository.isAircrafBusy(leg.getId(), leg.getAircraft().getId(), leg.getDepartureDate(), leg.getArrivalDate());
+			super.state(context, !isAircraftBusy, "aircraft", "acme.validation.leg.busy-aircraft.message");
+		}
 
-		boolean isLegOverlapping = legRepository.islegOverlapping(leg.getId(), leg.getFlight().getId(), leg.getDepartureDate(), leg.getArrivalDate());
-		super.state(context, !isLegOverlapping, "dates", "acme.validation.activity-log.overlapping-legs.message");
+		if (leg.getDepartureDate() != null) {
+			boolean isDepartureAfterArrival = leg.getDepartureDate().after(leg.getArrivalDate());
+			super.state(context, !isDepartureAfterArrival, "dates", "acme.validation.leg.arrival-before-departure.message");
+		}
+
+		super.state(context, leg.getFlight() != null, "flight", "javax.validation.constraints.NotNull.message");
+		if (leg.getFlight() != null) {
+			boolean isLegOverlapping = legRepository.islegOverlapping(leg.getId(), leg.getFlight().getId(), leg.getDepartureDate(), leg.getArrivalDate());
+			super.state(context, !isLegOverlapping, "dates", "acme.validation.activity-log.overlapping-legs.message");
+		}
 
 		result = !super.hasErrors(context);
 

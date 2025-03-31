@@ -1,3 +1,14 @@
+/*
+ * AirlineManagerLegUpdateService.java
+ *
+ * Copyright (C) 2012-2025 Rafael Corchuelo.
+ *
+ * In keeping with the traditional purpose of furthering education and research, it is
+ * the policy of the copyright owner to permit non-commercial use and redistribution of
+ * this software. It has been tested carefully, but it is not guaranteed for any particular
+ * purposes. The copyright owner does not offer any warranties or representations, nor do
+ * they accept any liabilities with respect to them.
+ */
 
 package acme.features.airline_manager.legs;
 
@@ -15,75 +26,59 @@ import acme.entities.airports.Airport;
 import acme.entities.flights.Flight;
 import acme.entities.legs.Leg;
 import acme.entities.legs.LegStatus;
-import acme.features.airline_manager.flights.AirlineManagerFlightRepository;
 import acme.realms.AirlineManager;
 
 @GuiService
-public class AirlineManagerLegCreateService extends AbstractGuiService<AirlineManager, Leg> {
-
-	// Internal state ---------------------------------------------------------
+public class AirlineManagerLegDelayService extends AbstractGuiService<AirlineManager, Leg> {
 
 	@Autowired
-	private AirlineManagerLegRepository		repository;
-
-	@Autowired
-	private AirlineManagerFlightRepository	flightRepository;
-
-	// AbstractGuiService interface -------------------------------------------
+	private AirlineManagerLegRepository repository;
 
 
 	@Override
 	public void authorise() {
+		int managerId;
+		int legId;
+		boolean status = true;
 
-		boolean authorized = true;
+		managerId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		legId = super.getRequest().getData("id", int.class);
 
-		Integer flightId = super.getRequest().getData("flightId", int.class);
-		Flight flight = this.flightRepository.findFlightById(flightId).orElseThrow(() -> new RuntimeException("No flight with id: " + flightId));
+		Optional<Leg> optionalLeg = this.repository.findLegById(legId);
 
-		if (!flight.isDraftMode())
-			authorized = false;
+		status &= optionalLeg.isPresent();
 
-		Integer airlineManagerId = super.getRequest().getPrincipal().getActiveRealm().getId();
-		Optional<Flight> optionalFlight = this.flightRepository.findByIdAndManagerId(flightId, airlineManagerId);
+		if (optionalLeg.isPresent()) {
+			Leg leg = optionalLeg.get();
+			Optional<Flight> optionalFlight = this.repository.findByIdAndManagerId(leg.getFlight().getId(), managerId);
 
-		if (optionalFlight.isEmpty())
-			authorized = false;
+			status &= optionalFlight.isPresent();
 
-		super.getResponse().setAuthorised(authorized);
+			status &= leg.getStatus().equals(LegStatus.ON_TIME);
+
+			if (optionalFlight.isPresent()) {
+				Flight flight = optionalFlight.get();
+				status &= !flight.isDraftMode();
+			}
+		}
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
 	public void load() {
 		Leg leg;
+		int legId;
 
-		Integer flightId = super.getRequest().getData("flightId", int.class);
-		Flight flight = this.flightRepository.findFlightById(flightId).orElseThrow(() -> new RuntimeException("No flight with id: " + flightId));
-
-		leg = new Leg();
-		leg.setFlight(flight);
+		legId = super.getRequest().getData("id", int.class);
+		leg = this.repository.findLegById(legId).orElse(null);
 
 		super.getBuffer().addData(leg);
 	}
 
 	@Override
 	public void bind(final Leg leg) {
-
-		super.bindObject(leg, "departureDate", "arrivalDate", "flightNumberDigits");
-
-		int departureAirportId = super.getRequest().getData("departureAirport", int.class);
-		Airport departureAirport = this.repository.findAirportById(departureAirportId).orElse(null);
-		leg.setDepartureAirport(departureAirport);
-
-		int arrivalAirportId = super.getRequest().getData("arrivalAirport", int.class);
-		Airport arrivalAirport = this.repository.findAirportById(arrivalAirportId).orElse(null);
-		leg.setArrivalAirport(arrivalAirport);
-
-		int aircraftId = super.getRequest().getData("aircraft", int.class);
-		Aircraft aircraft = this.repository.findAircraftById(aircraftId).orElse(null);
-		leg.setAircraft(aircraft);
-
-		leg.setStatus(LegStatus.ON_TIME);
-
+		leg.setStatus(LegStatus.DELAYED);
 	}
 
 	@Override
@@ -98,10 +93,9 @@ public class AirlineManagerLegCreateService extends AbstractGuiService<AirlineMa
 
 	@Override
 	public void unbind(final Leg leg) {
-
 		Dataset dataset;
 		dataset = super.unbindObject(leg, "departureDate", "arrivalDate", "flightNumberDigits");
-		dataset.put("flightNumber", null);
+		dataset.put("flightNumber", leg.flightNumber());
 		dataset.put("draftMode", leg.getFlight().isDraftMode());
 
 		Collection<Airport> airports = this.repository.findAllAirports();
@@ -129,17 +123,5 @@ public class AirlineManagerLegCreateService extends AbstractGuiService<AirlineMa
 
 		super.getResponse().addData(dataset);
 	}
-
-	/*
-	 * flightNumberDigits;
-	 * departureDate;
-	 * arrivalDate;
-	 * status;
-	 * -------------------------
-	 * arrivalAirport;
-	 * departureAirport;
-	 * aircraft;
-	 * flight;
-	 */
 
 }
