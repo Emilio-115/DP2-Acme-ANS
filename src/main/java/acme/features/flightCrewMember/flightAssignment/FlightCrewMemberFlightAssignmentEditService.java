@@ -68,6 +68,9 @@ public class FlightCrewMemberFlightAssignmentEditService extends AbstractGuiServ
 		dataset = super.unbindObject(flightAssignment, "remarks", "duty", "status", "draftMode");
 
 		{
+			dataset.put("flightCrewMember", flightAssignment.getFlightCrewMember().getEmployeeCode());
+		}
+		{
 			List<Leg> pendingLegs;
 
 			if (!flightAssignment.isDraftMode())

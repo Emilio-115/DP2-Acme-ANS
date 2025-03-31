@@ -4,6 +4,10 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:form>
+	<jstl:if test="${_command == 'show' && draftMode == false}">
+		<acme:input-textbox code="flight-crew-member.flight-assignment.form.label.flight-crew-member" path="flightCrewMember" readonly="true"/>
+	</jstl:if>
+	
 	<acme:input-select code="flight-crew-member.flight-assignment.form.label.leg" path="leg" choices="${legs}" readonly="${draftMode==false}"/>
 	<acme:input-select code="flight-crew-member.flight-assignment.form.label.duty" path="duty" choices="${duties}" readonly="${draftMode==false}"/>
 	<acme:input-select code="flight-crew-member.flight-assignment.form.label.status" path="status" choices="${statuses}" readonly="${draftMode==false}"/>
