@@ -28,7 +28,7 @@
 			</jstl:if>
 		</jstl:when>
 		<jstl:when test="${_command == 'create'}">
-			<acme:input-select code = "customer.flight.form.label.tag" path= "flight" choices="${flightTagChoices}" />
+			<acme:input-select code = "customer.booking.flight.form.label.tag" path= "flight" choices="${flightTagChoices}" />
 			<acme:submit code="customer.booking.form.button.create" action="/customer/booking/create"/>
 		</jstl:when>
 	</jstl:choose>
