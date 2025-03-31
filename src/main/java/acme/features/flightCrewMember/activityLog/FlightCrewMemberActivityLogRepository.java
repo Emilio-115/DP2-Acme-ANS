@@ -23,16 +23,25 @@ public interface FlightCrewMemberActivityLogRepository extends AbstractRepositor
 	@Query("""
 		SELECT al FROM ActivityLog al
 		WHERE al.registeringAssignment.flightCrewMember.id = :flightCrewMemberId
+		AND al.draftMode = false
 		""")
-	public List<ActivityLog> findAllByFlightCrewMemberId(Integer flightCrewMemberId);
+	public List<ActivityLog> findPublishedByFlightCrewMemberId(Integer flightCrewMemberId);
+
+	@Query("""
+		SELECT al FROM ActivityLog al
+		WHERE al.registeringAssignment.flightCrewMember.id = :flightCrewMemberId
+		AND al.draftMode = true
+		""")
+	public List<ActivityLog> findDraftsByFlightCrewMemberId(Integer flightCrewMemberId);
 
 	@Query("""
 		SELECT fa FROM FlightAssignment fa
 		WHERE fa.id = :flightAssignmentId
 		AND fa.flightCrewMember.id = :flightCrewMemberId
 		AND fa.draftMode = false
+		AND fa.status = 'CONFIRMED'
 		""")
-	public Optional<FlightAssignment> findPublishedFlightAssignmentByIdAndFlightCrewMemberId(Integer flightAssignmentId, Integer flightCrewMemberId);
+	public Optional<FlightAssignment> findPublishedAndConfirmedFlightAssignmentByIdAndFlightCrewMemberId(Integer flightAssignmentId, Integer flightCrewMemberId);
 
 	@Query("""
 		SELECT fa FROM FlightAssignment fa
@@ -46,7 +55,8 @@ public interface FlightCrewMemberActivityLogRepository extends AbstractRepositor
 		WHERE fa.flightCrewMember.id = :flightCrewMemberId
 		AND fa.leg.arrivalDate < :cutoff
 		AND fa.draftMode = false
+		AND fa.status = 'CONFIRMED'
 		""")
-	public List<FlightAssignment> findPublishedFlightAssignmentsByFlightCrewMemberIdLandedBefore(Integer flightCrewMemberId, Date cutoff);
+	public List<FlightAssignment> findPublishedAndConfirmedFlightAssignmentsByFlightCrewMemberIdLandedBefore(Integer flightCrewMemberId, Date cutoff);
 
 }

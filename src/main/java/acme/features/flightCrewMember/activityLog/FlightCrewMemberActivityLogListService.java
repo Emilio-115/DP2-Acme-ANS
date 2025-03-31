@@ -1,10 +1,6 @@
 
 package acme.features.flightCrewMember.activityLog;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
@@ -14,22 +10,9 @@ import acme.realms.flightCrewMember.FlightCrewMember;
 @GuiService
 public class FlightCrewMemberActivityLogListService extends AbstractGuiService<FlightCrewMember, ActivityLog> {
 
-	@Autowired
-	private FlightCrewMemberActivityLogRepository repository;
-
-
 	@Override
 	public void authorise() {
 		super.getResponse().setAuthorised(true);
-	}
-
-	@Override
-	public void load() {
-		FlightCrewMember flightCrewMember = (FlightCrewMember) super.getRequest().getPrincipal().getActiveRealm();
-
-		List<ActivityLog> activityLogs = this.repository.findAllByFlightCrewMemberId(flightCrewMember.getId());
-
-		super.getBuffer().addData(activityLogs);
 	}
 
 	@Override

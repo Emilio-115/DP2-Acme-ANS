@@ -15,7 +15,7 @@ import acme.entities.flightAssignment.FlightAssignment;
 import acme.helpers.SelectChoicesHelper;
 import acme.realms.flightCrewMember.FlightCrewMember;
 
-public class FlightCrewMemberActivityLogService extends AbstractGuiService<FlightCrewMember, ActivityLog> {
+public class FlightCrewMemberActivityLogEditService extends AbstractGuiService<FlightCrewMember, ActivityLog> {
 
 	@Autowired
 	protected FlightCrewMemberActivityLogRepository repository;
@@ -48,7 +48,7 @@ public class FlightCrewMemberActivityLogService extends AbstractGuiService<Fligh
 		FlightCrewMember flightCrewMember = (FlightCrewMember) super.getRequest().getPrincipal().getActiveRealm();
 
 		int registeringAssignmentId = super.getRequest().getData("registeringAssignment", int.class);
-		FlightAssignment registeringAssignment = this.repository.findPublishedFlightAssignmentByIdAndFlightCrewMemberId(registeringAssignmentId, flightCrewMember.getId()).get();
+		FlightAssignment registeringAssignment = this.repository.findPublishedAndConfirmedFlightAssignmentByIdAndFlightCrewMemberId(registeringAssignmentId, flightCrewMember.getId()).orElse(null);
 
 		super.bindObject(activityLog, "incidentType", "description", "severityLevel");
 		activityLog.setRegisteringAssignment(registeringAssignment);
@@ -68,7 +68,7 @@ public class FlightCrewMemberActivityLogService extends AbstractGuiService<Fligh
 			if (!activityLog.isDraftMode())
 				validAssignments = this.repository.findPublishedFlightAssignmentsByFlightCrewMemberId(flightCrewMemberId);
 			else
-				validAssignments = this.repository.findPublishedFlightAssignmentsByFlightCrewMemberIdLandedBefore(flightCrewMemberId, MomentHelper.getCurrentMoment());
+				validAssignments = this.repository.findPublishedAndConfirmedFlightAssignmentsByFlightCrewMemberIdLandedBefore(flightCrewMemberId, MomentHelper.getCurrentMoment());
 
 			SelectChoices registeringAssignments;
 			registeringAssignments = SelectChoicesHelper.from(validAssignments, fa -> fa.getLeg().flightNumber(), activityLog.getRegisteringAssignment());

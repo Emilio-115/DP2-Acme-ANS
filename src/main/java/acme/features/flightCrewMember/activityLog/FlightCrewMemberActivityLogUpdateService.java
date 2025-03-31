@@ -5,7 +5,7 @@ import acme.client.services.GuiService;
 import acme.entities.activityLogs.ActivityLog;
 
 @GuiService
-public class FlightCrewMemberActivityLogUpdateService extends FlightCrewMemberActivityLogService {
+public class FlightCrewMemberActivityLogUpdateService extends FlightCrewMemberActivityLogEditService {
 
 	@Override
 	public void validate(final ActivityLog activityLog) {

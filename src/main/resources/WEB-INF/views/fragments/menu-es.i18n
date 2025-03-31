@@ -28,9 +28,11 @@ master.menu.administrator.shut-system-down = Parar el sistema
 # master.menu.flight-crew-member ##############################################
 
 master.menu.flight-crew-member = Miembro de Tripulación de Vuelo
-master.menu.flight-crew-member.list-planned = Listar asignaciones planeadas
-master.menu.flight-crew-member.list-departed = Listar asignaciones de tramos despegados
-master.menu.flight-crew-member.list-drafts = Listar borradores de asignación
+master.menu.flight-crew-member.flight-assignment.list-planned = Listar asignaciones planeadas
+master.menu.flight-crew-member.flight-assignment.list-departed = Listar asignaciones de tramos despegados
+master.menu.flight-crew-member.flight-assignment.list-drafts = Listar borradores de asignación
+master.menu.flight-crew-member.activity-log.list-published = Listar registros de actividad publicados
+master.menu.flight-crew-member.activity-log.list-drafts = Listar borradores de registros de actividad
 
 # master.menu.provider ########################################################
 
