@@ -39,7 +39,8 @@ public class AssistanceAgentClaimListService extends AbstractGuiService<Assistan
 		assistanceAgent = this.repository.findAssistanceAgentById(userAccountId);
 
 		id = assistanceAgent.getId();
-		completedClaims = this.repository.findClaimsByAssistanceAgent(id, true);
+		completedClaims = this.repository.findClaimsByAssistanceAgent(id);
+		completedClaims = completedClaims.stream().filter(x -> x.isComplete()).toList();
 		super.getBuffer().addData(completedClaims);
 	}
 

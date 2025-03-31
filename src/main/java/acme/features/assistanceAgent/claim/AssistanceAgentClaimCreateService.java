@@ -36,7 +36,6 @@ public class AssistanceAgentClaimCreateService extends AbstractGuiService<Assist
 
 		claim = new Claim();
 		claim.setAssistanceAgent(assistanceAgent);
-		claim.setCompleted(false);
 		claim.setDraftMode(true);
 
 		super.getBuffer().addData(claim);
