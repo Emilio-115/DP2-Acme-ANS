@@ -13,6 +13,7 @@ import acme.client.services.GuiService;
 import acme.entities.claims.Claim;
 import acme.entities.claims.ClaimType;
 import acme.entities.legs.Leg;
+import acme.entities.legs.LegStatus;
 import acme.entities.trackingLogs.TrackingLog;
 import acme.realms.AssistanceAgent;
 
@@ -20,7 +21,7 @@ import acme.realms.AssistanceAgent;
 public class AssistanceAgentClaimDeleteService extends AbstractGuiService<AssistanceAgent, Claim> {
 
 	@Autowired
-	AssistanceAgentClaimRepository repository;
+	private AssistanceAgentClaimRepository repository;
 
 
 	@Override
@@ -31,12 +32,17 @@ public class AssistanceAgentClaimDeleteService extends AbstractGuiService<Assist
 	@Override
 	public void load() {
 		Claim claim;
-		int id;
+		int claimId;
 
-		id = super.getRequest().getData("id", int.class);
-		claim = this.repository.findClaimById(id);
+		claimId = super.getRequest().getData("id", int.class);
+		claim = this.repository.findClaimById(claimId);
 
 		super.getBuffer().addData(claim);
+	}
+
+	@Override
+	public void bind(final Claim claim) {
+		super.bindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "leg", "isAccepted");
 	}
 
 	@Override
@@ -44,23 +50,12 @@ public class AssistanceAgentClaimDeleteService extends AbstractGuiService<Assist
 		boolean status;
 		int claimId = super.getRequest().getData("id", int.class);
 
+		System.out.println("1");
 		List<TrackingLog> trackingLogs = this.repository.findAllTrackingLogsByClaimId(claimId);
 
 		status = trackingLogs.size() == 0;
 
 		super.state(status, "*", "assistance-agent.claim.delete.claim-linked");
-	}
-
-	@Override
-	public void bind(final Claim claim) {
-		int legId;
-		Leg leg;
-
-		legId = super.getRequest().getData("leg", int.class);
-		leg = this.repository.findLegById(legId);
-
-		super.bindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "isAccepted");
-		claim.setLeg(leg);
 	}
 
 	@Override
@@ -73,18 +68,16 @@ public class AssistanceAgentClaimDeleteService extends AbstractGuiService<Assist
 		SelectChoices choices;
 		Dataset dataset;
 		SelectChoices legChoices;
-		Collection<Leg> legs = this.repository.findAllLegs();
+		Collection<Leg> legs = this.repository.findAllLandedLegs(LegStatus.LANDED);
 
 		choices = SelectChoices.from(ClaimType.class, claim.getType());
 		legChoices = SelectChoices.from(legs, "id", claim.getLeg());
 
-		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "type");
-		dataset.put("leg", legChoices.getSelected().getKey());
+		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "leg");
 		dataset.put("types", choices);
 		dataset.put("landedLegs", legChoices);
-		dataset.put("readonly", true);
+		dataset.put("readonly", false);
 
 		super.getResponse().addData(dataset);
 	}
-
 }

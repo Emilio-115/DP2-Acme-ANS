@@ -24,6 +24,7 @@ public class AssistanceAgentClaimShowService extends AbstractGuiService<Assistan
 
 	@Override
 	public void authorise() {
+
 		int agentId;
 		int claimId;
 		boolean status;
@@ -40,6 +41,7 @@ public class AssistanceAgentClaimShowService extends AbstractGuiService<Assistan
 
 	@Override
 	public void load() {
+
 		Claim claim;
 		int claimId = super.getRequest().getData("id", int.class);
 
@@ -50,6 +52,7 @@ public class AssistanceAgentClaimShowService extends AbstractGuiService<Assistan
 
 	@Override
 	public void unbind(final Claim claim) {
+
 		SelectChoices choices;
 		Dataset dataset;
 		SelectChoices legChoices;
@@ -58,7 +61,9 @@ public class AssistanceAgentClaimShowService extends AbstractGuiService<Assistan
 		choices = SelectChoices.from(ClaimType.class, claim.getType());
 		legChoices = SelectChoices.from(legs, "id", claim.getLeg());
 
-		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "type");
+		System.out.println("CLAIM " + claim.getRegistrationMoment());
+		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "isAccepted");
+		dataset.put("registrationMoment", claim.getRegistrationMoment());
 		dataset.put("leg", legChoices.getSelected().getKey());
 		dataset.put("types", choices);
 		dataset.put("landedLegs", legChoices);
