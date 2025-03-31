@@ -8,7 +8,7 @@
 	<acme:list-column code = "customer.passenger.list.label.draftmode" path = "draftMode"/>
 	<acme:list-column code = "customer.passenger.list.label.birthdate" path = "birthDate"/>
 	<acme:list-payload path="payload"/>
-</acme:list>>
+</acme:list>
 <jstl:if test="${_command == 'list-all'}">
 	<acme:button code="customer.passenger.list-all.label.create" action="/customer/passenger/create"/>
 </jstl:if>
