@@ -24,6 +24,7 @@
 			<jstl:if test="${draftMode == true}">
 				<acme:submit code="customer.booking.form.button.update" action="/customer/booking/update"/>
 				<acme:submit code="customer.booking.form.button.delete" action="/customer/booking/delete"/>
+				<acme:submit code="customer.booking.form.button.publish" action="/customer/booking/publish"/>
 			</jstl:if>
 		</jstl:when>
 		<jstl:when test="${_command == 'create'}">
