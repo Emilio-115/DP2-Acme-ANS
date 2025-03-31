@@ -1,0 +1,20 @@
+administrator.airport.list.title = Aeropuertos
+administrator.airport.form.title = Detalles de aeropuerto
+
+administrator.airport.list.label.iata-code = Código IATA
+administrator.airport.list.label.name = Nombre
+administrator.airport.list.label.city = Ciudad
+
+administrator.airport.form.label.name = Nombre
+administrator.airport.form.label.iata-code = Código IATA
+administrator.airport.form.label.operational-scope = Alcance operacional
+administrator.airport.form.label.city = Ciudad
+administrator.airport.form.label.country = País
+administrator.airport.form.label.website = Sitio web
+administrator.airport.form.label.email = Correo electrónico
+administrator.airport.form.label.contact-phone-number = Número de teléfono de contacto
+
+administrator.airport.list.button.create = Crear
+administrator.airport.form.button.create = Crear
+administrator.airport.form.button.update = Actualizar
+administrator.airport.form.label.confirmation = Confirme que el aeropuerto es correcto
