@@ -57,18 +57,24 @@ public class AssistanceAgentClaimDeleteService extends AbstractGuiService<Assist
 
 	@Override
 	public void validate(final Claim claim) {
-		boolean status;
-		int claimId = super.getRequest().getData("id", int.class);
-
-		List<TrackingLog> trackingLogs = this.repository.findAllTrackingLogsByClaimId(claimId);
-
-		status = trackingLogs.size() == 0;
-
-		super.state(status, "*", "assistance-agent.claim.delete.claim-linked");
+		/*
+		 * boolean status;
+		 * int claimId = super.getRequest().getData("id", int.class);
+		 * 
+		 * List<TrackingLog> trackingLogs = this.repository.findAllTrackingLogsByClaimId(claimId);
+		 * 
+		 * status = trackingLogs.size() == 0;
+		 * 
+		 * super.state(status, "*", "assistance-agent.claim.delete.claim-linked");
+		 */
+		;
 	}
 
 	@Override
 	public void perform(final Claim claim) {
+		List<TrackingLog> trackingLogs = this.repository.findAllTrackingLogsByClaimId(claim.getId());
+
+		this.repository.deleteAll(trackingLogs);
 		this.repository.delete(claim);
 	}
 
