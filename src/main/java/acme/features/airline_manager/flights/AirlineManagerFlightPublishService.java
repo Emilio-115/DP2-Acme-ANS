@@ -93,7 +93,7 @@ public class AirlineManagerFlightPublishService extends AbstractGuiService<Airli
 		dataset = super.unbindObject(flight, "tag", "requiresSelfTransfer", "cost", "description");
 		dataset.put("draftMode", true);
 		dataset.put("origin", flight.origin());
-		dataset.put("destiny", flight.destiny());
+		dataset.put("destination", flight.destination());
 		dataset.put("departureDate", flight.scheduledDeparture());
 		dataset.put("arrivalDate", flight.scheduledArrival());
 		dataset.put("numberOfLayovers", flight.numberOfLayovers());

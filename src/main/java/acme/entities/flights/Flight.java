@@ -93,10 +93,10 @@ public class Flight extends AbstractEntity {
 	}
 
 	@Transient
-	public String destiny() {
+	public String destination() {
 		LegRepository legRepository = SpringHelper.getBean(LegRepository.class);
 		Leg leg = legRepository.findFirstLegByFlightIdOrderByDepartureDateDesc(this.getId());
-		return leg != null ? leg.getDepartureAirport().getCity() : "No Data";
+		return leg != null ? leg.getArrivalAirport().getCity() : "No Data";
 	}
 
 	@Transient

@@ -86,7 +86,7 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 		dataset.put("departureDate", booking.getFlight().scheduledDeparture());
 		dataset.put("arrivalDate", booking.getFlight().scheduledArrival());
 		dataset.put("origin", booking.getFlight().origin());
-		dataset.put("destiny", booking.getFlight().destiny());
+		dataset.put("destination", booking.getFlight().destination());
 		dataset.put("numberOfLayovers", booking.getFlight().numberOfLayovers());
 
 		super.getResponse().addData(dataset);
