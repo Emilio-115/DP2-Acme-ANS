@@ -32,8 +32,8 @@ master.menu.flight-crew-member = Flight Crew Member
 master.menu.flight-crew-member.flight-assignment.list-planned = List planned assignments
 master.menu.flight-crew-member.flight-assignment.list-departed = List assignments of departed legs
 master.menu.flight-crew-member.flight-assignment.list-drafts = List draft assignments
-master.menu.flight-crew-member.activity-log.list-published = List published activity logs
-master.menu.flight-crew-member.activity-log.list-drafts = List draft activity logs
+master.menu.flight-crew-member.activity-log.list-published = List my published activity logs
+master.menu.flight-crew-member.activity-log.list-drafts = List my draft activity logs
 
 # master.menu.provider ########################################################
 

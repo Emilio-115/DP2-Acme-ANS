@@ -13,8 +13,12 @@
 	<acme:input-select code="flight-crew-member.flight-assignment.form.label.status" path="status" choices="${statuses}" readonly="${draftMode==false}"/>
 	<acme:input-textarea code="flight-crew-member.flight-assignment.form.label.remarks" path="remarks" readonly="${draftMode==false}"/>
 	
+	<jstl:if test="${isMine == true}">
+		<acme:button code="flight-crew-member.flight-assignment.form.button.activity-log" action="/flight-crew-member/activity-log/list?flightAssignmentId=${id}"/>
+	</jstl:if>
+	
 	<jstl:choose>	 
-		<jstl:when test="${((_command == 'show' && draftMode == false && status == 'PENDING') || acme:anyOf(_command, 'confirm|cancel')) && canEdit == true}">		
+		<jstl:when test="${((_command == 'show' && draftMode == false && status == 'PENDING') || acme:anyOf(_command, 'confirm|cancel')) && isMine == true}">		
 			<acme:submit code="flight-crew-member.flight-assignment.form.button.confirm" action="/flight-crew-member/flight-assignment/confirm"/>	
 			<acme:submit code="flight-crew-member.flight-assignment.form.button.cancel" action="/flight-crew-member/flight-assignment/cancel"/>	
 		</jstl:when>
@@ -28,3 +32,4 @@
 		</jstl:when>		
 	</jstl:choose>
 </acme:form>
+

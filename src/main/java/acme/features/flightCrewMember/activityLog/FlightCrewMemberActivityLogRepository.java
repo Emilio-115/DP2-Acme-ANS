@@ -30,6 +30,14 @@ public interface FlightCrewMemberActivityLogRepository extends AbstractRepositor
 	@Query("""
 		SELECT al FROM ActivityLog al
 		WHERE al.registeringAssignment.flightCrewMember.id = :flightCrewMemberId
+		AND al.registeringAssignment.id = :flightAssignmentId
+		AND al.draftMode = false
+		""")
+	public List<ActivityLog> findPublishedByFlightCrewMemberIdAndFlightAssignmentId(Integer flightCrewMemberId, Integer flightAssignmentId);
+
+	@Query("""
+		SELECT al FROM ActivityLog al
+		WHERE al.registeringAssignment.flightCrewMember.id = :flightCrewMemberId
 		AND al.draftMode = true
 		""")
 	public List<ActivityLog> findDraftsByFlightCrewMemberId(Integer flightCrewMemberId);
