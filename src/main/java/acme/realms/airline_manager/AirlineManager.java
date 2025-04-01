@@ -1,5 +1,5 @@
 
-package acme.realms;
+package acme.realms.airline_manager;
 
 import java.util.Date;
 
@@ -18,6 +18,7 @@ import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidUrl;
 import acme.constraints.ValidInitialsNumberIdentifier;
+import acme.constraints.airlineManager.ValidAirlineManager;
 import acme.entities.airlines.Airline;
 import lombok.Getter;
 import lombok.Setter;
@@ -39,6 +40,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@ValidAirlineManager
 public class AirlineManager extends AbstractRole {
 
 	private static final long	serialVersionUID	= 1L;

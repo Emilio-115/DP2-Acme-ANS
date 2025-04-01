@@ -35,6 +35,9 @@ acme.validation.leg.draft-mode-status.message = Invalid status, leg status must 
 acme.validation.flight.no-legs.message = Flight need at least a leg to be published.
 
 
+acme.validation.airline-manager.non-unique-identifier = Identifier must be unique
+
+
 # acme.validation.booking ############################
 
 acme.validation.booking.creditcardlastnibble = Credit card last nibble is mandatory to publish the booking

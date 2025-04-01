@@ -9,7 +9,7 @@ import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.flights.Flight;
-import acme.realms.AirlineManager;
+import acme.realms.airline_manager.AirlineManager;
 
 @GuiService
 public class AirlineManagerFlightShowService extends AbstractGuiService<AirlineManager, Flight> {

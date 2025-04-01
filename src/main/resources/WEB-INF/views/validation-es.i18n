@@ -34,6 +34,8 @@ acme.validation.flight.aircraft-under-maintenance.message = Avión no valido, es
 acme.validation.leg.draft-mode-status.message = Estado invalido, el estado del segmento debe ser ON_TIME si el modo edición está activado
 acme.validation.flight.no-legs.message = El vuelo necesita al menos un segmento para ser publicado
 
+acme.validation.airline-manager.non-unique-identifier = El identificador debe ser único
+
 # acme.validation.booking #############################
 
 acme.validation.booking.creditcardlastnibble = Los 4 números de la tarjeta de credito son obligatorios para publicar la reserva

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acme.client.controllers.AbstractGuiController;
 import acme.client.controllers.GuiController;
 import acme.entities.legs.Leg;
-import acme.realms.AirlineManager;
+import acme.realms.airline_manager.AirlineManager;
 
 @GuiController
 public class AirlineManagerLegController extends AbstractGuiController<AirlineManager, Leg> {

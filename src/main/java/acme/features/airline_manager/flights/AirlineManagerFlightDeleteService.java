@@ -21,7 +21,7 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.flights.Flight;
 import acme.entities.legs.Leg;
-import acme.realms.AirlineManager;
+import acme.realms.airline_manager.AirlineManager;
 
 @GuiService
 public class AirlineManagerFlightDeleteService extends AbstractGuiService<AirlineManager, Flight> {
