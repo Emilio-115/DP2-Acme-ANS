@@ -50,6 +50,10 @@ public class TrackingLog extends AbstractEntity {
 	@Automapped
 	private TrackingLogStatus	status;
 
+	@Mandatory
+	@Automapped
+	boolean						draftMode;
+
 	@Optional
 	@ValidString
 	@Automapped

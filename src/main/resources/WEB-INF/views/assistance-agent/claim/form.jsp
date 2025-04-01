@@ -3,6 +3,7 @@
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
+<acme:button code="assistance-agent.claim.list.label.tracking-log" action="/assistance-agent/tracking-log/list?claimId=${id}"/>
 
 <acme:form>
 	<acme:input-moment code="assistance-agent.claim.form.label.registrationmoment" path="registrationMoment" readonly="${readonly}"/>

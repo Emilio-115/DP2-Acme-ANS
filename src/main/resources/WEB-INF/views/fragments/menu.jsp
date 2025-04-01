@@ -59,14 +59,10 @@
 		<acme:menu-option code="master.menu.consumer" access="hasRealm('Consumer')">
 			<acme:menu-suboption code="master.menu.consumer.favourite-link" action="http://www.example.com/"/>
 		</acme:menu-option>
-<<<<<<< HEAD
-		
-=======
 		<acme:menu-option code="master.menu.assistance-agent" access="hasRealm('AssistanceAgent')">
 			<acme:menu-suboption code="master.menu.assistance-agent.claim" action="/assistance-agent/claim/list"/>
 			<acme:menu-suboption code="master.menu.assistance-agent.claim.undergoing" action="/assistance-agent/claim/undergoing"/>
 		</acme:menu-option>
->>>>>>> 30100974796ad071116b77832130821ed3233b5e
 	</acme:menu-left>
 
 	<acme:menu-right>		

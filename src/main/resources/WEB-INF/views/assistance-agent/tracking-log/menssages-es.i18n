@@ -1,0 +1,12 @@
+assistance-agent.tracking-log.list.title = Revisiones
+assistance-agent.tracking-log.form.title = Detalles de las Revisiones
+
+assistance-agent.tracking-log.list.label.lastUpdateMoment = Ultima actualizacion
+assistance-agent.tracking-log.list.label.resolutionPercentage = Porcentaje de resolucion
+assistance-agent.tracking-log.list.label.status = Estado
+
+assistance-agent.tracking-log.form.label.lastUpdateMoment = Ultima actualizacion
+assistance-agent.tracking-log.form.label.undergoingStep = Paso actual
+assistance-agent.tracking-log.form.label.resolutionPercentage = Porcentaje de resolucion
+assistance-agent.tracking-log.form.label.status = Estado
+assistance-agent.tracking-log.form.label.resolution = Resolucion

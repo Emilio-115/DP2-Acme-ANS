@@ -62,13 +62,13 @@ public class AssistanceAgentClaimShowService extends AbstractGuiService<Assistan
 		choices = SelectChoices.from(ClaimType.class, claim.getType());
 		legChoices = SelectChoices.from(legs, "id", claim.getLeg());
 
-		System.out.println("CLAIM " + claim.getRegistrationMoment());
 		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "isAccepted", "draftMode");
 		dataset.put("leg", legChoices.getSelected().getKey());
 		dataset.put("types", choices);
 		dataset.put("landedLegs", legChoices);
 		dataset.put("complete", claim.isComplete());
 		dataset.put("readonly", false);
+		super.addPayload(dataset, claim, "id");
 
 		super.getResponse().addData(dataset);
 	}
