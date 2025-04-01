@@ -13,6 +13,7 @@ flight-crew-member.flight-assignment.form.label.status = Estado
 flight-crew-member.flight-assignment.form.label.remarks = Observaciones
 
 flight-crew-member.flight-assignment.list.button.create = Crear
+flight-crew-member.flight-assignment.form.button.activity-log = Mis registros de actividad
 flight-crew-member.flight-assignment.form.button.create = Crear
 flight-crew-member.flight-assignment.form.button.update = Actualizar
 flight-crew-member.flight-assignment.form.button.delete = Borrar

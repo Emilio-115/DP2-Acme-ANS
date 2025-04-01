@@ -97,9 +97,9 @@ public class FlightCrewMemberFlightAssignmentEditService extends AbstractGuiServ
 			dataset.put("statuses", statuses);
 		}
 		{
-			boolean canEdit = flightCrewMember.equals(flightAssignment.getFlightCrewMember());
+			boolean isMine = flightCrewMember.equals(flightAssignment.getFlightCrewMember());
 
-			dataset.put("canEdit", canEdit);
+			dataset.put("isMine", isMine);
 		}
 
 		super.getResponse().addData(dataset);

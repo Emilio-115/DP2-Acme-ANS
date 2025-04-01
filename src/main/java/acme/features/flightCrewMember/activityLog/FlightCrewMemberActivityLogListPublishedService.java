@@ -20,7 +20,14 @@ public class FlightCrewMemberActivityLogListPublishedService extends FlightCrewM
 	public void load() {
 		FlightCrewMember flightCrewMember = (FlightCrewMember) super.getRequest().getPrincipal().getActiveRealm();
 
-		List<ActivityLog> activityLogs = this.repository.findPublishedByFlightCrewMemberId(flightCrewMember.getId());
+		Integer flightAssignmentId = super.getRequest().getData("flightAssignmentId", Integer.class, null);
+
+		List<ActivityLog> activityLogs;
+
+		if (flightAssignmentId == null)
+			activityLogs = this.repository.findPublishedByFlightCrewMemberId(flightCrewMember.getId());
+		else
+			activityLogs = this.repository.findPublishedByFlightCrewMemberIdAndFlightAssignmentId(flightCrewMember.getId(), flightAssignmentId);
 
 		super.getBuffer().addData(activityLogs);
 	}
