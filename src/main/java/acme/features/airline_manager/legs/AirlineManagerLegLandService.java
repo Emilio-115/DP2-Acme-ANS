@@ -110,7 +110,10 @@ public class AirlineManagerLegLandService extends AbstractGuiService<AirlineMana
 		dataset.put("departureAirport", airportDepartureChoices.getSelected().getKey());
 		dataset.put("arrivalAirport", airportArrivalChoices.getSelected().getKey());
 
-		Collection<Aircraft> availableAircrafts = this.repository.findAllAircrafts();
+		Collection<Aircraft> availableAircrafts = this.repository.findAllActiveAircrafts();
+		if (!availableAircrafts.contains(leg.getAircraft()))
+			availableAircrafts.add(leg.getAircraft());
+
 		SelectChoices aircraftChoices = SelectChoices.from(availableAircrafts, "registrationNumber", leg.getAircraft());
 		dataset.put("aircraftChoices", aircraftChoices);
 		dataset.put("aircraft", aircraftChoices.getSelected().getKey());

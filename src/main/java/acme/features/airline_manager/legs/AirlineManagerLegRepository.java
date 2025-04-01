@@ -25,8 +25,8 @@ public interface AirlineManagerLegRepository extends AbstractRepository {
 	@Query("SELECT a FROM Airport a")
 	Collection<Airport> findAllAirports();
 
-	@Query("SELECT a FROM Aircraft a")
-	Collection<Aircraft> findAllAircrafts();
+	@Query("SELECT a FROM Aircraft a WHERE a.status = acme.entities.aircrafts.AircraftStatus.ACTIVE")
+	Collection<Aircraft> findAllActiveAircrafts();
 
 	@Query("SELECT l FROM Leg l WHERE l.flight.id = :flightId")
 	List<Leg> findAllByFlightId(Integer flightId);

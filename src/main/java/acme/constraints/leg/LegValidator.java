@@ -8,6 +8,7 @@ import acme.client.components.validation.Validator;
 import acme.client.helpers.SpringHelper;
 import acme.entities.legs.Leg;
 import acme.entities.legs.LegRepository;
+import acme.entities.legs.LegStatus;
 
 @Validator
 public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
@@ -46,6 +47,10 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 		if (leg.getFlight() != null) {
 			boolean isLegOverlapping = legRepository.islegOverlapping(leg.getId(), leg.getFlight().getId(), leg.getDepartureDate(), leg.getArrivalDate());
 			super.state(context, !isLegOverlapping, "departureDate", "acme.validation.leg.overlapping-legs.message");
+
+			boolean isLegStatusConsistentWithDraftMode = !leg.getFlight().isDraftMode() && leg.getStatus().equals(LegStatus.ON_TIME);
+			super.state(context, isLegStatusConsistentWithDraftMode, "status", "acme.validation.leg.draft-mode-status.message");
+
 		}
 
 		result = !super.hasErrors(context);

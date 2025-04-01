@@ -11,6 +11,7 @@ import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.aircrafts.Aircraft;
+import acme.entities.aircrafts.AircraftStatus;
 import acme.entities.airports.Airport;
 import acme.entities.flights.Flight;
 import acme.entities.legs.Leg;
@@ -88,7 +89,11 @@ public class AirlineManagerLegCreateService extends AbstractGuiService<AirlineMa
 
 	@Override
 	public void validate(final Leg leg) {
-		;
+
+		if (leg.getAircraft() != null) {
+			boolean isAircraftActive = leg.getAircraft().getStatus().equals(AircraftStatus.ACTIVE);
+			super.state(isAircraftActive, "aircraft", "acme.validation.flight.aircraft-under-maintenance.message");
+		}
 	}
 
 	@Override
@@ -115,7 +120,7 @@ public class AirlineManagerLegCreateService extends AbstractGuiService<AirlineMa
 		dataset.put("departureAirport", airportDepartureChoices.getSelected().getKey());
 		dataset.put("arrivalAirport", airportArrivalChoices.getSelected().getKey());
 
-		Collection<Aircraft> availableAircrafts = this.repository.findAllAircrafts();
+		Collection<Aircraft> availableAircrafts = this.repository.findAllActiveAircrafts();
 		SelectChoices aircraftChoices = SelectChoices.from(availableAircrafts, "registrationNumber", leg.getAircraft());
 		dataset.put("aircraftChoices", aircraftChoices);
 		dataset.put("aircraft", aircraftChoices.getSelected().getKey());
