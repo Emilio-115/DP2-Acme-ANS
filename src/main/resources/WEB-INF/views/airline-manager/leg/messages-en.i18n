@@ -1,9 +1,10 @@
 manager.leg.list.label.id = Id
 manager.leg.list.label.departureAirport = Departure Airport
 manager.leg.list.label.arrivalAirport = Arrival Airport
-manager.leg.list.label.departureDate = Fecha de Salida
-manager.leg.list.label.arrivalDate = Fecha de Llegada
-manager.leg.list.label.status = Estado
+manager.leg.list.label.departureDate = Departure Date
+manager.leg.list.label.arrivalDate = Arrival Date
+manager.leg.list.label.status = Status
+manager.leg.list.label.draftMode = Draft Mode
 manager.leg.list.button.create = Create
 
 manager.leg.form.label.id = Id
@@ -18,6 +19,7 @@ manager.leg.form.label.aircraft = Aircraft
 
 manager.leg.form.button.update = Update
 manager.leg.form.button.delete= Delete
+manager.leg.form.button.publish = Publish
 manager.leg.form.button.create = Create
 
 manager.leg.form.button.mark-as-delayed = Mark as delayed

@@ -22,6 +22,7 @@ import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.aircrafts.Aircraft;
+import acme.entities.aircrafts.AircraftStatus;
 import acme.entities.airports.Airport;
 import acme.entities.flights.Flight;
 import acme.entities.legs.Leg;
@@ -29,7 +30,7 @@ import acme.entities.legs.LegStatus;
 import acme.realms.AirlineManager;
 
 @GuiService
-public class AirlineManagerLegCancelService extends AbstractGuiService<AirlineManager, Leg> {
+public class AirlineManagerLegPublishService extends AbstractGuiService<AirlineManager, Leg> {
 
 	@Autowired
 	private AirlineManagerLegRepository repository;
@@ -54,11 +55,9 @@ public class AirlineManagerLegCancelService extends AbstractGuiService<AirlineMa
 
 			status &= optionalFlight.isPresent();
 
-			status &= leg.getStatus().equals(LegStatus.ON_TIME);
-
 			if (optionalFlight.isPresent()) {
 				Flight flight = optionalFlight.get();
-				status &= !flight.isDraftMode();
+				status &= flight.isDraftMode();
 			}
 		}
 
@@ -78,12 +77,28 @@ public class AirlineManagerLegCancelService extends AbstractGuiService<AirlineMa
 
 	@Override
 	public void bind(final Leg leg) {
-		leg.setStatus(LegStatus.CANCELLED);
+		super.bindObject(leg, "departureDate", "arrivalDate", "flightNumberDigits", "status");
+
+		int departureAirportId = super.getRequest().getData("departureAirport", int.class);
+		Airport departureAirport = this.repository.findAirportById(departureAirportId).orElse(null);
+		leg.setDepartureAirport(departureAirport);
+
+		int arrivalAirportId = super.getRequest().getData("arrivalAirport", int.class);
+		Airport arrivalAirport = this.repository.findAirportById(arrivalAirportId).orElse(null);
+		leg.setArrivalAirport(arrivalAirport);
+
+		int aircraftId = super.getRequest().getData("aircraft", int.class);
+		Aircraft aircraft = this.repository.findAircraftById(aircraftId).orElse(null);
+		leg.setAircraft(aircraft);
+		leg.setDraftMode(false);
 	}
 
 	@Override
 	public void validate(final Leg leg) {
-		;
+		if (leg.getAircraft() != null) {
+			boolean isAircraftActive = leg.getAircraft().getStatus().equals(AircraftStatus.ACTIVE);
+			super.state(isAircraftActive, "aircraft", "acme.validation.flight.aircraft-under-maintenance.message");
+		}
 	}
 
 	@Override

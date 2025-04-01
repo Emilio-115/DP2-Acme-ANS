@@ -77,7 +77,7 @@ public class AirlineManagerLegUpdateService extends AbstractGuiService<AirlineMa
 
 	@Override
 	public void bind(final Leg leg) {
-		super.bindObject(leg, "departureDate", "arrivalDate", "flightNumberDigits");
+		super.bindObject(leg, "departureDate", "arrivalDate", "flightNumberDigits", "status");
 
 		int departureAirportId = super.getRequest().getData("departureAirport", int.class);
 		Airport departureAirport = this.repository.findAirportById(departureAirportId).orElse(null);
@@ -110,7 +110,8 @@ public class AirlineManagerLegUpdateService extends AbstractGuiService<AirlineMa
 		Dataset dataset;
 		dataset = super.unbindObject(leg, "departureDate", "arrivalDate", "flightNumberDigits");
 		dataset.put("flightNumber", leg.flightNumber());
-		dataset.put("draftMode", leg.getFlight().isDraftMode());
+		dataset.put("draftMode", leg.isDraftMode());
+		dataset.put("flightDraftMode", leg.getFlight().isDraftMode());
 
 		Collection<Airport> airports = this.repository.findAllAirports();
 

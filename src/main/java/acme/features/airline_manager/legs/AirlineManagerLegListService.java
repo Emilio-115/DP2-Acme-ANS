@@ -53,7 +53,7 @@ public class AirlineManagerLegListService extends AbstractGuiService<AirlineMana
 	public void unbind(final Leg leg) {
 
 		Dataset dataset;
-		dataset = super.unbindObject(leg, "departureDate", "arrivalDate", "status");
+		dataset = super.unbindObject(leg, "departureDate", "arrivalDate", "status", "draftMode");
 		dataset.put("departureAirport", leg.getDepartureAirport().getCity());
 		dataset.put("arrivalAirport", leg.getArrivalAirport().getCity());
 		dataset.put("flight", leg.getFlight());
@@ -64,10 +64,10 @@ public class AirlineManagerLegListService extends AbstractGuiService<AirlineMana
 	@Override
 	public void unbind(final Collection<Leg> legs) {
 		Integer flightId = super.getRequest().getData("flightId", int.class);
-		super.getRequest().addGlobal("flightId", flightId);
+		super.getResponse().addGlobal("flightId", flightId);
 
 		Flight flight = this.flightRepository.findFlightById(flightId).get();
-		super.getRequest().addGlobal("draftMode", flight.isDraftMode());
+		super.getResponse().addGlobal("flightDraftMode", flight.isDraftMode());
 	}
 
 }
