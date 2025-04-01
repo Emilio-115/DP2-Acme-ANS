@@ -4,10 +4,11 @@ package acme.entities.legs;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-public interface LegRepository extends JpaRepository<Leg, Integer> {
+import acme.client.repositories.AbstractRepository;
+
+public interface LegRepository extends AbstractRepository {
 
 	//@Query("SELECT l FROM Leg l WHERE l.flight.id = :flightId ORDER BY l.departureDate ASC")
 	Leg findFirstLegByFlightIdOrderByDepartureDate(Integer flightId);
