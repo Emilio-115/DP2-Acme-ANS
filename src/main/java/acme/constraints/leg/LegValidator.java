@@ -24,6 +24,9 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 
 		boolean result = true;
 
+		if (leg == null)
+			return true;
+
 		LegRepository legRepository = SpringHelper.getBean(LegRepository.class);
 
 		if (leg.getAircraft() != null) {
@@ -43,7 +46,6 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 			super.state(context, !isDepartureAfterArrival, "departureDate", "acme.validation.leg.arrival-before-departure.message");
 		}
 
-		super.state(context, leg.getFlight() != null, "flight", "javax.validation.constraints.NotNull.message");
 		if (leg.getFlight() != null) {
 			boolean isLegOverlapping = legRepository.islegOverlapping(leg.getId(), leg.getFlight().getId(), leg.getDepartureDate(), leg.getArrivalDate());
 			super.state(context, !isLegOverlapping, "departureDate", "acme.validation.leg.overlapping-legs.message");

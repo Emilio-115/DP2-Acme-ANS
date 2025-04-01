@@ -22,13 +22,12 @@ public class FlightValidator extends AbstractValidator<ValidFlight, Flight> {
 		boolean result;
 
 		if (flight == null)
-			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
+			return true;
 
-		if (flight != null) {
-			boolean hasALeg = flight.numberOfLayovers() >= 0;
-			if (!flight.isDraftMode())
-				super.state(context, hasALeg, "draftMode", "acme.validation.flight.no-legs.message");
-		}
+		boolean hasALeg = flight.numberOfLayovers() >= 0;
+		if (!flight.isDraftMode())
+			super.state(context, hasALeg, "draftMode", "acme.validation.flight.no-legs.message");
+
 		result = !super.hasErrors(context);
 
 		return result;

@@ -18,21 +18,24 @@ public class BookingRecordValidator extends AbstractValidator<ValidBookingRecord
 	}
 
 	@Override
-	public boolean isValid(final BookingRecord value, final ConstraintValidatorContext context) {
+	public boolean isValid(final BookingRecord bookingRecord, final ConstraintValidatorContext context) {
 
 		assert context != null;
 		boolean result;
 
+		if (bookingRecord == null)
+			return true;
+
 		BookingRepository bookingRepository = SpringHelper.getBean(BookingRepository.class);
 
-		boolean bookingNotNull = value.getAssociatedBooking() != null;
-		boolean passengerNotNull = value.getAssociatedPassenger() != null;
+		boolean bookingNotNull = bookingRecord.getAssociatedBooking() != null;
+		boolean passengerNotNull = bookingRecord.getAssociatedPassenger() != null;
 		if (bookingNotNull && passengerNotNull) {
-			boolean noExistingBookingRecord = bookingRepository.findBookingRecordByBookingAndPassenger(value.getAssociatedBooking().getId(), value.getAssociatedPassenger().getId(), value.getId()).isEmpty();
+			boolean noExistingBookingRecord = bookingRepository.findBookingRecordByBookingAndPassenger(bookingRecord.getAssociatedBooking().getId(), bookingRecord.getAssociatedPassenger().getId(), bookingRecord.getId()).isEmpty();
 			super.state(context, noExistingBookingRecord, "associatedPassenger", "acme.validation.bookingrecord.passenger");
 		}
 		if (passengerNotNull) {
-			boolean passengerNoDraftMode = !bookingRepository.findPassengerDrafModeById(value.getAssociatedPassenger().getId());
+			boolean passengerNoDraftMode = !bookingRepository.findPassengerDrafModeById(bookingRecord.getAssociatedPassenger().getId());
 			super.state(context, passengerNoDraftMode, "associatedPassenger", "acme.validation.bookingrecord.passenger.draftmode");
 		}
 
