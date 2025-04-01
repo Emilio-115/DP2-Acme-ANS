@@ -13,6 +13,7 @@ import acme.client.services.GuiService;
 import acme.entities.claims.Claim;
 import acme.entities.claims.ClaimType;
 import acme.entities.legs.Leg;
+import acme.entities.legs.LegStatus;
 import acme.entities.trackingLogs.TrackingLog;
 import acme.realms.AssistanceAgent;
 
@@ -59,7 +60,6 @@ public class AssistanceAgentClaimDeleteService extends AbstractGuiService<Assist
 		boolean status;
 		int claimId = super.getRequest().getData("id", int.class);
 
-		System.out.println("1");
 		List<TrackingLog> trackingLogs = this.repository.findAllTrackingLogsByClaimId(claimId);
 
 		status = trackingLogs.size() == 0;
@@ -77,15 +77,15 @@ public class AssistanceAgentClaimDeleteService extends AbstractGuiService<Assist
 		SelectChoices choices;
 		Dataset dataset;
 		SelectChoices legChoices;
-		Collection<Leg> legs = this.repository.findAllLegs();
+		Collection<Leg> legs = this.repository.findAllLandedLegs(LegStatus.LANDED);
 
 		choices = SelectChoices.from(ClaimType.class, claim.getType());
 		legChoices = SelectChoices.from(legs, "id", claim.getLeg());
 
-		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "leg", "draftMode");
+		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "leg", "draftMode", "isAccepted");
 		dataset.put("types", choices);
 		dataset.put("landedLegs", legChoices);
-		dataset.put("readonly", false);
+		dataset.put("complete", claim.isComplete());
 
 		super.getResponse().addData(dataset);
 	}

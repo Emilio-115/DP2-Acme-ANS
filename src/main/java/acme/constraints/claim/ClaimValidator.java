@@ -38,6 +38,17 @@ public class ClaimValidator extends AbstractValidator<ValidClaim, Claim> {
 			return false;
 		}
 
+		var accepted = claim.getIsAccepted();
+		var complete = claim.isComplete();
+		if (!complete && accepted != null) {
+			super.state(context, false, "isAccepted", "acme.validation.claim.not-completed-claim");
+			return false;
+		}
+		if (complete && accepted == null) {
+			super.state(context, false, "isAccepted", "javax.validation.constraints.NotNull.message");
+			return false;
+		}
+
 		result = !super.hasErrors(context);
 
 		return result;

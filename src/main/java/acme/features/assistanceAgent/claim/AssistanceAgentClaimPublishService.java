@@ -50,7 +50,7 @@ public class AssistanceAgentClaimPublishService extends AbstractGuiService<Assis
 		legId = super.getRequest().getData("leg", int.class);
 		leg = this.repository.findLegById(legId);
 
-		super.bindObject(claim, "registrationMoment", "passengerEmail", "description", "type");
+		super.bindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "isAccepted");
 		claim.setLeg(leg);
 	}
 
@@ -78,10 +78,10 @@ public class AssistanceAgentClaimPublishService extends AbstractGuiService<Assis
 		choices = SelectChoices.from(ClaimType.class, claim.getType());
 		legChoices = SelectChoices.from(legs, "id", claim.getLeg());
 
-		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "leg");
+		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "leg", "draftMode", "isAccepted");
 		dataset.put("types", choices);
 		dataset.put("landedLegs", legChoices);
-		dataset.put("readonly", false);
+		dataset.put("complete", claim.isComplete());
 
 		super.getResponse().addData(dataset);
 	}

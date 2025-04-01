@@ -5,7 +5,6 @@ assistance-agent.claim.list.label.registrationmoment = Registration moment
 assistance-agent.claim.list.label.isaccepted = Accepted
 assistance-agent.claim.list.label.leg = Leg
 assistance-agent.claim.list.label.type = Type
-assistance-agent.claim.list.label.complete = Complete
 
 assistance-agent.claim.form.label.registrationmoment = Registration moment
 assistance-agent.claim.form.label.passengeremail = Passenger Email

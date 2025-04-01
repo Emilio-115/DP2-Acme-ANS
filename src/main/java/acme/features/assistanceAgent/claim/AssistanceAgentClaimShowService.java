@@ -13,6 +13,7 @@ import acme.client.services.GuiService;
 import acme.entities.claims.Claim;
 import acme.entities.claims.ClaimType;
 import acme.entities.legs.Leg;
+import acme.entities.legs.LegStatus;
 import acme.realms.AssistanceAgent;
 
 @GuiService
@@ -56,17 +57,17 @@ public class AssistanceAgentClaimShowService extends AbstractGuiService<Assistan
 		SelectChoices choices;
 		Dataset dataset;
 		SelectChoices legChoices;
-		Collection<Leg> legs = this.repository.findAllLegs();
+		Collection<Leg> legs = this.repository.findAllLandedLegs(LegStatus.LANDED);
 
 		choices = SelectChoices.from(ClaimType.class, claim.getType());
 		legChoices = SelectChoices.from(legs, "id", claim.getLeg());
 
 		System.out.println("CLAIM " + claim.getRegistrationMoment());
 		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "isAccepted", "draftMode");
-		dataset.put("registrationMoment", claim.getRegistrationMoment());
 		dataset.put("leg", legChoices.getSelected().getKey());
 		dataset.put("types", choices);
 		dataset.put("landedLegs", legChoices);
+		dataset.put("complete", claim.isComplete());
 		dataset.put("readonly", false);
 
 		super.getResponse().addData(dataset);

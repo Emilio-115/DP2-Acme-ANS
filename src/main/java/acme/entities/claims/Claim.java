@@ -2,6 +2,7 @@
 package acme.entities.claims;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -79,8 +80,11 @@ public class Claim extends AbstractEntity {
 		ClaimRepository repository;
 
 		repository = SpringHelper.getBean(ClaimRepository.class);
-		TrackingLog trackingLog = repository.getAllTrackingLogFromClaim(this.getId()).get(0);
-		result = trackingLog.getResolutionPercentage() < 100.00;
+		List<TrackingLog> trackingLogs = repository.getAllTrackingLogFromClaim(this.getId());
+		if (!trackingLogs.isEmpty())
+			result = trackingLogs.get(0).getResolutionPercentage() < 100.00;
+		else
+			return false;
 		return !result;
 	}
 
