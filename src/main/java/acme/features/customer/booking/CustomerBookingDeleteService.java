@@ -2,6 +2,7 @@
 package acme.features.customer.booking;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,42 +13,53 @@ import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.bookings.Booking;
+import acme.entities.bookings.BookingRecord;
 import acme.entities.bookings.TravelClass;
 import acme.entities.flights.Flight;
 import acme.realms.Customer;
 
 @GuiService
-public class CustomerBookingShowService extends AbstractGuiService<Customer, Booking> {
+public class CustomerBookingDeleteService extends AbstractGuiService<Customer, Booking> {
 
 	@Autowired
-	private CustomerBookingRepository repository;
+	CustomerBookingRepository repository;
 
 
 	@Override
 	public void authorise() {
-
-		int customerId;
-		int bookingId;
+		int bookingId = super.getRequest().getData("id", int.class);
+		int customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		boolean status;
-
-		customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
-		bookingId = super.getRequest().getData("id", int.class);
-
 		Optional<Booking> booking = this.repository.findByIdAndCustomerId(bookingId, customerId);
-
 		status = booking.isPresent();
-
 		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
 	public void load() {
-		Booking booking;
+
 		int bookingId = super.getRequest().getData("id", int.class);
-
-		booking = this.repository.findBookingById(bookingId);
-
+		Booking booking = this.repository.findBookingById(bookingId);
 		super.getBuffer().addData(booking);
+
+	}
+
+	@Override
+	public void bind(final Booking booking) {
+		super.bindObject(booking, "locatorCode", "purchaseMoment", "travelClass", "creditCardLastNibble");
+	}
+
+	@Override
+	public void validate(final Booking booking) {
+		boolean notPublished = booking.isDraftMode();
+		super.state(notPublished, "draftMode", "acme.validation.update.draftMode");
+	}
+
+	@Override
+	public void perform(final Booking booking) {
+		List<BookingRecord> bookingRecords = this.repository.findBookingRecordsByBookingId(booking.getId());
+		this.repository.deleteAll(bookingRecords);
+		this.repository.delete(booking);
 	}
 
 	@Override

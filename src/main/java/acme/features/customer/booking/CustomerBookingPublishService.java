@@ -17,37 +17,55 @@ import acme.entities.flights.Flight;
 import acme.realms.Customer;
 
 @GuiService
-public class CustomerBookingShowService extends AbstractGuiService<Customer, Booking> {
+public class CustomerBookingPublishService extends AbstractGuiService<Customer, Booking> {
 
 	@Autowired
-	private CustomerBookingRepository repository;
+	CustomerBookingRepository repository;
 
 
 	@Override
 	public void authorise() {
-
-		int customerId;
-		int bookingId;
+		int bookingId = super.getRequest().getData("id", int.class);
+		int customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		boolean status;
-
-		customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
-		bookingId = super.getRequest().getData("id", int.class);
-
 		Optional<Booking> booking = this.repository.findByIdAndCustomerId(bookingId, customerId);
-
 		status = booking.isPresent();
-
 		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
 	public void load() {
-		Booking booking;
+
 		int bookingId = super.getRequest().getData("id", int.class);
-
-		booking = this.repository.findBookingById(bookingId);
-
+		Booking booking = this.repository.findBookingById(bookingId);
 		super.getBuffer().addData(booking);
+
+	}
+
+	@Override
+	public void bind(final Booking booking) {
+		int flightId = super.getRequest().getData("flight", int.class);
+		Flight flight = this.repository.findFlightById(flightId);
+
+		super.bindObject(booking, "locatorCode", "travelClass", "creditCardLastNibble");
+		booking.setPurchaseMoment(MomentHelper.getCurrentMoment());
+		booking.setFlight(flight);
+	}
+
+	@Override
+	public void validate(final Booking booking) {
+		boolean notPublished = booking.isDraftMode();
+		boolean hasPassengers = !this.repository.findPassengersByBookingId(booking.getId()).isEmpty();
+		boolean hasLastNibble = !booking.getCreditCardLastNibble().isBlank();
+		super.state(notPublished, "*", "acme.validation.update.draftMode");
+		super.state(hasPassengers, "*", "acme.validation.booking.passenger");
+		super.state(hasLastNibble, "*", "acme.validation.booking.creditcardlastnibble");
+	}
+
+	@Override
+	public void perform(final Booking booking) {
+		booking.setDraftMode(false);
+		this.repository.save(booking);
 	}
 
 	@Override
@@ -76,6 +94,7 @@ public class CustomerBookingShowService extends AbstractGuiService<Customer, Boo
 		dataset.put("destiny", booking.getFlight().destiny());
 		dataset.put("numberOfLayovers", booking.getFlight().numberOfLayovers());
 
+		super.getResponse().addData(dataset);
 		super.getResponse().addData(dataset);
 	}
 }
