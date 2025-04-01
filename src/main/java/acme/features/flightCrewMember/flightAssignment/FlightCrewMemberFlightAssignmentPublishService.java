@@ -40,6 +40,13 @@ public class FlightCrewMemberFlightAssignmentPublishService extends FlightCrewMe
 	}
 
 	@Override
+	public void unbind(final FlightAssignment flightAssignment) {
+		flightAssignment.setDraftMode(true);
+
+		super.unbind(flightAssignment);
+	}
+
+	@Override
 	public void perform(final FlightAssignment flightAssignment) {
 		this.repository.save(flightAssignment);
 	}

@@ -41,8 +41,9 @@ public interface FlightCrewMemberFlightAssignmentRepository extends AbstractRepo
 	@Query("""
 		SELECT fa FROM FlightAssignment fa
 		WHERE fa.draftMode = true
+		AND fa.flightCrewMember.id = :flightCrewMemberId
 		""")
-	List<FlightAssignment> findDraftFlightAssignments();
+	List<FlightAssignment> findDraftFlightAssignmentsByFlightCrewMemberId(Integer flightCrewMemberId);
 
 	List<FlightAssignment> findAllByFlightCrewMemberId(Integer flightCrewMemberId);
 
@@ -50,7 +51,7 @@ public interface FlightCrewMemberFlightAssignmentRepository extends AbstractRepo
 
 	@Query("""
 		select fcm from FlightCrewMember fcm
-		where fcm.availabilityStatus = 'AVAILABLE'
+		where fcm.availabilityStatus = acme.realms.flightCrewMember.FlightCrewMemberAvailabilityStatus.AVAILABLE
 		""")
 	List<FlightCrewMember> findAvailableFlightCrewMembers();
 
@@ -66,12 +67,13 @@ public interface FlightCrewMemberFlightAssignmentRepository extends AbstractRepo
 	@Query("""
 		SELECT l FROM Leg l
 		WHERE l.departureDate > :cutoff
+		AND l.draftMode = false
 		AND NOT EXISTS(
 			SELECT fa
 			FROM FlightAssignment fa
 			WHERE fa.id <> :flightAssignmentId
 			AND fa.draftMode = false
-			AND fa.status = 'CONFIRMED'
+			AND fa.status = acme.entities.flightAssignment.FlightAssignmentStatus.CONFIRMED
 			AND fa.flightCrewMember.id = :flightCrewMemberId
 			AND (fa.leg.departureDate <= l.arrivalDate AND fa.leg.arrivalDate >= l.departureDate)
 		)

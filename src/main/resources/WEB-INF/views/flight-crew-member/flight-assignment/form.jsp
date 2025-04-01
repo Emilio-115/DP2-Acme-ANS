@@ -14,7 +14,7 @@
 	<acme:input-textarea code="flight-crew-member.flight-assignment.form.label.remarks" path="remarks" readonly="${draftMode==false}"/>
 	
 	<jstl:choose>	 
-		<jstl:when test="${_command == 'show' && draftMode == false && status == 'PENDING' && canEdit == true}">		
+		<jstl:when test="${((_command == 'show' && draftMode == false && status == 'PENDING') || acme:anyOf(_command, 'confirm|cancel')) && canEdit == true}">		
 			<acme:submit code="flight-crew-member.flight-assignment.form.button.confirm" action="/flight-crew-member/flight-assignment/confirm"/>	
 			<acme:submit code="flight-crew-member.flight-assignment.form.button.cancel" action="/flight-crew-member/flight-assignment/cancel"/>	
 		</jstl:when>
