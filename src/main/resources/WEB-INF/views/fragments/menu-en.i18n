@@ -46,12 +46,20 @@ master.menu.provider.favourite-link = Favourite link
 master.menu.consumer = Consumer
 master.menu.consumer.favourite-link = Favourite link
 
+<<<<<<< HEAD
 # master.menu.customer ####################################################
 
 master.menu.customer = Customer
 master.menu.customer.booking = Your Bookings
 master.menu.customer.passenger = Your Passengers
 master.menu.customer.booking-record = Booking Record
+=======
+# master.menu.assistance-agent ##########################################################
+
+master.menu.assistance-agent = Assistance Agent
+master.menu.assistance-agent.claim = Claims
+master.menu.assistance-agent.claim.undergoing = Undergoing Claims
+>>>>>>> 30100974796ad071116b77832130821ed3233b5e
 
 # master.menu.user-account ####################################################
 

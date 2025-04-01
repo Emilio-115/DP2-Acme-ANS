@@ -45,12 +45,20 @@ master.menu.provider.favourite-link = Enlace favorito
 master.menu.consumer = Consumidor
 master.menu.consumer.favourite-link = Enlace favorito
 
+<<<<<<< HEAD
 # master.menu.customer ####################################################
 
 master.menu.customer = Cliente
 master.menu.customer.booking = Sus reservas
 master.menu.customer.passenger = Sus pasajeros
 master.menu.customer.booking-record = Registro de reservas
+=======
+# master.menu.assistance-agent ##########################################################
+
+master.menu.assistance-agent = Agente Asistente
+master.menu.assistance-agent.claim = Reclamaciones
+master.menu.assistance-agent.claim.undergoing = Reclamaciones no terminadas
+>>>>>>> 30100974796ad071116b77832130821ed3233b5e
 
 # master.menu.user-account ####################################################
 
