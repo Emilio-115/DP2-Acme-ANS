@@ -1,0 +1,16 @@
+customer.booking.list.title = Your Bookings
+customer.booking.form.title = Bookings Details
+
+customer.booking.list.label.locatorcode = Locator code
+customer.booking.list.label.purchasemoment = Purchase moment
+customer.booking.list.label.travelclass = Travel class
+
+customer.booking.form.label.locatorcode = Locator code
+customer.booking.form.label.purchasemoment = Purchase moment
+customer.booking.form.label.travelclass = Travel class
+customer.booking.form.label.price = Price
+customer.booking.form.label.creditcardlastnibble = Credit Card Last Nibble
+
+
+customer.booking.list.label.create = Create
+
