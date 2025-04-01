@@ -111,7 +111,7 @@ public class AirlineManagerLegPublishService extends AbstractGuiService<AirlineM
 		Dataset dataset;
 		dataset = super.unbindObject(leg, "departureDate", "arrivalDate", "flightNumberDigits");
 		dataset.put("flightNumber", leg.flightNumber());
-		dataset.put("draftMode", leg.isDraftMode());
+		dataset.put("draftMode", true);
 		dataset.put("flightDraftMode", leg.getFlight().isDraftMode());
 
 		Collection<Airport> airports = this.repository.findAllAirports();
