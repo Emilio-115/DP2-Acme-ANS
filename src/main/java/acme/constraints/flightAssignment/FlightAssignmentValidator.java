@@ -45,13 +45,9 @@ public class FlightAssignmentValidator extends AbstractValidator<ValidFlightAssi
 
 		if (leg != null) {
 
-			var flight = leg.getFlight();
-
-			if (flight != null) {
-				boolean legPublished = !flight.isDraftMode();
-
+				boolean legPublished = !leg.isDraftMode();
 				super.state(context, legPublished, "leg", "acme.validation.flight-assignment.leg-not-published.message");
-			}
+
 
 			if (status != null && flightCrewMember != null) {
 

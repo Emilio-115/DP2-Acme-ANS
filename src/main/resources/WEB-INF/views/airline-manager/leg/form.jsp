@@ -4,17 +4,15 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:form>
-	<acme:input-textbox code = "manager.leg.form.label.id" path= "id" readonly="true"/>
-	<acme:input-moment code = "manager.leg.form.label.departureDate" path= "departureDate"/>
-	<acme:input-moment code = "manager.leg.form.label.arrivalDate" path= "arrivalDate" />
-	<acme:input-select code = "manager.leg.form.label.status" path= "status"  choices="${statusChoices}" />
-	<acme:input-textbox code = "manager.leg.form.label.flightNumberDigits" path="flightNumberDigits"/>
+	<acme:input-moment code = "manager.leg.form.label.departureDate" path= "departureDate" readonly="${draftMode != true}"/>
+	<acme:input-moment code = "manager.leg.form.label.arrivalDate" path= "arrivalDate" readonly="${draftMode != true}" />
+	<acme:input-select code = "manager.leg.form.label.status" path= "status"  choices="${statusChoices}"  readonly="${draftMode != true}"/>
+	<acme:input-textbox code = "manager.leg.form.label.flightNumberDigits" path="flightNumberDigits" readonly="${draftMode != true}"/>
 	<acme:input-textbox code = "manager.leg.form.label.flightNumber" path="flightNumber" readonly="true"/>
-	<acme:input-select code = "manager.leg.form.label.departureAirport" path= "departureAirport"  choices="${departureAirportChoices}"/>
-	<acme:input-select code = "manager.leg.form.label.arrivalAirport" path= "arrivalAirport"  choices="${arrivalAirportChoices}"/>
-	<acme:input-select code = "manager.leg.form.label.aircraft" path= "aircraft"  choices="${aircraftChoices}"/>
+	<acme:input-select code = "manager.leg.form.label.departureAirport" path= "departureAirport"  choices="${departureAirportChoices}" readonly="${draftMode != true}"/>
+	<acme:input-select code = "manager.leg.form.label.arrivalAirport" path= "arrivalAirport"  choices="${arrivalAirportChoices}" readonly="${draftMode != true}"/>
+	<acme:input-select code = "manager.leg.form.label.aircraft" path= "aircraft"  choices="${aircraftChoices}" readonly="${draftMode != true}"/>
 
-	
 	<jstl:choose>	 
 		<jstl:when test="${_command == 'show' && draftMode == false && status=='ON_TIME'}">
 			<acme:submit code="manager.leg.form.button.mark-as-delayed" action="/airline-manager/leg/delay"/>					

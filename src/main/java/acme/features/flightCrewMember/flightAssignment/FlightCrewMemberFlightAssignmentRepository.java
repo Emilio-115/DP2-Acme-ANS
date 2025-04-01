@@ -67,7 +67,7 @@ public interface FlightCrewMemberFlightAssignmentRepository extends AbstractRepo
 	@Query("""
 		SELECT l FROM Leg l
 		WHERE l.departureDate > :cutoff
-		AND l.flight.draftMode = false
+		AND l.draftMode = false
 		AND NOT EXISTS(
 			SELECT fa
 			FROM FlightAssignment fa

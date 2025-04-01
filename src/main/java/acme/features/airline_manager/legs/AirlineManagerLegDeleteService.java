@@ -57,6 +57,7 @@ public class AirlineManagerLegDeleteService extends AbstractGuiService<AirlineMa
 			Optional<Flight> optionalFlight = this.repository.findByIdAndManagerId(leg.getFlight().getId(), managerId);
 
 			status &= optionalFlight.isPresent();
+			status &= leg.isDraftMode();
 		}
 
 		super.getResponse().setAuthorised(status);

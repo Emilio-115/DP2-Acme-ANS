@@ -26,6 +26,7 @@ acme.validation.flight-assignment.flight-crew-member-busy.message = Flight crew 
 acme.validation.flight-assignment.pilot-duty-taken.message = Pilot duty is already assigned for this leg
 acme.validation.flight-assignment.copilot-duty-taken.message = Copilot duty is already assigned for this leg
 
+acme.validation.flight.leg-not-published.message = Every leg have to be published
 acme.validation.leg.overlapping-legs.message = Invalid dates of departure or arrival, legs cannot overlap
 acme.validation.leg.busy-aircraft.message = Invalid aircraft, the aircraft is busy in that time range
 acme.validation.leg.unique-flight-number.message = Invalid flight number, IATA code + Flight Number Digits must be unique

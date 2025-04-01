@@ -26,6 +26,7 @@ acme.validation.flight-assignment.flight-crew-member-busy.message = El miembro d
 acme.validation.flight-assignment.pilot-duty-taken.message = El rol de piloto ya ha sido asignado para este segmento
 acme.validation.flight-assignment.copilot-duty-taken.message = El rol de copiloto ya ha sido asignado para este segmento
 
+acme.validation.flight.leg-not-published.message = Todas los segmentos tienen que estar publicados
 acme.validation.leg.overlapping-legs.message = Fechas de salida o llegada no validas, los segmentos no pueden superponerse
 acme.validation.leg.busy-aircraft.message = Avión no válido, el avión está ocupado durante ese rango de tiempo
 acme.validation.leg.unique-flight-number.message = Número de vuelo no válido, codigo IATA + Digitos del número de vuelo deben ser únicos

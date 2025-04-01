@@ -75,6 +75,8 @@ public class AirlineManagerFlightPublishService extends AbstractGuiService<Airli
 			if (leg.getAircraft() != null) {
 				boolean isAircraftActive = leg.getAircraft().getStatus().equals(AircraftStatus.ACTIVE);
 				super.state(isAircraftActive, "*", "acme.validation.flight.aircraft-under-maintenance.message");
+				boolean isLegPublished = !leg.isDraftMode();
+				super.state(isLegPublished, "*", "acme.validation.flight.leg-not-published.message");
 				break;
 			}
 	}
@@ -88,7 +90,8 @@ public class AirlineManagerFlightPublishService extends AbstractGuiService<Airli
 	@Override
 	public void unbind(final Flight flight) {
 		Dataset dataset;
-		dataset = super.unbindObject(flight, "tag", "requiresSelfTransfer", "cost", "description", "draftMode");
+		dataset = super.unbindObject(flight, "tag", "requiresSelfTransfer", "cost", "description");
+		dataset.put("draftMode", true);
 		dataset.put("origin", flight.origin());
 		dataset.put("destiny", flight.destiny());
 		dataset.put("departureDate", flight.scheduledDeparture());

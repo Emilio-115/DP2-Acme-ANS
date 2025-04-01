@@ -4,7 +4,6 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:form>
-	<acme:input-textbox code = "manager.flight.form.label.id" path= "id" readonly="true"/>
 	<acme:input-textbox code = "manager.flight.form.label.origin" path= "origin" readonly="true"/>
 	<acme:input-textbox code = "manager.flight.form.label.destiny" path= "destiny" readonly="true"/>
 	<acme:input-moment code = "manager.flight.form.label.departureDate" path= "departureDate" readonly="true"/>
