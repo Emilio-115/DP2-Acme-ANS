@@ -11,11 +11,9 @@
 	<acme:input-textarea code="assistance-agent.claim.form.label.description" path="description" readonly="${readonly}"/>
 	<acme:input-select code="assistance-agent.claim.form.label.type" path="type" choices="${types}" readonly="${readonly}"/>
 	<acme:input-select code="assistance-agent.claim.form.label.leg" path="leg" choices = "${landedLegs}" readonly="${readonly}"/>
+	<acme:input-select code="assistance-agent.claim.form.label.isaccepted" path="isAccepted" choices="${status}" readonly="${readonly}"/>
 	<jstl:choose>
 		<jstl:when test="${acme:anyOf(_command,'show|update|delete|publish')}">
-			<jstl:if test="${complete == true}">
-    			<acme:input-checkbox code="assistance-agent.claim.form.label.isaccepted" path="isAccepted" readonly="${readonly}"/>
-    		</jstl:if>
     		<jstl:if test="${draftMode == true}">
     			<acme:submit code="assistance-agent.claim.form.button.delete" action="/assistance-agent/claim/delete"/>
     			<acme:submit code="assistance-agent.claim.form.button.update" action="/assistance-agent/claim/update"/>

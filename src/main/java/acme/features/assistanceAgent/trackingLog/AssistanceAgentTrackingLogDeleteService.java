@@ -15,7 +15,7 @@ import acme.entities.trackingLogs.TrackingLogStatus;
 import acme.realms.AssistanceAgent;
 
 @GuiService
-public class AssistanceAgentTrackingLogShowService extends AbstractGuiService<AssistanceAgent, TrackingLog> {
+public class AssistanceAgentTrackingLogDeleteService extends AbstractGuiService<AssistanceAgent, TrackingLog> {
 
 	@Autowired
 	private AssistanceAgentTrackingLogRepository repository;
@@ -23,30 +23,53 @@ public class AssistanceAgentTrackingLogShowService extends AbstractGuiService<As
 
 	@Override
 	public void authorise() {
-		int trackingLogId;
+
 		boolean status;
 
-		trackingLogId = super.getRequest().getData("id", int.class);
-
-		TrackingLog trackingLog = this.repository.findTrackingLogById(trackingLogId);
-
-		status = trackingLog != null;
+		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class);
 
 		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
 	public void load() {
+		TrackingLog trackingLog;
 		int trackingLogId;
+
 		trackingLogId = super.getRequest().getData("id", int.class);
-
-		TrackingLog trackingLog = this.repository.findTrackingLogById(trackingLogId);
-
+		trackingLog = this.repository.findTrackingLogById(trackingLogId);
 		super.getBuffer().addData(trackingLog);
 	}
 
 	@Override
+	public void bind(final TrackingLog trackingLog) {
+		assert trackingLog != null;
+
+		int claimId;
+		Claim claim;
+
+		claimId = super.getRequest().getData("claim", int.class);
+		claim = this.repository.findClaimById(claimId);
+
+		super.bindObject(trackingLog, "lastUpdateMoment", "undergoingStep", "resolutionPercentage", "resolution", "status");
+		trackingLog.setClaim(claim);
+	}
+
+	@Override
+	public void validate(final TrackingLog trackingLog) {
+		assert trackingLog != null;
+	}
+
+	@Override
+	public void perform(final TrackingLog trackingLog) {
+		assert trackingLog != null;
+
+		this.repository.delete(trackingLog);
+	}
+
+	@Override
 	public void unbind(final TrackingLog trackingLog) {
+
 		int assistanceAgentId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		Collection<Claim> claims = this.repository.findAllClaimsByAssistanceAgentId(assistanceAgentId);
 		SelectChoices choices;
@@ -56,7 +79,7 @@ public class AssistanceAgentTrackingLogShowService extends AbstractGuiService<As
 		claimsChoices = SelectChoices.from(claims, "id", trackingLog.getClaim());
 		choices = SelectChoices.from(TrackingLogStatus.class, trackingLog.getStatus());
 
-		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "undergoingStep", "resolutionPercentage", "draftMode", "resolution", "status");
+		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "undergoingStep", "resolutionPercentage", "resolution", "status");
 		dataset.put("claim", choices.getSelected().getKey());
 		dataset.put("claimOptions", claimsChoices);
 		dataset.put("statuses", choices);

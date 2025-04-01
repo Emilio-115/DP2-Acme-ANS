@@ -12,6 +12,7 @@ acme.validation.resolutionDescription.message = Error en la relacion entre descr
 acme.validation.short-text.message = Texto no válido, necesita ser igual o más corto de 50 caracteres
 
 acme.validation.claim.not-completed-claim = El proceso de la reclamacion aun no ha terminado
+acme.validation.claim.not-status-claim = El proceso de la reclamacion esta terminado, comente si esta aceptada o no
 
 acme.validation.activity-log.assignment-not-published.message = La asignación de vuelo no está publicada
 acme.validation.activity-log.assignment-not-confirmed.message = La asignación de vuelo no está confirmada

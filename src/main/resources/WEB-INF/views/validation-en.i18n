@@ -12,6 +12,7 @@ acme.validation.resolutionDescription.message = Error in the relation between de
 acme.validation.short-text.message = Invalid text, it needs to be shorter or equal than 50 characters
 
 acme.validation.claim.not-completed-claim = The process of this claim is not complete
+acme.validation.claim.not-status-claim = The process of this claim is complete, determine if it is accepted
 
 acme.validation.activity-log.assignment-not-published.message = Flight assignment is not published
 acme.validation.activity-log.assignment-not-confirmed.message = Flight assignment is not confirmed

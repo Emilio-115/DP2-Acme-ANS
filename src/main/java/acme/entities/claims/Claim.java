@@ -57,7 +57,7 @@ public class Claim extends AbstractEntity {
 	@Optional
 	@Valid
 	@Automapped
-	private Boolean				isAccepted;
+	private ClaimStatus			isAccepted;
 
 	@Mandatory
 	@Automapped

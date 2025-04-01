@@ -11,6 +11,7 @@ import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.claims.Claim;
+import acme.entities.claims.ClaimStatus;
 import acme.entities.claims.ClaimType;
 import acme.entities.legs.Leg;
 import acme.entities.legs.LegStatus;
@@ -83,13 +84,17 @@ public class AssistanceAgentClaimDeleteService extends AbstractGuiService<Assist
 		SelectChoices choices;
 		Dataset dataset;
 		SelectChoices legChoices;
+		SelectChoices status;
 		Collection<Leg> legs = this.repository.findAllLandedLegs(LegStatus.LANDED);
 
 		choices = SelectChoices.from(ClaimType.class, claim.getType());
 		legChoices = SelectChoices.from(legs, "id", claim.getLeg());
+		status = SelectChoices.from(ClaimStatus.class, claim.getIsAccepted());
 
-		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "leg", "draftMode", "isAccepted");
+		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "isAccepted", "draftMode");
+		dataset.put("leg", legChoices.getSelected().getKey());
 		dataset.put("types", choices);
+		dataset.put("status", status);
 		dataset.put("landedLegs", legChoices);
 		dataset.put("complete", claim.isComplete());
 

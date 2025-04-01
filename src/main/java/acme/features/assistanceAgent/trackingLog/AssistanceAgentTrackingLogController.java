@@ -14,24 +14,22 @@ import acme.realms.AssistanceAgent;
 public class AssistanceAgentTrackingLogController extends AbstractGuiController<AssistanceAgent, TrackingLog> {
 
 	@Autowired
-	private AssistanceAgentTrackingLogListService	listService;
+	private AssistanceAgentTrackingLogListService		listService;
 
 	@Autowired
-	private AssistanceAgentTrackingLogShowService	showService;
+	private AssistanceAgentTrackingLogShowService		showService;
 
 	@Autowired
-	private AssistanceAgentTrackingLogCreateService	createService;
+	private AssistanceAgentTrackingLogCreateService		createService;
 
-	/*
-	 * @Autowired
-	 * private AssistanceAgentClaimDeleteService deleteService;
-	 * 
-	 * @Autowired
-	 * private AssistanceAgentClaimUpdateService updateService;
-	 * 
-	 * @Autowired
-	 * private AssistanceAgentClaimPublishService publishService;
-	 */
+	@Autowired
+	private AssistanceAgentTrackingLogUpdateService		updateService;
+
+	@Autowired
+	private AssistanceAgentTrackingLogDeleteService		deleteService;
+
+	@Autowired
+	private AssistanceAgentTrackingLogPublishService	publishService;
 
 
 	@PostConstruct
@@ -39,10 +37,9 @@ public class AssistanceAgentTrackingLogController extends AbstractGuiController<
 		super.addBasicCommand("list", this.listService);
 		super.addBasicCommand("show", this.showService);
 		super.addBasicCommand("create", this.createService);
-		//super.addBasicCommand("delete", this.deleteService);
-		//super.addBasicCommand("update", this.updateService);
+		super.addBasicCommand("delete", this.deleteService);
+		super.addBasicCommand("update", this.updateService);
 
-		//super.addCustomCommand("publish", "update", this.publishService);
-		//super.addCustomCommand("undergoing", "list", this.showUndService);
+		super.addCustomCommand("publish", "update", this.publishService);
 	}
 }

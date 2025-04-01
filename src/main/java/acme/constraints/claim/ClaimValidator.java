@@ -6,6 +6,7 @@ import javax.validation.ConstraintValidatorContext;
 import acme.client.components.validation.AbstractValidator;
 import acme.client.components.validation.Validator;
 import acme.entities.claims.Claim;
+import acme.entities.claims.ClaimStatus;
 
 @Validator
 public class ClaimValidator extends AbstractValidator<ValidClaim, Claim> {
@@ -40,12 +41,12 @@ public class ClaimValidator extends AbstractValidator<ValidClaim, Claim> {
 
 		var accepted = claim.getIsAccepted();
 		var complete = claim.isComplete();
-		if (!complete && accepted != null) {
+		if (!complete && !accepted.equals(ClaimStatus.PENDING)) {
 			super.state(context, false, "isAccepted", "acme.validation.claim.not-completed-claim");
 			return false;
 		}
-		if (complete && accepted == null) {
-			super.state(context, false, "isAccepted", "javax.validation.constraints.NotNull.message");
+		if (complete && accepted.equals(ClaimStatus.PENDING)) {
+			super.state(context, false, "isAccepted", "acme.validation.claim.not-status-claim");
 			return false;
 		}
 

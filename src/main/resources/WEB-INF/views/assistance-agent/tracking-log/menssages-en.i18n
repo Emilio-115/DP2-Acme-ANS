@@ -10,6 +10,7 @@ assistance-agent.tracking-log.form.label.undergoingStep = Undergoing Step
 assistance-agent.tracking-log.form.label.resolutionPercentage = Resolution Percentage
 assistance-agent.tracking-log.form.label.status = Status
 assistance-agent.tracking-log.form.label.resolution = Resolution
+assistance-agent.tracking-log.form.label.claim = Claim
 
 assistance-agent.tracking-log.form.button.create = Create
 assistance-agent.tracking-log.list.label.create = Create

@@ -1,6 +1,7 @@
 
 package acme.features.assistanceAgent.trackingLog;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
@@ -26,4 +27,7 @@ public interface AssistanceAgentTrackingLogRepository extends AbstractRepository
 
 	@Query("SELECT c FROM Claim c WHERE c.id = :id")
 	Claim findClaimById(int id);
+
+	@Query("SELECT c FROM Claim c WHERE c.assistanceAgent.id = :id")
+	Collection<Claim> findAllClaimsByAssistanceAgentId(int id);
 }

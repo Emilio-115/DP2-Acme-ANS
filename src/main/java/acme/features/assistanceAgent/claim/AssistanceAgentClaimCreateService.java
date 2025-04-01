@@ -10,6 +10,7 @@ import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.claims.Claim;
+import acme.entities.claims.ClaimStatus;
 import acme.entities.claims.ClaimType;
 import acme.entities.legs.Leg;
 import acme.entities.legs.LegStatus;
@@ -50,7 +51,7 @@ public class AssistanceAgentClaimCreateService extends AbstractGuiService<Assist
 		legId = super.getRequest().getData("leg", int.class);
 		leg = this.repository.findLegById(legId);
 
-		super.bindObject(claim, "registrationMoment", "passengerEmail", "description", "type");
+		super.bindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "isAccepted");
 		claim.setLeg(leg);
 	}
 
@@ -69,14 +70,19 @@ public class AssistanceAgentClaimCreateService extends AbstractGuiService<Assist
 		SelectChoices choices;
 		Dataset dataset;
 		SelectChoices legChoices;
+		SelectChoices status;
 		Collection<Leg> legs = this.repository.findAllLandedLegs(LegStatus.LANDED);
 
 		choices = SelectChoices.from(ClaimType.class, claim.getType());
 		legChoices = SelectChoices.from(legs, "id", claim.getLeg());
+		status = SelectChoices.from(ClaimStatus.class, claim.getIsAccepted());
 
-		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "leg");
+		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "isAccepted", "draftMode");
+		dataset.put("leg", legChoices.getSelected().getKey());
 		dataset.put("types", choices);
+		dataset.put("status", status);
 		dataset.put("landedLegs", legChoices);
+		dataset.put("complete", claim.isComplete());
 		dataset.put("readonly", false);
 
 		super.getResponse().addData(dataset);
