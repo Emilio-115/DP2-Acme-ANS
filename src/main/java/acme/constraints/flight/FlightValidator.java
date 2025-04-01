@@ -26,7 +26,7 @@ public class FlightValidator extends AbstractValidator<ValidFlight, Flight> {
 
 		if (flight != null) {
 			boolean hasALeg = flight.numberOfLayovers() >= 0;
-			if (flight.isDraftMode())
+			if (!flight.isDraftMode())
 				super.state(context, hasALeg, "draftMode", "acme.validation.flight.no-legs.message");
 		}
 		result = !super.hasErrors(context);
