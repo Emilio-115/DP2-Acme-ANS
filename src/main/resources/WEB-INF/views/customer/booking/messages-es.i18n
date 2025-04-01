@@ -4,7 +4,26 @@ customer.booking.form.title = Detalles de la reserva
 customer.booking.list.label.locatorcode = Código localizador
 customer.booking.list.label.purchasemoment = Fecha de compra
 customer.booking.list.label.travelclass = Clase del viaje
-customer.booking.list.label.price = Precio
-customer.booking.list.label.creditcardlastnibble = Últimos 4 digitos T.Crédito
+customer.booking.flight.list.label.destiny = Destino
+
+customer.booking.form.label.locatorcode = Código localizador
+customer.booking.form.label.purchasemoment = Fecha de compra
+customer.booking.form.label.travelclass = Clase del viaje
+customer.booking.form.label.price = Precio
+customer.booking.form.label.creditcardlastnibble = Últimos 4 digitos T.Crédito
+customer.booking.form.label.passenger = Pasajeros
+
+customer.booking.flight.form.label.origin = Orígen
+customer.booking.flight.form.label.destiny = Destino
+customer.booking.flight.form.label.departureDate = Fecha de salida
+customer.booking.flight.form.label.arrivalDate = Fecha de llegada
+customer.booking.flight.form.label.tag = Etiqueta
+customer.booking.flight.form.label.requiresSelfTransfer = Requiere Transporte Propio
+customer.booking.flight.form.label.description = Descripción del vuelo
+customer.booking.flight.form.label.numberOfLayovers = Numero de Escalas
 
 customer.booking.list.label.create = Crear
+customer.booking.form.button.create = Crear
+customer.booking.form.button.update = Actualizar
+customer.booking.form.button.delete = Borrar
+customer.booking.form.button.publish = Publicar

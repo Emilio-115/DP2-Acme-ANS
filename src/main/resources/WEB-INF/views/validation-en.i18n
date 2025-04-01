@@ -28,3 +28,22 @@ acme.validation.flight-assignment.copilot-duty-taken.message = Copilot duty is a
 
 acme.validation.leg.overlapping-legs.message = Invalid dates of departure or arrival, legs cannot overlap
 acme.validation.leg.busy-aircraft.message = Invalid aircraft, the aircraft is busy in that time range
+
+# acme.validation.booking ############################
+
+acme.validation.booking.creditcardlastnibble = Credit card last nibble is mandatory to publish the booking
+acme.validation.booking.passenger = Passengers are necessary to publish the booking
+acme.validation.booking.locatorCode = Locator code must be unique
+acme.validation.booking.flight = You must select a flight
+acme.validation.booking.flight.draftMode = You can not choose a flight in draftMode
+acme.validation.booking.draftmode.message = You can not add passengers to a published booking
+
+
+# acme.validation.bookingrecord #######################
+
+acme.validation.bookingrecord.passenger = The passenger is already added to the booking
+acme.validation.bookingrecord.delete = You can not delete because the booking is published
+acme.validation.bookingrecord.passenger.draftmode = Passanger must be published
+
+# acme.validation.passenger.update ####################
+acme.validation.passenger.update = You cannot update a published passenger 
