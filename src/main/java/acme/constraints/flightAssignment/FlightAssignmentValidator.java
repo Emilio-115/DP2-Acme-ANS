@@ -64,8 +64,9 @@ public class FlightAssignmentValidator extends AbstractValidator<ValidFlightAssi
 			return false;
 		}
 
-		{
-			boolean legPublished = !leg.isDraftMode();
+		if (leg.getFlight() != null) {
+
+			boolean legPublished = !leg.getFlight().isDraftMode();
 
 			super.state(context, legPublished, "leg", "acme.validation.flight-assignment.leg-not-published.message");
 		}
