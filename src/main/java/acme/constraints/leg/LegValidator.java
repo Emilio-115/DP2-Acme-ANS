@@ -48,7 +48,7 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 			boolean isLegOverlapping = legRepository.islegOverlapping(leg.getId(), leg.getFlight().getId(), leg.getDepartureDate(), leg.getArrivalDate());
 			super.state(context, !isLegOverlapping, "departureDate", "acme.validation.leg.overlapping-legs.message");
 
-			boolean isLegStatusConsistentWithDraftMode = !leg.getFlight().isDraftMode() && leg.getStatus().equals(LegStatus.ON_TIME);
+			boolean isLegStatusConsistentWithDraftMode = !leg.getFlight().isDraftMode() || leg.getStatus().equals(LegStatus.ON_TIME);
 			super.state(context, isLegStatusConsistentWithDraftMode, "status", "acme.validation.leg.draft-mode-status.message");
 
 		}
