@@ -48,7 +48,7 @@ public interface LegRepository extends AbstractRepository {
 		l.flight.id = :flightId AND
 		(l.departureDate <= :arrivalDate AND l.arrivalDate >= :departureDate)
 		""")
-	public boolean islegOverlapping(Integer legId, Integer flightId, Date departureDate, Date arrivalDate);
+	public boolean isLegOverlapping(Integer legId, Integer flightId, Date departureDate, Date arrivalDate);
 
 	@Query("""
 		SELECT
