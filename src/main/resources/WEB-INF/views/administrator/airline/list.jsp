@@ -7,8 +7,6 @@
 	<acme:list-column code="administrator.airline.list.label.name" path="name" width="10%"/>
 	<acme:list-column code="administrator.airline.list.label.iata-code" path="iataCode" width="5%"/>
 	<acme:list-column code="administrator.airline.list.label.type" path="type"/>
-	<acme:list-column code="administrator.airline.list.label.foundation-moment" path="foundationMoment"/>
-	<acme:list-column code="administrator.airline.list.label.phone-number" path="phoneNumber"/>
 </acme:list>
 
 <acme:button code="administrator.airline.list.button.create" action="/administrator/airline/create"/>

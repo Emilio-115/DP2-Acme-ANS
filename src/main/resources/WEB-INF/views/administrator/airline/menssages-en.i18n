@@ -4,8 +4,6 @@ administrator.airline.form.title = Airlines Details
 administrator.airline.list.label.name = Name
 administrator.airline.list.label.iata-code = IATA code
 administrator.airline.list.label.type = Type
-administrator.airline.list.label.foundation-moment = Foundation Moment
-administrator.airline.list.label.phone-number = Phone Number
 
 administrator.airline.form.label.name = Name
 administrator.airline.form.label.iata-code = IATA code

@@ -26,9 +26,6 @@ public class AdministratorAirlineListService extends AbstractGuiService<Administ
 	@Override
 	public void load() {
 		List<Airline> airlines;
-		int administratorId;
-
-		administratorId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		airlines = this.repository.findAllAirlines();
 
 		super.getBuffer().addData(airlines);
@@ -38,14 +35,7 @@ public class AdministratorAirlineListService extends AbstractGuiService<Administ
 	public void unbind(final Airline airline) {
 
 		Dataset dataset;
-		dataset = super.unbindObject(airline, "id");
-		dataset.put("name", airline.getName());
-		dataset.put("iataCode", airline.getIataCode());
-		dataset.put("departureDate", airline.getWebsite());
-		dataset.put("type", airline.getType());
-		dataset.put("foundationMoment", airline.getFoundationMoment());
-		dataset.put("email", airline.getEmail());
-		dataset.put("phoneNumber", airline.getPhoneNumber());
+		dataset = super.unbindObject(airline, "id", "name", "iataCode", "website", "type", "foundationMoment", "email", "phoneNumber");
 		super.getResponse().addData(dataset);
 	}
 }

@@ -4,8 +4,6 @@ administrator.airline.form.title = Detalles de la Aerolinea
 administrator.airline.list.label.name = Nombre
 administrator.airline.list.label.iata-code = Codigo IATA
 administrator.airline.list.label.type = Tipo
-administrator.airline.list.label.foundation-moment = Fundado en
-administrator.airline.list.label.phone-number = Numero de Telefono
 
 administrator.airline.form.label.name = Nombre
 administrator.airline.form.label.iata-code = Codigo IATA
