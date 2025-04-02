@@ -80,13 +80,13 @@ public class CustomerBookingDeleteService extends AbstractGuiService<Customer, B
 		dataset.put("flight", flightChoices.getSelected().getKey());
 		dataset.put("flightTagChoices", flightChoices);
 
-		dataset.put("flightSelfTransfer", booking.getFlight().isRequiresSelfTransfer());
-		dataset.put("flightDescription", booking.getFlight().getDescription());
-		dataset.put("departureDate", booking.getFlight().scheduledDeparture());
-		dataset.put("arrivalDate", booking.getFlight().scheduledArrival());
-		dataset.put("origin", booking.getFlight().origin());
-		dataset.put("destination", booking.getFlight().destination());
-		dataset.put("numberOfLayovers", booking.getFlight().numberOfLayovers());
+		dataset.put("flightSelfTransfer", booking.getFlight() != null ? booking.getFlight().isRequiresSelfTransfer() : "No Data");
+		dataset.put("flightDescription", booking.getFlight() != null ? booking.getFlight().getDescription() : "No Data");
+		dataset.put("departureDate", booking.getFlight() != null ? booking.getFlight().scheduledDeparture() : "No Data");
+		dataset.put("arrivalDate", booking.getFlight() != null ? booking.getFlight().scheduledArrival() : "No Data");
+		dataset.put("origin", booking.getFlight() != null ? booking.getFlight().origin() : "No Data");
+		dataset.put("destination", booking.getFlight() != null ? booking.getFlight().destination() : "No Data");
+		dataset.put("numberOfLayovers", booking.getFlight() != null ? booking.getFlight().numberOfLayovers() : "No Data");
 
 		super.getResponse().addData(dataset);
 	}
