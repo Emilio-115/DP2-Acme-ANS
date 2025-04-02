@@ -1,0 +1,22 @@
+customer.passenger.list.title = Passengers
+customer.passenger.form.title = Passenger Details
+
+customer.passenger.list.label.passportnumber = Passport
+customer.passenger.list.label.draftmode = Draftmode
+customer.passenger.list.label.birthdate = Birthdate
+
+
+customer.passenger.form.label.fullname = Full Name
+customer.passenger.form.label.passportnumber = Passport
+customer.passenger.form.label.email = Email
+customer.passenger.form.label.birthdate = Bithdate
+customer.passenger.form.label.specialneeds = Special needs
+customer.passenger.form.label.draftmode = Draftmode
+
+
+customer.passenger.list-all.label.create = Create
+customer.passenger.form.label.create = Create
+customer.passenger.form.button.update = Update
+customer.passenger.form.button.delete = Delete
+customer.passenger.form.button.publish = Publish
+

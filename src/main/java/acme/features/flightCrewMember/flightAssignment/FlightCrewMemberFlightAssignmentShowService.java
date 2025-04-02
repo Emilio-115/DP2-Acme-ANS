@@ -1,8 +1,6 @@
 
 package acme.features.flightCrewMember.flightAssignment;
 
-import java.util.Optional;
-
 import acme.client.services.GuiService;
 import acme.entities.flightAssignment.FlightAssignment;
 
@@ -10,16 +8,7 @@ import acme.entities.flightAssignment.FlightAssignment;
 public class FlightCrewMemberFlightAssignmentShowService extends FlightCrewMemberFlightAssignmentEditService {
 
 	@Override
-	public void authorise() {
-		boolean status;
-		int flightAssignmentId;
-		Optional<FlightAssignment> flightAssignment;
-
-		flightAssignmentId = super.getRequest().getData("id", int.class);
-		flightAssignment = this.repository.findFlightAssignmentById(flightAssignmentId);
-		status = flightAssignment.isPresent();
-
-		super.getResponse().setAuthorised(status);
+	public boolean authoriseFlightAssignment(final FlightAssignment flightAssignment) {
+		return true;
 	}
-
 }

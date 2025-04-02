@@ -4,26 +4,23 @@ package acme.entities.legs;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
-import acme.entities.aircrafts.Aircraft;
-import acme.entities.flights.Flight;
+import acme.client.repositories.AbstractRepository;
 
-public interface LegRepository extends JpaRepository<Leg, Integer> {
+public interface LegRepository extends AbstractRepository {
 
-	@Query("SELECT l FROM Leg l WHERE l.flight = :flight ORDER BY l.departureDate ASC")
-	Leg findFirstLegByFlight(@Param("flight") Flight flight);
+	//@Query("SELECT l FROM Leg l WHERE l.flight.id = :flightId ORDER BY l.departureDate ASC")
+	Leg findFirstLegByFlightIdOrderByDepartureDate(Integer flightId);
 
-	@Query("SELECT l FROM Leg l WHERE l.flight = :flight ORDER BY l.departureDate DESC")
-	Leg findLastLegByFlight(@Param("flight") Flight flight);
+	//@Query("SELECT l FROM Leg l WHERE l.flight.id = :flightId ORDER BY l.departureDate DESC")
+	Leg findFirstLegByFlightIdOrderByDepartureDateDesc(Integer flightId);
 
-	@Query("SELECT COUNT(l) FROM Leg l WHERE l.flight = :flight")
-	long countLegsByFlight(@Param("flight") Flight flight);
+	@Query("SELECT COUNT(l) FROM Leg l WHERE l.flight.id = :flightId")
+	long countLegsByFlight(Integer flightId);
 
-	@Query("SELECT l FROM Leg l WHERE l.flight = :flight")
-	List<Leg> findAllLegsByFlight(@Param("flight") Flight flight);
+	@Query("SELECT l FROM Leg l WHERE l.flight.id = :flightId")
+	List<Leg> findAllLegsByFlight(Integer flightId);
 
 	@Query("""
 		SELECT
@@ -33,21 +30,38 @@ public interface LegRepository extends JpaRepository<Leg, Integer> {
 			END
 		FROM Leg l
 			WHERE
-		l <> :leg AND
-		l.aircraft= :aircraft AND
+		l.id != :legId AND
+		l.aircraft.id = :aircraftId AND
 		(l.departureDate <= :arrivalDate AND l.arrivalDate >= :departureDate)
 		""")
-	public boolean isAircrafBusy(@Param("leg") Leg leg, @Param("aircraft") Aircraft aircraft, @Param("departureDate") Date departureDate, @Param("arrivalDate") Date arrivalDate);
+	public boolean isAircrafBusy(Integer legId, Integer aircraftId, Date departureDate, Date arrivalDate);
 
 	@Query("""
 		SELECT
-			l
+			CASE
+				WHEN COUNT(l) > 0 THEN true
+				ELSE false
+			END
 		FROM Leg l
 		WHERE
-		l <> :leg AND
-		l.aircraft= :aircraft AND
+		l.id != :legId AND
+		l.flight.id = :flightId AND
 		(l.departureDate <= :arrivalDate AND l.arrivalDate >= :departureDate)
 		""")
-	public Leg get(@Param("leg") Leg leg, @Param("aircraft") final Aircraft aircraft, @Param("departureDate") Date departureDate, @Param("arrivalDate") Date arrivalDate);
+	public boolean isLegOverlapping(Integer legId, Integer flightId, Date departureDate, Date arrivalDate);
+
+	@Query("""
+		SELECT
+			CASE
+				WHEN COUNT(l) > 0 THEN true
+				ELSE false
+			END
+		FROM Leg l
+		WHERE
+		l.id != :legId AND
+		l.aircraft.airline.id = :airlineId AND
+		l.flightNumberDigits = :flightNumberDigits
+		""")
+	public boolean isFlightNumberUsed(Integer legId, Integer airlineId, String flightNumberDigits);
 
 }

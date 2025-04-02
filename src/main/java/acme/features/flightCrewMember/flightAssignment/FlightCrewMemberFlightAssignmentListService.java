@@ -20,8 +20,8 @@ public class FlightCrewMemberFlightAssignmentListService extends AbstractGuiServ
 
 		Dataset dataset;
 		dataset = super.unbindObject(flightAssignment, "duty", "status");
-		dataset.put("employeeCode", flightAssignment.getFlightCrewMember().getEmployeeCode());
 		dataset.put("flightNumber", flightAssignment.getLeg().flightNumber());
+		dataset.put("departure", flightAssignment.getLeg().getDepartureDate());
 		super.addPayload(dataset, flightAssignment, "remarks", "leg.departureAirport.name", "leg.departureAirport.iataCode", "leg.departureAirport.city", "leg.departureAirport.country", "leg.arrivalAirport.name", "leg.arrivalAirport.iataCode",
 			"leg.arrivalAirport.city", "leg.arrivalAirport.country");
 		super.getResponse().addData(dataset);

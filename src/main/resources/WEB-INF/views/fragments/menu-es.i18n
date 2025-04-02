@@ -23,6 +23,7 @@ master.menu.administrator = Administrador
 master.menu.administrator.list-user-accounts = Ver cuentas de usuario
 master.menu.administrator.list-airports = Ver aeropuertos
 master.menu.administrator.list-airline = Ver aerolineas
+master.menu.administrator.list-aircrafts = Ver aviones
 master.menu.administrator.populate-db-initial = Poblar BD (inicial)
 master.menu.administrator.populate-db-sample = Poblar BD (ejemplos)
 master.menu.administrator.shut-system-down = Parar el sistema
@@ -33,8 +34,8 @@ master.menu.flight-crew-member = Miembro de Tripulación de Vuelo
 master.menu.flight-crew-member.flight-assignment.list-planned = Listar asignaciones planeadas
 master.menu.flight-crew-member.flight-assignment.list-departed = Listar asignaciones de tramos despegados
 master.menu.flight-crew-member.flight-assignment.list-drafts = Listar borradores de asignación
-master.menu.flight-crew-member.activity-log.list-published = Listar registros de actividad publicados
-master.menu.flight-crew-member.activity-log.list-drafts = Listar borradores de registros de actividad
+master.menu.flight-crew-member.activity-log.list-published = Listar mis registros de actividad publicados
+master.menu.flight-crew-member.activity-log.list-drafts = Listar mis borradores de registros de actividad
 
 # master.menu.provider ########################################################
 
@@ -46,6 +47,13 @@ master.menu.provider.favourite-link = Enlace favorito
 master.menu.consumer = Consumidor
 master.menu.consumer.favourite-link = Enlace favorito
 
+# master.menu.customer ####################################################
+
+master.menu.customer = Cliente
+master.menu.customer.booking = Sus reservas
+master.menu.customer.passenger = Sus pasajeros
+master.menu.customer.booking-record = Registro de reservas
+
 # master.menu.user-account ####################################################
 
 master.menu.user-account = Cuenta
@@ -54,3 +62,9 @@ master.menu.user-account.become-provider = Hacerse proveedor
 master.menu.user-account.provider-profile = Perfil de proveedor
 master.menu.user-account.become-consumer = Hazte consumidor
 master.menu.user-account.consumer-profile = Perfil de consumidor
+
+
+# master.menu.airline-manager ##########################################################
+
+master.menu.airline-manager = Administrador de Aerolinea
+master.menu.airline-manager.my-flights = Mis Vuelos

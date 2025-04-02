@@ -16,10 +16,11 @@ import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoney;
 import acme.client.components.validation.ValidString;
 import acme.client.helpers.SpringHelper;
-import acme.constraints.flight.ValidFlight;
 import acme.constraints.ValidShortText;
+import acme.constraints.flight.ValidFlight;
+import acme.entities.legs.Leg;
 import acme.entities.legs.LegRepository;
-import acme.realms.AirlineManager;
+import acme.realms.airlineManager.AirlineManager;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -72,31 +73,36 @@ public class Flight extends AbstractEntity {
 	@Transient
 	public Date scheduledDeparture() {
 		LegRepository legRepository = SpringHelper.getBean(LegRepository.class);
-		return legRepository.findFirstLegByFlight(this).getDepartureDate();
+		Leg leg = legRepository.findFirstLegByFlightIdOrderByDepartureDate(this.getId());
+		return leg != null ? leg.getArrivalDate() : null;
 	}
 
 	@Transient
 	public Date scheduledArrival() {
 		LegRepository legRepository = SpringHelper.getBean(LegRepository.class);
-		return legRepository.findLastLegByFlight(this).getArrivalDate();
+
+		Leg leg = legRepository.findFirstLegByFlightIdOrderByDepartureDateDesc(this.getId());
+		return leg != null ? leg.getArrivalDate() : null;
 	}
 
 	@Transient
 	public String origin() {
 		LegRepository legRepository = SpringHelper.getBean(LegRepository.class);
-		return legRepository.findFirstLegByFlight(this).getDepartureAirport().getCity();
+		Leg leg = legRepository.findFirstLegByFlightIdOrderByDepartureDate(this.getId());
+		return leg != null ? leg.getDepartureAirport().getCity() : "No Data";
 	}
 
 	@Transient
-	public String destiny() {
+	public String destination() {
 		LegRepository legRepository = SpringHelper.getBean(LegRepository.class);
-		return legRepository.findLastLegByFlight(this).getArrivalAirport().getCity();
+		Leg leg = legRepository.findFirstLegByFlightIdOrderByDepartureDateDesc(this.getId());
+		return leg != null ? leg.getArrivalAirport().getCity() : "No Data";
 	}
 
 	@Transient
 	public int numberOfLayovers() {
 		LegRepository legRepository = SpringHelper.getBean(LegRepository.class);
-		return (int) legRepository.countLegsByFlight(this);
+		return (int) Long.max(legRepository.countLegsByFlight(this.getId()) - 1, 0);
 	}
 
 

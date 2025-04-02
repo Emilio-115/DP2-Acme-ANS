@@ -18,11 +18,11 @@ Flight {ValidFlight}
 + description: String {Optional ,ValidString ,Automapped}
 + draftMode: boolean {Mandatory, Automapped}
 --
-+ scheduledDeparture: Date 
-+ scheduledArrival: Date 
-+ origin: String 
-+ destiny: String
-+ numberOfLayovers: int 
++ scheduledDeparture: Date
++ scheduledArrival: Date
++ origin: String
++ destination: String
++ numberOfLayovers: int
 
 bg=yellow</panel_attributes>
     <additional_attributes/>
@@ -73,7 +73,7 @@ bg=green</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;-x
 m1=1
-m2= * 
+m2= *
 is managed by &gt;</panel_attributes>
     <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
   </element>
@@ -188,7 +188,7 @@ bg=#CCDA9DD</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;-x
 m1=1
-m2= * 
+m2= *
 works for &gt;</panel_attributes>
     <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
   </element>
@@ -240,7 +240,7 @@ bg=yellow</panel_attributes>
       <w>126</w>
       <h>63</h>
     </coordinates>
-    <panel_attributes>arrivalDate debe 
+    <panel_attributes>arrivalDate debe
 ser anterior a
 departureDate
 bg=blue</panel_attributes>
@@ -268,11 +268,11 @@ bg=blue</panel_attributes>
       <w>207</w>
       <h>117</h>
     </coordinates>
-    <panel_attributes>Tanto scheduledDeparture como 
-origin son datos que provienen de 
+    <panel_attributes>Tanto scheduledDeparture como
+origin son datos que provienen de
 la primera leg asociada al flight,
 de la misma manera con
-scheduleArrival y destiny que 
+scheduleArrival y destination que
 vienen de la última leg
 bg=blue</panel_attributes>
     <additional_attributes/>
@@ -288,7 +288,7 @@ bg=blue</panel_attributes>
     <panel_attributes>flightNumber es la
 concatenación de
  el IATA code de
- su aerolinea y 
+ su aerolinea y
  su flightNumberDigits
 bg=blue</panel_attributes>
     <additional_attributes/>
@@ -336,7 +336,7 @@ bg=blue</panel_attributes>
     </coordinates>
     <panel_attributes>numberOfLayovers se
 calcula contando
-cuantas legs tiene 
+cuantas legs tiene
 el vuelo
 bg=blue</panel_attributes>
     <additional_attributes/>

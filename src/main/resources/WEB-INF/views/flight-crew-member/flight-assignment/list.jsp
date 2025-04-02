@@ -4,7 +4,7 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:list>
-	<acme:list-column code = "flight-crew-member.flight-assignment.list.label.employee-code" path= "employeeCode"/>
+	<acme:list-column code = "flight-crew-member.flight-assignment.list.label.departure" path= "departure"/>
 	<acme:list-column code = "flight-crew-member.flight-assignment.list.label.flight-number" path= "flightNumber"/>
 	<acme:list-column code = "flight-crew-member.flight-assignment.list.label.duty" path= "duty"/>
 	<acme:list-column code = "flight-crew-member.flight-assignment.list.label.status" path= "status"/>

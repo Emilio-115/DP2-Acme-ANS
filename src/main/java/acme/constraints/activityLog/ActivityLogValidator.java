@@ -22,44 +22,34 @@ public class ActivityLogValidator extends AbstractValidator<ValidActivityLog, Ac
 
 		boolean result;
 
-		if (activityLog == null) {
-			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
-			return false;
-		}
-
-		var registeredAt = activityLog.getRegisteredAt();
-		if (registeredAt == null) {
-			super.state(context, false, "registeredAt", "javax.validation.constraints.NotNull.message");
-			return false;
-		}
+		if (activityLog == null)
+			return true;
 
 		var registeringAssignment = activityLog.getRegisteringAssignment();
-		if (registeringAssignment == null) {
-			super.state(context, false, "registeringAssignment", "javax.validation.constraints.NotNull.message");
-			return false;
+
+		if (registeringAssignment != null) {
+
+			boolean assignmentIsPublished = !registeringAssignment.isDraftMode();
+			super.state(context, assignmentIsPublished, "registeringAssignment", "acme.validation.activity-log.assignment-not-published.message");
+
+			boolean assignmentIsConfirmed = FlightAssignmentStatus.CONFIRMED.equals(registeringAssignment.getStatus());
+			super.state(context, assignmentIsConfirmed, "registeringAssignment", "acme.validation.activity-log.assignment-not-confirmed.message");
+
+			var registeredAt = activityLog.getRegisteredAt();
+			var leg = registeringAssignment.getLeg();
+
+			if (leg != null) {
+				var arrivalDate = leg.getArrivalDate();
+
+				if (registeredAt != null && arrivalDate != null) {
+
+					boolean registeredAfterLanding = registeredAt.after(arrivalDate);
+					super.state(context, registeredAfterLanding, "registeredAt", "acme.validation.activity-log.registered-before-landing.message");
+
+				}
+			}
+
 		}
-
-		boolean assignmentIsPublished = !registeringAssignment.isDraftMode();
-		super.state(context, assignmentIsPublished, "registeringAssignment", "acme.validation.activity-log.assignment-not-published.message");
-
-		boolean assignmentIsConfirmed = FlightAssignmentStatus.CONFIRMED.equals(registeringAssignment.getStatus());
-		super.state(context, assignmentIsConfirmed, "registeringAssignment", "acme.validation.activity-log.assignment-not-confirmed.message");
-
-		var leg = registeringAssignment.getLeg();
-		if (leg == null) {
-			super.state(context, false, "leg", "javax.validation.constraints.NotNull.message");
-			return false;
-		}
-
-		var arrivalDate = leg.getArrivalDate();
-		if (arrivalDate == null) {
-			super.state(context, false, "arrivalDate", "javax.validation.constraints.NotNull.message");
-			return false;
-		}
-
-		boolean registeredAfterLanding = registeredAt.after(arrivalDate);
-
-		super.state(context, registeredAfterLanding, "registeredAt", "acme.validation.activity-log.registered-before-landing.message");
 
 		result = !super.hasErrors(context);
 

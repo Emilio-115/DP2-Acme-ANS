@@ -4,13 +4,27 @@ customer.booking.form.title = Bookings Details
 customer.booking.list.label.locatorcode = Locator code
 customer.booking.list.label.purchasemoment = Purchase moment
 customer.booking.list.label.travelclass = Travel class
+customer.booking.flight.list.label.destination = Destination
 
 customer.booking.form.label.locatorcode = Locator code
 customer.booking.form.label.purchasemoment = Purchase moment
 customer.booking.form.label.travelclass = Travel class
 customer.booking.form.label.price = Price
 customer.booking.form.label.creditcardlastnibble = Credit Card Last Nibble
+customer.booking.form.label.passenger = Passengers
 
+
+customer.booking.flight.form.label.origin = Origin
+customer.booking.flight.form.label.destination = Destination
+customer.booking.flight.form.label.departureDate = Departure Date
+customer.booking.flight.form.label.arrivalDate = Arrival Date
+customer.booking.flight.form.label.tag = Tag
+customer.booking.flight.form.label.requiresSelfTransfer = Requires Self Transfer
+customer.booking.flight.form.label.description = Flight Description
+customer.booking.flight.form.label.numberOfLayovers = Number of Layovers
 
 customer.booking.list.label.create = Create
-
+customer.booking.form.button.create = Create
+customer.booking.form.button.update = Update
+customer.booking.form.button.delete = Delete
+customer.booking.form.button.publish = Publish

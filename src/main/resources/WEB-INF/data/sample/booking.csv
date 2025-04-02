@@ -1,6 +1,6 @@
 key,locatorCode,purchaseMoment,travelClass,draftMode,creditCardLastNibble,key:customer,key:flight
-booking-01,99999999,2011/04/16 0:00,ECONOMY,true,0230,customer-01,flight-01
-booking-02,10VX555,2022/07/29 23:59,BUSINESS,true,0000,customer-01,flight-02
-booking-03,MSKQ638,2000/01/01 0:01,BUSINESS,false,9999,customer-01,flight-03
-booking-04,AAAAAAA,2008/01/08 0:00,ECONOMY,true,6969,customer-01,flight-04
-booking-05,ZZZZ9999,2000/01/01 0:00,ECONOMY,false,0007,customer-02,flight-05
+booking-01,99999999,2011/04/16 0:00,ECONOMY,true,0230,customer-01,flight-11
+booking-02,10VX555,2022/07/29 23:59,BUSINESS,true,0000,customer-01,flight-11
+booking-03,MSKQ638,2000/01/01 0:01,BUSINESS,false,9999,customer-01,flight-11
+booking-04,AAAAAAA,2008/01/08 0:00,ECONOMY,true,6969,customer-01,flight-11
+booking-05,ZZZZ9999,2000/01/01 0:00,ECONOMY,false,0007,customer-02,flight-11
