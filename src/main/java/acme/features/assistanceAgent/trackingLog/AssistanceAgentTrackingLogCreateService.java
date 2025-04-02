@@ -45,8 +45,18 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 		claimId = super.getRequest().getData("claimId", int.class);
 		claim = this.repository.findClaimById(claimId);
 
+		/*
+		 * double per = super.getRequest().getData("resolutionPercentage", double.class);
+		 * TrackingLogStatus st = super.getRequest().getData("status", TrackingLogStatus.class);
+		 * 
+		 * if (per == 100.0) {
+		 * ClaimStatus cs = st.equals(TrackingLogStatus.ACCEPTED) ? ClaimStatus.ACCEPTED : ClaimStatus.REJECTED;
+		 * claim.setIsAccepted(cs);
+		 * }
+		 */
 		super.bindObject(trackingLog, "undergoingStep", "resolutionPercentage", "resolution", "status");
 		trackingLog.setReclaim(false);
+		trackingLog.setDraftMode(true);
 		trackingLog.setLastUpdateMoment(MomentHelper.getCurrentMoment());
 		trackingLog.setClaim(claim);
 	}
@@ -59,6 +69,7 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 	@Override
 	public void perform(final TrackingLog trackingLog) {
 		this.repository.save(trackingLog);
+		this.repository.save(trackingLog.getClaim());
 	}
 
 	@Override
@@ -71,7 +82,7 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 
 		choices = SelectChoices.from(TrackingLogStatus.class, trackingLog.getStatus());
 
-		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "undergoingStep", "resolutionPercentage", "resolution", "draftMode", "status");
+		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "undergoingStep", "resolutionPercentage", "resolution", "draftMode", "status", "reclaim");
 		dataset.put("statuses", choices);
 		dataset.put("claim", claim);
 		dataset.put("claimId", claimId);

@@ -64,7 +64,6 @@ public class AssistanceAgentTrackingLogListService extends AbstractGuiService<As
 			topPercentage = TLs.get(0).getResolutionPercentage();
 			published = !TLs.get(0).isDraftMode();
 		}
-
 		boolean finish = topPercentage == 100.00;
 
 		super.getResponse().addGlobal("finish", finish);

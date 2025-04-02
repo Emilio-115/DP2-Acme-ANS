@@ -10,6 +10,7 @@ import acme.client.components.views.SelectChoices;
 import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
+import acme.entities.claims.Claim;
 import acme.entities.trackingLogs.TrackingLog;
 import acme.entities.trackingLogs.TrackingLogStatus;
 import acme.realms.assistanceAgent.AssistanceAgent;
@@ -43,9 +44,21 @@ public class AssistanceAgentTrackingLogPublishService extends AbstractGuiService
 	@Override
 	public void bind(final TrackingLog trackingLog) {
 		assert trackingLog != null;
+		int claimId = super.getRequest().getData("claimId", int.class);
+		Claim claim = this.repository.findClaimById(claimId);
 
-		super.bindObject(trackingLog, "undergoingStep", "resolutionPercentage", "resolution", "status");
+		/*
+		 * double per = super.getRequest().getData("resolutionPercentage", double.class);
+		 * TrackingLogStatus st = super.getRequest().getData("status", TrackingLogStatus.class);
+		 * 
+		 * if (per == 100.0) {
+		 * ClaimStatus cs = st.equals(TrackingLogStatus.ACCEPTED) ? ClaimStatus.ACCEPTED : ClaimStatus.REJECTED;
+		 * claim.setIsAccepted(cs);
+		 * }
+		 */
+		super.bindObject(trackingLog, "undergoingStep", "resolutionPercentage", "resolution", "status", "lastUpdateMoment");
 		trackingLog.setLastUpdateMoment(MomentHelper.getCurrentMoment());
+		trackingLog.setClaim(claim);
 	}
 
 	@Override
@@ -78,7 +91,7 @@ public class AssistanceAgentTrackingLogPublishService extends AbstractGuiService
 
 		choices = SelectChoices.from(TrackingLogStatus.class, trackingLog.getStatus());
 
-		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "undergoingStep", "resolutionPercentage", "resolution", "status", "draftMode");
+		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "undergoingStep", "resolutionPercentage", "resolution", "status", "draftMode", "reclaim");
 		dataset.put("statuses", choices);
 
 		super.getResponse().addData(dataset);

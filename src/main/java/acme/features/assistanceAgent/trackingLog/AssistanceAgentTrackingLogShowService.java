@@ -44,12 +44,15 @@ public class AssistanceAgentTrackingLogShowService extends AbstractGuiService<As
 
 	@Override
 	public void unbind(final TrackingLog trackingLog) {
+
 		SelectChoices choices;
 		Dataset dataset;
 
 		choices = SelectChoices.from(TrackingLogStatus.class, trackingLog.getStatus());
 
-		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "undergoingStep", "resolutionPercentage", "resolution", "status", "draftMode");
+		int claimId = trackingLog.getClaim().getId();
+		super.getResponse().addGlobal("claimId", claimId);
+		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "undergoingStep", "resolutionPercentage", "resolution", "status", "draftMode", "reclaim");
 		dataset.put("statuses", choices);
 
 		super.getResponse().addData(dataset);
