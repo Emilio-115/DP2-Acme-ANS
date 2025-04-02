@@ -11,6 +11,8 @@ acme.validation.percentage.message = Error en la relacion entre porcentaje y sta
 acme.validation.resolutionDescription.message = Error en la relacion entre descripcion y status en el tracking log
 acme.validation.short-text.message = Texto no válido, necesita ser igual o más corto de 50 caracteres
 
+acme.validation.update.draftMode.claim = Esta reclamacion no se puede publicar porque aun hay registro de seguimiento en borrador
+
 acme.validation.claim.not-completed-claim = El proceso de la reclamacion aun no ha terminado
 acme.validation.claim.not-status-claim = El proceso de la reclamacion esta terminado, comente si esta aceptada o no
 

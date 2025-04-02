@@ -50,13 +50,18 @@ public class ClaimValidator extends AbstractValidator<ValidClaim, Claim> {
 
 		var accepted = claim.getIsAccepted();
 		var complete = claim.isComplete();
-		if (!complete && !accepted.equals(ClaimStatus.PENDING)) {
-			super.state(context, false, "isAccepted", "acme.validation.claim.not-completed-claim");
+		if (accepted == null) {
+			super.state(context, false, "isAccepted", "javax.validation.constraints.NotNull.message");
 			return false;
-		}
-		if (complete && accepted.equals(ClaimStatus.PENDING)) {
-			super.state(context, false, "isAccepted", "acme.validation.claim.not-status-claim");
-			return false;
+		} else {
+			if (!complete && !accepted.equals(ClaimStatus.PENDING)) {
+				super.state(context, false, "isAccepted", "acme.validation.claim.not-completed-claim");
+				return false;
+			}
+			if (complete && accepted.equals(ClaimStatus.PENDING)) {
+				super.state(context, false, "isAccepted", "acme.validation.claim.not-status-claim");
+				return false;
+			}
 		}
 
 		result = !super.hasErrors(context);
