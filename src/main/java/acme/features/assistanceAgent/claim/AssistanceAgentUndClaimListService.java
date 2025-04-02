@@ -48,7 +48,8 @@ public class AssistanceAgentUndClaimListService extends AbstractGuiService<Assis
 	public void unbind(final Claim claim) {
 		Dataset dataset;
 
-		dataset = super.unbindObject(claim, "registrationMoment", "isAccepted", "leg", "type");
+		dataset = super.unbindObject(claim, "registrationMoment", "isAccepted", "type");
+		dataset.put("leg", claim.getLeg().getFlightNumberDigits());
 
 		super.getResponse().addData(dataset);
 	}

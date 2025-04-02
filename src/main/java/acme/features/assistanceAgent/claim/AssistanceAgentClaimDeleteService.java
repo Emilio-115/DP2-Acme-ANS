@@ -88,7 +88,7 @@ public class AssistanceAgentClaimDeleteService extends AbstractGuiService<Assist
 		Collection<Leg> legs = this.repository.findAllLandedLegs(LegStatus.LANDED);
 
 		choices = SelectChoices.from(ClaimType.class, claim.getType());
-		legChoices = SelectChoices.from(legs, "id", claim.getLeg());
+		legChoices = SelectChoices.from(legs, "flightNumberDigits", claim.getLeg());
 		status = SelectChoices.from(ClaimStatus.class, claim.getIsAccepted());
 
 		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "isAccepted", "draftMode");

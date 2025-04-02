@@ -6,7 +6,9 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
+import acme.client.components.models.Request;
 import acme.client.components.views.SelectChoices;
+import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.claims.Claim;
@@ -41,10 +43,13 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 		int claimId;
 		Claim claim;
 
+		Request hola = super.getRequest();
+
 		claimId = super.getRequest().getData("claim", int.class);
 		claim = this.repository.findClaimById(claimId);
 
-		super.bindObject(trackingLog, "lastUpdateMoment", "undergoingStep", "resolutionPercentage", "resolution", "status");
+		super.bindObject(trackingLog, "undergoingStep", "resolutionPercentage", "resolution", "status");
+		trackingLog.setLastUpdateMoment(MomentHelper.getCurrentMoment());
 		trackingLog.setClaim(claim);
 	}
 

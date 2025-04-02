@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
+import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.claims.Claim;
@@ -51,7 +52,8 @@ public class AssistanceAgentClaimCreateService extends AbstractGuiService<Assist
 		legId = super.getRequest().getData("leg", int.class);
 		leg = this.repository.findLegById(legId);
 
-		super.bindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "isAccepted");
+		super.bindObject(claim, "passengerEmail", "description", "type", "isAccepted");
+		claim.setRegistrationMoment(MomentHelper.getCurrentMoment());
 		claim.setLeg(leg);
 	}
 
@@ -74,10 +76,10 @@ public class AssistanceAgentClaimCreateService extends AbstractGuiService<Assist
 		Collection<Leg> legs = this.repository.findAllLandedLegs(LegStatus.LANDED);
 
 		choices = SelectChoices.from(ClaimType.class, claim.getType());
-		legChoices = SelectChoices.from(legs, "id", claim.getLeg());
+		legChoices = SelectChoices.from(legs, "flightNumberDigits", claim.getLeg());
 		status = SelectChoices.from(ClaimStatus.class, claim.getIsAccepted());
 
-		dataset = super.unbindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "isAccepted", "draftMode");
+		dataset = super.unbindObject(claim, "passengerEmail", "description", "type", "isAccepted", "draftMode");
 		dataset.put("leg", legChoices.getSelected().getKey());
 		dataset.put("types", choices);
 		dataset.put("status", status);

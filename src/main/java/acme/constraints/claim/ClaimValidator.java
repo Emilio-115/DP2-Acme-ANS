@@ -1,6 +1,8 @@
 
 package acme.constraints.claim;
 
+import java.util.Date;
+
 import javax.validation.ConstraintValidatorContext;
 
 import acme.client.components.validation.AbstractValidator;
@@ -27,16 +29,23 @@ public class ClaimValidator extends AbstractValidator<ValidClaim, Claim> {
 			return false;
 		}
 
-		var registrationMoment = claim.getRegistrationMoment();
-		if (registrationMoment == null) {
-			super.state(context, false, "registrationMoment", "javax.validation.constraints.NotNull.message");
-			return false;
-		}
-
 		var leg = claim.getLeg();
 		if (leg == null) {
 			super.state(context, false, "leg", "javax.validation.constraints.NotNull.message");
 			return false;
+		}
+
+		var registrationMoment = claim.getRegistrationMoment();
+		if (registrationMoment == null) {
+			super.state(context, false, "registrationMoment", "javax.validation.constraints.NotNull.message");
+			return false;
+		} else {
+			Date arrivalMoment = leg.getArrivalDate();
+			if (!arrivalMoment.before(registrationMoment)) {
+				super.state(context, false, "registrationMoment", "acme.validation.claim.moment-registration-before-arrival");
+				return false;
+			}
+
 		}
 
 		var accepted = claim.getIsAccepted();
