@@ -41,7 +41,7 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 			}
 		}
 
-		if (leg.getDepartureDate() != null) {
+		if (leg.getDepartureDate() != null && leg.getArrivalDate() != null) {
 			boolean isDepartureAfterArrival = leg.getDepartureDate().after(leg.getArrivalDate());
 			super.state(context, !isDepartureAfterArrival, "departureDate", "acme.validation.leg.arrival-before-departure.message");
 		}
