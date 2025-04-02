@@ -21,6 +21,9 @@ acme.validation.activity-log.arrival-before-departure.message = Fecha de salida 
 
 acme.validation.airport.non-unique-iata-code.message = El código IATA ha de ser único
 
+
+acme.validation.aircraft.non-unique-registration-number = El número de registro ya existe, el número de registro debe ser único
+
 acme.validation.flight-assignment.flight-crew-member-unavailable.message = El miembro de la tripulación de vuelo no está disponible
 acme.validation.flight-assignment.member-already-in-leg-with-duty.message = El miembro de la tripulación de vuelo ya está asignado a este segmento con este rol
 acme.validation.flight-assignment.leg-not-published.message = El segmento no está publicado
@@ -29,8 +32,17 @@ acme.validation.flight-assignment.flight-crew-member-busy.message = El miembro d
 acme.validation.flight-assignment.pilot-duty-taken.message = El rol de piloto ya ha sido asignado para este segmento
 acme.validation.flight-assignment.copilot-duty-taken.message = El rol de copiloto ya ha sido asignado para este segmento
 
+acme.validation.flight-crew-member.non-unique-employee-code = El código de empleado debe ser único
+
+acme.validation.flight.leg-not-published.message = Todas los segmentos tienen que estar publicados
 acme.validation.leg.overlapping-legs.message = Fechas de salida o llegada no validas, los segmentos no pueden superponerse
-acme.validation.leg.busy-aircraft.message = Avión no válido, el avión está ocupado durante ese rando de tiempo.
+acme.validation.leg.busy-aircraft.message = Avión no válido, el avión está ocupado durante ese rango de tiempo
+acme.validation.leg.unique-flight-number.message = Número de vuelo no válido, codigo IATA + Digitos del número de vuelo deben ser únicos
+acme.validation.flight.aircraft-under-maintenance.message = Avión no valido, está en mantenimiento
+acme.validation.leg.draft-mode-status.message = Estado invalido, el estado del segmento debe ser ON_TIME si el modo edición está activado
+acme.validation.flight.no-legs.message = El vuelo necesita al menos un segmento para ser publicado
+
+acme.validation.airline-manager.non-unique-identifier = El identificador debe ser único
 
 # acme.validation.booking #############################
 

@@ -22,6 +22,7 @@ master.menu.anonymous.student4-favourite-link = 77496014K:García Vizcaíno, Mig
 master.menu.administrator = Administrator
 master.menu.administrator.list-user-accounts = List user accounts
 master.menu.administrator.list-airports = List airports
+master.menu.administrator.list-aircrafts = List aircrafts
 master.menu.administrator.populate-db-initial = Populate DB (initial)
 master.menu.administrator.populate-db-sample = Populate DB (samples)
 master.menu.administrator.shut-system-down = Shut system down
@@ -29,9 +30,9 @@ master.menu.administrator.shut-system-down = Shut system down
 # master.menu.flight-crew-member ##############################################
 
 master.menu.flight-crew-member = Flight Crew Member
-master.menu.flight-crew-member.flight-assignment.list-planned = List planned assignments
-master.menu.flight-crew-member.flight-assignment.list-departed = List assignments of departed legs
-master.menu.flight-crew-member.flight-assignment.list-drafts = List draft assignments
+master.menu.flight-crew-member.flight-assignment.list-planned = List my planned assignments
+master.menu.flight-crew-member.flight-assignment.list-departed = List my assignments of departed legs
+master.menu.flight-crew-member.flight-assignment.list-drafts = List my draft assignments
 master.menu.flight-crew-member.activity-log.list-published = List my published activity logs
 master.menu.flight-crew-member.activity-log.list-drafts = List my draft activity logs
 
@@ -67,3 +68,8 @@ master.menu.user-account.become-provider = Become a provider
 master.menu.user-account.provider-profile = Provider profile
 master.menu.user-account.become-consumer = Become a consumer
 master.menu.user-account.consumer-profile = Consumer profile
+
+# master.menu.airline-manager ##########################################################
+
+master.menu.airline-manager = Airline Manager
+master.menu.airline-manager.my-flights = My Flights

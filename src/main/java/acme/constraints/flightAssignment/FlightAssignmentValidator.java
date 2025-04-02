@@ -35,67 +35,52 @@ public class FlightAssignmentValidator extends AbstractValidator<ValidFlightAssi
 		 * * No hay otro piloto confirmado
 		 * * No hay otra co-piloto confirmado
 		 */
-		if (flightAssignment == null) {
-			super.state(context, false, "leg", "javax.validation.constraints.NotNull.message");
-			return false;
-		}
+		if (flightAssignment == null)
+			return true;
 
 		var flightCrewMember = flightAssignment.getFlightCrewMember();
-		if (flightCrewMember == null) {
-			super.state(context, false, "flightCrewMember", "javax.validation.constraints.NotNull.message");
-			return false;
-		}
-
 		var leg = flightAssignment.getLeg();
-		if (leg == null) {
-			super.state(context, false, "leg", "javax.validation.constraints.NotNull.message");
-			return false;
-		}
-
 		var status = flightAssignment.getStatus();
-		if (status == null) {
-			super.state(context, false, "status", "javax.validation.constraints.NotNull.message");
-			return false;
-		}
-
 		var duty = flightAssignment.getDuty();
-		if (duty == null) {
-			super.state(context, false, "duty", "javax.validation.constraints.NotNull.message");
-			return false;
-		}
 
-		{
+		if (leg != null) {
+
 			boolean legPublished = !leg.isDraftMode();
-
 			super.state(context, legPublished, "leg", "acme.validation.flight-assignment.leg-not-published.message");
-		}
 
-		boolean flightPublishedAndNotCancelled = !flightAssignment.isDraftMode() && (status.equals(FlightAssignmentStatus.CONFIRMED) || status.equals(FlightAssignmentStatus.PENDING));
+			if (status != null && flightCrewMember != null) {
 
-		if (flightPublishedAndNotCancelled) {
-			boolean legMemberDutyUnique = repository.isLegMemberDutyUnique(flightAssignment.getId(), leg.getId(), flightCrewMember.getId(), flightAssignment.getDuty());
+				boolean flightPublishedAndConfirmed = !flightAssignment.isDraftMode() && status.equals(FlightAssignmentStatus.CONFIRMED);
 
-			super.state(context, legMemberDutyUnique, "leg", "acme.validation.flight-assignment.member-already-in-leg-with-duty.message");
-		}
+				if (flightPublishedAndConfirmed) {
+					boolean flightCrewMemberFree = repository.isFlightCrewMemberFree(flightAssignment.getId(), flightCrewMember.getId(), leg.getDepartureDate(), leg.getArrivalDate());
 
-		boolean flightConfirmed = !flightAssignment.isDraftMode() && status.equals(FlightAssignmentStatus.CONFIRMED);
+					super.state(context, flightCrewMemberFree, "leg", "acme.validation.flight-assignment.flight-crew-member-busy.message");
+				}
 
-		if (flightConfirmed) {
+				if (duty != null) {
 
-			boolean flightCrewMemberFree = repository.isFlightCrewMemberFree(flightAssignment.getId(), flightCrewMember.getId(), leg.getDepartureDate(), leg.getArrivalDate());
+					boolean flightPublishedAndNotCancelled = !flightAssignment.isDraftMode() && (status.equals(FlightAssignmentStatus.CONFIRMED) || status.equals(FlightAssignmentStatus.PENDING));
 
-			super.state(context, flightCrewMemberFree, "leg", "acme.validation.flight-assignment.flight-crew-member-busy.message");
+					if (flightPublishedAndNotCancelled) {
+						boolean legMemberDutyUnique = repository.isLegMemberDutyUnique(flightAssignment.getId(), leg.getId(), flightCrewMember.getId(), duty);
 
-			if (duty.equals(FlightCrewDuty.PILOT)) {
-				boolean pilotDutyFree = repository.isDutyFree(flightAssignment.getId(), leg.getId(), FlightCrewDuty.PILOT);
+						super.state(context, legMemberDutyUnique, "duty", "acme.validation.flight-assignment.member-already-in-leg-with-duty.message");
+					}
 
-				super.state(context, pilotDutyFree, "duty", "acme.validation.flight-assignment.pilot-duty-taken.message");
-			}
+					if (flightPublishedAndConfirmed)
+						if (duty.equals(FlightCrewDuty.PILOT)) {
+							boolean pilotDutyFree = repository.isDutyFree(flightAssignment.getId(), leg.getId(), FlightCrewDuty.PILOT);
 
-			else if (duty.equals(FlightCrewDuty.COPILOT)) {
-				boolean copilotDutyFree = repository.isDutyFree(flightAssignment.getId(), leg.getId(), FlightCrewDuty.COPILOT);
+							super.state(context, pilotDutyFree, "duty", "acme.validation.flight-assignment.pilot-duty-taken.message");
+						}
 
-				super.state(context, copilotDutyFree, "duty", "acme.validation.flight-assignment.copilot-duty-taken.message");
+						else if (duty.equals(FlightCrewDuty.COPILOT)) {
+							boolean copilotDutyFree = repository.isDutyFree(flightAssignment.getId(), leg.getId(), FlightCrewDuty.COPILOT);
+
+							super.state(context, copilotDutyFree, "duty", "acme.validation.flight-assignment.copilot-duty-taken.message");
+						}
+				}
 			}
 
 		}

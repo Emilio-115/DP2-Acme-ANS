@@ -22,6 +22,8 @@ acme.validation.activity-log.arrival-before-departure.message = Invalid departur
 
 acme.validation.airport.non-unique-iata-code.message = IATA code must be unique
 
+acme.validation.aircraft.non-unique-registration-number = Registration Number already exist, registration number must be unique
+
 acme.validation.flight-assignment.flight-crew-member-unavailable.message = Flight crew member is unavailable
 acme.validation.flight-assignment.member-already-in-leg-with-duty.message = Flight crew member is already assigned to this leg with this duty
 acme.validation.flight-assignment.leg-not-published.message = Leg is not published
@@ -30,8 +32,19 @@ acme.validation.flight-assignment.flight-crew-member-busy.message = Flight crew 
 acme.validation.flight-assignment.pilot-duty-taken.message = Pilot duty is already assigned for this leg
 acme.validation.flight-assignment.copilot-duty-taken.message = Copilot duty is already assigned for this leg
 
+acme.validation.flight-crew-member.non-unique-employee-code = Employee code must be unique
+
+acme.validation.flight.leg-not-published.message = Every leg have to be published
 acme.validation.leg.overlapping-legs.message = Invalid dates of departure or arrival, legs cannot overlap
 acme.validation.leg.busy-aircraft.message = Invalid aircraft, the aircraft is busy in that time range
+acme.validation.leg.unique-flight-number.message = Invalid flight number, IATA code + Flight Number Digits must be unique
+acme.validation.flight.aircraft-under-maintenance.message = Invalid Aircraft, it is under maintenance
+acme.validation.leg.draft-mode-status.message = Invalid status, leg status must be ON_TIME if draft mode is true
+acme.validation.flight.no-legs.message = Flight need at least a leg to be published.
+
+
+acme.validation.airline-manager.non-unique-identifier = Identifier must be unique
+
 
 # acme.validation.booking ############################
 
@@ -50,4 +63,4 @@ acme.validation.bookingrecord.delete = You can not delete because the booking is
 acme.validation.bookingrecord.passenger.draftmode = Passanger must be published
 
 # acme.validation.passenger.update ####################
-acme.validation.passenger.update = You cannot update a published passenger 
+acme.validation.passenger.update = You cannot update a published passenger

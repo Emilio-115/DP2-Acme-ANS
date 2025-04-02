@@ -23,6 +23,10 @@ public class FlightCrewMemberFlightAssignmentEditService extends AbstractGuiServ
 	protected FlightCrewMemberFlightAssignmentRepository repository;
 
 
+	public boolean authoriseFlightAssignment(final FlightAssignment flightAssignment) {
+		return flightAssignment.isDraftMode();
+	}
+
 	@Override
 	public void authorise() {
 		boolean status;
@@ -33,7 +37,7 @@ public class FlightCrewMemberFlightAssignmentEditService extends AbstractGuiServ
 
 		flightAssignmentId = super.getRequest().getData("id", int.class);
 		flightAssignment = this.repository.findByIdAndFlightCrewMemberId(flightAssignmentId, flightCrewMember.getId());
-		status = flightAssignment.map(fa -> fa.isDraftMode()).orElse(false);
+		status = flightAssignment.map(this::authoriseFlightAssignment).orElse(false);
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -57,6 +61,7 @@ public class FlightCrewMemberFlightAssignmentEditService extends AbstractGuiServ
 
 		super.bindObject(flightAssignment, "status", "duty", "remarks");
 		flightAssignment.setLeg(leg);
+
 		flightAssignment.setUpdatedAt(MomentHelper.getCurrentMoment());
 	}
 
@@ -65,11 +70,8 @@ public class FlightCrewMemberFlightAssignmentEditService extends AbstractGuiServ
 		FlightCrewMember flightCrewMember = (FlightCrewMember) super.getRequest().getPrincipal().getActiveRealm();
 
 		Dataset dataset;
-		dataset = super.unbindObject(flightAssignment, "remarks", "duty", "status", "draftMode");
+		dataset = super.unbindObject(flightAssignment, "updatedAt", "remarks", "duty", "status", "draftMode");
 
-		{
-			dataset.put("flightCrewMember", flightAssignment.getFlightCrewMember().getEmployeeCode());
-		}
 		{
 			List<Leg> pendingLegs;
 
@@ -95,11 +97,6 @@ public class FlightCrewMemberFlightAssignmentEditService extends AbstractGuiServ
 			statuses = SelectChoices.from(FlightAssignmentStatus.class, flightAssignment.getStatus());
 
 			dataset.put("statuses", statuses);
-		}
-		{
-			boolean isMine = flightCrewMember.equals(flightAssignment.getFlightCrewMember());
-
-			dataset.put("isMine", isMine);
 		}
 
 		super.getResponse().addData(dataset);

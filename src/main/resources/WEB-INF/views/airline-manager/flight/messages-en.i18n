@@ -1,12 +1,13 @@
 manager.flight.list.label.id = Id
 manager.flight.list.label.origin = Origin City
-manager.flight.list.label.destiny = Destiny City
+manager.flight.list.label.destination = Destination City
 manager.flight.list.label.departureDate = Departure Date
 manager.flight.list.label.arrivalDate= Arrival Date
+manager.flight.list.label.isPublished= Published
 
 manager.flight.form.label.id = Id
 manager.flight.form.label.origin = Origin City
-manager.flight.form.label.destiny = Destiny City
+manager.flight.form.label.destination = Destination City
 manager.flight.form.label.departureDate = Departure Date
 manager.flight.form.label.arrivalDate= Arrival Date
 manager.flight.form.label.tag = Tag
@@ -20,7 +21,7 @@ manager.flight.list.button.create = Create
 
 manager.flight.form.button.legs = Legs
 manager.flight.form.button.update = Update
-manager.flight.form.button.delete = Delete 
+manager.flight.form.button.delete = Delete
 manager.flight.form.button.publish = Publish
 manager.flight.form.button.create = Create
 

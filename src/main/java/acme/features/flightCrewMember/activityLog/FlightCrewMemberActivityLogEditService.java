@@ -58,7 +58,7 @@ public class FlightCrewMemberActivityLogEditService extends AbstractGuiService<F
 	@Override
 	public void unbind(final ActivityLog activityLog) {
 		Dataset dataset;
-		dataset = super.unbindObject(activityLog, "incidentType", "description", "severityLevel", "draftMode");
+		dataset = super.unbindObject(activityLog, "registeredAt", "incidentType", "description", "severityLevel", "draftMode");
 
 		int flightCrewMemberId = super.getRequest().getPrincipal().getActiveRealm().getId();
 

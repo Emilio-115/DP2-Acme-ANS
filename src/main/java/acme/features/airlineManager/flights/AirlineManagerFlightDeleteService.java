@@ -10,7 +10,9 @@
  * they accept any liabilities with respect to them.
  */
 
-package acme.features.airline_manager.flights;
+package acme.features.airlineManager.flights;
+
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,7 +20,8 @@ import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.flights.Flight;
-import acme.realms.AirlineManager;
+import acme.entities.legs.Leg;
+import acme.realms.airlineManager.AirlineManager;
 
 @GuiService
 public class AirlineManagerFlightDeleteService extends AbstractGuiService<AirlineManager, Flight> {
@@ -52,7 +55,7 @@ public class AirlineManagerFlightDeleteService extends AbstractGuiService<Airlin
 		int flightId;
 
 		flightId = super.getRequest().getData("id", int.class);
-		flight = this.repository.findFlightById(flightId).get();
+		flight = this.repository.findFlightById(flightId).orElse(null);
 
 		super.getBuffer().addData(flight);
 	}
@@ -64,15 +67,15 @@ public class AirlineManagerFlightDeleteService extends AbstractGuiService<Airlin
 
 	@Override
 	public void validate(final Flight flight) {
-		;
+
 	}
 
 	@Override
 	public void perform(final Flight flight) {
-		//Collection<Duty> duties;
+		Collection<Leg> legs;
 
-		//duties = this.repository.findDutiesByJobId(flight.getId());
-		//this.repository.deleteAll(duties); //TODO: delete all legs
+		legs = this.repository.findAllLegsByFlightId(flight.getId());
+		this.repository.deleteAll(legs);
 		this.repository.delete(flight);
 	}
 
@@ -81,7 +84,7 @@ public class AirlineManagerFlightDeleteService extends AbstractGuiService<Airlin
 		Dataset dataset;
 		dataset = super.unbindObject(flight, "tag", "requiresSelfTransfer", "cost", "description", "draftMode");
 		dataset.put("origin", flight.origin());
-		dataset.put("destiny", flight.destiny());
+		dataset.put("destination", flight.destination());
 		dataset.put("departureDate", flight.scheduledDeparture());
 		dataset.put("arrivalDate", flight.scheduledArrival());
 		dataset.put("numberOfLayovers", flight.numberOfLayovers());

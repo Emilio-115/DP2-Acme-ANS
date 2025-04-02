@@ -1,5 +1,5 @@
 /*
- * AirlineManagerLegPublishService.java
+ * AirlineManagerLegUpdateService.java
  *
  * Copyright (C) 2012-2025 Rafael Corchuelo.
  *
@@ -10,7 +10,7 @@
  * they accept any liabilities with respect to them.
  */
 
-package acme.features.airline_manager.flights;
+package acme.features.airlineManager.flights;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,10 +18,10 @@ import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.flights.Flight;
-import acme.realms.AirlineManager;
+import acme.realms.airlineManager.AirlineManager;
 
 @GuiService
-public class AirlineManagerFlightPublishService extends AbstractGuiService<AirlineManager, Flight> {
+public class AirlineManagerFlightUpdateService extends AbstractGuiService<AirlineManager, Flight> {
 
 	@Autowired
 	private AirlineManagerFlightRepository repository;
@@ -65,7 +65,6 @@ public class AirlineManagerFlightPublishService extends AbstractGuiService<Airli
 
 	@Override
 	public void perform(final Flight flight) {
-		flight.setDraftMode(false);
 		this.repository.save(flight);
 	}
 
@@ -74,7 +73,7 @@ public class AirlineManagerFlightPublishService extends AbstractGuiService<Airli
 		Dataset dataset;
 		dataset = super.unbindObject(flight, "tag", "requiresSelfTransfer", "cost", "description", "draftMode");
 		dataset.put("origin", flight.origin());
-		dataset.put("destiny", flight.destiny());
+		dataset.put("destination", flight.destination());
 		dataset.put("departureDate", flight.scheduledDeparture());
 		dataset.put("arrivalDate", flight.scheduledArrival());
 		dataset.put("numberOfLayovers", flight.numberOfLayovers());
