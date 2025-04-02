@@ -5,6 +5,7 @@ flight-crew-member.activity-log.list.label.flight-number = Número de vuelo
 flight-crew-member.activity-log.list.label.incident-type = Tipo de incidente
 flight-crew-member.activity-log.list.label.severity-level = Nivel de severidad
 
+flight-crew-member.activity-log.form.label.registered-at = Registrado en
 flight-crew-member.activity-log.form.label.registering-assignment = Número de vuelo
 flight-crew-member.activity-log.form.label.incident-type = Tipo de incidente
 flight-crew-member.activity-log.form.label.description = Descripción

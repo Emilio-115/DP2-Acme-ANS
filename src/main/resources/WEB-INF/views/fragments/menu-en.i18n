@@ -30,9 +30,9 @@ master.menu.administrator.shut-system-down = Shut system down
 # master.menu.flight-crew-member ##############################################
 
 master.menu.flight-crew-member = Flight Crew Member
-master.menu.flight-crew-member.flight-assignment.list-planned = List planned assignments
-master.menu.flight-crew-member.flight-assignment.list-departed = List assignments of departed legs
-master.menu.flight-crew-member.flight-assignment.list-drafts = List draft assignments
+master.menu.flight-crew-member.flight-assignment.list-planned = List my planned assignments
+master.menu.flight-crew-member.flight-assignment.list-departed = List my assignments of departed legs
+master.menu.flight-crew-member.flight-assignment.list-drafts = List my draft assignments
 master.menu.flight-crew-member.activity-log.list-published = List my published activity logs
 master.menu.flight-crew-member.activity-log.list-drafts = List my draft activity logs
 
