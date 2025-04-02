@@ -8,7 +8,6 @@ import acme.client.components.views.SelectChoices;
 import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
-import acme.entities.claims.Claim;
 import acme.entities.trackingLogs.TrackingLog;
 import acme.entities.trackingLogs.TrackingLogStatus;
 import acme.realms.AssistanceAgent;
@@ -44,15 +43,8 @@ public class AssistanceAgentTrackingLogDeleteService extends AbstractGuiService<
 	public void bind(final TrackingLog trackingLog) {
 		assert trackingLog != null;
 
-		int claimId;
-		Claim claim;
-
-		claimId = super.getRequest().getData("claimId", int.class);
-		claim = this.repository.findClaimById(claimId);
-
 		super.bindObject(trackingLog, "undergoingStep", "resolutionPercentage", "resolution", "status");
 		trackingLog.setLastUpdateMoment(MomentHelper.getCurrentMoment());
-		trackingLog.setClaim(claim);
 	}
 
 	@Override
@@ -69,8 +61,6 @@ public class AssistanceAgentTrackingLogDeleteService extends AbstractGuiService<
 
 	@Override
 	public void unbind(final TrackingLog trackingLog) {
-		int claimId = super.getRequest().getData("claimId", int.class);
-		Claim claim = this.repository.findClaimById(claimId);
 		SelectChoices choices;
 		Dataset dataset;
 
@@ -78,8 +68,6 @@ public class AssistanceAgentTrackingLogDeleteService extends AbstractGuiService<
 
 		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "undergoingStep", "resolutionPercentage", "resolution", "draftMode", "status");
 		dataset.put("statuses", choices);
-		dataset.put("claim", claim);
-		dataset.put("claimId", claimId);
 
 		super.getResponse().addData(dataset);
 

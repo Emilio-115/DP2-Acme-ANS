@@ -5,9 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
+import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
-import acme.entities.claims.Claim;
 import acme.entities.trackingLogs.TrackingLog;
 import acme.entities.trackingLogs.TrackingLogStatus;
 import acme.realms.AssistanceAgent;
@@ -42,14 +42,8 @@ public class AssistanceAgentTrackingLogPublishService extends AbstractGuiService
 	public void bind(final TrackingLog trackingLog) {
 		assert trackingLog != null;
 
-		int claimId;
-		Claim claim;
-
-		claimId = super.getRequest().getData("claimId", int.class);
-		claim = this.repository.findClaimById(claimId);
-
-		super.bindObject(trackingLog, "lastUpdateMoment", "undergoingStep", "resolutionPercentage", "resolution", "status");
-		trackingLog.setClaim(claim);
+		super.bindObject(trackingLog, "undergoingStep", "resolutionPercentage", "resolution", "status");
+		trackingLog.setLastUpdateMoment(MomentHelper.getCurrentMoment());
 	}
 
 	@Override
@@ -66,8 +60,6 @@ public class AssistanceAgentTrackingLogPublishService extends AbstractGuiService
 
 	@Override
 	public void unbind(final TrackingLog trackingLog) {
-		int claimId = super.getRequest().getData("claimId", int.class);
-		Claim claim = this.repository.findClaimById(claimId);
 		SelectChoices choices;
 		Dataset dataset;
 
@@ -75,8 +67,6 @@ public class AssistanceAgentTrackingLogPublishService extends AbstractGuiService
 
 		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "undergoingStep", "resolutionPercentage", "resolution", "status", "draftMode");
 		dataset.put("statuses", choices);
-		dataset.put("claim", claim);
-		dataset.put("claimId", claimId);
 
 		super.getResponse().addData(dataset);
 

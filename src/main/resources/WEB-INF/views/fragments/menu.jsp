@@ -83,7 +83,7 @@
                   action="/airline-manager/flight/list" />
               </acme:menu-option>
 
-            </acme:menu-left>
+       
 
             <acme:menu-right>
               <acme:menu-option code="master.menu.user-account" access="isAuthenticated()">
