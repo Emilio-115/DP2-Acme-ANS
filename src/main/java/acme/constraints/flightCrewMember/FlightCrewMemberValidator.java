@@ -29,7 +29,7 @@ public class FlightCrewMemberValidator extends AbstractValidator<ValidFlightCrew
 		FlightCrewMemberRepository flightCrewMemberRepository = SpringHelper.getBean(FlightCrewMemberRepository.class);
 		boolean isEmployeeCodeFree = flightCrewMemberRepository.isEmployeeCodeFree(flightCrewMember.getId(), flightCrewMember.getEmployeeCode());
 
-		super.state(context, isEmployeeCodeFree, "employeeCode", "acme.validation.flight-crew-member.non-unique-employee-code");
+		super.state(context, isEmployeeCodeFree, "employeeCode", "acme.validation.assistance-agent.non-unique-employee-code");
 
 		result = !super.hasErrors(context);
 

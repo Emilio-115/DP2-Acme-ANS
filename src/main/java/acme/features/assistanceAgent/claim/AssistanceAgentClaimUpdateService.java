@@ -15,7 +15,7 @@ import acme.entities.claims.ClaimStatus;
 import acme.entities.claims.ClaimType;
 import acme.entities.legs.Leg;
 import acme.entities.legs.LegStatus;
-import acme.realms.AssistanceAgent;
+import acme.realms.assistanceAgent.AssistanceAgent;
 
 @GuiService
 public class AssistanceAgentClaimUpdateService extends AbstractGuiService<AssistanceAgent, Claim> {

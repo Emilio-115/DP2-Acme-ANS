@@ -36,6 +36,8 @@ acme.validation.flight-assignment.copilot-duty-taken.message = El rol de copilot
 
 acme.validation.flight-crew-member.non-unique-employee-code = El código de empleado debe ser único
 
+acme.validation.assistance-agent.non-unique-employee-code = El código de empleado debe ser único
+
 acme.validation.flight.leg-not-published.message = Todas los segmentos tienen que estar publicados
 acme.validation.leg.overlapping-legs.message = Fechas de salida o llegada no validas, los segmentos no pueden superponerse
 acme.validation.leg.busy-aircraft.message = Avión no válido, el avión está ocupado durante ese rango de tiempo

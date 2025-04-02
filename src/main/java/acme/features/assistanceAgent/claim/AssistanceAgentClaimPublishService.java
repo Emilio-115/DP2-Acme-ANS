@@ -17,7 +17,7 @@ import acme.entities.claims.ClaimType;
 import acme.entities.legs.Leg;
 import acme.entities.legs.LegStatus;
 import acme.entities.trackingLogs.TrackingLog;
-import acme.realms.AssistanceAgent;
+import acme.realms.assistanceAgent.AssistanceAgent;
 
 @GuiService
 public class AssistanceAgentClaimPublishService extends AbstractGuiService<AssistanceAgent, Claim> {

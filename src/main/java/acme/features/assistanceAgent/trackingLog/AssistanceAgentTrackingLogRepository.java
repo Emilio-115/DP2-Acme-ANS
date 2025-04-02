@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import acme.client.repositories.AbstractRepository;
 import acme.entities.claims.Claim;
 import acme.entities.trackingLogs.TrackingLog;
-import acme.realms.AssistanceAgent;
+import acme.realms.assistanceAgent.AssistanceAgent;
 
 public interface AssistanceAgentTrackingLogRepository extends AbstractRepository {
 

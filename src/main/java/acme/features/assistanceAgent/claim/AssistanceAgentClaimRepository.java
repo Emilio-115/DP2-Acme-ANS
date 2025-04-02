@@ -12,7 +12,7 @@ import acme.entities.claims.Claim;
 import acme.entities.legs.Leg;
 import acme.entities.legs.LegStatus;
 import acme.entities.trackingLogs.TrackingLog;
-import acme.realms.AssistanceAgent;
+import acme.realms.assistanceAgent.AssistanceAgent;
 
 public interface AssistanceAgentClaimRepository extends AbstractRepository {
 
