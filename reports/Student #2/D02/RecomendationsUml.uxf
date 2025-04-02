@@ -20,7 +20,7 @@ Recomendations
 + locality: String {Mandatory,ValidString,Automapped}
 + address: String {Mandatory,ValidString,Automapped}
 
-bg=cyan</panel_attributes>
+bg=yellow</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
