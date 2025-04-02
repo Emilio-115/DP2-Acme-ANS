@@ -8,6 +8,6 @@ leg-6,6746,2019/03/20 20:00,2019/03/21 19:00,ON_TIME,true,airport-02,airport-01,
 leg-7,2222,2019/03/21 20:00,2019/03/22 19:00,ON_TIME,true,airport-03,airport-02,aircraft-07,flight-03
 leg-8,3333,2019/03/22 20:00,2019/03/23 19:00,DELAYED,false,airport-04,airport-03,aircraft-07,flight-07
 leg-9,9999,2000/01/1 00:01,2200/12/31 23:58,CANCELLED,false,airport-01,airport-04,aircraft-09,flight-08
-leg-10,0000,2000/01/1 00:00,2200/12/31 23:59,LANDED,false,airport-02,airport-01,aircraft-10,flight-09
+leg-10,0000,2000/01/1 00:00,2018/12/31 23:59,LANDED,false,airport-02,airport-01,aircraft-10,flight-09
 leg-11,1000,2030/01/1 00:00,2030/01/1 23:59,ON_TIME,false,airport-01,airport-02,aircraft-01,flight-11
 leg-12,1001,2031/01/1 00:00,2031/01/1 23:59,ON_TIME,false,airport-01,airport-02,aircraft-01,flight-11

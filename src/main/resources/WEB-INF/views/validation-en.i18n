@@ -11,12 +11,25 @@ acme.validation.percentage.message = Error in the relation between percentage an
 acme.validation.resolutionDescription.message = Error in the relation between description and status in the tracking log
 acme.validation.short-text.message = Invalid text, it needs to be shorter or equal than 50 characters
 
+acme.validation.claim.not-completed-claim = The process of this claim is not complete
+acme.validation.claim.not-status-claim = The process of this claim is complete, determine if it is accepted
+acme.validation.claim.moment-registration-before-arrival = The moment have to be before the leg landed
+
 acme.validation.activity-log.assignment-not-published.message = Flight assignment is not published
 acme.validation.activity-log.assignment-not-confirmed.message = Flight assignment is not confirmed
 acme.validation.activity-log.registered-before-landing.message = Invalid registeredAt date: registered before the respective leg landed
 acme.validation.activity-log.arrival-before-departure.message = Invalid departureDate date, arrival must be after departure
 
+acme.validation.update.draftMode.claim = This claim can not be publish with unpublished tracking logs
+
+acme.validation.update.draftMode.tracking-log = This tracking log can not be publish with unpublished tracking logs
+
+acme.validation.create.tracking-log.low-percentage = The percentage is not valid, it has to be higher than the last tracking log
+
 acme.validation.airport.non-unique-iata-code.message = IATA code must be unique
+
+acme.validation.tracking-log.not-good-update-date = The update date has to be after the date of the creation of the claim
+acme.validation.tracking-log.update-before-other = The update date has to be after the date of the most recent tracking log
 
 acme.validation.aircraft.non-unique-registration-number = Registration Number already exist, registration number must be unique
 
@@ -30,6 +43,7 @@ acme.validation.flight-assignment.copilot-duty-taken.message = Copilot duty is a
 
 acme.validation.flight-crew-member.non-unique-employee-code = Employee code must be unique
 
+acme.validation.assistance-agent.non-unique-employee-code = Employee code must be unique
 acme.validation.flight.leg-not-published.message = Every leg have to be published
 acme.validation.leg.overlapping-legs.message = Invalid dates of departure or arrival, legs cannot overlap
 acme.validation.leg.busy-aircraft.message = Invalid aircraft, the aircraft is busy in that time range
