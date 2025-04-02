@@ -9,7 +9,7 @@ import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.flights.Flight;
-import acme.realms.AirlineManager;
+import acme.realms.airline_manager.AirlineManager;
 
 @GuiService
 public class AirlineManagerFlightListService extends AbstractGuiService<AirlineManager, Flight> {
@@ -40,9 +40,10 @@ public class AirlineManagerFlightListService extends AbstractGuiService<AirlineM
 		Dataset dataset;
 		dataset = super.unbindObject(flight, "id");
 		dataset.put("origin", flight.origin());
-		dataset.put("destiny", flight.destiny());
+		dataset.put("destination", flight.destination());
 		dataset.put("departureDate", flight.scheduledDeparture());
 		dataset.put("arrivalDate", flight.scheduledArrival());
+		dataset.put("published", !flight.isDraftMode());
 		super.getResponse().addData(dataset);
 	}
 

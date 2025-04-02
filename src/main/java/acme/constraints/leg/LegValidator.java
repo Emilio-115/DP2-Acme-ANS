@@ -1,8 +1,6 @@
 
 package acme.constraints.leg;
 
-import java.util.List;
-
 import javax.validation.ConstraintValidatorContext;
 
 import acme.client.components.validation.AbstractValidator;
@@ -10,6 +8,7 @@ import acme.client.components.validation.Validator;
 import acme.client.helpers.SpringHelper;
 import acme.entities.legs.Leg;
 import acme.entities.legs.LegRepository;
+import acme.entities.legs.LegStatus;
 
 @Validator
 public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
@@ -25,28 +24,35 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 
 		boolean result = true;
 
+		if (leg == null)
+			return true;
+
 		LegRepository legRepository = SpringHelper.getBean(LegRepository.class);
-		boolean isAircraftBusy = legRepository.isAircrafBusy(leg, leg.getAircraft(), leg.getDepartureDate(), leg.getArrivalDate());
 
-		if (leg.getDepartureDate().after(leg.getArrivalDate()))
-			super.state(context, false, "departureDate", "acme.validation.leg.arrival-before-departure.message");
-		else if (isAircraftBusy)
-			super.state(context, false, "aircraft", "acme.validation.leg.busy-aircraft.message");
-		else {
-			List<Leg> legsOfFlight = legRepository.findAllLegsByFlight(leg.getFlight());
+		if (leg.getAircraft() != null) {
 
-			for (Leg l : legsOfFlight) {
+			boolean isAircraftBusy = legRepository.isAircrafBusy(leg.getId(), leg.getAircraft().getId(), leg.getDepartureDate(), leg.getArrivalDate());
+			super.state(context, !isAircraftBusy, "aircraft", "acme.validation.leg.busy-aircraft.message");
 
-				if (leg.equals(l))
-					continue;
+			if (leg.getAircraft().getAirline() != null) {
 
-				boolean areDatesBeforeDeparture = leg.getArrivalDate().before(l.getDepartureDate()) && leg.getDepartureDate().before(l.getDepartureDate());
-				boolean areDatesAfterArrival = leg.getArrivalDate().after(l.getArrivalDate()) && leg.getDepartureDate().after(l.getArrivalDate());
-
-				boolean areDatesCorrect = areDatesAfterArrival || areDatesBeforeDeparture;
-
-				super.state(context, areDatesCorrect, "dates", "acme.validation.leg.overlapping-legs.message");
+				boolean isFlightNumberUsed = legRepository.isFlightNumberUsed(leg.getId(), leg.getAircraft().getAirline().getId(), leg.getFlightNumberDigits());
+				super.state(context, !isFlightNumberUsed, "flightNumberDigits", "acme.validation.leg.unique-flight-number.message");
 			}
+		}
+
+		if (leg.getDepartureDate() != null) {
+			boolean isDepartureAfterArrival = leg.getDepartureDate().after(leg.getArrivalDate());
+			super.state(context, !isDepartureAfterArrival, "departureDate", "acme.validation.leg.arrival-before-departure.message");
+		}
+
+		if (leg.getFlight() != null) {
+			boolean isLegOverlapping = legRepository.isLegOverlapping(leg.getId(), leg.getFlight().getId(), leg.getDepartureDate(), leg.getArrivalDate());
+			super.state(context, !isLegOverlapping, "departureDate", "acme.validation.leg.overlapping-legs.message");
+
+			boolean isLegStatusConsistentWithDraftMode = !leg.isDraftMode() || leg.getStatus().equals(LegStatus.ON_TIME);
+			super.state(context, isLegStatusConsistentWithDraftMode, "status", "acme.validation.leg.draft-mode-status.message");
+
 		}
 
 		result = !super.hasErrors(context);

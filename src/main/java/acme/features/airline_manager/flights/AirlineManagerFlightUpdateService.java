@@ -18,7 +18,7 @@ import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.flights.Flight;
-import acme.realms.AirlineManager;
+import acme.realms.airline_manager.AirlineManager;
 
 @GuiService
 public class AirlineManagerFlightUpdateService extends AbstractGuiService<AirlineManager, Flight> {
@@ -73,7 +73,7 @@ public class AirlineManagerFlightUpdateService extends AbstractGuiService<Airlin
 		Dataset dataset;
 		dataset = super.unbindObject(flight, "tag", "requiresSelfTransfer", "cost", "description", "draftMode");
 		dataset.put("origin", flight.origin());
-		dataset.put("destiny", flight.destiny());
+		dataset.put("destination", flight.destination());
 		dataset.put("departureDate", flight.scheduledDeparture());
 		dataset.put("arrivalDate", flight.scheduledArrival());
 		dataset.put("numberOfLayovers", flight.numberOfLayovers());

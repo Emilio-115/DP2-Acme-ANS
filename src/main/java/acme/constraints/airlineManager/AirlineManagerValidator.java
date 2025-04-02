@@ -1,11 +1,15 @@
 
 package acme.constraints.airlineManager;
 
+import java.util.List;
+
 import javax.validation.ConstraintValidatorContext;
 
 import acme.client.components.validation.AbstractValidator;
 import acme.client.components.validation.Validator;
-import acme.realms.AirlineManager;
+import acme.client.helpers.SpringHelper;
+import acme.realms.airline_manager.AirlineManager;
+import acme.realms.airline_manager.AirlineManagerRepository;
 
 @Validator
 public class AirlineManagerValidator extends AbstractValidator<ValidAirlineManager, AirlineManager> {
@@ -16,13 +20,19 @@ public class AirlineManagerValidator extends AbstractValidator<ValidAirlineManag
 	}
 
 	@Override
-	public boolean isValid(final AirlineManager manager, final ConstraintValidatorContext context) {
+	public boolean isValid(final AirlineManager airlineManager, final ConstraintValidatorContext context) {
 		assert context != null;
 
 		boolean result;
 
-		if (manager == null)
-			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
+		if (airlineManager == null)
+			return true;
+
+		AirlineManagerRepository managerRepository = SpringHelper.getBean(AirlineManagerRepository.class);
+		List<AirlineManager> managers = managerRepository.findAllAirlineManagersWithIndentifier(airlineManager.getId(), airlineManager.getIdentifier());
+		boolean isIndentifierFree = managers.isEmpty();
+
+		super.state(context, isIndentifierFree, "identifier", "acme.validation.airline-manager.non-unique-identifier");
 
 		result = !super.hasErrors(context);
 

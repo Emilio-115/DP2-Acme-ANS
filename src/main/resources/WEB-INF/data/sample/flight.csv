@@ -1,12 +1,12 @@
 key,tag,requiresSelfTransfer,cost,draftMode,description,key:manager
-flight-01,Lo,true,EUR 12.1,true,A,manager-01
-flight-02,L,true,EUR 13.4,true,AB,manager-02
-flight-03,"Lorem ipsum dolor sit amet, consectetur adipiscing",false,USD 93.01,true,⤮ⓞ⓭➉➜⎏⋇⢄⍍⾞⣥⚗⨌⫳⯝⓻⪪₱∽ⰣⅡ⊳ⱴ⩪⏼ⓟ⽃⭈⪻Ⲵ⮥⠤␬⡟▱₝⇩⪻⹀⹌⚤⠎⿐⺆⤢≮♤⎽⵷⼔◉⍺ ⯃⼥♟,manager-02
-flight-04,😶‍🌫️😶‍🌫️😶‍🌫️😶‍🌫️😶‍🌫️👍👍👍😍😍😍😍,false,USD 0.01,true,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolorA",manager-02
-flight-05,℮⼚℆⒒⡂▔∕₃⹮∤Ⰱ₮,true,USD 999999.99,true,就有草。,manager-02
-flight-06,'' or 'A' = 'A,true,EUR 1000000.00,true,'' or 'A' = 'A,manager-02
-flight-07,⊮℁Ⲯ⑎⥌ⓟ⩆₁○Ⓔ⣌⌑⁀⸵↋╏⡪,false,EUR 00.00,true,🤣🤣🤣🤣🤣,manager-02
-flight-08,<script>alert(‘Hacked!’);</script>,false,EUR 49.13,true,<marquee>Hacked</marquee>,manager-02
-flight-09,<marquee>Hacked</marquee>,true,EUR 13.99,true,<script>alert(‘Hacked!’);</script>,manager-02
+flight-01,Lo,true,EUR 12.1,false,A,manager-01
+flight-02,L,true,EUR 13.4,true,AB,manager-01
+flight-03,"Lorem ipsum dolor sit amet, consectetur adipiscing",false,USD 93.01,true,⤮ⓞ⓭➉➜⎏⋇⢄⍍⾞⣥⚗⨌⫳⯝⓻⪪₱∽ⰣⅡ⊳ⱴ⩪⏼ⓟ⽃⭈⪻Ⲵ⮥⠤␬⡟▱₝⇩⪻⹀⹌⚤⠎⿐⺆⤢≮♤⎽⵷⼔◉⍺ ⯃⼥♟,manager-01
+flight-04,😶‍🌫️😶‍🌫️😶‍🌫️😶‍🌫️😶‍🌫️👍👍👍😍😍😍😍,false,USD 0.01,true,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolorA",manager-01
+flight-05,℮⼚℆⒒⡂▔∕₃⹮∤Ⰱ₮,true,USD 999999.99,true,就有草。,manager-01
+flight-06,'' or 'A' = 'A,true,EUR 1000000.00,true,'' or 'A' = 'A,manager-01
+flight-07,⊮℁Ⲯ⑎⥌ⓟ⩆₁○Ⓔ⣌⌑⁀⸵↋╏⡪,false,EUR 00.00,false,🤣🤣🤣🤣🤣,manager-01
+flight-08,<script>alert(‘Hacked!’);</script>,false,EUR 49.13,false,<marquee>Hacked</marquee>,manager-01
+flight-09,<marquee>Hacked</marquee>,true,EUR 13.99,false,<script>alert(‘Hacked!’);</script>,manager-01
 flight-10,"Lorem ipsum dolor sit amet, consectetur adipiscin",true,EUR 1344.88,true,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor",manager-02
 flight-11,Available and pending!,false,EUR 12.1,false,Available and pending!,manager-01
