@@ -8,11 +8,12 @@
         <acme:input-select code="customer.booking.form.label.travelclass" path="travelClass"
           choices="${travelClasses}" />
         <acme:input-textbox code="customer.booking.form.label.creditcardlastnibble" path="creditCardLastNibble" />
-        <acme:input-money code="customer.booking.form.label.price" path="price"/>
+       
 
 
         <jstl:choose>
           <jstl:when test="${acme:anyOf(_command,'show|update|delete|publish')}">
+           <acme:input-money code="customer.booking.form.label.price" path="price" readonly="true"/>
             <acme:input-moment code="customer.booking.form.label.purchasemoment" path="purchaseMoment"
               readonly="true" />
             <acme:input-select code="customer.booking.flight.form.label.tag" path="flight"
