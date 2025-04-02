@@ -39,10 +39,8 @@
 	</acme:footer-logo>
 </acme:footer-panel>
 
-<jstl:if test="${advertisement != null}">
-	<div class="panel-body" style="margin: 1em 0em 1em 0em; text-align: center;">	
-		<a href="${advertisement.target}" target="_blank">
-			<img src="${advertisement.picture}" alt="${advertisement.slogan}" class="img-fluid rounded" style="border-style: solid;"/>
-		</a>
+<jstl:if test="${service != null}">
+	<div class="panel-body" style="margin: 1em 0em 1em 0em; text-align: center; ">	
+			<img src="${service.picture}" alt="${service.name}" class="img-fluid rounded" style="border-style: solid; width: 35rem;"/>
 	</div>
 </jstl:if>
