@@ -10,7 +10,7 @@
  * they accept any liabilities with respect to them.
  */
 
-package acme.features.airline_manager.legs;
+package acme.features.airlineManager.legs;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -27,10 +27,10 @@ import acme.entities.airports.Airport;
 import acme.entities.flights.Flight;
 import acme.entities.legs.Leg;
 import acme.entities.legs.LegStatus;
-import acme.realms.airline_manager.AirlineManager;
+import acme.realms.airlineManager.AirlineManager;
 
 @GuiService
-public class AirlineManagerLegUpdateService extends AbstractGuiService<AirlineManager, Leg> {
+public class AirlineManagerLegPublishService extends AbstractGuiService<AirlineManager, Leg> {
 
 	@Autowired
 	private AirlineManagerLegRepository repository;
@@ -90,6 +90,7 @@ public class AirlineManagerLegUpdateService extends AbstractGuiService<AirlineMa
 		int aircraftId = super.getRequest().getData("aircraft", int.class);
 		Aircraft aircraft = this.repository.findAircraftById(aircraftId).orElse(null);
 		leg.setAircraft(aircraft);
+		leg.setDraftMode(false);
 	}
 
 	@Override
@@ -110,7 +111,7 @@ public class AirlineManagerLegUpdateService extends AbstractGuiService<AirlineMa
 		Dataset dataset;
 		dataset = super.unbindObject(leg, "departureDate", "arrivalDate", "flightNumberDigits");
 		dataset.put("flightNumber", leg.flightNumber());
-		dataset.put("draftMode", leg.isDraftMode());
+		dataset.put("draftMode", true);
 		dataset.put("flightDraftMode", leg.getFlight().isDraftMode());
 
 		Collection<Airport> airports = this.repository.findAllAirports();

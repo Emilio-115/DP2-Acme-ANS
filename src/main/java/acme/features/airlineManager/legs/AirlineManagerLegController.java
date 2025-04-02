@@ -1,5 +1,5 @@
 
-package acme.features.airline_manager.legs;
+package acme.features.airlineManager.legs;
 
 import javax.annotation.PostConstruct;
 
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acme.client.controllers.AbstractGuiController;
 import acme.client.controllers.GuiController;
 import acme.entities.legs.Leg;
-import acme.realms.airline_manager.AirlineManager;
+import acme.realms.airlineManager.AirlineManager;
 
 @GuiController
 public class AirlineManagerLegController extends AbstractGuiController<AirlineManager, Leg> {

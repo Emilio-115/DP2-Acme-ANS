@@ -1,5 +1,5 @@
 
-package acme.features.airline_manager.flights;
+package acme.features.airlineManager.flights;
 
 import java.util.Optional;
 
@@ -9,7 +9,7 @@ import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.flights.Flight;
-import acme.realms.airline_manager.AirlineManager;
+import acme.realms.airlineManager.AirlineManager;
 
 @GuiService
 public class AirlineManagerFlightShowService extends AbstractGuiService<AirlineManager, Flight> {

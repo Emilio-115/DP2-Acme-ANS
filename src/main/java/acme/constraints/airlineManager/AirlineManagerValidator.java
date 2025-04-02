@@ -8,8 +8,8 @@ import javax.validation.ConstraintValidatorContext;
 import acme.client.components.validation.AbstractValidator;
 import acme.client.components.validation.Validator;
 import acme.client.helpers.SpringHelper;
-import acme.realms.airline_manager.AirlineManager;
-import acme.realms.airline_manager.AirlineManagerRepository;
+import acme.realms.airlineManager.AirlineManager;
+import acme.realms.airlineManager.AirlineManagerRepository;
 
 @Validator
 public class AirlineManagerValidator extends AbstractValidator<ValidAirlineManager, AirlineManager> {

@@ -1,5 +1,5 @@
 
-package acme.features.airline_manager.legs;
+package acme.features.airlineManager.legs;
 
 import java.util.Collection;
 import java.util.List;
@@ -12,8 +12,8 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.flights.Flight;
 import acme.entities.legs.Leg;
-import acme.features.airline_manager.flights.AirlineManagerFlightRepository;
-import acme.realms.airline_manager.AirlineManager;
+import acme.features.airlineManager.flights.AirlineManagerFlightRepository;
+import acme.realms.airlineManager.AirlineManager;
 
 @GuiService
 public class AirlineManagerLegListService extends AbstractGuiService<AirlineManager, Leg> {
