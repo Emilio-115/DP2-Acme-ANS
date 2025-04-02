@@ -58,6 +58,31 @@ public class TrackingLogValidator extends AbstractValidator<ValidTrackingLog, Tr
 
 					super.state(context, correctDescription, "resolution", "acme.validation.resolutionDescription.message");
 				}
+				{
+					var updateMoment = TL.getLastUpdateMoment();
+					if (updateMoment == null) {
+						super.state(context, false, "lastUpdateMoment", "javax.validation.constraints.NotNull.message");
+						return false;
+					} else if (!updateMoment.after(TL.getClaim().getRegistrationMoment())) {
+						super.state(context, false, "lastUpdateMoment", "acme.validation.tracking-log.not-good-update-date");
+						return false;
+					} else {
+						List<TrackingLog> topDate = trackingLogRepository.findTopDateReclaim(TL.getClaim().getId());
+
+						boolean cond;
+
+						if (topDate == null || topDate.isEmpty())
+							cond = true;
+						else if (topDate.get(0).getId() == TL.getId())
+							cond = TL.getLastUpdateMoment().after(topDate.get(0).getLastUpdateMoment()) || TL.getLastUpdateMoment().equals(topDate.get(0).getLastUpdateMoment());
+						else if (topDate.contains(TL))
+							cond = true;
+						else
+							cond = TL.getLastUpdateMoment().after(topDate.get(0).getLastUpdateMoment());
+
+						super.state(context, cond, "lastUpdateMoment", "acme.validation.tracking-log.update-before-other");
+					}
+				}
 				if (!TL.isReclaim()) {
 					List<TrackingLog> topPercentage = trackingLogRepository.findTopPercentage(TL.getClaim().getId());
 

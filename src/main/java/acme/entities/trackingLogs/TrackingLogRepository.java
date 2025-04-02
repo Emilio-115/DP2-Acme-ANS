@@ -24,4 +24,12 @@ public interface TrackingLogRepository extends AbstractRepository {
 		ORDER BY tl.resolutionPercentage DESC
 		""")
 	List<TrackingLog> findTopPercentageReclaim(int claimId);
+
+	@Query("""
+		SELECT tl
+		FROM TrackingLog tl
+		WHERE tl.claim.id = :claimId AND tl.reclaim = true
+		ORDER BY tl.lastUpdateMoment DESC
+		""")
+	List<TrackingLog> findTopDateReclaim(int claimId);
 }

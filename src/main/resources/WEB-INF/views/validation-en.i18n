@@ -28,6 +28,9 @@ acme.validation.create.tracking-log.low-percentage = The percentage is not valid
 
 acme.validation.airport.non-unique-iata-code.message = IATA code must be unique
 
+acme.validation.tracking-log.not-good-update-date = The update date has to be after the date of the creation of the claim
+acme.validation.tracking-log.update-before-other = The update date has to be after the date of the most recent tracking log
+
 acme.validation.aircraft.non-unique-registration-number = Registration Number already exist, registration number must be unique
 
 acme.validation.flight-assignment.flight-crew-member-unavailable.message = Flight crew member is unavailable
