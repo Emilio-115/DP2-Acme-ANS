@@ -4,10 +4,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>252</x>
+      <x>261</x>
       <y>594</y>
       <w>468</w>
-      <h>117</h>
+      <h>135</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
 Passenger
@@ -16,7 +16,8 @@ Passenger
 + email: String {Mandatory,ValidEmail,Automapped}
 + passportNumber: String {Mandatory,ValidPassportNumber,Automapped}
 + birthDate: Date {Mandatory,ValidMoment(past=true),Temporal(TIMESTAMP)}
-- specialNeeds: String {Optional,ValidString(max=50),Automapped}
++ draftMode: boolean {Mandatory,Automapped}
++ specialNeeds: String {Optional,ValidShortText,Automapped}
 
 bg=yellow</panel_attributes>
     <additional_attributes/>
@@ -24,7 +25,7 @@ bg=yellow</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>216</x>
+      <x>225</x>
       <y>36</y>
       <w>549</w>
       <h>144</h>
@@ -35,9 +36,10 @@ Customer
 + identifier: String {Mandatory,ValidInitialsNumberIdentifier,Column(unique = true)}
 + phoneNumber: String {Mandatory,ValidPhoneNumber, Automapped}
 + physicalAddress: String {Mandatory,ValidString, Automapped}
-+ city: String {Mandatory,ValidString(max = 50), Automapped}
-+ country: String {Mandatory,ValidString(max = 50), Automapped}
-- earnedPoints: Integer {Optional,ValidNumber(min = 0, max = 500000),Automapped}
++ city: String {Mandatory,ValidShortText, Automapped}
++ country: String {Mandatory,ValidShortText, Automapped}
++ draftMode: boolean {Mandatory,Automapped}
++ earnedPoints: Integer {Optional,ValidNumber(min = 0, max = 500000),Automapped}
 
 bg=#CCDA9DD</panel_attributes>
     <additional_attributes/>
@@ -45,19 +47,20 @@ bg=#CCDA9DD</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>207</x>
-      <y>261</y>
+      <x>216</x>
+      <y>252</y>
       <w>558</w>
-      <h>117</h>
+      <h>135</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
 Booking
+{ValidBooking}
 --
 + locatorCode: String {Mandatory,ValidLocatorCode,Column(unique=true)}
 + purchaseMoment: Date {Mandatory,ValidMoment(past=true),Automapped}
 + travelClass: TravelClass {Mandatory,Valid,Automapped}
 + price: Money {Mandatory,ValidMoney,Automapped}
-- creditCardLastNibble: String {Optional,Pattern(regex = "^\d{4}$"),Automapped}
++ creditCardLastNibble: String {Optional,Pattern(regex = "^\d{4}$"),Automapped}
 
 bg=yellow</panel_attributes>
     <additional_attributes/>
@@ -65,69 +68,71 @@ bg=yellow</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>477</x>
+      <x>486</x>
       <y>171</y>
       <w>90</w>
-      <h>108</h>
+      <h>99</h>
     </coordinates>
     <panel_attributes>lt=x-&gt;
 m1= *
 m2=1
 made by &gt;</panel_attributes>
-    <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>477</x>
+      <x>486</x>
       <y>513</y>
       <w>117</w>
       <h>99</h>
     </coordinates>
     <panel_attributes>lt=&lt;-x
 m1=1
-m2= 1..*
+m2=  *
 associated to &gt;</panel_attributes>
     <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>396</x>
+      <x>405</x>
       <y>468</y>
       <w>189</w>
       <h>54</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
 BookingRecord
+{ValidBookingRecord}
 -
+
 bg=yellow</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>477</x>
-      <y>369</y>
+      <x>486</x>
+      <y>378</y>
       <w>117</w>
-      <h>117</h>
+      <h>108</h>
     </coordinates>
     <panel_attributes>lt=&lt;-x
 m1=1
-m2= 1..*
+m2= *
 associated to &gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>909</x>
+      <x>918</x>
       <y>351</y>
       <w>90</w>
       <h>45</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
-Fligth
+Flight
 
 bg=yellow</panel_attributes>
     <additional_attributes/>
@@ -135,7 +140,7 @@ bg=yellow</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>855</x>
+      <x>864</x>
       <y>108</y>
       <w>144</w>
       <h>72</h>
@@ -152,7 +157,7 @@ bg=green</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>756</x>
+      <x>765</x>
       <y>297</y>
       <w>225</w>
       <h>72</h>
@@ -162,5 +167,44 @@ m1= *
 m2=1
 reserve seats for &gt;</panel_attributes>
     <additional_attributes>10.0;20.0;220.0;20.0;220.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>126</x>
+      <y>108</y>
+      <w>153</w>
+      <h>585</h>
+    </coordinates>
+    <panel_attributes>lt=x-&gt;
+m1=  *
+m2=1
+created by &gt;</panel_attributes>
+    <additional_attributes>150.0;620.0;20.0;620.0;10.0;10.0;110.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>207</x>
+      <y>486</y>
+      <w>135</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>The passenger must
+be published 
+(draftMode = false)
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>333</x>
+      <y>513</y>
+      <w>180</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;180.0;50.0</additional_attributes>
   </element>
 </diagram>
