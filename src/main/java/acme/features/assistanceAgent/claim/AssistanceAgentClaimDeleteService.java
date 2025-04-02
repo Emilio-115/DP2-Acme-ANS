@@ -66,6 +66,7 @@ public class AssistanceAgentClaimDeleteService extends AbstractGuiService<Assist
 		 * status = trackingLogs.size() == 0;
 		 * 
 		 * super.state(status, "*", "assistance-agent.claim.delete.claim-linked");
+   		 * UN POCO SUUUUUS 💀💀💀💀💀
 		 */
 		;
 	}
