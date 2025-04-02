@@ -60,9 +60,10 @@ public class AssistanceAgentTrackingLogListService extends AbstractGuiService<As
 		List<TrackingLog> TLs = this.repository.findTopPercentage(claimId);
 		double topPercentage = 0.0;
 		boolean published = false;
-		if (!TLs.isEmpty() || TLs != null)
+		if (!TLs.isEmpty() || TLs != null) {
 			topPercentage = TLs.get(0).getResolutionPercentage();
-		published = !TLs.get(0).isDraftMode();
+			published = !TLs.get(0).isDraftMode();
+		}
 
 		boolean finish = topPercentage == 100.00;
 
