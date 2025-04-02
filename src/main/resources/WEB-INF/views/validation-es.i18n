@@ -18,6 +18,9 @@ acme.validation.activity-log.arrival-before-departure.message = Fecha de salida 
 
 acme.validation.airport.non-unique-iata-code.message = El código IATA ha de ser único
 
+
+acme.validation.aircraft.non-unique-registration-number = El número de registro ya existe, el número de registro debe ser único
+
 acme.validation.flight-assignment.flight-crew-member-unavailable.message = El miembro de la tripulación de vuelo no está disponible
 acme.validation.flight-assignment.member-already-in-leg-with-duty.message = El miembro de la tripulación de vuelo ya está asignado a este segmento con este rol
 acme.validation.flight-assignment.leg-not-published.message = El segmento no está publicado

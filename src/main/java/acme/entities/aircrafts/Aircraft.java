@@ -13,13 +13,15 @@ import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidString;
 import acme.constraints.ValidShortText;
+import acme.constraints.aircraft.ValidAircraft;
 import acme.entities.airlines.Airline;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
 @Getter
 @Setter
+@ValidAircraft
+@Entity
 public class Aircraft extends AbstractEntity {
 
 	/**

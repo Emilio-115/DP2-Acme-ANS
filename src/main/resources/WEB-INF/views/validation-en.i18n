@@ -18,6 +18,8 @@ acme.validation.activity-log.arrival-before-departure.message = Invalid departur
 
 acme.validation.airport.non-unique-iata-code.message = IATA code must be unique
 
+acme.validation.aircraft.non-unique-registration-number = Registration Number already exist, registration number must be unique
+
 acme.validation.flight-assignment.flight-crew-member-unavailable.message = Flight crew member is unavailable
 acme.validation.flight-assignment.member-already-in-leg-with-duty.message = Flight crew member is already assigned to this leg with this duty
 acme.validation.flight-assignment.leg-not-published.message = Leg is not published
