@@ -1,6 +1,7 @@
 
 package acme.features.assistanceAgent.trackingLog;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
+import acme.entities.claims.Claim;
 import acme.entities.trackingLogs.TrackingLog;
 import acme.realms.AssistanceAgent;
 
@@ -47,7 +49,15 @@ public class AssistanceAgentTrackingLogListService extends AbstractGuiService<As
 
 		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "resolutionPercentage", "status", "draftMode");
 
-		super.addPayload(dataset, trackingLog, "claim.id");
 		super.getResponse().addData(dataset);
+	}
+
+	@Override
+	public void unbind(final Collection<TrackingLog> trackingLogs) {
+		Integer claimId = super.getRequest().getData("claimId", int.class);
+		super.getResponse().addGlobal("claimId", claimId);
+
+		Claim claim = this.repository.findClaimById(claimId);
+		super.getResponse().addGlobal("claimDraftMode", claim.isDraftMode());
 	}
 }
