@@ -1,5 +1,5 @@
 /*
- * AirlineManagerLegPublishService.java
+ * AirlineManagerLegUpdateService.java
  *
  * Copyright (C) 2012-2025 Rafael Corchuelo.
  *
@@ -10,22 +10,18 @@
  * they accept any liabilities with respect to them.
  */
 
-package acme.features.airline_manager.flights;
-
-import java.util.List;
+package acme.features.airlineManager.flights;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
-import acme.entities.aircrafts.AircraftStatus;
 import acme.entities.flights.Flight;
-import acme.entities.legs.Leg;
-import acme.realms.airline_manager.AirlineManager;
+import acme.realms.airlineManager.AirlineManager;
 
 @GuiService
-public class AirlineManagerFlightPublishService extends AbstractGuiService<AirlineManager, Flight> {
+public class AirlineManagerFlightUpdateService extends AbstractGuiService<AirlineManager, Flight> {
 
 	@Autowired
 	private AirlineManagerFlightRepository repository;
@@ -60,38 +56,22 @@ public class AirlineManagerFlightPublishService extends AbstractGuiService<Airli
 	@Override
 	public void bind(final Flight flight) {
 		super.bindObject(flight, "tag", "description", "cost", "requiresSelfTransfer");
-		flight.setDraftMode(false);
 	}
 
 	@Override
-
 	public void validate(final Flight flight) {
-
-		boolean haveALeg = flight.numberOfLayovers() >= 0;
-		super.state(haveALeg, "*", "acme.validation.flight.no-legs.message");
-
-		List<Leg> legs = this.repository.findAllLegsByFlightId(flight.getId());
-		for (Leg leg : legs)
-			if (leg.getAircraft() != null) {
-				boolean isAircraftActive = leg.getAircraft().getStatus().equals(AircraftStatus.ACTIVE);
-				super.state(isAircraftActive, "*", "acme.validation.flight.aircraft-under-maintenance.message");
-				boolean isLegPublished = !leg.isDraftMode();
-				super.state(isLegPublished, "*", "acme.validation.flight.leg-not-published.message");
-				break;
-			}
+		;
 	}
 
 	@Override
 	public void perform(final Flight flight) {
-
 		this.repository.save(flight);
 	}
 
 	@Override
 	public void unbind(final Flight flight) {
 		Dataset dataset;
-		dataset = super.unbindObject(flight, "tag", "requiresSelfTransfer", "cost", "description");
-		dataset.put("draftMode", true);
+		dataset = super.unbindObject(flight, "tag", "requiresSelfTransfer", "cost", "description", "draftMode");
 		dataset.put("origin", flight.origin());
 		dataset.put("destination", flight.destination());
 		dataset.put("departureDate", flight.scheduledDeparture());

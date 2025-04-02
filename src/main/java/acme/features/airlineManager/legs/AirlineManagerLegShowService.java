@@ -1,16 +1,5 @@
-/*
- * AirlineManagerLegUpdateService.java
- *
- * Copyright (C) 2012-2025 Rafael Corchuelo.
- *
- * In keeping with the traditional purpose of furthering education and research, it is
- * the policy of the copyright owner to permit non-commercial use and redistribution of
- * this software. It has been tested carefully, but it is not guaranteed for any particular
- * purposes. The copyright owner does not offer any warranties or representations, nor do
- * they accept any liabilities with respect to them.
- */
 
-package acme.features.airline_manager.legs;
+package acme.features.airlineManager.legs;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -26,10 +15,10 @@ import acme.entities.airports.Airport;
 import acme.entities.flights.Flight;
 import acme.entities.legs.Leg;
 import acme.entities.legs.LegStatus;
-import acme.realms.airline_manager.AirlineManager;
+import acme.realms.airlineManager.AirlineManager;
 
 @GuiService
-public class AirlineManagerLegCancelService extends AbstractGuiService<AirlineManager, Leg> {
+public class AirlineManagerLegShowService extends AbstractGuiService<AirlineManager, Leg> {
 
 	@Autowired
 	private AirlineManagerLegRepository repository;
@@ -37,6 +26,7 @@ public class AirlineManagerLegCancelService extends AbstractGuiService<AirlineMa
 
 	@Override
 	public void authorise() {
+
 		int managerId;
 		int legId;
 		boolean status = true;
@@ -53,9 +43,6 @@ public class AirlineManagerLegCancelService extends AbstractGuiService<AirlineMa
 			Optional<Flight> optionalFlight = this.repository.findByIdAndManagerId(leg.getFlight().getId(), managerId);
 
 			status &= optionalFlight.isPresent();
-
-			status &= leg.getStatus().equals(LegStatus.ON_TIME);
-
 		}
 
 		super.getResponse().setAuthorised(status);
@@ -63,32 +50,20 @@ public class AirlineManagerLegCancelService extends AbstractGuiService<AirlineMa
 
 	@Override
 	public void load() {
-		Leg leg;
-		int legId;
+		Leg leg = null;
+		int legId = super.getRequest().getData("id", int.class);
 
-		legId = super.getRequest().getData("id", int.class);
-		leg = this.repository.findLegById(legId).get();
+		Optional<Leg> optionalLeg = this.repository.findLegById(legId);
+
+		if (optionalLeg.isPresent())
+			leg = optionalLeg.get();
 
 		super.getBuffer().addData(leg);
 	}
 
 	@Override
-	public void bind(final Leg leg) {
-		leg.setStatus(LegStatus.CANCELLED);
-	}
-
-	@Override
-	public void validate(final Leg leg) {
-		;
-	}
-
-	@Override
-	public void perform(final Leg leg) {
-		this.repository.save(leg);
-	}
-
-	@Override
 	public void unbind(final Leg leg) {
+
 		Dataset dataset;
 		dataset = super.unbindObject(leg, "departureDate", "arrivalDate", "flightNumberDigits");
 		dataset.put("flightNumber", leg.flightNumber());
@@ -123,5 +98,17 @@ public class AirlineManagerLegCancelService extends AbstractGuiService<AirlineMa
 
 		super.getResponse().addData(dataset);
 	}
+
+	/*
+	 * flightNumberDigits;
+	 * departureDate;
+	 * arrivalDate;
+	 * status;
+	 * -------------------------
+	 * arrivalAirport;
+	 * departureAirport;
+	 * aircraft;
+	 * flight;
+	 */
 
 }

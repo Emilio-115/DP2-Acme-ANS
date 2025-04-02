@@ -10,7 +10,7 @@
  * they accept any liabilities with respect to them.
  */
 
-package acme.features.airline_manager.legs;
+package acme.features.airlineManager.legs;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -26,7 +26,7 @@ import acme.entities.airports.Airport;
 import acme.entities.flights.Flight;
 import acme.entities.legs.Leg;
 import acme.entities.legs.LegStatus;
-import acme.realms.airline_manager.AirlineManager;
+import acme.realms.airlineManager.AirlineManager;
 
 @GuiService
 public class AirlineManagerLegLandService extends AbstractGuiService<AirlineManager, Leg> {

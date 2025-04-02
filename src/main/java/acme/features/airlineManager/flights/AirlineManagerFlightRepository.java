@@ -1,5 +1,5 @@
 
-package acme.features.airline_manager.flights;
+package acme.features.airlineManager.flights;
 
 import java.util.List;
 import java.util.Optional;

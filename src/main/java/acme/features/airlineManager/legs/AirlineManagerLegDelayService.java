@@ -1,5 +1,5 @@
 /*
- * AirlineManagerLegDeleteService.java
+ * AirlineManagerLegUpdateService.java
  *
  * Copyright (C) 2012-2025 Rafael Corchuelo.
  *
@@ -10,7 +10,7 @@
  * they accept any liabilities with respect to them.
  */
 
-package acme.features.airline_manager.legs;
+package acme.features.airlineManager.legs;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -26,17 +26,13 @@ import acme.entities.airports.Airport;
 import acme.entities.flights.Flight;
 import acme.entities.legs.Leg;
 import acme.entities.legs.LegStatus;
-import acme.realms.airline_manager.AirlineManager;
+import acme.realms.airlineManager.AirlineManager;
 
 @GuiService
-public class AirlineManagerLegDeleteService extends AbstractGuiService<AirlineManager, Leg> {
-
-	// Internal state ---------------------------------------------------------
+public class AirlineManagerLegDelayService extends AbstractGuiService<AirlineManager, Leg> {
 
 	@Autowired
 	private AirlineManagerLegRepository repository;
-
-	// AbstractGuiService interface -------------------------------------------
 
 
 	@Override
@@ -57,7 +53,13 @@ public class AirlineManagerLegDeleteService extends AbstractGuiService<AirlineMa
 			Optional<Flight> optionalFlight = this.repository.findByIdAndManagerId(leg.getFlight().getId(), managerId);
 
 			status &= optionalFlight.isPresent();
-			status &= leg.isDraftMode();
+
+			status &= leg.getStatus().equals(LegStatus.ON_TIME);
+
+			if (optionalFlight.isPresent()) {
+				Flight flight = optionalFlight.get();
+				status &= !flight.isDraftMode();
+			}
 		}
 
 		super.getResponse().setAuthorised(status);
@@ -69,13 +71,14 @@ public class AirlineManagerLegDeleteService extends AbstractGuiService<AirlineMa
 		int legId;
 
 		legId = super.getRequest().getData("id", int.class);
-		leg = this.repository.findLegById(legId).get();
+		leg = this.repository.findLegById(legId).orElse(null);
 
 		super.getBuffer().addData(leg);
 	}
 
 	@Override
 	public void bind(final Leg leg) {
+		leg.setStatus(LegStatus.DELAYED);
 	}
 
 	@Override
@@ -85,7 +88,7 @@ public class AirlineManagerLegDeleteService extends AbstractGuiService<AirlineMa
 
 	@Override
 	public void perform(final Leg leg) {
-		this.repository.delete(leg);
+		this.repository.save(leg);
 	}
 
 	@Override

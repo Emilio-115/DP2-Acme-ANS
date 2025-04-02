@@ -1,5 +1,5 @@
 /*
- * AirlineManagerLegUpdateService.java
+ * AirlineManagerLegDeleteService.java
  *
  * Copyright (C) 2012-2025 Rafael Corchuelo.
  *
@@ -10,7 +10,7 @@
  * they accept any liabilities with respect to them.
  */
 
-package acme.features.airline_manager.legs;
+package acme.features.airlineManager.legs;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -22,18 +22,21 @@ import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.aircrafts.Aircraft;
-import acme.entities.aircrafts.AircraftStatus;
 import acme.entities.airports.Airport;
 import acme.entities.flights.Flight;
 import acme.entities.legs.Leg;
 import acme.entities.legs.LegStatus;
-import acme.realms.airline_manager.AirlineManager;
+import acme.realms.airlineManager.AirlineManager;
 
 @GuiService
-public class AirlineManagerLegPublishService extends AbstractGuiService<AirlineManager, Leg> {
+public class AirlineManagerLegDeleteService extends AbstractGuiService<AirlineManager, Leg> {
+
+	// Internal state ---------------------------------------------------------
 
 	@Autowired
 	private AirlineManagerLegRepository repository;
+
+	// AbstractGuiService interface -------------------------------------------
 
 
 	@Override
@@ -54,11 +57,7 @@ public class AirlineManagerLegPublishService extends AbstractGuiService<AirlineM
 			Optional<Flight> optionalFlight = this.repository.findByIdAndManagerId(leg.getFlight().getId(), managerId);
 
 			status &= optionalFlight.isPresent();
-
-			if (optionalFlight.isPresent()) {
-				Flight flight = optionalFlight.get();
-				status &= flight.isDraftMode();
-			}
+			status &= leg.isDraftMode();
 		}
 
 		super.getResponse().setAuthorised(status);
@@ -77,33 +76,16 @@ public class AirlineManagerLegPublishService extends AbstractGuiService<AirlineM
 
 	@Override
 	public void bind(final Leg leg) {
-		super.bindObject(leg, "departureDate", "arrivalDate", "flightNumberDigits", "status");
-
-		int departureAirportId = super.getRequest().getData("departureAirport", int.class);
-		Airport departureAirport = this.repository.findAirportById(departureAirportId).orElse(null);
-		leg.setDepartureAirport(departureAirport);
-
-		int arrivalAirportId = super.getRequest().getData("arrivalAirport", int.class);
-		Airport arrivalAirport = this.repository.findAirportById(arrivalAirportId).orElse(null);
-		leg.setArrivalAirport(arrivalAirport);
-
-		int aircraftId = super.getRequest().getData("aircraft", int.class);
-		Aircraft aircraft = this.repository.findAircraftById(aircraftId).orElse(null);
-		leg.setAircraft(aircraft);
-		leg.setDraftMode(false);
 	}
 
 	@Override
 	public void validate(final Leg leg) {
-		if (leg.getAircraft() != null) {
-			boolean isAircraftActive = leg.getAircraft().getStatus().equals(AircraftStatus.ACTIVE);
-			super.state(isAircraftActive, "aircraft", "acme.validation.flight.aircraft-under-maintenance.message");
-		}
+		;
 	}
 
 	@Override
 	public void perform(final Leg leg) {
-		this.repository.save(leg);
+		this.repository.delete(leg);
 	}
 
 	@Override
@@ -111,7 +93,7 @@ public class AirlineManagerLegPublishService extends AbstractGuiService<AirlineM
 		Dataset dataset;
 		dataset = super.unbindObject(leg, "departureDate", "arrivalDate", "flightNumberDigits");
 		dataset.put("flightNumber", leg.flightNumber());
-		dataset.put("draftMode", true);
+		dataset.put("draftMode", leg.isDraftMode());
 		dataset.put("flightDraftMode", leg.getFlight().isDraftMode());
 
 		Collection<Airport> airports = this.repository.findAllAirports();

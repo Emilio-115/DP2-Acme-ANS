@@ -1,5 +1,5 @@
 /*
- * AirlineManagerLegUpdateService.java
+ * AirlineManagerLegDeleteService.java
  *
  * Copyright (C) 2012-2025 Rafael Corchuelo.
  *
@@ -10,7 +10,9 @@
  * they accept any liabilities with respect to them.
  */
 
-package acme.features.airline_manager.flights;
+package acme.features.airlineManager.flights;
+
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,13 +20,18 @@ import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.flights.Flight;
-import acme.realms.airline_manager.AirlineManager;
+import acme.entities.legs.Leg;
+import acme.realms.airlineManager.AirlineManager;
 
 @GuiService
-public class AirlineManagerFlightUpdateService extends AbstractGuiService<AirlineManager, Flight> {
+public class AirlineManagerFlightDeleteService extends AbstractGuiService<AirlineManager, Flight> {
+
+	// Internal state ---------------------------------------------------------
 
 	@Autowired
 	private AirlineManagerFlightRepository repository;
+
+	// AbstractGuiService interface -------------------------------------------
 
 
 	@Override
@@ -48,7 +55,7 @@ public class AirlineManagerFlightUpdateService extends AbstractGuiService<Airlin
 		int flightId;
 
 		flightId = super.getRequest().getData("id", int.class);
-		flight = this.repository.findFlightById(flightId).get();
+		flight = this.repository.findFlightById(flightId).orElse(null);
 
 		super.getBuffer().addData(flight);
 	}
@@ -60,12 +67,16 @@ public class AirlineManagerFlightUpdateService extends AbstractGuiService<Airlin
 
 	@Override
 	public void validate(final Flight flight) {
-		;
+
 	}
 
 	@Override
 	public void perform(final Flight flight) {
-		this.repository.save(flight);
+		Collection<Leg> legs;
+
+		legs = this.repository.findAllLegsByFlightId(flight.getId());
+		this.repository.deleteAll(legs);
+		this.repository.delete(flight);
 	}
 
 	@Override
