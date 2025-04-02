@@ -58,8 +58,23 @@ public class TrackingLogValidator extends AbstractValidator<ValidTrackingLog, Tr
 
 					super.state(context, correctDescription, "resolution", "acme.validation.resolutionDescription.message");
 				}
-				{
+				if (!TL.isReclaim()) {
 					List<TrackingLog> topPercentage = trackingLogRepository.findTopPercentage(TL.getClaim().getId());
+
+					boolean cond;
+
+					if (topPercentage == null || topPercentage.isEmpty())
+						cond = TL.getResolutionPercentage() >= 0.00;
+					else if (topPercentage.get(0).getId() == TL.getId())
+						cond = TL.getResolutionPercentage() >= topPercentage.get(0).getResolutionPercentage();
+					else if (topPercentage.contains(TL))
+						cond = true;
+					else
+						cond = TL.getResolutionPercentage() > topPercentage.get(0).getResolutionPercentage();
+
+					super.state(context, cond, "resolutionPercentage", "acme.validation.create.tracking-log.low-percentage");
+				} else {
+					List<TrackingLog> topPercentage = trackingLogRepository.findTopPercentageReclaim(TL.getClaim().getId());
 
 					boolean cond;
 

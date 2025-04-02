@@ -4,6 +4,7 @@ assistance-agent.tracking-log.form.title = Tracking Logs Details
 assistance-agent.tracking-log.list.label.lastUpdateMoment = Last Update
 assistance-agent.tracking-log.list.label.resolutionPercentage = Resolution Percentage
 assistance-agent.tracking-log.list.label.status = Status
+assistance-agent.tracking-log.list.label.reclaim = Is a reclaim?
 
 assistance-agent.tracking-log.form.label.lastUpdateMoment = Last Update
 assistance-agent.tracking-log.form.label.undergoingStep = Undergoing Step
@@ -17,3 +18,6 @@ assistance-agent.tracking-log.list.label.create = Create
 assistance-agent.tracking-log.form.button.delete = Delete
 assistance-agent.tracking-log.form.button.update = Update
 assistance-agent.tracking-log.form.button.publish = Publish
+
+assistance-agent.tracking-log.list.label.reclaim = Reclaim
+assistance-agent.tracking-log.form.button.reclaim = Reclaim

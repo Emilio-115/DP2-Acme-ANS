@@ -47,7 +47,7 @@ public class AssistanceAgentTrackingLogListService extends AbstractGuiService<As
 	public void unbind(final TrackingLog trackingLog) {
 		Dataset dataset;
 
-		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "resolutionPercentage", "status");
+		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "resolutionPercentage", "status", "reclaim");
 		dataset.put("claim", trackingLog.getClaim());
 
 		super.getResponse().addData(dataset);
@@ -57,6 +57,17 @@ public class AssistanceAgentTrackingLogListService extends AbstractGuiService<As
 	public void unbind(final Collection<TrackingLog> trackingLogs) {
 		Integer claimId = super.getRequest().getData("claimId", int.class);
 
+		List<TrackingLog> TLs = this.repository.findTopPercentage(claimId);
+		double topPercentage = 0.0;
+		boolean published = false;
+		if (!TLs.isEmpty() || TLs != null)
+			topPercentage = TLs.get(0).getResolutionPercentage();
+		published = !TLs.get(0).isDraftMode();
+
+		boolean finish = topPercentage == 100.00;
+
+		super.getResponse().addGlobal("finish", finish);
+		super.getResponse().addGlobal("published", published);
 		super.getResponse().addGlobal("claimId", claimId);
 
 		Claim claim = this.repository.findClaimById(claimId);

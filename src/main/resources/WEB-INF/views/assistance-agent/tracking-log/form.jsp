@@ -20,5 +20,8 @@
 		<jstl:when test="${_command == 'create'}">
 			<acme:submit code="assistance-agent.tracking-log.form.button.create" action="/assistance-agent/tracking-log/create?claimId=${claimId}"/>
 		</jstl:when>
+		<jstl:when test="${_command == 'reclaim'}">
+			<acme:submit code="assistance-agent.tracking-log.form.button.create" action="/assistance-agent/tracking-log/reclaim?claimId=${claimId}"/>
+		</jstl:when>
 	</jstl:choose>
 </acme:form>
