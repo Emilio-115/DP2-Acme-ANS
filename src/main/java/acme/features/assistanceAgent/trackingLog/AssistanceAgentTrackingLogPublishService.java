@@ -53,10 +53,7 @@ public class AssistanceAgentTrackingLogPublishService extends AbstractGuiService
 		boolean notPublished = trackingLog.isDraftMode();
 
 		List<TrackingLog> trackingLogs;
-		if (!trackingLog.isReclaim())
-			trackingLogs = this.repository.findTopPercentage(trackingLog.getClaim().getId());
-		else
-			trackingLogs = this.repository.findTopPercentageReclaim(trackingLog.getClaim().getId());
+		trackingLogs = this.repository.findTopPercentage(trackingLog.getClaim().getId(), trackingLog.isReclaim());
 
 		int thisTL = trackingLogs.indexOf(trackingLog);
 

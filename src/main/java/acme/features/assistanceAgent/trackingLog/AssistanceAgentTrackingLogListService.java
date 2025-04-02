@@ -57,10 +57,10 @@ public class AssistanceAgentTrackingLogListService extends AbstractGuiService<As
 	public void unbind(final Collection<TrackingLog> trackingLogs) {
 		Integer claimId = super.getRequest().getData("claimId", int.class);
 
-		List<TrackingLog> TLs = this.repository.findTopPercentage(claimId);
+		List<TrackingLog> TLs = this.repository.findTopPercentage(claimId, false);
 		double topPercentage = 0.0;
 		boolean published = false;
-		if (!TLs.isEmpty() || TLs != null) {
+		if (!TLs.isEmpty()) {
 			topPercentage = TLs.get(0).getResolutionPercentage();
 			published = !TLs.get(0).isDraftMode();
 		}
