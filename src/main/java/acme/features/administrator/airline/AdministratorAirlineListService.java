@@ -35,7 +35,7 @@ public class AdministratorAirlineListService extends AbstractGuiService<Administ
 	public void unbind(final Airline airline) {
 
 		Dataset dataset;
-		dataset = super.unbindObject(airline, "id", "name", "iataCode", "website", "type", "foundationMoment", "email", "phoneNumber");
+		dataset = super.unbindObject(airline, "name", "iataCode", "type");
 		super.getResponse().addData(dataset);
 	}
 }

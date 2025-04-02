@@ -24,7 +24,7 @@ public class AirlineValidator extends AbstractValidator<ValidAirline, Airline> {
 		boolean result = true;
 
 		if (airline == null)
-			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
+			super.state(context, false, "airline", "javax.validation.constraints.NotNull.message");
 		else {
 			AirlineRepository airlineRepository = SpringHelper.getBean(AirlineRepository.class);
 
