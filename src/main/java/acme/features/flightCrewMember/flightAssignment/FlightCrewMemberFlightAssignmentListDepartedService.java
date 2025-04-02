@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acme.client.helpers.MomentHelper;
 import acme.client.services.GuiService;
 import acme.entities.flightAssignment.FlightAssignment;
+import acme.realms.flightCrewMember.FlightCrewMember;
 
 @GuiService
 public class FlightCrewMemberFlightAssignmentListDepartedService extends FlightCrewMemberFlightAssignmentListService {
@@ -18,9 +19,11 @@ public class FlightCrewMemberFlightAssignmentListDepartedService extends FlightC
 
 	@Override
 	public void load() {
+		FlightCrewMember flightCrewMember = (FlightCrewMember) super.getRequest().getPrincipal().getActiveRealm();
+
 		List<FlightAssignment> flightAssignments;
 
-		flightAssignments = this.repository.findInProgressFlightAssignments(MomentHelper.getCurrentMoment());
+		flightAssignments = this.repository.findInProgressFlightAssignments(flightCrewMember.getId(), MomentHelper.getCurrentMoment());
 
 		super.getBuffer().addData(flightAssignments);
 	}

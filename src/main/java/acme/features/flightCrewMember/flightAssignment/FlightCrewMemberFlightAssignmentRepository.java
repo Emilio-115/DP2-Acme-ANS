@@ -27,16 +27,18 @@ public interface FlightCrewMemberFlightAssignmentRepository extends AbstractRepo
 	@Query("""
 		SELECT fa FROM FlightAssignment fa
 		WHERE fa.leg.departureDate >= :cutoff
+		AND fa.flightCrewMember.id = :flightCrewMemberId
 		AND fa.draftMode = false
 		""")
-	List<FlightAssignment> findPlannedFlightAssignments(Date cutoff);
+	List<FlightAssignment> findPlannedFlightAssignments(Integer flightCrewMemberId, Date cutoff);
 
 	@Query("""
 		SELECT fa FROM FlightAssignment fa
 		WHERE fa.leg.departureDate <= :cutoff
+		AND fa.flightCrewMember.id = :flightCrewMemberId
 		AND fa.draftMode = false
 		""")
-	List<FlightAssignment> findInProgressFlightAssignments(Date cutoff);
+	List<FlightAssignment> findInProgressFlightAssignments(Integer flightCrewMemberId, Date cutoff);
 
 	@Query("""
 		SELECT fa FROM FlightAssignment fa

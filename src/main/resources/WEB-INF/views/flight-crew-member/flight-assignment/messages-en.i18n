@@ -1,12 +1,12 @@
 flight-crew-member.flight-assignment.list.title = Flight Assignments
 flight-crew-member.flight-assignment.form.title = Flight Assignment Details
 
-flight-crew-member.flight-assignment.list.label.employee-code = Employee code
+flight-crew-member.flight-assignment.list.label.departure = Departure
 flight-crew-member.flight-assignment.list.label.flight-number = Flight number
 flight-crew-member.flight-assignment.list.label.duty = Duty
 flight-crew-member.flight-assignment.list.label.status = Status
 
-flight-crew-member.flight-assignment.form.label.flight-crew-member = Employee code
+flight-crew-member.flight-assignment.form.label.updated-at = Updated at
 flight-crew-member.flight-assignment.form.label.leg = Leg
 flight-crew-member.flight-assignment.form.label.duty = Duty
 flight-crew-member.flight-assignment.form.label.status = Status
