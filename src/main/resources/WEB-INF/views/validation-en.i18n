@@ -22,6 +22,10 @@ acme.validation.activity-log.arrival-before-departure.message = Invalid departur
 
 acme.validation.update.draftMode.claim = This claim can not be publish with unpublished tracking logs
 
+acme.validation.update.draftMode.tracking-log = This tracking log can not be publish with unpublished tracking logs
+
+acme.validation.create.tracking-log.low-percentage = The percentage is not valid, it has to be higher than the last tracking log
+
 acme.validation.airport.non-unique-iata-code.message = IATA code must be unique
 
 acme.validation.aircraft.non-unique-registration-number = Registration Number already exist, registration number must be unique

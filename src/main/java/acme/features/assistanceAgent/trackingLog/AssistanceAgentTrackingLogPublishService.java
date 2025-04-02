@@ -1,6 +1,8 @@
 
 package acme.features.assistanceAgent.trackingLog;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
@@ -49,7 +51,17 @@ public class AssistanceAgentTrackingLogPublishService extends AbstractGuiService
 	@Override
 	public void validate(final TrackingLog trackingLog) {
 		boolean notPublished = trackingLog.isDraftMode();
-		super.state(notPublished, "draftMode", "acme.validation.update.draftMode");
+
+		List<TrackingLog> trackingLogs = this.repository.findTopPercentage(trackingLog.getClaim().getId());
+
+		int thisTL = trackingLogs.indexOf(trackingLog);
+
+		boolean allPublished = true;
+		if (thisTL != trackingLogs.size() - 1)
+			allPublished = !trackingLogs.get(thisTL + 1).isDraftMode();
+		boolean result = notPublished && allPublished;
+
+		super.state(result, "*", "acme.validation.update.draftMode.tracking-log");
 	}
 
 	@Override

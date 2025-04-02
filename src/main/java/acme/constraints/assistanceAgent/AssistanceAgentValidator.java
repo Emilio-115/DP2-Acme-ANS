@@ -36,7 +36,7 @@ public class AssistanceAgentValidator extends AbstractValidator<ValidAssistanceA
 		boolean isEmployeeCodeFree = assistanceAgentRepository.isEmployeeCodeFree(assistanceAgent.getId(), code);
 
 		super.state(context, isEmployeeCodeFree, "employeeCode", "acme.validation.flight-crew-member.non-unique-employee-code");
-
+		
 		result = !super.hasErrors(context);
 
 		return result;

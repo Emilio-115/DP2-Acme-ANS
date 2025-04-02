@@ -30,4 +30,12 @@ public interface AssistanceAgentTrackingLogRepository extends AbstractRepository
 
 	@Query("SELECT c FROM Claim c WHERE c.assistanceAgent.id = :id")
 	Collection<Claim> findAllClaimsByAssistanceAgentId(int id);
+
+	@Query("""
+		SELECT tl
+		FROM TrackingLog tl
+		WHERE tl.claim.id = :claimId
+		ORDER BY tl.resolutionPercentage DESC
+		""")
+	List<TrackingLog> findTopPercentage(int claimId);
 }

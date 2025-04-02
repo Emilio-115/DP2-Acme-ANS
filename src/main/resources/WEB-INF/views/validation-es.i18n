@@ -16,6 +16,10 @@ acme.validation.update.draftMode.claim = Esta reclamacion no se puede publicar p
 acme.validation.claim.not-completed-claim = El proceso de la reclamacion aun no ha terminado
 acme.validation.claim.not-status-claim = El proceso de la reclamacion esta terminado, comente si esta aceptada o no
 
+acme.validation.update.draftMode.tracking-log = Este registro no se puede publicar si hay registros previos sin publicar
+
+acme.validation.create.tracking-log.low-percentage = El porcentaje de resolucion debe ser mayor que el ultimo registro
+
 acme.validation.activity-log.assignment-not-published.message = La asignación de vuelo no está publicada
 acme.validation.activity-log.assignment-not-confirmed.message = La asignación de vuelo no está confirmada
 acme.validation.activity-log.registered-before-landing.message = Fecha de registro inválida: registrado antes de que el segmento de vuelo aterrizase
