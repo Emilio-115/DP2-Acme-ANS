@@ -23,23 +23,34 @@
                 <acme:menu-suboption code="master.menu.anonymous.student4-favourite-link" action="https://github.com" />
               </acme:menu-option>
 
-              <acme:menu-option code="master.menu.administrator" access="hasRealm('Administrator')">
-                <acme:menu-suboption code="master.menu.administrator.list-user-accounts"
-                  action="/administrator/user-account/list" />
-                <acme:menu-separator />
-                <acme:menu-suboption code="master.menu.administrator.list-airports"
-                  action="/administrator/airport/list" />
-                  <acme:menu-suboption code="master.menu.administrator.list-aircrafts"
-                  action="/administrator/aircraft/list" />
-                <acme:menu-separator />
-                <acme:menu-suboption code="master.menu.administrator.populate-db-initial"
-                  action="/administrator/system/populate-initial" />
-                <acme:menu-suboption code="master.menu.administrator.populate-db-sample"
-                  action="/administrator/system/populate-sample" />
-                <acme:menu-separator />
-                <acme:menu-suboption code="master.menu.administrator.shut-system-down"
-                  action="/administrator/system/shut-down" />
-              </acme:menu-option>
+		<acme:menu-option code="master.menu.administrator" access="hasRealm('Administrator')">
+			<acme:menu-suboption code="master.menu.administrator.list-user-accounts" 
+                           action="/administrator/user-account/list"/>
+			<acme:menu-separator/>
+			<acme:menu-suboption code="master.menu.administrator.list-airports" 
+                           action="/administrator/airport/list"/>
+			<acme:menu-suboption code="master.menu.administrator.list-airline" 
+                           action="/administrator/airline/list"/>
+      <acme:menu-suboption code="master.menu.administrator.list-aircrafts" 
+                           action="/administrator/aircraft/list" />
+			<acme:menu-separator/>
+			<acme:menu-suboption code="master.menu.administrator.populate-db-initial" 
+                           action="/administrator/system/populate-initial"/>
+			<acme:menu-suboption code="master.menu.administrator.populate-db-sample" 
+                           action="/administrator/system/populate-sample"/>			
+			<acme:menu-separator/>
+			<acme:menu-suboption code="master.menu.administrator.shut-system-down" 
+                           action="/administrator/system/shut-down"/>
+		</acme:menu-option>
+		
+		<acme:menu-option code="master.menu.flight-crew-member" access="hasRealm('FlightCrewMember')">
+			<acme:menu-suboption code="master.menu.flight-crew-member.flight-assignment.list-planned" action="/flight-crew-member/flight-assignment/list-planned"/>
+			<acme:menu-suboption code="master.menu.flight-crew-member.flight-assignment.list-departed" action="/flight-crew-member/flight-assignment/list-departed"/>
+			<acme:menu-suboption code="master.menu.flight-crew-member.flight-assignment.list-drafts" action="/flight-crew-member/flight-assignment/list-drafts"/>
+			<acme:menu-separator/>
+			<acme:menu-suboption code="master.menu.flight-crew-member.activity-log.list-published" action="/flight-crew-member/activity-log/list"/>
+			<acme:menu-suboption code="master.menu.flight-crew-member.activity-log.list-drafts" action="/flight-crew-member/activity-log/list-drafts"/>
+		</acme:menu-option>
 
               <acme:menu-option code="master.menu.customer" access="hasRealm('Customer')">
                 <acme:menu-suboption code="master.menu.customer.booking" action="/customer/booking/list" />
@@ -48,6 +59,14 @@
                   action="/customer/booking-record/list" />
               </acme:menu-option>
 
+		<acme:menu-option code="master.menu.consumer" access="hasRealm('Consumer')">
+			<acme:menu-suboption code="master.menu.consumer.favourite-link" action="http://www.example.com/"/>
+		</acme:menu-option>
+		<acme:menu-option code="master.menu.assistance-agent" access="hasRealm('AssistanceAgent')">
+			<acme:menu-suboption code="master.menu.assistance-agent.claim" action="/assistance-agent/claim/list"/>
+			<acme:menu-suboption code="master.menu.assistance-agent.claim.undergoing" action="/assistance-agent/claim/undergoing"/>
+		</acme:menu-option>
+	</acme:menu-left>
               <acme:menu-option code="master.menu.flight-crew-member" access="hasRealm('FlightCrewMember')">
                 <acme:menu-suboption code="master.menu.flight-crew-member.flight-assignment.list-planned"
                   action="/flight-crew-member/flight-assignment/list-planned" />
@@ -74,8 +93,8 @@
                 <acme:menu-suboption code="master.menu.airline-manager.my-flights"
                   action="/airline-manager/flight/list" />
               </acme:menu-option>
-
-            </acme:menu-left>
+            
+       
 
             <acme:menu-right>
               <acme:menu-option code="master.menu.user-account" access="isAuthenticated()">
