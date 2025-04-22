@@ -81,8 +81,10 @@ public class Leg extends AbstractEntity {
 
 	@Transient
 	public String flightNumber() {
-		return this.aircraft.getAirline().getIataCode() + this.flightNumberDigits;
 
+		if (this.aircraft != null)
+			return this.aircraft.getAirline().getIataCode() + this.flightNumberDigits;
+		return "No Data";
 	}
 
 
