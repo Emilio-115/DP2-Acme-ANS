@@ -2,6 +2,8 @@
 package acme.features.assistanceAgent.claim;
 
 import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,6 +17,7 @@ import acme.entities.claims.ClaimStatus;
 import acme.entities.claims.ClaimType;
 import acme.entities.legs.Leg;
 import acme.entities.legs.LegStatus;
+import acme.entities.trackingLogs.TrackingLog;
 import acme.realms.assistanceAgent.AssistanceAgent;
 
 @GuiService
@@ -42,9 +45,14 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 		int claimId;
 
 		claimId = super.getRequest().getData("id", int.class);
+		List<TrackingLog> trackingLogs = this.repository.findAllTrackingLogsByClaimId(claimId);
 		assistanceAgentId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		claim = this.repository.findClaimByAssistanceAgent(assistanceAgentId, claimId);
-
+		if(!trackingLogs.isEmpty()) {
+			TrackingLog trackingLog = trackingLogs.stream().sorted(Comparator.comparing(TrackingLog::getResolutionPercentage).reversed()).findFirst().get();
+		}
+		
+		
 		super.getBuffer().addData(claim);
 	}
 

@@ -40,6 +40,7 @@ public class AssistanceAgentClaimCreateService extends AbstractGuiService<Assist
 
 		claim.setAssistanceAgent(assistanceAgent);
 		claim.setDraftMode(true);
+		claim.setIsAccepted(ClaimStatus.PENDING);
 
 		super.getBuffer().addData(claim);
 	}
@@ -52,7 +53,8 @@ public class AssistanceAgentClaimCreateService extends AbstractGuiService<Assist
 		legId = super.getRequest().getData("leg", int.class);
 		leg = this.repository.findLegById(legId);
 
-		super.bindObject(claim, "passengerEmail", "description", "type", "isAccepted");
+		super.bindObject(claim, "passengerEmail", "description", "type");
+
 		claim.setRegistrationMoment(MomentHelper.getCurrentMoment());
 		claim.setLeg(leg);
 	}
