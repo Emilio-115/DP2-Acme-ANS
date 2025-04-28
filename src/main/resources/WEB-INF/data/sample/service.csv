@@ -1,6 +1,6 @@
 key,average_dwell_time,discount,name,picture,promotion_code,key:airport
 service-01,10,EUR 0.00,L,https://i.imgur.com/JRnNU2f.jpeg,ABCD-25,airport-01
-service-02,01,EUR 0.01,La,ftp://a.b,WXYZ-25,airport-02
+service-02,01,EUR 0.01,La,http://a.b,WXYZ-25,airport-02
 service-03,12,EUR 999999.99,"Lorem ipsum dolor sit amet, consectetur adipiscin",https://i.imgur.com/Y1je0sY.jpeg,MNTQ-25,airport-03
 service-04,30,EUR 1000000.00,"Lorem ipsum dolor sit amet, consectetur adipiscing",https://i.imgur.com/1stc8pQ.png,JPLK-25,airport-04
 service-05,34,EUR 100.20,<marquee>Hacked</marquee>,http://example.org/a/b?,SETT-25,airport-02

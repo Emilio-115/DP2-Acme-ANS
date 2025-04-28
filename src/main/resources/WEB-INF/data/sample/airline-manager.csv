@@ -1,4 +1,4 @@
 key,identifier,yearOfExpirience,birthDate,pictureLink,key:airline,key:userAccount
 manager-01,MK407539,120,2000/01/1 00:00,http://lorem.com/ipsum,airline-01,user-account-manager-01
-manager-02,JN835349,0,2022/7/29 23:59,ftp://a,airline-02,user-account-manager-02
+manager-02,JN835349,0,2022/7/29 23:59,http://a.b,airline-02,user-account-manager-02
 manager-03,JC451339,5,2002/03/19 00:00,http://example.org?a&b,airline-03,user-account-manager-03
