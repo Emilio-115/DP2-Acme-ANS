@@ -81,8 +81,9 @@ public class Claim extends AbstractEntity {
 
 		repository = SpringHelper.getBean(ClaimRepository.class);
 		List<TrackingLog> trackingLogs = repository.getAllTrackingLogFromClaim(this.getId());
+		Claim claim = repository.getClaimById(this.getId());
 		if (!trackingLogs.isEmpty())
-			result = trackingLogs.get(0).getResolutionPercentage() < 100.00;
+			result = trackingLogs.get(0).getResolutionPercentage() < 100.00 && !claim.getIsAccepted().equals(ClaimStatus.PENDING);
 		else
 			return false;
 		return !result;
