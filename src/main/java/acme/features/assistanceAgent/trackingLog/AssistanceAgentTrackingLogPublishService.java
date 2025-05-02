@@ -47,18 +47,18 @@ public class AssistanceAgentTrackingLogPublishService extends AbstractGuiService
 		assert trackingLog != null;
 		int claimId = super.getRequest().getData("claimId", int.class);
 		Claim claim = this.repository.findClaimById(claimId);
-		boolean complete = claim.isComplete();
 
-		double per = super.getRequest().getData("resolutionPercentage", double.class);
+		super.bindObject(trackingLog, "undergoingStep", "resolutionPercentage", "resolution", "status", "lastUpdateMoment");
+		trackingLog.setLastUpdateMoment(MomentHelper.getCurrentMoment());
+
+		Double per = super.getRequest().getData("resolutionPercentage", double.class);
 		TrackingLogStatus st = super.getRequest().getData("status", TrackingLogStatus.class);
 
-		if (per == 100.0 && complete) {
+		if (per == 100.00) {
 			ClaimStatus cs = st.equals(TrackingLogStatus.ACCEPTED) ? ClaimStatus.ACCEPTED : ClaimStatus.REJECTED;
 			claim.setIsAccepted(cs);
 		}
 
-		super.bindObject(trackingLog, "undergoingStep", "resolutionPercentage", "resolution", "status", "lastUpdateMoment");
-		trackingLog.setLastUpdateMoment(MomentHelper.getCurrentMoment());
 		trackingLog.setClaim(claim);
 	}
 

@@ -57,18 +57,28 @@ public class AssistanceAgentTrackingLogListService extends AbstractGuiService<As
 	public void unbind(final Collection<TrackingLog> trackingLogs) {
 		Integer claimId = super.getRequest().getData("claimId", int.class);
 
-		List<TrackingLog> TLs = this.repository.findTopPercentage(claimId, false);
+		boolean reclaimed = trackingLogs.stream().anyMatch(x -> x.isReclaim());
+
+		List<TrackingLog> TLs = this.repository.findTopPercentage(claimId, reclaimed);
 		double topPercentage = 0.0;
-		boolean published = false;
+		boolean published = true;
+		boolean end = false;
 		if (!TLs.isEmpty()) {
 			topPercentage = TLs.get(0).getResolutionPercentage();
 			published = !TLs.get(0).isDraftMode();
 		}
-		boolean finish = topPercentage == 100.00;
-
+		boolean finish = false;
+		if (!reclaimed)
+			finish = topPercentage == 100.00;
+		else {
+			finish = true;
+			if (topPercentage == 100.00)
+				end = true;
+		}
 		super.getResponse().addGlobal("finish", finish);
 		super.getResponse().addGlobal("published", published);
 		super.getResponse().addGlobal("claimId", claimId);
+		super.getResponse().addGlobal("end", end);
 
 		Claim claim = this.repository.findClaimById(claimId);
 		super.getResponse().addGlobal("claimDraftMode", claim.isDraftMode());

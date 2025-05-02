@@ -11,9 +11,9 @@
 	<acme:list-payload path="payload"/>
 </acme:list>
 
-<jstl:if test="${!finish}">
+<jstl:if test="${!finish && published}">
 	<acme:button code="assistance-agent.tracking-log.list.label.create" action="/assistance-agent/tracking-log/create?claimId=${claimId}"/>
 </jstl:if>
-<jstl:if test="${finish && published}">
+<jstl:if test="${finish && published && !end}">
 	<acme:button code="assistance-agent.tracking-log.list.label.reclaim" action="/assistance-agent/tracking-log/reclaim?claimId=${claimId}"/>
 </jstl:if>
