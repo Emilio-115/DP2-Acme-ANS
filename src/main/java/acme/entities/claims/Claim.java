@@ -83,7 +83,7 @@ public class Claim extends AbstractEntity {
 		List<TrackingLog> trackingLogs = repository.getAllTrackingLogFromClaim(this.getId());
 		Claim claim = repository.getClaimById(this.getId());
 		if (!trackingLogs.isEmpty())
-			result = trackingLogs.get(0).getResolutionPercentage() < 100.00 && !claim.getIsAccepted().equals(ClaimStatus.PENDING);
+			result = trackingLogs.get(0).getResolutionPercentage() < 100.00;
 		else
 			return false;
 		return !result;
