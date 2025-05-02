@@ -69,7 +69,7 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 	@Override
 	public void perform(final TrackingLog trackingLog) {
 		this.repository.save(trackingLog);
-		this.repository.save(trackingLog.getClaim());
+		//this.repository.save(trackingLog.getClaim());
 	}
 
 	@Override
