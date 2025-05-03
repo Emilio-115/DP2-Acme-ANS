@@ -32,7 +32,6 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 		Claim claim = this.repository.findClaimById(claimId);
 
 		List<TrackingLog> trackingLogs = this.repository.findTopPercentage(claimId, false);
-		boolean valor = trackingLogs.get(0).getResolutionPercentage().equals(100.00);
 		if (!trackingLogs.isEmpty() && (trackingLogs.get(0).isDraftMode() || trackingLogs.get(0).getResolutionPercentage().equals(100.00)))
 			canCreate = false;
 
