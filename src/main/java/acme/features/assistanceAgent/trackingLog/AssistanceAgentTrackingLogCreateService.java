@@ -1,6 +1,8 @@
 
 package acme.features.assistanceAgent.trackingLog;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
@@ -23,12 +25,18 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 	@Override
 	public void authorise() {
 		boolean status;
+		boolean canCreate = true;
 
 		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		int claimId = super.getRequest().getData("claimId", int.class);
 		Claim claim = this.repository.findClaimById(claimId);
 
-		status = claim.getAssistanceAgent().getId() == agentId;
+		List<TrackingLog> trackingLogs = this.repository.findTopPercentage(claimId, false);
+		boolean valor = trackingLogs.get(0).getResolutionPercentage().equals(100.00);
+		if (!trackingLogs.isEmpty() && (trackingLogs.get(0).isDraftMode() || trackingLogs.get(0).getResolutionPercentage().equals(100.00)))
+			canCreate = false;
+
+		status = canCreate && claim.getAssistanceAgent().getId() == agentId;
 		super.getResponse().setAuthorised(status);
 	}
 
