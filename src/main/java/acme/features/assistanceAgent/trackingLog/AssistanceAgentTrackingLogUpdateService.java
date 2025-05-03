@@ -26,7 +26,14 @@ public class AssistanceAgentTrackingLogUpdateService extends AbstractGuiService<
 
 		boolean status;
 
-		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class);
+		int trackingLogId = super.getRequest().getData("id", int.class);
+
+		TrackingLog trackingLog = this.repository.findTrackingLogById(trackingLogId);
+
+		Claim claim = trackingLog.getClaim();
+		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
+
+		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && claim.getAssistanceAgent().getId() == agentId;
 
 		super.getResponse().setAuthorised(status);
 	}
