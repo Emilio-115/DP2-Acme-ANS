@@ -29,7 +29,7 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 		int customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		boolean status;
 		Optional<Booking> booking = this.repository.findByIdAndCustomerId(bookingId, customerId);
-		status = booking.isPresent();
+		status = booking.isPresent() && booking.get().isDraftMode();
 		super.getResponse().setAuthorised(status);
 	}
 
