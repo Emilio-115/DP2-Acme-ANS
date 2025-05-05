@@ -27,7 +27,15 @@ public class AssistanceAgentClaimDeleteService extends AbstractGuiService<Assist
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		boolean status;
+
+		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		int claimId = super.getRequest().getData("id", int.class);
+		Claim claim = this.repository.findClaimById(claimId);
+
+		status = claim.getAssistanceAgent().getId() == agentId && claim.isDraftMode();
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
