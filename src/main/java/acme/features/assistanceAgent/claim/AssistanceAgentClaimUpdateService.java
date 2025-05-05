@@ -30,7 +30,11 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 	public void authorise() {
 		boolean status;
 
-		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class);
+		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		int claimId = super.getRequest().getData("id", int.class);
+		Claim claim = this.repository.findClaimById(claimId);
+
+		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && claim.getAssistanceAgent().getId() == agentId && claim.isDraftMode();
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -42,8 +46,8 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 		int claimId;
 
 		claimId = super.getRequest().getData("id", int.class);
-		assistanceAgentId = super.getRequest().getPrincipal().getActiveRealm().getId();
-		claim = this.repository.findClaimByAssistanceAgent(assistanceAgentId, claimId);
+		assistanceAgentId = super.getRequest().getPrincipal().getAccountId();
+		claim = this.repository.findClaimById(claimId);
 
 		super.getBuffer().addData(claim);
 	}

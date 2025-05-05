@@ -10,7 +10,6 @@ import acme.client.helpers.PrincipalHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.claims.Claim;
-import acme.entities.claims.ClaimStatus;
 import acme.entities.trackingLogs.TrackingLog;
 import acme.entities.trackingLogs.TrackingLogStatus;
 import acme.realms.assistanceAgent.AssistanceAgent;
@@ -27,7 +26,14 @@ public class AssistanceAgentTrackingLogUpdateService extends AbstractGuiService<
 
 		boolean status;
 
-		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class);
+		int trackingLogId = super.getRequest().getData("id", int.class);
+
+		TrackingLog trackingLog = this.repository.findTrackingLogById(trackingLogId);
+
+		Claim claim = trackingLog.getClaim();
+		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
+
+		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && claim.getAssistanceAgent().getId() == agentId;
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -48,18 +54,9 @@ public class AssistanceAgentTrackingLogUpdateService extends AbstractGuiService<
 		int claimId = super.getRequest().getData("claimId", int.class);
 		Claim claim = this.repository.findClaimById(claimId);
 
-		boolean complete = claim.isComplete();
-
-		double per = super.getRequest().getData("resolutionPercentage", double.class);
-		TrackingLogStatus st = super.getRequest().getData("status", TrackingLogStatus.class);
-
-		if (per == 100.0 && complete) {
-			ClaimStatus cs = st.equals(TrackingLogStatus.ACCEPTED) ? ClaimStatus.ACCEPTED : ClaimStatus.REJECTED;
-			claim.setIsAccepted(cs);
-		}
-
 		super.bindObject(trackingLog, "undergoingStep", "resolutionPercentage", "resolution", "status", "lastUpdateMoment");
 		trackingLog.setLastUpdateMoment(MomentHelper.getCurrentMoment());
+
 		trackingLog.setClaim(claim);
 	}
 

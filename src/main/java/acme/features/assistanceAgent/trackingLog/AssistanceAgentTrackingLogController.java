@@ -19,6 +19,10 @@ public class AssistanceAgentTrackingLogController extends AbstractGuiController<
 	@Autowired
 	private AssistanceAgentTrackingLogShowService		showService;
 
+	/*
+	 * Mientras una tracking log no este publicada no se podra crear otra. Este boton desaparece cuando se llega al
+	 * 100 de progreso. El funcionamiento con el boton reclaim es igual.
+	 */
 	@Autowired
 	private AssistanceAgentTrackingLogCreateService		createService;
 
@@ -28,9 +32,16 @@ public class AssistanceAgentTrackingLogController extends AbstractGuiController<
 	@Autowired
 	private AssistanceAgentTrackingLogDeleteService		deleteService;
 
+	/*
+	 * Una vez que se publique una tracking log con un 100% de progreso, el estado (aceptado o rechazado)
+	 * modificara el estado de claim. Mientras este en modo borrador no lo hara
+	 */
 	@Autowired
 	private AssistanceAgentTrackingLogPublishService	publishService;
 
+	/*
+	 * Solo esta disponible cuando una tracking log con un 100% de progreso es publicada
+	 */
 	@Autowired
 	private AssistanceAgentTrackingLogReclaimService	reclaimService;
 

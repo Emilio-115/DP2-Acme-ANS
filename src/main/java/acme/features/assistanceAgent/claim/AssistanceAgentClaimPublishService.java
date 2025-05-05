@@ -32,7 +32,7 @@ public class AssistanceAgentClaimPublishService extends AbstractGuiService<Assis
 		int assistanceAgentId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		boolean status;
 		Optional<Claim> claim = this.repository.findByIdAndAssistanceAgentId(claimId, assistanceAgentId);
-		status = claim.isPresent();
+		status = claim.isPresent() && claim.get().getAssistanceAgent().getId() == assistanceAgentId;
 		super.getResponse().setAuthorised(status);
 	}
 
