@@ -44,8 +44,7 @@ public class CustomerPassengerPublishService extends AbstractGuiService<Customer
 
 	@Override
 	public void validate(final Passenger passenger) {
-		boolean notPublished = passenger.isDraftMode();
-		super.state(notPublished, "draftMode", "acme.validation.update.draftMode");
+		;
 	}
 
 	@Override

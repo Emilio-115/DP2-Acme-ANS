@@ -69,12 +69,7 @@ public class CustomerBookingRecordCreateService extends AbstractGuiService<Custo
 
 	@Override
 	public void validate(final BookingRecord bookingRecord) {
-		boolean isValid;
-		Booking associatedBooking = bookingRecord.getAssociatedBooking();
-		if (associatedBooking != null) {
-			isValid = associatedBooking.isDraftMode();
-			super.state(isValid, "associatedBooking", "acme.validation.booking.draftmode.message");
-		}
+		;
 
 	}
 

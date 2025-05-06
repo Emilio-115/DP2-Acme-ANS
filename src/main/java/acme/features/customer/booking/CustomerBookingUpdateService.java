@@ -54,8 +54,7 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 
 	@Override
 	public void validate(final Booking booking) {
-		boolean notPublished = booking.isDraftMode();
-		super.state(notPublished, "draftMode", "acme.validation.update.draftMode");
+		;
 	}
 
 	@Override

@@ -28,7 +28,7 @@ public class CustomerBookingRecordDeleteService extends AbstractGuiService<Custo
 		int customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		boolean status;
 		Optional<BookingRecord> bookingRecord = this.repository.findByBookingRecordIdAndCustomerId(bookingRecordId, customerId);
-		status = bookingRecord.isPresent();
+		status = bookingRecord.isPresent() && bookingRecord.get().getAssociatedBooking().isDraftMode();
 		super.getResponse().setAuthorised(status);
 	}
 
@@ -43,9 +43,7 @@ public class CustomerBookingRecordDeleteService extends AbstractGuiService<Custo
 
 	@Override
 	public void validate(final BookingRecord bookingRecord) {
-		boolean canDelete = bookingRecord.getAssociatedBooking().isDraftMode();
-		super.state(canDelete, "associatedBooking", "acme.validation.bookingrecord.delete");
-
+		;
 	}
 
 	@Override
