@@ -2,7 +2,6 @@
 package acme.features.customer.booking;
 
 import java.util.Collection;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -30,9 +29,8 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 		if (super.getRequest().hasData("flight")) {
 			int flightId = super.getRequest().getData("flight", int.class);
 			if (flightId != 0) {
-				Optional<Boolean> flightIsDraftmodeOpt = this.repository.findFlightDraftmodeValueById(flightId);
-				if (flightIsDraftmodeOpt.isPresent())
-					status = !flightIsDraftmodeOpt.get();
+				Boolean flightIsAvailable = this.repository.checkFlightIsAvailableById(flightId, MomentHelper.getCurrentMoment());
+				status = flightIsAvailable;
 			}
 		}
 		super.getResponse().setAuthorised(status);
@@ -73,8 +71,6 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 	@Override
 	public void unbind(final Booking booking) {
 		Collection<Flight> availableFlights = this.repository.findAvailableFlights(MomentHelper.getCurrentMoment());
-		if (booking.getFlight() != null && !availableFlights.contains(booking.getFlight()))
-			availableFlights.add(booking.getFlight());
 		Dataset dataset;
 		SelectChoices choices;
 		SelectChoices flightChoices;

@@ -33,6 +33,9 @@ public interface CustomerBookingRepository extends AbstractRepository {
 	@Query("SELECT f.draftMode FROM Flight f WHERE f.id = :id")
 	Optional<Boolean> findFlightDraftmodeValueById(Integer id);
 
+	@Query("SELECT count(f)>0 FROM Flight f WHERE f.id = :id AND f.draftMode = false AND NOT EXISTS(SELECT l FROM Leg l WHERE l.flight = :id AND l.departureDate <= :currentMoment)")
+	Boolean checkFlightIsAvailableById(Integer id, Date currentMoment);
+
 	@Query("SELECT br FROM BookingRecord br WHERE br.associatedBooking.id = :bookingId")
 	List<BookingRecord> findBookingRecordsByBookingId(Integer bookingId);
 
