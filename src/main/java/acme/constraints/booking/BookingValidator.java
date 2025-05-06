@@ -28,7 +28,7 @@ public class BookingValidator extends AbstractValidator<ValidBooking, Booking> {
 			return true;
 
 		BookingRepository bookingRepository = SpringHelper.getBean(BookingRepository.class);
-		Long numberPassegers = bookingRepository.countPassangersByBookingId(booking.getId());
+		Long numberPassegers = bookingRepository.countPassengersByBookingId(booking.getId());
 		Optional<String> foundLocatorCode = bookingRepository.findLocatorCodeFromDifferentBooking(booking.getId(), booking.getLocatorCode());
 
 		var flight = booking.getFlight();
