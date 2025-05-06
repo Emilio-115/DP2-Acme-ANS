@@ -2,6 +2,7 @@
 package acme.features.customer.bookingRecord;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -28,22 +29,35 @@ public class CustomerBookingRecordCreateService extends AbstractGuiService<Custo
 		var a = super.getRequest();
 
 		int customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
-		if (super.getRequest().hasData("associatedBooking")) {
-			int associatedBookingId = super.getRequest().getData("associatedBooking", int.class);
-			if (associatedBookingId != 0) {
-				Boolean ownsBooking = this.repository.isBookingOwnedByCustomerId(associatedBookingId, customerId);
-				status = ownsBooking;
-			}
-		}
+		if (super.getRequest().hasData("associatedBooking"))
+			status = this.checkBookingIsOwnedAndDraftmode(status, customerId);
 
-		if (super.getRequest().hasData("associatedPassenger")) {
-			int associatedPassengerId = super.getRequest().getData("associatedPassenger", int.class);
-			if (associatedPassengerId != 0) {
-				Boolean ownsPassenger = this.repository.isPassengerOwnedByCustomerId(associatedPassengerId, customerId);
-				status = status && ownsPassenger;
-			}
-		}
+		if (status && super.getRequest().hasData("associatedPassenger"))
+			status = this.checkPassengerisOwnedAndNotDraftmode(status, customerId);
+
 		super.getResponse().setAuthorised(status);
+	}
+
+	private boolean checkPassengerisOwnedAndNotDraftmode(boolean status, final int customerId) {
+		int associatedPassengerId = super.getRequest().getData("associatedPassenger", int.class);
+		if (associatedPassengerId != 0) {
+			Optional<Passenger> passenger = this.repository.isPassengerOwnedByCustomerId(associatedPassengerId, customerId);
+			status = passenger.isPresent();
+			if (passenger.isPresent())
+				status = !passenger.get().isDraftMode();
+		}
+		return status;
+	}
+
+	private boolean checkBookingIsOwnedAndDraftmode(boolean status, final int customerId) {
+		int associatedBookingId = super.getRequest().getData("associatedBooking", int.class);
+		if (associatedBookingId != 0) {
+			Optional<Booking> booking = this.repository.isBookingOwnedByCustomerId(associatedBookingId, customerId);
+			status = booking.isPresent();
+			if (booking.isPresent())
+				status = booking.get().isDraftMode();
+		}
+		return status;
 	}
 
 	@Override

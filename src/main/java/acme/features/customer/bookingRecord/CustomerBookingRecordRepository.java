@@ -37,9 +37,9 @@ public interface CustomerBookingRecordRepository extends AbstractRepository {
 	@Query("SELECT br FROM BookingRecord br WHERE br.associatedBooking.customer.id = :customerId")
 	List<BookingRecord> findBookingRecordByCustomerId(Integer customerId);
 
-	@Query("SELECT count(b)>0 FROM Booking b WHERE b.id = :bookingId AND b.customer.id = :customerId")
-	Boolean isBookingOwnedByCustomerId(Integer bookingId, Integer customerId);
+	@Query("SELECT b FROM Booking b WHERE b.id = :bookingId AND b.customer.id = :customerId")
+	Optional<Booking> isBookingOwnedByCustomerId(Integer bookingId, Integer customerId);
 
-	@Query("SELECT count(p)>0 FROM Passenger p WHERE p.id = :passengerId AND p.customer.id = :customerId")
-	Boolean isPassengerOwnedByCustomerId(Integer passengerId, Integer customerId);
+	@Query("SELECT p FROM Passenger p WHERE p.id = :passengerId AND p.customer.id = :customerId")
+	Optional<Passenger> isPassengerOwnedByCustomerId(Integer passengerId, Integer customerId);
 }
