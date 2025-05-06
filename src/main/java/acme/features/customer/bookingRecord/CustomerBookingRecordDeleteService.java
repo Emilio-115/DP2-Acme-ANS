@@ -57,13 +57,8 @@ public class CustomerBookingRecordDeleteService extends AbstractGuiService<Custo
 
 	@Override
 	public void bind(final BookingRecord bookingRecord) {
-		int bookingId = super.getRequest().getData("associatedBooking", int.class);
-		int passengerId = super.getRequest().getData("associatedPassenger", int.class);
-		Booking associatedBooking = this.repository.findBookingById(bookingId);
-		Passenger associatedPassenger = this.repository.findPassengerById(passengerId);
 		super.bindObject(bookingRecord);
-		bookingRecord.setAssociatedBooking(associatedBooking);
-		bookingRecord.setAssociatedPassenger(associatedPassenger);
+
 	}
 
 	@Override
