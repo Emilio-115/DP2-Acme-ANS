@@ -2,6 +2,7 @@
 package acme.features.customer.booking;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -24,7 +25,17 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+
+		boolean status = true;
+		if (super.getRequest().hasData("flight")) {
+			int flightId = super.getRequest().getData("flight", int.class);
+			if (flightId != 0) {
+				Optional<Boolean> flightIsDraftmodeOpt = this.repository.findFlightDraftmodeValueById(flightId);
+				if (flightIsDraftmodeOpt.isPresent())
+					status = !flightIsDraftmodeOpt.get();
+			}
+		}
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override

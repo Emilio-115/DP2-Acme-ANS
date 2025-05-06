@@ -33,12 +33,12 @@ public class CustomerBookingRecordCreateService extends AbstractGuiService<Custo
 			status = this.checkBookingIsOwnedAndDraftmode(status, customerId);
 
 		if (status && super.getRequest().hasData("associatedPassenger"))
-			status = this.checkPassengerisOwnedAndNotDraftmode(status, customerId);
+			status = this.checkPassengerIsOwnedAndNotDraftmode(status, customerId);
 
 		super.getResponse().setAuthorised(status);
 	}
 
-	private boolean checkPassengerisOwnedAndNotDraftmode(boolean status, final int customerId) {
+	private boolean checkPassengerIsOwnedAndNotDraftmode(boolean status, final int customerId) {
 		int associatedPassengerId = super.getRequest().getData("associatedPassenger", int.class);
 		if (associatedPassengerId != 0) {
 			Optional<Passenger> passenger = this.repository.isPassengerOwnedByCustomerId(associatedPassengerId, customerId);

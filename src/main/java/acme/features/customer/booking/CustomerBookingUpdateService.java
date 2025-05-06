@@ -30,7 +30,23 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 		boolean status;
 		Optional<Booking> booking = this.repository.findByIdAndCustomerId(bookingId, customerId);
 		status = booking.isPresent() && booking.get().isDraftMode();
+
+		if (status)
+			status = this.checkFlightIsPublished(status);
+
 		super.getResponse().setAuthorised(status);
+	}
+
+	private boolean checkFlightIsPublished(boolean status) {
+		if (super.getRequest().hasData("flight")) {
+			int flightId = super.getRequest().getData("flight", int.class);
+			if (flightId != 0) {
+				Optional<Boolean> flightIsDraftmodeOpt = this.repository.findFlightDraftmodeValueById(flightId);
+				if (flightIsDraftmodeOpt.isPresent())
+					status = !flightIsDraftmodeOpt.get();
+			}
+		}
+		return status;
 	}
 
 	@Override
