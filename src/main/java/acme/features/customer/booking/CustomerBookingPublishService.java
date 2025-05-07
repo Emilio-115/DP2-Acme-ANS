@@ -2,6 +2,7 @@
 package acme.features.customer.booking;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,14 +66,16 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 	@Override
 	public void unbind(final Booking booking) {
 
-		Collection<Flight> availableFlights = this.repository.findAvailableFlights(MomentHelper.getCurrentMoment());
-		if (booking.getFlight() != null && !availableFlights.contains(booking.getFlight()))
-			availableFlights.add(booking.getFlight());
+		Date currentMoment = MomentHelper.getCurrentMoment();
+		Collection<Flight> availableFlights = this.repository.findAvailableFlights(currentMoment);
+		boolean flightAvailable = false;
+		if (booking.getFlight() != null)
+			flightAvailable = this.repository.checkFlightIsAvailableById(booking.getFlight().getId(), currentMoment);
 		Dataset dataset;
 		SelectChoices choices;
 		SelectChoices flightChoices;
 		choices = SelectChoices.from(TravelClass.class, booking.getTravelClass());
-		flightChoices = SelectChoices.from(availableFlights, "tag", booking.getFlight());
+		flightChoices = SelectChoices.from(availableFlights, "tag", flightAvailable ? booking.getFlight() : null);
 		dataset = super.unbindObject(booking, "locatorCode", "purchaseMoment", "travelClass", "creditCardLastNibble", "draftMode");
 
 		dataset.put("price", booking.price());
