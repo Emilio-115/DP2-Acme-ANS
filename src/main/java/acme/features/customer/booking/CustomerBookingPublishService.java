@@ -29,7 +29,7 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 		int customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		boolean status;
 		Optional<Booking> booking = this.repository.findByIdAndCustomerId(bookingId, customerId);
-		status = booking.isPresent();
+		status = booking.isPresent() && booking.get().isDraftMode();
 		super.getResponse().setAuthorised(status);
 	}
 
@@ -44,22 +44,16 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 
 	@Override
 	public void bind(final Booking booking) {
-		int flightId = super.getRequest().getData("flight", int.class);
-		Flight flight = this.repository.findFlightById(flightId);
-
-		super.bindObject(booking, "locatorCode", "travelClass", "creditCardLastNibble");
+		super.bindObject(booking);
 		booking.setPurchaseMoment(MomentHelper.getCurrentMoment());
-		booking.setFlight(flight);
 	}
 
 	@Override
 	public void validate(final Booking booking) {
-		boolean notPublished = booking.isDraftMode();
 		boolean hasPassengers = !this.repository.findPassengersByBookingId(booking.getId()).isEmpty();
 		boolean hasLastNibble = !booking.getCreditCardLastNibble().isBlank();
-		super.state(notPublished, "*", "acme.validation.update.draftMode");
 		super.state(hasPassengers, "*", "acme.validation.booking.passenger");
-		super.state(hasLastNibble, "*", "acme.validation.booking.creditcardlastnibble");
+		super.state(hasLastNibble, "creditCardLastNibble", "acme.validation.booking.creditcardlastnibble");
 	}
 
 	@Override

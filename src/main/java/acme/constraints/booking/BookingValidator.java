@@ -7,6 +7,7 @@ import javax.validation.ConstraintValidatorContext;
 
 import acme.client.components.validation.AbstractValidator;
 import acme.client.components.validation.Validator;
+import acme.client.helpers.MomentHelper;
 import acme.client.helpers.SpringHelper;
 import acme.entities.bookings.Booking;
 import acme.entities.bookings.BookingRepository;
@@ -28,14 +29,14 @@ public class BookingValidator extends AbstractValidator<ValidBooking, Booking> {
 			return true;
 
 		BookingRepository bookingRepository = SpringHelper.getBean(BookingRepository.class);
-		Long numberPassegers = bookingRepository.countPassangersByBookingId(booking.getId());
+		Long numberPassegers = bookingRepository.countPassengersByBookingId(booking.getId());
 		Optional<String> foundLocatorCode = bookingRepository.findLocatorCodeFromDifferentBooking(booking.getId(), booking.getLocatorCode());
 
 		var flight = booking.getFlight();
 		if (flight != null) {
-			boolean flightNoDraftMode = !flight.isDraftMode();
+			boolean flightNoDraftMode = bookingRepository.checkFlightIsStillFutureById(flight.getId(), MomentHelper.getCurrentMoment());
 
-			super.state(context, flightNoDraftMode, "flight", "acme.validation.booking.flight.draftMode");
+			super.state(context, flightNoDraftMode, "flight", "acme.validation.booking.flight.future");
 		}
 
 		boolean locatorNotUsed = foundLocatorCode.isEmpty();
@@ -44,9 +45,6 @@ public class BookingValidator extends AbstractValidator<ValidBooking, Booking> {
 
 		boolean needCreditCardLastNibble = !booking.isDraftMode() && booking.getCreditCardLastNibble() == null;
 		super.state(context, !needCreditCardLastNibble, "creditCardLastNibble", "acme.validation.booking.creditcardlastnibble");
-
-		boolean needPassengers = !booking.isDraftMode() && numberPassegers.equals(0L);
-		super.state(context, !needPassengers, "*", "acme.validation.booking.passenger");
 
 		result = !super.hasErrors(context);
 		return result;
