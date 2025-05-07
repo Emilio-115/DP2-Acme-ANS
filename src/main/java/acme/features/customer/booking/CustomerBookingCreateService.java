@@ -33,6 +33,13 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 				status = flightIsAvailable;
 			}
 		}
+
+		if (status && super.getRequest().hasData("id")) {
+			int id = super.getRequest().getData("id", int.class);
+			if (id != 0)
+				status = false;
+		}
+
 		super.getResponse().setAuthorised(status);
 	}
 

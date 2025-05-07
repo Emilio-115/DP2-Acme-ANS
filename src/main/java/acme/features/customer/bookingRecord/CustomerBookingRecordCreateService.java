@@ -28,8 +28,14 @@ public class CustomerBookingRecordCreateService extends AbstractGuiService<Custo
 		boolean status = true;
 		var a = super.getRequest();
 
+		if (super.getRequest().hasData("id")) {
+			int id = super.getRequest().getData("id", int.class);
+			if (id != 0)
+				status = false;
+		}
+
 		int customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
-		if (super.getRequest().hasData("associatedBooking"))
+		if (status && super.getRequest().hasData("associatedBooking"))
 			status = this.checkBookingIsOwnedAndDraftmode(status, customerId);
 
 		if (status && super.getRequest().hasData("associatedPassenger"))
