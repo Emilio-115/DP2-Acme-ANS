@@ -107,6 +107,5 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 		dataset.put("numberOfLayovers", booking.getFlight() != null ? booking.getFlight().numberOfLayovers() : "No Data");
 
 		super.getResponse().addData(dataset);
-		super.getResponse().addData(dataset);
 	}
 }
