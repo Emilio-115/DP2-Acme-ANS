@@ -39,13 +39,13 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 	}
 
 	private boolean checkFlightIsPublished(boolean status) {
-		if (super.getRequest().hasData("flight")) {
-			int flightId = super.getRequest().getData("flight", int.class);
-			if (flightId != 0) {
-				Boolean flightIsAvailable = this.repository.checkFlightIsAvailableById(flightId, MomentHelper.getCurrentMoment());
-				status = flightIsAvailable;
-			}
+
+		int flightId = super.getRequest().getData("flight", int.class);
+		if (flightId != 0) {
+			Boolean flightIsAvailable = this.repository.checkFlightIsAvailableById(flightId, MomentHelper.getCurrentMoment());
+			status = flightIsAvailable;
 		}
+
 		return status;
 	}
 
