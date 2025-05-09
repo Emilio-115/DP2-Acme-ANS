@@ -58,6 +58,7 @@ public class AssistanceAgentTrackingLogPublishService extends AbstractGuiService
 
 		if (per != null && st != null)
 			if (per == 100.00) {
+				claim.setCompleted(true);
 				ClaimStatus cs = st.equals(TrackingLogStatus.ACCEPTED) ? ClaimStatus.ACCEPTED : ClaimStatus.REJECTED;
 				claim.setIsAccepted(cs);
 			}

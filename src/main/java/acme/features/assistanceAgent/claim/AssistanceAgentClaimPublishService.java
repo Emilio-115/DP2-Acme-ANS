@@ -91,7 +91,6 @@ public class AssistanceAgentClaimPublishService extends AbstractGuiService<Assis
 		dataset.put("types", choices);
 		dataset.put("status", status);
 		dataset.put("landedLegs", legChoices);
-		dataset.put("complete", claim.isComplete());
 
 		super.getResponse().addData(dataset);
 	}
