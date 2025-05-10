@@ -31,7 +31,7 @@ public class CustomerBookingDeleteService extends AbstractGuiService<Customer, B
 		int customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		boolean status;
 		Optional<Booking> booking = this.repository.findByIdAndCustomerId(bookingId, customerId);
-		status = booking.isPresent();
+		status = booking.isPresent() && booking.get().isDraftMode();
 		super.getResponse().setAuthorised(status);
 	}
 
@@ -46,13 +46,12 @@ public class CustomerBookingDeleteService extends AbstractGuiService<Customer, B
 
 	@Override
 	public void bind(final Booking booking) {
-		super.bindObject(booking, "locatorCode", "purchaseMoment", "travelClass", "creditCardLastNibble");
+		super.bindObject(booking);
 	}
 
 	@Override
 	public void validate(final Booking booking) {
-		boolean notPublished = booking.isDraftMode();
-		super.state(notPublished, "draftMode", "acme.validation.update.draftMode");
+		;
 	}
 
 	@Override

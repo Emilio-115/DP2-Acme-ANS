@@ -1,17 +1,18 @@
-key,description,is_accepted,passenger_email,registration_moment,type,key:assistance_agent,key:leg,draftMode
-claim-01,"L",ACCEPTED,"acme@lorem-ipsum.org",2020/01/01 0:00,"OTHER_ISSUES",assistance-agent-01,leg-10,true
-claim-02,"La",ACCEPTED,"a@b.e",2019/04/01 0:01,"OTHER_ISSUES",assistance-agent-02,leg-10,true
-claim-03,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor",REJECTED,"lorem-ipsum@dolor.sit.amet.consectetur.adipiscing.elit.sed.do.eiusmod.tempor.incididunt.ut.labore.et.dolore.magna.aliqua.Ut.enim.ad.minim.veniam.quis.nostrud.exercitation.ullamco.laboris.nisi.ut.aliquip.ex.ea.commodo.consequat.duis.aute.irure.doloris.edu",2022/07/29 23:59,"SECURITY_INCIDENT",assistance-agent-02,leg-10,false
-claim-04,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor*",REJECTED,"a@b.es",2019/04/16 0:00,"LUGGAGE_ISSUES",assistance-agent-01,leg-10,false
-claim-05,"AYUDAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",PENDING,"a@b.esx",2022/07/29 23:58,"FLIGHT_ISSUES",assistance-agent-02,leg-10,true
-claim-06,"โลเร็ม อิปซัม",ACCEPTED,"a@b.esx",2019/04/02 22:22,"OTHER_ISSUES",assistance-agent-01,leg-10,true
-claim-07,"لوريم إيبسوم",REJECTED,"ab@b.esx",2019/10/30 12:00,"LUGGAGE_ISSUES",assistance-agent-02,leg-10,false
-claim-08,"洛伦·伊普森",REJECTED,"ac@b.esx",2019/11/11 11:11,"OTHER_ISSUES",assistance-agent-01,leg-10,false
-claim-09,"<marquee>Hacked</marquee>",REJECTED,"lorem-ipsum@dolor.sit.amet.consectetur.adipiscing.elit.sed.do.eiusmod.tempor.incididunt.ut.labore.et.dolore.magna.aliqua.Ut.enim.ad.minim.veniam.quis.nostrud.exercitation.ullamco.laboris.nisi.ut.aliquip.ex.ea.commodo.consequat.duis.aute.irure.doloris.edu",2019/04/15 12:15,"FLIGHT_ISSUES",assistance-agent-01,leg-10,false
-claim-10,"<script>alert(‘Hacked!’);</script>",ACCEPTED,"lorem-ipsum@dolor.sit.amet.consectetur.adipiscing.elit.sed.do.eiusmod.tempor.incididunt.ut.labore.et.dolore.magna.aliqua.Ut.enim.ad.minim.veniam.quis.nostrud.exercitation.ullamco.laboris.nisi.ut.aliquip.ex.ea.commodo.consequat.duis.aute.irure.dolor.es.org",2019/10/23 15:14,"LUGGAGE_ISSUES",assistance-agent-02,leg-10,true
-claim-11,"' or 'A' = 'A ",ACCEPTED,"af@b.esx",2020/02/17 18:57,"LUGGAGE_ISSUES",assistance-agent-01,leg-10,true
-claim-12,"Buena Claim",PENDING,"migueltoro@us.es",2020/02/15 15:00,"LUGGAGE_ISSUES",assistance-agent-01,leg-10,true
-claim-13,"Tengo problemas con el vuelo",PENDING,"pabloperez@gmail.es",2019/03/20 13:10,"OTHER_ISSUES",assistance-agent-01,leg-10,true
-claim-14,"No me gusta la comida",PENDING,"angeltobar@gmail.es",2019/12/03 18:20,"FLIGHT_ISSUES",assistance-agent-02,leg-10,true
-claim-15,"Como funciona esto?",PENDING,"juanjose@gmail.es",2020/10/09 04:30,"OTHER_ISSUES",assistance-agent-01,leg-10,true
-claim-16,"Me han robado",PENDING,"papa@gmail.es",2020/11/20 12:13,"LUGGAGE_ISSUES",assistance-agent-02,leg-10,true
+key,description,is_accepted,passenger_email,registration_moment,type,key:assistance_agent,key:leg,draftMode,completed
+claim-01,"L",ACCEPTED,"acme@lorem-ipsum.org",2020/01/01 0:00,"OTHER_ISSUES",assistance-agent-01,leg-10,true,true
+claim-02,"La",ACCEPTED,"a@b.e",2019/04/01 0:01,"OTHER_ISSUES",assistance-agent-02,leg-10,true,true
+claim-03,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor",REJECTED,"lorem-ipsum@dolor.sit.amet.consectetur.adipiscing.elit.sed.do.eiusmod.tempor.incididunt.ut.labore.et.dolore.magna.aliqua.Ut.enim.ad.minim.veniam.quis.nostrud.exercitation.ullamco.laboris.nisi.ut.aliquip.ex.ea.commodo.consequat.duis.aute.irure.doloris.edu",2022/07/29 23:59,"SECURITY_INCIDENT",assistance-agent-02,leg-10,false,true
+claim-04,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor*",ACCEPTED,"a@b.es",2019/04/16 0:00,"LUGGAGE_ISSUES",assistance-agent-01,leg-10,false,true
+claim-05,"AYUDAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",PENDING,"a@b.esx",2022/07/29 23:58,"FLIGHT_ISSUES",assistance-agent-02,leg-10,true,false
+claim-06,"โลเร็ม อิปซัม",ACCEPTED,"a@b.esx",2019/04/02 22:22,"OTHER_ISSUES",assistance-agent-01,leg-10,true,true
+claim-07,"لوريم إيبسوم",REJECTED,"ab@b.esx",2019/10/30 12:00,"LUGGAGE_ISSUES",assistance-agent-02,leg-10,false,true
+claim-08,"洛伦·伊普森",REJECTED,"ac@b.esx",2019/11/11 11:11,"OTHER_ISSUES",assistance-agent-01,leg-10,false,true
+claim-09,"<marquee>Hacked</marquee>",REJECTED,"lorem-ipsum@dolor.sit.amet.consectetur.adipiscing.elit.sed.do.eiusmod.tempor.incididunt.ut.labore.et.dolore.magna.aliqua.Ut.enim.ad.minim.veniam.quis.nostrud.exercitation.ullamco.laboris.nisi.ut.aliquip.ex.ea.commodo.consequat.duis.aute.irure.doloris.edu",2019/04/15 12:15,"FLIGHT_ISSUES",assistance-agent-01,leg-10,false,true
+claim-10,"<script>alert(‘Hacked!’);</script>",ACCEPTED,"lorem-ipsum@dolor.sit.amet.consectetur.adipiscing.elit.sed.do.eiusmod.tempor.incididunt.ut.labore.et.dolore.magna.aliqua.Ut.enim.ad.minim.veniam.quis.nostrud.exercitation.ullamco.laboris.nisi.ut.aliquip.ex.ea.commodo.consequat.duis.aute.irure.dolor.es.org",2019/10/23 15:14,"LUGGAGE_ISSUES",assistance-agent-02,leg-10,true,true
+claim-11,"' or 'A' = 'A ",ACCEPTED,"af@b.esx",2020/02/17 18:57,"LUGGAGE_ISSUES",assistance-agent-01,leg-10,true,true
+claim-12,"Buena Claim",PENDING,"migueltoro@us.es",2020/02/15 15:00,"LUGGAGE_ISSUES",assistance-agent-01,leg-10,true,false
+claim-13,"Tengo problemas con el vuelo",PENDING,"pabloperez@gmail.es",2019/03/20 13:10,"OTHER_ISSUES",assistance-agent-01,leg-10,true,false
+claim-14,"No me gusta la comida",PENDING,"angeltobar@gmail.es",2019/12/03 18:20,"FLIGHT_ISSUES",assistance-agent-02,leg-10,true,false
+claim-15,"Como funciona esto?",PENDING,"juanjose@gmail.es",2020/10/09 04:30,"OTHER_ISSUES",assistance-agent-01,leg-10,true,false
+claim-16,"Me han robado",PENDING,"papa@gmail.es",2020/11/20 12:13,"LUGGAGE_ISSUES",assistance-agent-02,leg-10,true,false
+claim-17,"Sin Tracking logs",PENDING,"papa3@gmail.es",2020/12/20 09:13,"OTHER_ISSUES",assistance-agent-01,leg-10,true,false

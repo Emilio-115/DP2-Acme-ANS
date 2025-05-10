@@ -64,7 +64,7 @@ acme.validation.booking.creditcardlastnibble = Los 4 números de la tarjeta de c
 acme.validation.booking.passenger = Es necesario que la reserva tenga pasajeros para publicarla
 acme.validation.booking.locatorCode = El código localizador debe ser único
 acme.validation.booking.flight = Debes seleccionar un vuelo
-acme.validation.booking.flight.draftMode = No puedes seleccionar un vuelo en modo borrador
+acme.validation.booking.flight.future = El vuelo ya ha ocurrido, elija otro.
 acme.validation.booking.draftmode.message = No puedes añadir pasajeros a una reserva publicada
 
 # acme.validation.bookingrecord #######################

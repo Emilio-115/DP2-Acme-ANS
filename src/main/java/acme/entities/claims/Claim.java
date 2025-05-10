@@ -2,13 +2,11 @@
 package acme.entities.claims;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import javax.validation.Valid;
 
 import acme.client.components.basis.AbstractEntity;
@@ -18,10 +16,8 @@ import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidEmail;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidString;
-import acme.client.helpers.SpringHelper;
 import acme.constraints.claim.ValidClaim;
 import acme.entities.legs.Leg;
-import acme.entities.trackingLogs.TrackingLog;
 import acme.realms.assistanceAgent.AssistanceAgent;
 import lombok.Getter;
 import lombok.Setter;
@@ -59,6 +55,10 @@ public class Claim extends AbstractEntity {
 	@Automapped
 	private ClaimStatus			isAccepted;
 
+	@Optional
+	@Automapped
+	boolean						completed;
+
 	@Mandatory
 	@Automapped
 	boolean						draftMode;
@@ -73,19 +73,20 @@ public class Claim extends AbstractEntity {
 	@ManyToOne
 	private Leg					leg;
 
-
-	@Transient
-	public boolean isComplete() {
-		boolean result;
-		ClaimRepository repository;
-
-		repository = SpringHelper.getBean(ClaimRepository.class);
-		List<TrackingLog> trackingLogs = repository.getAllTrackingLogFromClaim(this.getId());
-		if (!trackingLogs.isEmpty())
-			result = trackingLogs.get(0).getResolutionPercentage() < 100.00;
-		else
-			return false;
-		return !result;
-	}
+	/*
+	 * @Transient
+	 * public boolean isComplete() {
+	 * boolean result;
+	 * ClaimRepository repository;
+	 * 
+	 * repository = SpringHelper.getBean(ClaimRepository.class);
+	 * List<TrackingLog> trackingLogs = repository.getAllTrackingLogFromClaim(this.getId());
+	 * if (!trackingLogs.isEmpty())
+	 * result = trackingLogs.get(0).getResolutionPercentage().equals(100.00);
+	 * else
+	 * return false;
+	 * return result;
+	 * }
+	 */
 
 }

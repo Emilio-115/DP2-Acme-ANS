@@ -20,6 +20,8 @@ acme.validation.activity-log.assignment-not-confirmed.message = Flight assignmen
 acme.validation.activity-log.registered-before-landing.message = Invalid registeredAt date: registered before the respective leg landed
 acme.validation.activity-log.arrival-before-departure.message = Invalid departureDate date, arrival must be after departure
 
+acme.validation.draftMode.tracking-log = This tracking log has already been published, it can not be deleted.
+
 acme.validation.update.draftMode.claim = This claim can not be publish with unpublished tracking logs
 
 acme.validation.update.draftMode.tracking-log = This tracking log can not be publish with unpublished tracking logs
@@ -64,7 +66,7 @@ acme.validation.booking.creditcardlastnibble = Credit card last nibble is mandat
 acme.validation.booking.passenger = Passengers are necessary to publish the booking
 acme.validation.booking.locatorCode = Locator code must be unique
 acme.validation.booking.flight = You must select a flight
-acme.validation.booking.flight.draftMode = You can not choose a flight in draftMode
+acme.validation.booking.flight.future = The flight has already flown, choose another.
 acme.validation.booking.draftmode.message = You can not add passengers to a published booking
 
 

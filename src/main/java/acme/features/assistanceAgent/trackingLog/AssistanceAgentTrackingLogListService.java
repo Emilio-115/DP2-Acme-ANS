@@ -24,7 +24,10 @@ public class AssistanceAgentTrackingLogListService extends AbstractGuiService<As
 	public void authorise() {
 		boolean status;
 
-		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class);
+		int claimId = super.getRequest().getData("claimId", int.class);
+		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		Claim claim = this.repository.findClaimById(claimId);
+		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && claim != null && claim.getAssistanceAgent().getId() == agentId;
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -57,18 +60,28 @@ public class AssistanceAgentTrackingLogListService extends AbstractGuiService<As
 	public void unbind(final Collection<TrackingLog> trackingLogs) {
 		Integer claimId = super.getRequest().getData("claimId", int.class);
 
-		List<TrackingLog> TLs = this.repository.findTopPercentage(claimId, false);
+		boolean reclaimed = trackingLogs.stream().anyMatch(x -> x.isReclaim());
+
+		List<TrackingLog> TLs = this.repository.findTopPercentage(claimId, reclaimed);
 		double topPercentage = 0.0;
-		boolean published = false;
+		boolean published = true;
+		boolean end = false;
 		if (!TLs.isEmpty()) {
 			topPercentage = TLs.get(0).getResolutionPercentage();
 			published = !TLs.get(0).isDraftMode();
 		}
-		boolean finish = topPercentage == 100.00;
-
+		boolean finish = false;
+		if (!reclaimed)
+			finish = topPercentage == 100.00;
+		else {
+			finish = true;
+			if (topPercentage == 100.00)
+				end = true;
+		}
 		super.getResponse().addGlobal("finish", finish);
 		super.getResponse().addGlobal("published", published);
 		super.getResponse().addGlobal("claimId", claimId);
+		super.getResponse().addGlobal("end", end);
 
 		Claim claim = this.repository.findClaimById(claimId);
 		super.getResponse().addGlobal("claimDraftMode", claim.isDraftMode());

@@ -7,6 +7,7 @@ import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
+import acme.entities.claims.Claim;
 import acme.entities.trackingLogs.TrackingLog;
 import acme.entities.trackingLogs.TrackingLogStatus;
 import acme.realms.assistanceAgent.AssistanceAgent;
@@ -27,9 +28,16 @@ public class AssistanceAgentTrackingLogShowService extends AbstractGuiService<As
 
 		TrackingLog trackingLog = this.repository.findTrackingLogById(trackingLogId);
 
-		status = trackingLog != null;
+		if (trackingLog == null)
+			super.getResponse().setAuthorised(false);
+		else {
+			Claim claim = trackingLog.getClaim();
+			int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
 
-		super.getResponse().setAuthorised(status);
+			status = claim != null && claim.getAssistanceAgent().getId() == agentId;
+
+			super.getResponse().setAuthorised(status);
+		}
 	}
 
 	@Override

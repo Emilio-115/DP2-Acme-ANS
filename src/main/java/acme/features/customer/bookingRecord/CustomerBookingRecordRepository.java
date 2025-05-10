@@ -28,7 +28,7 @@ public interface CustomerBookingRecordRepository extends AbstractRepository {
 	@Query("SELECT p FROM Passenger p WHERE p.id = :id")
 	Passenger findPassengerById(Integer id);
 
-	@Query("SELECT br FROM BookingRecord br WHERE br.id = :id AND br.associatedBooking.customer.id = :customerId")
+	@Query("SELECT br FROM BookingRecord br WHERE br.id = :id AND br.associatedBooking.customer.id = :customerId AND br.associatedPassenger.customer.id = :customerId")
 	Optional<BookingRecord> findByBookingRecordIdAndCustomerId(Integer id, Integer customerId);
 
 	@Query("SELECT br FROM BookingRecord br WHERE br.id = :id")
@@ -37,4 +37,9 @@ public interface CustomerBookingRecordRepository extends AbstractRepository {
 	@Query("SELECT br FROM BookingRecord br WHERE br.associatedBooking.customer.id = :customerId")
 	List<BookingRecord> findBookingRecordByCustomerId(Integer customerId);
 
+	@Query("SELECT b FROM Booking b WHERE b.id = :bookingId AND b.customer.id = :customerId")
+	Optional<Booking> isBookingOwnedByCustomerId(Integer bookingId, Integer customerId);
+
+	@Query("SELECT p FROM Passenger p WHERE p.id = :passengerId AND p.customer.id = :customerId")
+	Optional<Passenger> isPassengerOwnedByCustomerId(Integer passengerId, Integer customerId);
 }

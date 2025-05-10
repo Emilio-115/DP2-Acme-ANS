@@ -8,6 +8,7 @@ import acme.client.components.views.SelectChoices;
 import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
+import acme.entities.claims.Claim;
 import acme.entities.trackingLogs.TrackingLog;
 import acme.entities.trackingLogs.TrackingLogStatus;
 import acme.realms.assistanceAgent.AssistanceAgent;
@@ -24,9 +25,19 @@ public class AssistanceAgentTrackingLogDeleteService extends AbstractGuiService<
 
 		boolean status;
 
-		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class);
+		int trackingLogId = super.getRequest().getData("id", int.class);
+		TrackingLog trackingLog = this.repository.findTrackingLogById(trackingLogId);
 
-		super.getResponse().setAuthorised(status);
+		if (trackingLog == null)
+			super.getResponse().setAuthorised(false);
+		else {
+			Claim claim = trackingLog.getClaim();
+			int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
+
+			status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && claim.getAssistanceAgent().getId() == agentId && trackingLog.isDraftMode();
+
+			super.getResponse().setAuthorised(status);
+		}
 	}
 
 	@Override
@@ -41,7 +52,6 @@ public class AssistanceAgentTrackingLogDeleteService extends AbstractGuiService<
 
 	@Override
 	public void bind(final TrackingLog trackingLog) {
-		assert trackingLog != null;
 
 		super.bindObject(trackingLog, "undergoingStep", "resolutionPercentage", "resolution", "status");
 		trackingLog.setLastUpdateMoment(MomentHelper.getCurrentMoment());
@@ -49,12 +59,11 @@ public class AssistanceAgentTrackingLogDeleteService extends AbstractGuiService<
 
 	@Override
 	public void validate(final TrackingLog trackingLog) {
-		assert trackingLog != null;
+
 	}
 
 	@Override
 	public void perform(final TrackingLog trackingLog) {
-		assert trackingLog != null;
 
 		this.repository.delete(trackingLog);
 	}
