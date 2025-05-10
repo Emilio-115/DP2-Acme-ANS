@@ -71,7 +71,6 @@ public class AssistanceAgentClaimShowService extends AbstractGuiService<Assistan
 		dataset.put("types", choices);
 		dataset.put("status", status);
 		dataset.put("landedLegs", legChoices);
-		dataset.put("complete", claim.isComplete());
 		dataset.put("readonly", false);
 		super.addPayload(dataset, claim, "id");
 
