@@ -31,7 +31,7 @@ public class TrackingLogValidator extends AbstractValidator<ValidTrackingLog, Tr
 		else {
 			TrackingLogRepository trackingLogRepository = SpringHelper.getBean(TrackingLogRepository.class);
 			TrackingLogStatus TLstatus = trackingLog.getStatus();
-			var percentage = trackingLog.getResolutionPercentage();
+			Double percentage = trackingLog.getResolutionPercentage();
 			if (TLstatus == null) {
 				super.state(context, false, "status", "javax.validation.constraints.NotNull.message");
 				return false;

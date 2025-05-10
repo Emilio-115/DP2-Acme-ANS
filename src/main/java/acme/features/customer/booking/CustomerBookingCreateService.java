@@ -24,7 +24,23 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+
+		boolean status = true;
+		if (super.getRequest().hasData("flight")) {
+			int flightId = super.getRequest().getData("flight", int.class);
+			if (flightId != 0) {
+				Boolean flightIsAvailable = this.repository.checkFlightIsAvailableById(flightId, MomentHelper.getCurrentMoment());
+				status = flightIsAvailable;
+			}
+		}
+
+		if (status && super.getRequest().hasData("id")) {
+			int id = super.getRequest().getData("id", int.class);
+			if (id != 0)
+				status = false;
+		}
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -62,8 +78,6 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 	@Override
 	public void unbind(final Booking booking) {
 		Collection<Flight> availableFlights = this.repository.findAvailableFlights(MomentHelper.getCurrentMoment());
-		if (booking.getFlight() != null && !availableFlights.contains(booking.getFlight()))
-			availableFlights.add(booking.getFlight());
 		Dataset dataset;
 		SelectChoices choices;
 		SelectChoices flightChoices;

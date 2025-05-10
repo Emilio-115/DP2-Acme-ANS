@@ -10,7 +10,6 @@ import acme.client.helpers.PrincipalHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.claims.Claim;
-import acme.entities.claims.ClaimStatus;
 import acme.entities.trackingLogs.TrackingLog;
 import acme.entities.trackingLogs.TrackingLogStatus;
 import acme.realms.assistanceAgent.AssistanceAgent;
@@ -27,7 +26,12 @@ public class AssistanceAgentTrackingLogUpdateService extends AbstractGuiService<
 
 		boolean status;
 
-		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class);
+		int claimId = super.getRequest().getData("claimId", int.class);
+
+		Claim claim = this.repository.findClaimById(claimId);
+		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
+
+		status = claim != null && super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && claim.getAssistanceAgent().getId() == agentId;
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -44,33 +48,23 @@ public class AssistanceAgentTrackingLogUpdateService extends AbstractGuiService<
 
 	@Override
 	public void bind(final TrackingLog trackingLog) {
-		assert trackingLog != null;
+
 		int claimId = super.getRequest().getData("claimId", int.class);
 		Claim claim = this.repository.findClaimById(claimId);
 
-		boolean complete = claim.isComplete();
-
-		double per = super.getRequest().getData("resolutionPercentage", double.class);
-		TrackingLogStatus st = super.getRequest().getData("status", TrackingLogStatus.class);
-
-		if (per == 100.0 && complete) {
-			ClaimStatus cs = st.equals(TrackingLogStatus.ACCEPTED) ? ClaimStatus.ACCEPTED : ClaimStatus.REJECTED;
-			claim.setIsAccepted(cs);
-		}
-
 		super.bindObject(trackingLog, "undergoingStep", "resolutionPercentage", "resolution", "status", "lastUpdateMoment");
 		trackingLog.setLastUpdateMoment(MomentHelper.getCurrentMoment());
+
 		trackingLog.setClaim(claim);
 	}
 
 	@Override
 	public void validate(final TrackingLog trackingLog) {
-		assert trackingLog != null;
+
 	}
 
 	@Override
 	public void perform(final TrackingLog trackingLog) {
-		assert trackingLog != null;
 
 		this.repository.save(trackingLog);
 		this.repository.save(trackingLog.getClaim());

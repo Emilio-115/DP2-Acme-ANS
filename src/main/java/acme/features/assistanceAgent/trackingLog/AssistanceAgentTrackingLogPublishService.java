@@ -28,7 +28,10 @@ public class AssistanceAgentTrackingLogPublishService extends AbstractGuiService
 		int trackingLogId = super.getRequest().getData("id", int.class);
 		boolean status;
 		TrackingLog trackingLog = this.repository.findTrackingLogById(trackingLogId);
-		status = trackingLog != null;
+		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
+
+		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && trackingLog != null && trackingLog.getClaim().getAssistanceAgent().getId() == agentId;
+		;
 		super.getResponse().setAuthorised(status);
 	}
 
@@ -44,21 +47,21 @@ public class AssistanceAgentTrackingLogPublishService extends AbstractGuiService
 
 	@Override
 	public void bind(final TrackingLog trackingLog) {
-		assert trackingLog != null;
-		int claimId = super.getRequest().getData("claimId", int.class);
-		Claim claim = this.repository.findClaimById(claimId);
-		boolean complete = claim.isComplete();
 
-		double per = super.getRequest().getData("resolutionPercentage", double.class);
-		TrackingLogStatus st = super.getRequest().getData("status", TrackingLogStatus.class);
-
-		if (per == 100.0 && complete) {
-			ClaimStatus cs = st.equals(TrackingLogStatus.ACCEPTED) ? ClaimStatus.ACCEPTED : ClaimStatus.REJECTED;
-			claim.setIsAccepted(cs);
-		}
+		Claim claim = trackingLog.getClaim();
 
 		super.bindObject(trackingLog, "undergoingStep", "resolutionPercentage", "resolution", "status", "lastUpdateMoment");
 		trackingLog.setLastUpdateMoment(MomentHelper.getCurrentMoment());
+
+		Double per = trackingLog.getResolutionPercentage();
+		TrackingLogStatus st = trackingLog.getStatus();
+
+		if (per != null && st != null)
+			if (per == 100.00) {
+				claim.setCompleted(true);
+				ClaimStatus cs = st.equals(TrackingLogStatus.ACCEPTED) ? ClaimStatus.ACCEPTED : ClaimStatus.REJECTED;
+				claim.setIsAccepted(cs);
+			}
 		trackingLog.setClaim(claim);
 	}
 
@@ -69,14 +72,7 @@ public class AssistanceAgentTrackingLogPublishService extends AbstractGuiService
 		List<TrackingLog> trackingLogs;
 		trackingLogs = this.repository.findTopPercentage(trackingLog.getClaim().getId(), trackingLog.isReclaim());
 
-		int thisTL = trackingLogs.indexOf(trackingLog);
-
-		boolean allPublished = true;
-		if (thisTL != trackingLogs.size() - 1)
-			allPublished = !trackingLogs.get(thisTL + 1).isDraftMode();
-		boolean result = notPublished && allPublished;
-
-		super.state(result, "*", "acme.validation.update.draftMode.tracking-log");
+		super.state(notPublished, "*", "acme.validation.update.draftMode.tracking-log");
 	}
 
 	@Override

@@ -10,7 +10,7 @@
 	<acme:input-textarea code="assistance-agent.claim.form.label.description" path="description" readonly="${readonly}"/>
 	<acme:input-select code="assistance-agent.claim.form.label.type" path="type" choices="${types}" readonly="${readonly}"/>
 	<acme:input-select code="assistance-agent.claim.form.label.leg" path="leg" choices = "${landedLegs}" readonly="${readonly}"/>
-	<acme:input-select code="assistance-agent.claim.form.label.isaccepted" path="isAccepted" choices="${status}" readonly="${readonly}"/>
+	<acme:input-select code="assistance-agent.claim.form.label.isaccepted" path="isAccepted" choices="${status}" readonly="true"/>
 	<jstl:choose>
 		<jstl:when test="${acme:anyOf(_command,'show|update|delete|publish')}">
 			<acme:input-moment code="assistance-agent.claim.form.label.registrationmoment" path="registrationMoment" readonly="true"/>

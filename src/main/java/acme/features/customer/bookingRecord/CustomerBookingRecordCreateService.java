@@ -2,6 +2,7 @@
 package acme.features.customer.bookingRecord;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -23,7 +24,46 @@ public class CustomerBookingRecordCreateService extends AbstractGuiService<Custo
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+
+		boolean status = true;
+		var a = super.getRequest();
+
+		if (super.getRequest().hasData("id")) {
+			int id = super.getRequest().getData("id", int.class);
+			if (id != 0)
+				status = false;
+		}
+
+		int customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		if (status && super.getRequest().hasData("associatedBooking"))
+			status = this.checkBookingIsOwnedAndDraftmode(status, customerId);
+
+		if (status && super.getRequest().hasData("associatedPassenger"))
+			status = this.checkPassengerIsOwnedAndNotDraftmode(status, customerId);
+
+		super.getResponse().setAuthorised(status);
+	}
+
+	private boolean checkPassengerIsOwnedAndNotDraftmode(boolean status, final int customerId) {
+		int associatedPassengerId = super.getRequest().getData("associatedPassenger", int.class);
+		if (associatedPassengerId != 0) {
+			Optional<Passenger> passenger = this.repository.isPassengerOwnedByCustomerId(associatedPassengerId, customerId);
+			status = passenger.isPresent();
+			if (passenger.isPresent())
+				status = !passenger.get().isDraftMode();
+		}
+		return status;
+	}
+
+	private boolean checkBookingIsOwnedAndDraftmode(boolean status, final int customerId) {
+		int associatedBookingId = super.getRequest().getData("associatedBooking", int.class);
+		if (associatedBookingId != 0) {
+			Optional<Booking> booking = this.repository.isBookingOwnedByCustomerId(associatedBookingId, customerId);
+			status = booking.isPresent();
+			if (booking.isPresent())
+				status = booking.get().isDraftMode();
+		}
+		return status;
 	}
 
 	@Override
@@ -35,12 +75,7 @@ public class CustomerBookingRecordCreateService extends AbstractGuiService<Custo
 
 	@Override
 	public void validate(final BookingRecord bookingRecord) {
-		boolean isValid;
-		Booking associatedBooking = bookingRecord.getAssociatedBooking();
-		if (associatedBooking != null) {
-			isValid = associatedBooking.isDraftMode();
-			super.state(isValid, "associatedBooking", "acme.validation.booking.draftmode.message");
-		}
+		;
 
 	}
 

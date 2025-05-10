@@ -9,6 +9,7 @@ import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.claims.Claim;
+import acme.entities.claims.ClaimStatus;
 import acme.realms.assistanceAgent.AssistanceAgent;
 
 @GuiService
@@ -40,7 +41,7 @@ public class AssistanceAgentClaimListService extends AbstractGuiService<Assistan
 
 		id = assistanceAgent.getId();
 		completedClaims = this.repository.findClaimsByAssistanceAgent(id);
-		completedClaims = completedClaims.stream().filter(x -> x.isComplete()).toList();
+		completedClaims = completedClaims.stream().filter(x -> !x.getIsAccepted().equals(ClaimStatus.PENDING)).toList();
 		super.getBuffer().addData(completedClaims);
 	}
 
