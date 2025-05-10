@@ -13,12 +13,14 @@
 package acme.features.airlineManager.legs;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
+import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.aircrafts.Aircraft;
@@ -99,6 +101,12 @@ public class AirlineManagerLegPublishService extends AbstractGuiService<AirlineM
 			boolean isAircraftActive = leg.getAircraft().getStatus().equals(AircraftStatus.ACTIVE);
 			super.state(isAircraftActive, "aircraft", "acme.validation.flight.aircraft-under-maintenance.message");
 		}
+
+		if (leg.getArrivalDate() != null && leg.getDepartureDate() != null) {
+			Date currentDate = MomentHelper.getCurrentMoment();
+			super.state(currentDate.before(leg.getDepartureDate()), "departureDate", "acme.validation.leg.past-departure-date.message");
+			super.state(currentDate.before(leg.getArrivalDate()), "arrivalDate", "acme.validation.leg.past-arrival-date.message");
+		}
 	}
 
 	@Override
@@ -126,7 +134,7 @@ public class AirlineManagerLegPublishService extends AbstractGuiService<AirlineM
 		dataset.put("arrivalAirport", airportArrivalChoices.getSelected().getKey());
 
 		Collection<Aircraft> availableAircrafts = this.repository.findAllActiveAircrafts();
-		if (!availableAircrafts.contains(leg.getAircraft()))
+		if (!availableAircrafts.contains(leg.getAircraft()) && leg.getAircraft() != null)
 			availableAircrafts.add(leg.getAircraft());
 
 		SelectChoices aircraftChoices = SelectChoices.from(availableAircrafts, "registrationNumber", leg.getAircraft());

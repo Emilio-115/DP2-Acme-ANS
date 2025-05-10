@@ -74,7 +74,7 @@ public class Flight extends AbstractEntity {
 	public Date scheduledDeparture() {
 		LegRepository legRepository = SpringHelper.getBean(LegRepository.class);
 		Leg leg = legRepository.findFirstLegByFlightIdOrderByDepartureDate(this.getId());
-		return leg != null ? leg.getArrivalDate() : null;
+		return leg != null ? leg.getDepartureDate() : null;
 	}
 
 	@Transient
