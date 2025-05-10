@@ -21,14 +21,28 @@ public class FlightCrewMemberActivityLogEditService extends AbstractGuiService<F
 	protected FlightCrewMemberActivityLogRepository repository;
 
 
+	protected Optional<FlightAssignment> getRegisteringAssignmentFromRequest() {
+		FlightCrewMember flightCrewMember = (FlightCrewMember) super.getRequest().getPrincipal().getActiveRealm();
+
+		int registeringAssignmentId = super.getRequest().getData("registeringAssignment", int.class);
+		return this.repository.findPublishedAndConfirmedFlightAssignmentByIdAndFlightCrewMemberId(registeringAssignmentId, flightCrewMember.getId());
+
+	}
+
 	@Override
 	public void authorise() {
+		boolean status = true;
+
 		FlightCrewMember flightCrewMember = (FlightCrewMember) super.getRequest().getPrincipal().getActiveRealm();
 
 		int activityLogId = super.getRequest().getData("id", int.class);
 		Optional<ActivityLog> activityLog = this.repository.findByIdAndFlightCrewMemberId(activityLogId, flightCrewMember.getId());
 
-		boolean status = activityLog.map(fa -> fa.isDraftMode()).orElse(false);
+		if (!activityLog.map(al -> al.isDraftMode()).orElse(false))
+			status = false;
+
+		if (this.getRegisteringAssignmentFromRequest().isEmpty())
+			status = false;
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -45,10 +59,7 @@ public class FlightCrewMemberActivityLogEditService extends AbstractGuiService<F
 
 	@Override
 	public void bind(final ActivityLog activityLog) {
-		FlightCrewMember flightCrewMember = (FlightCrewMember) super.getRequest().getPrincipal().getActiveRealm();
-
-		int registeringAssignmentId = super.getRequest().getData("registeringAssignment", int.class);
-		FlightAssignment registeringAssignment = this.repository.findPublishedAndConfirmedFlightAssignmentByIdAndFlightCrewMemberId(registeringAssignmentId, flightCrewMember.getId()).orElse(null);
+		FlightAssignment registeringAssignment = this.getRegisteringAssignmentFromRequest().orElse(null);
 
 		super.bindObject(activityLog, "incidentType", "description", "severityLevel");
 		activityLog.setRegisteringAssignment(registeringAssignment);
