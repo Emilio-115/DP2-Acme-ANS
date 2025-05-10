@@ -24,9 +24,17 @@ public class FlightCrewMemberActivityLogEditService extends AbstractGuiService<F
 	protected Optional<FlightAssignment> getRegisteringAssignmentFromRequest() {
 		FlightCrewMember flightCrewMember = (FlightCrewMember) super.getRequest().getPrincipal().getActiveRealm();
 
-		int registeringAssignmentId = super.getRequest().getData("registeringAssignment", int.class);
+		Integer registeringAssignmentId = super.getRequest().getData("registeringAssignment", Integer.class, null);
 		return this.repository.findPublishedAndConfirmedFlightAssignmentByIdAndFlightCrewMemberId(registeringAssignmentId, flightCrewMember.getId());
+	}
 
+	protected boolean isRegisteringAssignmentAllowedIfPresent() {
+		Integer registeringAssignmentId = super.getRequest().getData("registeringAssignment", Integer.class, null);
+
+		if (registeringAssignmentId == null || registeringAssignmentId.equals(0))
+			return true;
+
+		return this.getRegisteringAssignmentFromRequest().isPresent();
 	}
 
 	@Override
@@ -38,10 +46,10 @@ public class FlightCrewMemberActivityLogEditService extends AbstractGuiService<F
 		int activityLogId = super.getRequest().getData("id", int.class);
 		Optional<ActivityLog> activityLog = this.repository.findByIdAndFlightCrewMemberId(activityLogId, flightCrewMember.getId());
 
-		if (!activityLog.map(al -> al.isDraftMode()).orElse(false))
+		if (activityLog.map(al -> !al.isDraftMode()).orElse(true))
 			status = false;
 
-		if (this.getRegisteringAssignmentFromRequest().isEmpty())
+		if (!this.isRegisteringAssignmentAllowedIfPresent())
 			status = false;
 
 		super.getResponse().setAuthorised(status);

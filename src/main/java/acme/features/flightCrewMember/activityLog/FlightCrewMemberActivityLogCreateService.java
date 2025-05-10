@@ -10,7 +10,7 @@ public class FlightCrewMemberActivityLogCreateService extends FlightCrewMemberAc
 	@Override
 	public void authorise() {
 
-		super.getResponse().setAuthorised(this.getRegisteringAssignmentFromRequest().isPresent());
+		super.getResponse().setAuthorised(this.isRegisteringAssignmentAllowedIfPresent());
 
 	}
 
