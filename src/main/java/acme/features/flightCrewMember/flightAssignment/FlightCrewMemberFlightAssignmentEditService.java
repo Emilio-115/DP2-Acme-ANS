@@ -98,6 +98,11 @@ public class FlightCrewMemberFlightAssignmentEditService extends AbstractGuiServ
 
 			dataset.put("statuses", statuses);
 		}
+		{
+			boolean showActivityLogs = !flightAssignment.isDraftMode() && flightAssignment.getLeg().getDepartureDate().before(MomentHelper.getCurrentMoment());
+			if (showActivityLogs)
+				dataset.put("showActivityLogs", true);
+		}
 
 		super.getResponse().addData(dataset);
 	}

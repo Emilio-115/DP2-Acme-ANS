@@ -13,7 +13,7 @@
 	<acme:input-select code="flight-crew-member.flight-assignment.form.label.status" path="status" choices="${statuses}" readonly="${draftMode==false}"/>
 	<acme:input-textarea code="flight-crew-member.flight-assignment.form.label.remarks" path="remarks" readonly="${draftMode==false}"/>
 	
-	<jstl:if test="${isMine == true}">
+	<jstl:if test="${showActivityLogs == true}">
 		<acme:button code="flight-crew-member.flight-assignment.form.button.activity-log" action="/flight-crew-member/activity-log/list?flightAssignmentId=${id}"/>
 	</jstl:if>
 	
