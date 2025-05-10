@@ -35,7 +35,7 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 		if (!trackingLogs.isEmpty() && (trackingLogs.get(0).isDraftMode() || trackingLogs.get(0).getResolutionPercentage().equals(100.00)))
 			canCreate = false;
 
-		status = canCreate && claim.getAssistanceAgent().getId() == agentId;
+		status = claim != null && canCreate && claim.getAssistanceAgent().getId() == agentId;
 		super.getResponse().setAuthorised(status);
 	}
 
