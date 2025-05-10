@@ -48,7 +48,7 @@ public class AssistanceAgentTrackingLogUpdateService extends AbstractGuiService<
 
 	@Override
 	public void bind(final TrackingLog trackingLog) {
-		assert trackingLog != null;
+
 		int claimId = super.getRequest().getData("claimId", int.class);
 		Claim claim = this.repository.findClaimById(claimId);
 
@@ -60,12 +60,11 @@ public class AssistanceAgentTrackingLogUpdateService extends AbstractGuiService<
 
 	@Override
 	public void validate(final TrackingLog trackingLog) {
-		assert trackingLog != null;
+
 	}
 
 	@Override
 	public void perform(final TrackingLog trackingLog) {
-		assert trackingLog != null;
 
 		this.repository.save(trackingLog);
 		this.repository.save(trackingLog.getClaim());

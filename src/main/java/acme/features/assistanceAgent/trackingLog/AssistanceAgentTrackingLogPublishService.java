@@ -72,14 +72,7 @@ public class AssistanceAgentTrackingLogPublishService extends AbstractGuiService
 		List<TrackingLog> trackingLogs;
 		trackingLogs = this.repository.findTopPercentage(trackingLog.getClaim().getId(), trackingLog.isReclaim());
 
-		int thisTL = trackingLogs.indexOf(trackingLog);
-
-		boolean allPublished = true;
-		if (thisTL != trackingLogs.size() - 1)
-			allPublished = !trackingLogs.get(thisTL + 1).isDraftMode();
-		boolean result = notPublished && allPublished;
-
-		super.state(result, "*", "acme.validation.update.draftMode.tracking-log");
+		super.state(notPublished, "*", "acme.validation.update.draftMode.tracking-log");
 	}
 
 	@Override
