@@ -41,16 +41,18 @@ public class AirlineManagerLegCreateService extends AbstractGuiService<AirlineMa
 		boolean authorized = true;
 
 		Integer flightId = super.getRequest().getData("flightId", int.class);
-		Flight flight = this.flightRepository.findFlightById(flightId).orElseThrow(() -> new RuntimeException("No flight with id: " + flightId));
-
-		if (!flight.isDraftMode())
-			authorized = false;
 
 		Integer airlineManagerId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		Optional<Flight> optionalFlight = this.flightRepository.findByIdAndManagerId(flightId, airlineManagerId);
 
 		if (optionalFlight.isEmpty())
 			authorized = false;
+
+		if (optionalFlight.isPresent()) {
+			Flight flight = optionalFlight.get();
+			if (!flight.isDraftMode())
+				authorized = false;
+		}
 
 		if (super.getRequest().hasData("id", boolean.class)) {
 			int aircraftId = super.getRequest().getData("id", int.class);
