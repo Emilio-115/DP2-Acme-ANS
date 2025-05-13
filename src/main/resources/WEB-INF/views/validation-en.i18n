@@ -53,8 +53,10 @@ acme.validation.leg.unique-flight-number.message = Invalid flight number, IATA c
 acme.validation.flight.aircraft-under-maintenance.message = Invalid Aircraft, it is under maintenance
 acme.validation.leg.draft-mode-status.message = Invalid status, leg status must be ON_TIME if draft mode is true
 acme.validation.flight.no-legs.message = Flight need at least a leg to be published.
-
-
+acme.validation.leg.past-departure-date.message = Departure Date must be future
+acme.validation.leg.past-arrival-date.message = Arrival Date must be future
+acme.validation.leg.arrival-before-departure.message = Arrival date must be after departure date
+acme.validation.flight.cost-euro.message = Cost currency must be euros
 acme.validation.airline-manager.non-unique-identifier = Identifier must be unique
 
 
