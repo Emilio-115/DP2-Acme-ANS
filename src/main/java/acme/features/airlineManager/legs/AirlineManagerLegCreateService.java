@@ -52,6 +52,11 @@ public class AirlineManagerLegCreateService extends AbstractGuiService<AirlineMa
 		if (optionalFlight.isEmpty())
 			authorized = false;
 
+		if (super.getRequest().hasData("id", boolean.class)) {
+			int aircraftId = super.getRequest().getData("id", int.class);
+			authorized &= aircraftId == 0;
+		}
+
 		super.getResponse().setAuthorised(authorized);
 	}
 
