@@ -10,7 +10,7 @@ import acme.entities.flightAssignment.FlightAssignmentStatus;
 public class FlightCrewMemberFlightAssignmentConfirmService extends FlightCrewMemberFlightAssignmentEditService {
 
 	@Override
-	public boolean authoriseFlightAssignment(final FlightAssignment flightAssignment) {
+	public boolean flightAssignmentIsAuthorised(final FlightAssignment flightAssignment) {
 		return FlightAssignmentStatus.PENDING.equals(flightAssignment.getStatus()) && !flightAssignment.isDraftMode();
 	}
 

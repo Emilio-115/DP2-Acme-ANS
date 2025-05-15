@@ -16,6 +16,7 @@ import acme.entities.flightAssignment.FlightCrewDuty;
 import acme.entities.legs.Leg;
 import acme.helpers.SelectChoicesHelper;
 import acme.realms.flightCrewMember.FlightCrewMember;
+import acme.realms.flightCrewMember.FlightCrewMemberAvailabilityStatus;
 
 public class FlightCrewMemberFlightAssignmentEditService extends AbstractGuiService<FlightCrewMember, FlightAssignment> {
 
@@ -23,21 +24,51 @@ public class FlightCrewMemberFlightAssignmentEditService extends AbstractGuiServ
 	protected FlightCrewMemberFlightAssignmentRepository repository;
 
 
-	public boolean authoriseFlightAssignment(final FlightAssignment flightAssignment) {
+	protected boolean checkLeg() {
+		return false;
+	}
+
+	protected boolean isLegValidForUpdatingIfPresent() {
+		FlightCrewMember flightCrewMember = (FlightCrewMember) super.getRequest().getPrincipal().getActiveRealm();
+
+		Integer legId = super.getRequest().getData("leg", Integer.class, null);
+		Integer flightAssignmentId = super.getRequest().getData("id", Integer.class, null);
+
+		if (legId == null || legId == 0)
+			return true;
+
+		Optional<Leg> leg = this.repository.findLegDepartingAfterWhereFlightCrewMemberIsFreeById(legId, MomentHelper.getCurrentMoment(), flightAssignmentId, flightCrewMember.getId());
+		return leg.isPresent();
+	}
+
+	protected boolean flightAssignmentIsAuthorised(final FlightAssignment flightAssignment) {
 		return flightAssignment.isDraftMode();
+	}
+
+	protected boolean idIsAuthorised() {
+		FlightCrewMember flightCrewMember = (FlightCrewMember) super.getRequest().getPrincipal().getActiveRealm();
+
+		Integer flightAssignmentId = super.getRequest().getData("id", Integer.class, null);
+		Optional<FlightAssignment> flightAssignment = this.repository.findByIdAndFlightCrewMemberId(flightAssignmentId, flightCrewMember.getId());
+		return flightAssignment.map(this::flightAssignmentIsAuthorised).orElse(false);
 	}
 
 	@Override
 	public void authorise() {
-		boolean status;
-		int flightAssignmentId;
-		Optional<FlightAssignment> flightAssignment;
+		boolean status = true;
 
 		FlightCrewMember flightCrewMember = (FlightCrewMember) super.getRequest().getPrincipal().getActiveRealm();
 
-		flightAssignmentId = super.getRequest().getData("id", int.class);
-		flightAssignment = this.repository.findByIdAndFlightCrewMemberId(flightAssignmentId, flightCrewMember.getId());
-		status = flightAssignment.map(this::authoriseFlightAssignment).orElse(false);
+		if (!flightCrewMember.getAvailabilityStatus().equals(FlightCrewMemberAvailabilityStatus.AVAILABLE))
+			status = false;
+
+		boolean idIsValid = this.idIsAuthorised();
+		if (!idIsValid)
+			status = false;
+
+		if (this.checkLeg())
+			if (!this.isLegValidForUpdatingIfPresent())
+				status = false;
 
 		super.getResponse().setAuthorised(status);
 	}

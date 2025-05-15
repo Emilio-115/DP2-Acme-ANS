@@ -4,18 +4,19 @@ package acme.features.flightCrewMember.flightAssignment;
 import acme.client.services.GuiService;
 import acme.entities.flightAssignment.FlightAssignment;
 import acme.realms.flightCrewMember.FlightCrewMember;
-import acme.realms.flightCrewMember.FlightCrewMemberAvailabilityStatus;
 
 @GuiService
 public class FlightCrewMemberFlightAssignmentCreateService extends FlightCrewMemberFlightAssignmentEditService {
 
 	@Override
-	public void authorise() {
+	protected boolean checkLeg() {
+		return true;
+	}
 
-		FlightCrewMember flightCrewMember = (FlightCrewMember) super.getRequest().getPrincipal().getActiveRealm();
-
-		super.getResponse().setAuthorised(flightCrewMember.getAvailabilityStatus().equals(FlightCrewMemberAvailabilityStatus.AVAILABLE));
-
+	@Override
+	protected boolean idIsAuthorised() {
+		Integer id = super.getRequest().getData("id", Integer.class, null);
+		return id == null || id == 0;
 	}
 
 	@Override
