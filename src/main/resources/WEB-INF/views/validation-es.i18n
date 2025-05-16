@@ -46,6 +46,7 @@ acme.validation.flight-crew-member.non-unique-employee-code = El código de empl
 acme.validation.assistance-agent.non-unique-employee-code = El código de empleado debe ser único
 
 acme.validation.flight.leg-not-published.message = Todas los segmentos tienen que estar publicados
+acme.validation.flight.no-leg.message = No hay ningun segmento en este vuelo
 acme.validation.leg.overlapping-legs.message = Fechas de salida o llegada no validas, los segmentos no pueden superponerse
 acme.validation.leg.busy-aircraft.message = Avión no válido, el avión está ocupado durante ese rango de tiempo
 acme.validation.leg.unique-flight-number.message = Número de vuelo no válido, codigo IATA + Digitos del número de vuelo deben ser únicos

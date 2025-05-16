@@ -47,6 +47,8 @@ acme.validation.flight-assignment.copilot-duty-taken.message = Copilot duty is a
 
 acme.validation.flight-crew-member.non-unique-employee-code = Employee code must be unique
 
+
+acme.validation.flight.no-leg.message = There is no leg in this flight
 acme.validation.assistance-agent.non-unique-employee-code = Employee code must be unique
 acme.validation.flight.leg-not-published.message = Every leg have to be published
 acme.validation.leg.overlapping-legs.message = Invalid dates of departure or arrival, legs cannot overlap
