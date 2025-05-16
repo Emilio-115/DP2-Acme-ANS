@@ -20,4 +20,4 @@ user-account-member-01,true,"UserIdentity{name: 'Agustín', surname: '之 თ乎
 user-account-member-02,true,"UserIdentity{name: 'Pitbull', surname: 'Worldwide', email: 'pitbull@worldwide.com'}",member2,member2
 user-account-member-03,true,"UserIdentity{name: 'لوريم إيبسوم', surname: '之 თ乎可良 Æløzå', email: 'agustin@acme.com'}",member3,member3
 user-account-member-04,true,"UserIdentity{name: '<marquee>Hacked</marquee>', surname: 'Worldwide', email: 'pitbull@worldwide.com'}",member4,member4
-user-account-member-05,true,"UserIdentity{name: 'Azucena', surname: '<script>alert(‘Hacked!’);</script>', email: 'agustin@acme.com'}",member5,member5
+user-account-member-05,true,"UserIdentity{name: 'Azucena', surname: '<script>alert(‘Hacked!’);</script>', email: 'agustin@acme.com'}",member,member
