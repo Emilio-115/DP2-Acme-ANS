@@ -34,7 +34,7 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 		int claimId = super.getRequest().getData("id", int.class);
 		Claim claim = this.repository.findClaimById(claimId);
 
-		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && claim.getAssistanceAgent().getId() == agentId && claim.isDraftMode();
+		status = claim != null && super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && claim.getAssistanceAgent().getId() == agentId && claim.isDraftMode();
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -54,7 +54,6 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 
 	@Override
 	public void bind(final Claim claim) {
-		assert claim != null;
 
 		int legId;
 		Leg leg;
@@ -68,19 +67,16 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 
 	@Override
 	public void validate(final Claim claim) {
-		assert claim != null;
 	}
 
 	@Override
 	public void perform(final Claim claim) {
-		assert claim != null;
 
 		this.repository.save(claim);
 	}
 
 	@Override
 	public void unbind(final Claim claim) {
-		assert claim != null;
 		SelectChoices choices;
 		Dataset dataset;
 		SelectChoices legChoices;
@@ -96,7 +92,6 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 		dataset.put("types", choices);
 		dataset.put("status", status);
 		dataset.put("landedLegs", legChoices);
-		dataset.put("complete", claim.isComplete());
 
 		super.getResponse().addData(dataset);
 	}

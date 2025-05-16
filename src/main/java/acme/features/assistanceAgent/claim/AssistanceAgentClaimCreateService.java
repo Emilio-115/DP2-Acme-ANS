@@ -88,7 +88,6 @@ public class AssistanceAgentClaimCreateService extends AbstractGuiService<Assist
 		dataset.put("types", choices);
 		dataset.put("status", status);
 		dataset.put("landedLegs", legChoices);
-		dataset.put("complete", claim.isComplete());
 		dataset.put("readonly", false);
 
 		super.getResponse().addData(dataset);

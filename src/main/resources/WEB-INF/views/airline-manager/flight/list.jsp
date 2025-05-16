@@ -7,7 +7,7 @@
         <acme:list-column code="manager.flight.list.label.origin" path="origin" />
         <acme:list-column code="manager.flight.list.label.destination" path="destination" />
         <acme:list-column code="manager.flight.list.label.departureDate" path="departureDate" />
-        <acme:list-column code="manager.flight.list.label.arrivalDate" path="arrivalDate" />
+        <acme:list-column code="manager.flight.list.label.tag" path="tag" />
         <acme:list-column code="manager.flight.list.label.isPublished" path="published" />
       </acme:list>
 

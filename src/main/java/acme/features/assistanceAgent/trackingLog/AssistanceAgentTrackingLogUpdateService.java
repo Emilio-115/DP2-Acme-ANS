@@ -26,14 +26,12 @@ public class AssistanceAgentTrackingLogUpdateService extends AbstractGuiService<
 
 		boolean status;
 
-		int trackingLogId = super.getRequest().getData("id", int.class);
+		int claimId = super.getRequest().getData("claimId", int.class);
 
-		TrackingLog trackingLog = this.repository.findTrackingLogById(trackingLogId);
-
-		Claim claim = trackingLog.getClaim();
+		Claim claim = this.repository.findClaimById(claimId);
 		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
 
-		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && claim.getAssistanceAgent().getId() == agentId;
+		status = claim != null && super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && claim.getAssistanceAgent().getId() == agentId;
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -50,7 +48,7 @@ public class AssistanceAgentTrackingLogUpdateService extends AbstractGuiService<
 
 	@Override
 	public void bind(final TrackingLog trackingLog) {
-		assert trackingLog != null;
+
 		int claimId = super.getRequest().getData("claimId", int.class);
 		Claim claim = this.repository.findClaimById(claimId);
 
@@ -62,12 +60,11 @@ public class AssistanceAgentTrackingLogUpdateService extends AbstractGuiService<
 
 	@Override
 	public void validate(final TrackingLog trackingLog) {
-		assert trackingLog != null;
+
 	}
 
 	@Override
 	public void perform(final TrackingLog trackingLog) {
-		assert trackingLog != null;
 
 		this.repository.save(trackingLog);
 		this.repository.save(trackingLog.getClaim());

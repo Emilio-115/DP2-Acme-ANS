@@ -49,7 +49,7 @@ public class ClaimValidator extends AbstractValidator<ValidClaim, Claim> {
 		}
 
 		var accepted = claim.getIsAccepted();
-		var complete = claim.isComplete();
+		boolean complete = claim.isCompleted();
 		if (accepted == null) {
 			super.state(context, false, "isAccepted", "javax.validation.constraints.NotNull.message");
 			return false;
