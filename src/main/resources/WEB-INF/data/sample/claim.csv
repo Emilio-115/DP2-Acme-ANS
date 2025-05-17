@@ -15,4 +15,3 @@ claim-13,"Tengo problemas con el vuelo",PENDING,"pabloperez@gmail.es",2019/03/20
 claim-14,"No me gusta la comida",PENDING,"angeltobar@gmail.es",2019/12/03 18:20,"FLIGHT_ISSUES",assistance-agent-02,leg-10,true,false
 claim-15,"Como funciona esto?",PENDING,"juanjose@gmail.es",2020/10/09 04:30,"OTHER_ISSUES",assistance-agent-01,leg-10,true,false
 claim-16,"Me han robado",PENDING,"papa@gmail.es",2020/11/20 12:13,"LUGGAGE_ISSUES",assistance-agent-02,leg-10,true,false
-claim-17,"Sin Tracking logs",PENDING,"papa3@gmail.es",2020/12/20 09:13,"OTHER_ISSUES",assistance-agent-01,leg-10,true,false
