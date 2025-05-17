@@ -11,3 +11,5 @@ flight-assignment-9,crew-member-03,leg-2,LEAD_ATTENDANT,2000/01/01 0:01,PENDING,
 flight-assignment-10,crew-member-04,leg-2,CABIN_ATTENDANT,2022/07/29 23:58,CANCELLED,false,' or 'A' = 'A
 flight-assignment-11,crew-member-01,leg-11,PILOT,2000/01/01 0:00,CONFIRMED,true,L
 flight-assignment-12,crew-member-01,leg-12,PILOT,2000/01/01 0:00,CONFIRMED,true,L
+flight-assignment-13,crew-member-01,leg-11,COPILOT,2000/01/01 0:00,PENDING,false,L
+flight-assignment-14,crew-member-01,leg-12,COPILOT,2000/01/01 0:00,PENDING,false,L

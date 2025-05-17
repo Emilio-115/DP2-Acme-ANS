@@ -1,6 +1,8 @@
 
 package acme.features.flightCrewMember.activityLog;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
@@ -9,6 +11,10 @@ import acme.realms.flightCrewMember.FlightCrewMember;
 
 @GuiService
 public class FlightCrewMemberActivityLogListService extends AbstractGuiService<FlightCrewMember, ActivityLog> {
+
+	@Autowired
+	protected FlightCrewMemberActivityLogRepository repository;
+
 
 	@Override
 	public void authorise() {

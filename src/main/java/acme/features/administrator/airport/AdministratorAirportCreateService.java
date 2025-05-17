@@ -9,9 +9,11 @@ public class AdministratorAirportCreateService extends AdministratorAirportServi
 
 	@Override
 	public void authorise() {
+		Integer airportId = super.getRequest().getData("id", Integer.class, null);
 
-		super.getResponse().setAuthorised(true);
+		boolean status = airportId == null || airportId == 0;
 
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
