@@ -28,8 +28,19 @@ public class AssistanceAgentClaimCreateService extends AbstractGuiService<Assist
 	public void authorise() {
 		boolean status;
 
-		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class);
+		String method = super.getRequest().getMethod();
 
+		if (method.equals("GET"))
+			status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class);
+		else {
+			status = false;
+			int legId = super.getRequest().getData("leg", int.class);
+			int claimId = super.getRequest().getData("id", int.class);
+			Leg leg = this.repository.findLegById(legId);
+			Collection<Leg> legs = this.repository.findAllLandedLegs(LegStatus.LANDED);
+			if (claimId == 0 && leg != null && legs.contains(leg))
+				status = true;
+		}
 		super.getResponse().setAuthorised(status);
 	}
 
@@ -56,7 +67,8 @@ public class AssistanceAgentClaimCreateService extends AbstractGuiService<Assist
 		legId = super.getRequest().getData("leg", int.class);
 		leg = this.repository.findLegById(legId);
 
-		super.bindObject(claim, "passengerEmail", "description", "type", "isAccepted");
+		super.bindObject(claim, "passengerEmail", "description", "type");
+		claim.setIsAccepted(ClaimStatus.PENDING);
 		claim.setRegistrationMoment(MomentHelper.getCurrentMoment());
 		claim.setLeg(leg);
 	}

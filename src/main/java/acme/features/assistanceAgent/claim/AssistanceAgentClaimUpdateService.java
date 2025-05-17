@@ -32,9 +32,16 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 
 		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		int claimId = super.getRequest().getData("id", int.class);
+		int securityId = super.getRequest().getData("claimId", int.class);
 		Claim claim = this.repository.findClaimById(claimId);
 
-		status = claim != null && super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && claim.getAssistanceAgent().getId() == agentId && claim.isDraftMode();
+		int legId = super.getRequest().getData("leg", int.class);
+		Leg leg = this.repository.findLegById(legId);
+		Collection<Leg> legs = this.repository.findAllLandedLegs(LegStatus.LANDED);
+
+		boolean statusClaim = claim != null && claimId == securityId && claim.getAssistanceAgent().getId() == agentId && claim.isDraftMode();
+		boolean statusLeg = leg != null && legs.contains(leg);
+		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && statusClaim && statusLeg;
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -61,7 +68,7 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 		legId = super.getRequest().getData("leg", int.class);
 		leg = this.repository.findLegById(legId);
 
-		super.bindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "isAccepted");
+		super.bindObject(claim, "passengerEmail", "description", "type");
 		claim.setLeg(leg);
 	}
 

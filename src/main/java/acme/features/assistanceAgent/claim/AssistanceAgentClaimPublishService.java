@@ -30,11 +30,20 @@ public class AssistanceAgentClaimPublishService extends AbstractGuiService<Assis
 	public void authorise() {
 		int claimId = super.getRequest().getData("id", int.class);
 		int assistanceAgentId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		int securityId = super.getRequest().getData("claimId", int.class);
 		boolean status = true;
+
+		int legId = super.getRequest().getData("leg", int.class);
+		Leg leg = this.repository.findLegById(legId);
+		Collection<Leg> legs = this.repository.findAllLandedLegs(LegStatus.LANDED);
+
+		boolean statusLeg = leg != null && legs.contains(leg);
+		boolean statusId = claimId == securityId;
+
 		Optional<Claim> claim = this.repository.findByIdAndAssistanceAgentId(claimId, assistanceAgentId);
 		if (!claim.isPresent())
 			status = false;
-		super.getResponse().setAuthorised(status);
+		super.getResponse().setAuthorised(status && statusLeg && statusId);
 	}
 
 	@Override
@@ -54,7 +63,7 @@ public class AssistanceAgentClaimPublishService extends AbstractGuiService<Assis
 		legId = super.getRequest().getData("leg", int.class);
 		leg = this.repository.findLegById(legId);
 
-		super.bindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "isAccepted");
+		super.bindObject(claim, "passengerEmail", "description", "type");
 		claim.setLeg(leg);
 	}
 
