@@ -35,8 +35,6 @@ public class AssistanceAgentClaimShowService extends AbstractGuiService<Assistan
 		agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		claimId = super.getRequest().getData("id", int.class);
 
-		var proxyId = super.getRequest();
-
 		Optional<Claim> claim = this.repository.findByIdAndAssistanceAgentId(claimId, agentId);
 
 		status = claim.isPresent() && claim.get().getAssistanceAgent().getId() == assistanceAgentId;
@@ -62,7 +60,6 @@ public class AssistanceAgentClaimShowService extends AbstractGuiService<Assistan
 		Dataset dataset;
 		SelectChoices legChoices;
 		SelectChoices status;
-		var proxyId = super.getRequest();
 		Collection<Leg> legs = this.repository.findAllLandedLegs(LegStatus.LANDED);
 
 		choices = SelectChoices.from(ClaimType.class, claim.getType());
