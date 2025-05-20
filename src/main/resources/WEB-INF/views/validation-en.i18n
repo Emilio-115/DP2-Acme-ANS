@@ -34,6 +34,8 @@ acme.validation.tracking-log.not-good-update-date = The update date has to be af
 acme.validation.tracking-log.update-before-other = The update date has to be after the date of the most recent tracking log
 
 acme.validation.aircraft.non-unique-registration-number = Registration Number already exist, registration number must be unique
+acme.validation.aircraft.busy-cant-be-under-maintenance = A busy aircraft cant be under maintenance
+
 
 acme.validation.flight-assignment.flight-crew-member-unavailable.message = Flight crew member is unavailable
 acme.validation.flight-assignment.member-already-in-leg-with-duty.message = Flight crew member is already assigned to this leg with this duty
