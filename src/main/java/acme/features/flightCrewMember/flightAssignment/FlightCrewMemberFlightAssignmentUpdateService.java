@@ -8,6 +8,11 @@ import acme.entities.flightAssignment.FlightAssignment;
 public class FlightCrewMemberFlightAssignmentUpdateService extends FlightCrewMemberFlightAssignmentEditService {
 
 	@Override
+	protected boolean checkLeg() {
+		return true;
+	}
+
+	@Override
 	public void validate(final FlightAssignment flightAssignment) {
 		;
 	}

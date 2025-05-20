@@ -3,6 +3,7 @@ manager.flight.list.label.origin = Ciudad Origen
 manager.flight.list.label.destination = Ciudad Destino
 manager.flight.list.label.departureDate = Fecha de Salida
 manager.flight.list.label.arrivalDate= Fecha de Llegada
+manager.flight.list.label.tag = Etiqueta
 manager.flight.list.label.isPublished= Publicado
 
 manager.flight.form.label.id = Id
