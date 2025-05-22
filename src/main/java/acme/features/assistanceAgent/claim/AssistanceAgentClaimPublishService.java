@@ -28,29 +28,17 @@ public class AssistanceAgentClaimPublishService extends AbstractGuiService<Assis
 
 	@Override
 	public void authorise() {
-		int claimId = super.getRequest().getData("id", int.class);
+
 		int assistanceAgentId = super.getRequest().getPrincipal().getActiveRealm().getId();
-		int securityId = super.getRequest().getData("claimId", int.class);
-		boolean status = true;
 
-		int legId = super.getRequest().getData("leg", int.class);
-		Leg leg = this.repository.findLegById(legId);
-		Collection<Leg> legs = this.repository.findAllLandedLegs(LegStatus.LANDED);
-
-		boolean statusLeg = leg != null && legs.contains(leg);
-		boolean statusId = claimId == securityId;
-
-		Optional<Claim> claim = this.repository.findByIdAndAssistanceAgentId(claimId, assistanceAgentId);
-		if (!claim.isPresent())
-			status = false;
-		super.getResponse().setAuthorised(status && statusLeg && statusId);
+		super.getResponse().setAuthorised(this.validPublish(assistanceAgentId) && this.securityId());
 	}
 
 	@Override
 	public void load() {
 
-		int claimId = super.getRequest().getData("id", int.class);
-		Claim claim = this.repository.findClaimById(claimId);
+		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		Claim claim = this.getClaim(agentId).get();
 		super.getBuffer().addData(claim);
 
 	}
@@ -102,5 +90,54 @@ public class AssistanceAgentClaimPublishService extends AbstractGuiService<Assis
 		dataset.put("landedLegs", legChoices);
 
 		super.getResponse().addData(dataset);
+	}
+
+	private Optional<Claim> getClaim(final int agentId) {
+		String method = super.getRequest().getMethod();
+
+		int claimId;
+		if (method.equals("GET"))
+			claimId = super.getRequest().getData("claimId", int.class);
+		else
+			claimId = super.getRequest().getData("id", int.class);
+		Optional<Claim> claim = this.repository.findByIdAndAssistanceAgentId(claimId, agentId);
+
+		return claim;
+	}
+
+	private boolean securityId() {
+		String method = super.getRequest().getMethod();
+		boolean status = true;
+		if (method.equals("POST")) {
+			int claimId = super.getRequest().getData("id", int.class);
+			int securityId = super.getRequest().getData("claimId", int.class);
+
+			status = claimId == securityId;
+		}
+		return status;
+	}
+
+	private boolean validPublish(final int agentId) {
+		int legId;
+		Leg leg = null;
+		boolean status;
+
+		Optional<Claim> claim = this.getClaim(agentId);
+
+		if (claim.isPresent())
+			if (super.getRequest().getMethod().equals("POST")) {
+				legId = super.getRequest().getData("leg", int.class);
+				leg = this.repository.findLegById(legId);
+			} else
+				leg = claim.get().getLeg();
+		status = this.validLeg(leg);
+		return status;
+	}
+
+	private boolean validLeg(final Leg leg) {
+		Collection<Leg> legs = this.repository.findAllLandedLegs(LegStatus.LANDED);
+		boolean status = leg != null && legs.contains(leg);
+
+		return status;
 	}
 }

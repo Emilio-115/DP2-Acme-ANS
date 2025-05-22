@@ -35,10 +35,10 @@ public class AssistanceAgentClaimCreateService extends AbstractGuiService<Assist
 		else {
 			status = false;
 			int legId = super.getRequest().getData("leg", int.class);
-			int claimId = super.getRequest().getData("id", int.class);
 			Leg leg = this.repository.findLegById(legId);
-			Collection<Leg> legs = this.repository.findAllLandedLegs(LegStatus.LANDED);
-			if (claimId == 0 && leg != null && legs.contains(leg))
+			boolean legStatus = this.validLeg(leg);
+			int claimId = super.getRequest().getData("id", int.class);
+			if (claimId == 0 && legStatus)
 				status = true;
 		}
 		super.getResponse().setAuthorised(status);
@@ -68,7 +68,6 @@ public class AssistanceAgentClaimCreateService extends AbstractGuiService<Assist
 		leg = this.repository.findLegById(legId);
 
 		super.bindObject(claim, "passengerEmail", "description", "type");
-		claim.setIsAccepted(ClaimStatus.PENDING);
 		claim.setRegistrationMoment(MomentHelper.getCurrentMoment());
 		claim.setLeg(leg);
 	}
@@ -104,4 +103,12 @@ public class AssistanceAgentClaimCreateService extends AbstractGuiService<Assist
 
 		super.getResponse().addData(dataset);
 	}
+
+	private boolean validLeg(final Leg leg) {
+		Collection<Leg> legs = this.repository.findAllLandedLegs(LegStatus.LANDED);
+		boolean status = leg != null && legs.contains(leg);
+
+		return status;
+	}
+
 }
