@@ -41,16 +41,23 @@ public class AirlineManagerLegCreateService extends AbstractGuiService<AirlineMa
 		boolean authorized = true;
 
 		Integer flightId = super.getRequest().getData("flightId", int.class);
-		Flight flight = this.flightRepository.findFlightById(flightId).orElseThrow(() -> new RuntimeException("No flight with id: " + flightId));
-
-		if (!flight.isDraftMode())
-			authorized = false;
 
 		Integer airlineManagerId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		Optional<Flight> optionalFlight = this.flightRepository.findByIdAndManagerId(flightId, airlineManagerId);
 
 		if (optionalFlight.isEmpty())
 			authorized = false;
+
+		if (optionalFlight.isPresent()) {
+			Flight flight = optionalFlight.get();
+			if (!flight.isDraftMode())
+				authorized = false;
+		}
+
+		if (super.getRequest().hasData("id", boolean.class)) {
+			int aircraftId = super.getRequest().getData("id", int.class);
+			authorized &= aircraftId == 0;
+		}
 
 		super.getResponse().setAuthorised(authorized);
 	}
@@ -130,6 +137,9 @@ public class AirlineManagerLegCreateService extends AbstractGuiService<AirlineMa
 		dataset.put("arrivalAirport", airportArrivalChoices.getSelected().getKey());
 
 		Collection<Aircraft> availableAircrafts = this.repository.findAllActiveAircrafts();
+		if (!availableAircrafts.contains(leg.getAircraft()) && leg.getAircraft() != null)
+			availableAircrafts.add(leg.getAircraft());
+
 		SelectChoices aircraftChoices = SelectChoices.from(availableAircrafts, "registrationNumber", leg.getAircraft());
 		dataset.put("aircraftChoices", aircraftChoices);
 		dataset.put("aircraft", aircraftChoices.getSelected().getKey());

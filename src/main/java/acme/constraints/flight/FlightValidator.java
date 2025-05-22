@@ -29,14 +29,13 @@ public class FlightValidator extends AbstractValidator<ValidFlight, Flight> {
 		if (flight == null)
 			return true;
 
-		boolean hasALeg = flight.numberOfLayovers() >= 0;
-		if (!flight.isDraftMode())
-			super.state(context, hasALeg, "draftMode", "acme.validation.flight.no-legs.message");
-
 		LegRepository legRepository = SpringHelper.getBean(LegRepository.class);
 
 		if (!flight.isDraftMode()) {
 			List<Leg> legs = legRepository.findAllLegsByFlight(flight.getId());
+
+			super.state(context, !legs.isEmpty(), "draftMode", "acme.validation.flight.no-leg.message");
+
 			for (Leg leg : legs) {
 				boolean isPublished = !leg.isDraftMode();
 				super.state(context, isPublished, "draftMode", "acme.validation.flight.leg-not-published.message");
