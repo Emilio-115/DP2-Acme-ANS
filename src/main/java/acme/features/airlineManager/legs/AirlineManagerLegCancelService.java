@@ -56,6 +56,8 @@ public class AirlineManagerLegCancelService extends AbstractGuiService<AirlineMa
 
 			status &= leg.getStatus().equals(LegStatus.ON_TIME);
 
+			status &= !leg.isDraftMode();
+
 		}
 
 		super.getResponse().setAuthorised(status);

@@ -24,7 +24,12 @@ public class AdministratorAircraftCreateService extends AbstractGuiService<Admin
 	@Override
 	public void authorise() {
 
-		super.getResponse().setAuthorised(true);
+		boolean status = true;
+		if (super.getRequest().hasData("id", boolean.class)) {
+			int aircraftId = super.getRequest().getData("id", int.class);
+			status &= aircraftId == 0;
+		}
+		super.getResponse().setAuthorised(status);
 
 	}
 
@@ -55,6 +60,7 @@ public class AdministratorAircraftCreateService extends AbstractGuiService<Admin
 
 		confirmation = super.getRequest().getData("confirmation", boolean.class);
 		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
+
 	}
 
 	@Override

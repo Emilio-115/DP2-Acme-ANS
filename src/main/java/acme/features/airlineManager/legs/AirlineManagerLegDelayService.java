@@ -56,10 +56,7 @@ public class AirlineManagerLegDelayService extends AbstractGuiService<AirlineMan
 
 			status &= leg.getStatus().equals(LegStatus.ON_TIME);
 
-			if (optionalFlight.isPresent()) {
-				Flight flight = optionalFlight.get();
-				status &= !flight.isDraftMode();
-			}
+			status &= !leg.isDraftMode();
 		}
 
 		super.getResponse().setAuthorised(status);

@@ -31,6 +31,7 @@ acme.validation.tracking-log.not-good-update-date = La fecha de actualizacion ti
 acme.validation.tracking-log.update-before-other = La fecha de actualizacion tiene que ser despues de la fecha del ultimo registro
 
 acme.validation.aircraft.non-unique-registration-number = El número de registro ya existe, el número de registro debe ser único
+acme.validation.aircraft.busy-cant-be-under-maintenance = Un avión ocupado no puede estar en mantenimiento
 
 acme.validation.flight-assignment.flight-crew-member-unavailable.message = El miembro de la tripulación de vuelo no está disponible
 acme.validation.flight-assignment.member-already-in-leg-with-duty.message = El miembro de la tripulación de vuelo ya está asignado a este segmento con este rol
@@ -45,6 +46,7 @@ acme.validation.flight-crew-member.non-unique-employee-code = El código de empl
 acme.validation.assistance-agent.non-unique-employee-code = El código de empleado debe ser único
 
 acme.validation.flight.leg-not-published.message = Todas los segmentos tienen que estar publicados
+acme.validation.flight.no-leg.message = No hay ningun segmento en este vuelo
 acme.validation.leg.overlapping-legs.message = Fechas de salida o llegada no validas, los segmentos no pueden superponerse
 acme.validation.leg.busy-aircraft.message = Avión no válido, el avión está ocupado durante ese rango de tiempo
 acme.validation.leg.unique-flight-number.message = Número de vuelo no válido, codigo IATA + Digitos del número de vuelo deben ser únicos
