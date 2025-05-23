@@ -31,12 +31,21 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 		int claimId = super.getRequest().getData("claimId", int.class);
 		Claim claim = this.repository.findClaimById(claimId);
 
+		String method = super.getRequest().getMethod();
+		boolean statusTrackingLog = true;
+		int trackingLogId;
+
 		List<TrackingLog> trackingLogs = this.repository.findTopPercentage(claimId, false);
 		if (!trackingLogs.isEmpty() && (trackingLogs.get(0).isDraftMode() || trackingLogs.get(0).getResolutionPercentage().equals(100.00)))
 			canCreate = false;
 
+		if (method.equals("POST")) {
+			trackingLogId = super.getRequest().getData("id", int.class);
+			statusTrackingLog = trackingLogId == 0;
+		}
+
 		status = claim != null && canCreate && claim.getAssistanceAgent().getId() == agentId;
-		super.getResponse().setAuthorised(status);
+		super.getResponse().setAuthorised(status && statusTrackingLog);
 	}
 
 	@Override
@@ -68,7 +77,9 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 		 * claim.setIsAccepted(cs);
 		 * }
 		 */
+		//System.out.println(super.getRequest().getData("resolutionPercentage", Double.class));
 		super.bindObject(trackingLog, "undergoingStep", "resolutionPercentage", "resolution", "status");
+
 		trackingLog.setReclaim(false);
 		trackingLog.setDraftMode(true);
 		trackingLog.setLastUpdateMoment(MomentHelper.getCurrentMoment());

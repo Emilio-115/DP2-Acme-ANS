@@ -50,7 +50,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "688820e2-7465-4a9d-910b-b6a7d4ca1114",GET,"/libraries/acme/js/acme.js",,,200,application/javascript,,,2705050368748700,2705050372305200,2705050373525000
 "7f67e361-aa39-40ce-9866-ab75890ecf1b",GET,/images/banner.png,,,200,image/png,,,2705050407471300,2705050410270300,2705050411345700
 "641e9776-e43d-47ed-a054-04b1a0111849",GET,/images/logo.png,,,200,image/png,,,2705050418500600,2705050423352500,2705050424685500
-"264a2827-6592-424f-a713-53345dc5d72e",GET,"/flight-crew-member/activity-log/list-drafts",,,200,text/html;charset=utf-8,"severityLevel%5B0%5D=5&id%5B0%5D=115&flightNumber%5B0%5D=ADC4324&incidentType%5B0%5D=%27+or+%27A%27+%3D+%27A&service=195&version%5B0%5D=0",,2705052653826600,2705052689098500,2705053997626500
+"264a2827-6592-424f-a713-53345dc5d72e",GET,"/flight-crew-member/activity-log/list-drafts",,,200,text/html;charset=utf-8,"severityLevel%5B0%5D=5&id%5B0%5D=115&flightNumber%5B0%5D=RED4324&incidentType%5B0%5D=%27+or+%27A%27+%3D+%27A&service=195&version%5B0%5D=0",,2705052653826600,2705052689098500,2705053997626500
 "4bc841e2-9e8f-400d-b3d7-ed9b6c6aaa2f",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,2705054039280600,2705054042440900,2705054043461800
 "5f5f0023-cd4b-401a-987a-a1f16f313045",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,2705054050296600,2705054053465000,2705054054252400
 "5233ac22-e8e9-4e0f-8368-8e7ef84bfcc8",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,2705054061449600,2705054064385700,2705054065376100

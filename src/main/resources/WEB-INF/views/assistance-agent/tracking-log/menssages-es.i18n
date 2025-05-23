@@ -13,11 +13,11 @@ assistance-agent.tracking-log.form.label.status = Estado
 assistance-agent.tracking-log.form.label.resolution = Resolucion
 assistance-agent.tracking-log.form.label.claim = Reclamacion
 
-assistance-agent.tracking-log.form.button.create = Create
-assistance-agent.tracking-log.list.label.create = Create
-assistance-agent.tracking-log.form.button.delete = Delete
-assistance-agent.tracking-log.form.button.update = Update
-assistance-agent.tracking-log.form.button.publish = Publish
+assistance-agent.tracking-log.form.button.create = Crear
+assistance-agent.tracking-log.list.label.create = Crear
+assistance-agent.tracking-log.form.button.delete = Borrar
+assistance-agent.tracking-log.form.button.update = Actualizar
+assistance-agent.tracking-log.form.button.publish = Publicar
 
 assistance-agent.tracking-log.list.label.reclaim = Volver a reclamar
 assistance-agent.tracking-log.form.button.reclaim = Volver a reclamar

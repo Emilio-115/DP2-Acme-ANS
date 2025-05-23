@@ -66,9 +66,6 @@ public class AirlineManagerFlightPublishService extends AbstractGuiService<Airli
 
 	public void validate(final Flight flight) {
 
-		boolean haveALeg = flight.numberOfLayovers() >= 0;
-		super.state(haveALeg, "*", "acme.validation.flight.no-legs.message");
-
 		List<Leg> legs = this.repository.findAllLegsByFlightId(flight.getId());
 		for (Leg leg : legs)
 			if (leg.getAircraft() != null) {
