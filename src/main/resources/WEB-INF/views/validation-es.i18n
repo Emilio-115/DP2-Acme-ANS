@@ -58,6 +58,7 @@ acme.validation.leg.past-arrival-date.message = La fecha de llegada debe ser fut
 acme.validation.leg.arrival-before-departure.message = La fecha de llegada debe ser posterior a la hora de salida
 acme.validation.leg.same-airport.message = Los aeropuertos de llegada y salida deben ser distintos
 acme.validation.airline-manager.non-unique-identifier = El identificador debe ser único
+acme.validation.flight.published-leg.message = No se puede borrar el vuelo ya que tiene segmentos publicados
 
 # acme.validation.booking #############################
 
