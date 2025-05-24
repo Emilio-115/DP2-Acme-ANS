@@ -56,7 +56,6 @@ acme.validation.flight.no-legs.message = El vuelo necesita al menos un segmento 
 acme.validation.leg.past-departure-date.message = La fecha de salida debe ser futura
 acme.validation.leg.past-arrival-date.message = La fecha de llegada debe ser futura
 acme.validation.leg.arrival-before-departure.message = La fecha de llegada debe ser posterior a la hora de salida
-acme.validation.flight.cost-euro.message = La moneda del coste debe de ser euros
 
 acme.validation.airline-manager.non-unique-identifier = El identificador debe ser único
 
