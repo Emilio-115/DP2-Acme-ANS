@@ -3,6 +3,7 @@ package acme.features.assistanceAgent.trackingLog;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -26,8 +27,8 @@ public class AssistanceAgentTrackingLogListService extends AbstractGuiService<As
 
 		int claimId = super.getRequest().getData("claimId", int.class);
 		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
-		Claim claim = this.repository.findClaimById(claimId);
-		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && claim != null && claim.getAssistanceAgent().getId() == agentId;
+		Optional<Claim> claim = this.repository.findByIdAndAssistanceAgentId(claimId, agentId);
+		status = claim.isPresent();
 
 		super.getResponse().setAuthorised(status);
 	}

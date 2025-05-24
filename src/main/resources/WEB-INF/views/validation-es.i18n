@@ -16,7 +16,7 @@ acme.validation.update.draftMode.claim = Esta reclamacion no se puede publicar p
 acme.validation.claim.not-completed-claim = El proceso de la reclamacion aun no ha terminado
 acme.validation.claim.not-status-claim = El proceso de la reclamacion esta terminado, comente si esta aceptada o no
 
-acme.validation.update.draftMode.tracking-log = Este registro no se puede publicar si hay registros previos sin publicar
+acme.validation.update.draftMode.tracking-log = Este registro no se puede publicar si la reclamacion no ha sido publicada.
 
 acme.validation.create.tracking-log.low-percentage = El porcentaje de resolucion debe ser mayor que el ultimo registro
 

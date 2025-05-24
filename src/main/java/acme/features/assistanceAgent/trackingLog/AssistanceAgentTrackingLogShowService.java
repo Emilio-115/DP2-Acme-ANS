@@ -1,6 +1,8 @@
 
 package acme.features.assistanceAgent.trackingLog;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
@@ -26,18 +28,9 @@ public class AssistanceAgentTrackingLogShowService extends AbstractGuiService<As
 
 		trackingLogId = super.getRequest().getData("id", int.class);
 
-		TrackingLog trackingLog = this.repository.findTrackingLogById(trackingLogId);
+		status = this.validDelete(trackingLogId);
 
-		if (trackingLog == null)
-			super.getResponse().setAuthorised(false);
-		else {
-			Claim claim = trackingLog.getClaim();
-			int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
-
-			status = claim != null && claim.getAssistanceAgent().getId() == agentId;
-
-			super.getResponse().setAuthorised(status);
-		}
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -45,8 +38,9 @@ public class AssistanceAgentTrackingLogShowService extends AbstractGuiService<As
 		int trackingLogId;
 		trackingLogId = super.getRequest().getData("id", int.class);
 
-		TrackingLog trackingLog = this.repository.findTrackingLogById(trackingLogId);
+		TrackingLog trackingLog = this.repository.findTrackingLogById(trackingLogId).get();
 
+		super.getBuffer().addGlobal("security", trackingLog.getId());
 		super.getBuffer().addData(trackingLog);
 	}
 
@@ -65,5 +59,16 @@ public class AssistanceAgentTrackingLogShowService extends AbstractGuiService<As
 
 		super.getResponse().addData(dataset);
 
+	}
+
+	private boolean validDelete(final int trackingLogId) {
+		boolean status = false;
+		Optional<TrackingLog> trackingLog = this.repository.findTrackingLogById(trackingLogId);
+		if (trackingLog.isPresent()) {
+			Claim claim = trackingLog.get().getClaim();
+			int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
+			status = claim.getAssistanceAgent().getId() == agentId;
+		}
+		return status;
 	}
 }

@@ -2,6 +2,7 @@
 package acme.features.assistanceAgent.trackingLog;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -29,7 +30,7 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 
 		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		int claimId = super.getRequest().getData("claimId", int.class);
-		Claim claim = this.repository.findClaimById(claimId);
+		Optional<Claim> claim = this.repository.findByIdAndAssistanceAgentId(claimId, agentId);
 
 		String method = super.getRequest().getMethod();
 		boolean statusTrackingLog = true;
@@ -44,7 +45,7 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 			statusTrackingLog = trackingLogId == 0;
 		}
 
-		status = claim != null && canCreate && claim.getAssistanceAgent().getId() == agentId;
+		status = claim.isPresent() && canCreate;
 		super.getResponse().setAuthorised(status && statusTrackingLog);
 	}
 
@@ -63,21 +64,8 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 		int claimId;
 		Claim claim;
 
-		//Request hola = super.getRequest();
-
 		claimId = super.getRequest().getData("claimId", int.class);
 		claim = this.repository.findClaimById(claimId);
-
-		/*
-		 * double per = super.getRequest().getData("resolutionPercentage", double.class);
-		 * TrackingLogStatus st = super.getRequest().getData("status", TrackingLogStatus.class);
-		 * 
-		 * if (per == 100.0) {
-		 * ClaimStatus cs = st.equals(TrackingLogStatus.ACCEPTED) ? ClaimStatus.ACCEPTED : ClaimStatus.REJECTED;
-		 * claim.setIsAccepted(cs);
-		 * }
-		 */
-		//System.out.println(super.getRequest().getData("resolutionPercentage", Double.class));
 		super.bindObject(trackingLog, "undergoingStep", "resolutionPercentage", "resolution", "status");
 
 		trackingLog.setReclaim(false);
@@ -94,7 +82,6 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 	@Override
 	public void perform(final TrackingLog trackingLog) {
 		this.repository.save(trackingLog);
-		//this.repository.save(trackingLog.getClaim());
 	}
 
 	@Override

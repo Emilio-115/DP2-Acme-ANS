@@ -26,7 +26,7 @@ acme.validation.draftMode.tracking-log = This tracking log has already been publ
 
 acme.validation.update.draftMode.claim = This claim can not be publish with unpublished tracking logs
 
-acme.validation.update.draftMode.tracking-log = This tracking log can not be publish with unpublished tracking logs
+acme.validation.update.draftMode.tracking-log = This tracking log can not be publish with unpublished claim.
 
 acme.validation.create.tracking-log.low-percentage = The percentage is not valid, it has to be higher than the last tracking log
 
