@@ -50,7 +50,7 @@ public class AssistanceAgentTrackingLogPublishService extends AbstractGuiService
 
 		Claim claim = trackingLog.getClaim();
 
-		super.bindObject(trackingLog, "undergoingStep", "resolutionPercentage", "resolution", "status", "lastUpdateMoment");
+		super.bindObject(trackingLog, "undergoingStep", "resolutionPercentage", "resolution", "status");
 		trackingLog.setLastUpdateMoment(MomentHelper.getCurrentMoment());
 
 		Double per = trackingLog.getResolutionPercentage();
