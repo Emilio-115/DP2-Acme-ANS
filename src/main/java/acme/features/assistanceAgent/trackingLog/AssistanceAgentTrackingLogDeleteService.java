@@ -28,12 +28,16 @@ public class AssistanceAgentTrackingLogDeleteService extends AbstractGuiService<
 		int trackingLogId = super.getRequest().getData("id", int.class);
 		TrackingLog trackingLog = this.repository.findTrackingLogById(trackingLogId);
 
-		Claim claim = trackingLog.getClaim();
-		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		if (trackingLog == null)
+			super.getResponse().setAuthorised(false);
+		else {
+			Claim claim = trackingLog.getClaim();
+			int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
 
-		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && claim.getAssistanceAgent().getId() == agentId && trackingLog.isDraftMode();
+			status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && claim.getAssistanceAgent().getId() == agentId && trackingLog.isDraftMode();
 
-		super.getResponse().setAuthorised(status);
+			super.getResponse().setAuthorised(status);
+		}
 	}
 
 	@Override
@@ -48,7 +52,6 @@ public class AssistanceAgentTrackingLogDeleteService extends AbstractGuiService<
 
 	@Override
 	public void bind(final TrackingLog trackingLog) {
-		assert trackingLog != null;
 
 		super.bindObject(trackingLog, "undergoingStep", "resolutionPercentage", "resolution", "status");
 		trackingLog.setLastUpdateMoment(MomentHelper.getCurrentMoment());
@@ -56,12 +59,11 @@ public class AssistanceAgentTrackingLogDeleteService extends AbstractGuiService<
 
 	@Override
 	public void validate(final TrackingLog trackingLog) {
-		assert trackingLog != null;
+
 	}
 
 	@Override
 	public void perform(final TrackingLog trackingLog) {
-		assert trackingLog != null;
 
 		this.repository.delete(trackingLog);
 	}

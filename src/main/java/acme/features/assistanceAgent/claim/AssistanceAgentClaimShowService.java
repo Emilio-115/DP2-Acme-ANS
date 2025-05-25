@@ -27,17 +27,13 @@ public class AssistanceAgentClaimShowService extends AbstractGuiService<Assistan
 	@Override
 	public void authorise() {
 
-		int agentId;
-		int claimId;
 		boolean status;
 
 		int assistanceAgentId = super.getRequest().getPrincipal().getActiveRealm().getId();
-		agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
-		claimId = super.getRequest().getData("id", int.class);
 
-		Optional<Claim> claim = this.repository.findByIdAndAssistanceAgentId(claimId, agentId);
+		Optional<Claim> claim = this.getClaim(assistanceAgentId);
 
-		status = claim.isPresent() && claim.get().getAssistanceAgent().getId() == assistanceAgentId;
+		status = claim.isPresent();
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -71,10 +67,17 @@ public class AssistanceAgentClaimShowService extends AbstractGuiService<Assistan
 		dataset.put("types", choices);
 		dataset.put("status", status);
 		dataset.put("landedLegs", legChoices);
-		dataset.put("complete", claim.isComplete());
 		dataset.put("readonly", false);
 		super.addPayload(dataset, claim, "id");
 
 		super.getResponse().addData(dataset);
+	}
+
+	private Optional<Claim> getClaim(final int agentId) {
+		int claimId;
+		claimId = super.getRequest().getData("id", int.class);
+		Optional<Claim> claim = this.repository.findByIdAndAssistanceAgentId(claimId, agentId);
+
+		return claim;
 	}
 }

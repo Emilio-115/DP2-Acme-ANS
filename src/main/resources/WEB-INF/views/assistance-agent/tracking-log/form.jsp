@@ -12,9 +12,9 @@
 		<jstl:when test="${acme:anyOf(_command,'show|update|delete|publish')}">
 		<acme:input-moment code="assistance-agent.tracking-log.form.label.lastUpdateMoment" path="lastUpdateMoment" readonly="true"/>
     		<jstl:if test="${draftMode == true}">
-    			<acme:submit code="assistance-agent.tracking-log.form.button.delete" action="/assistance-agent/tracking-log/delete"/>
-    			<acme:submit code="assistance-agent.tracking-log.form.button.update" action="/assistance-agent/tracking-log/update?claimId=${claimId}"/>
-    			<acme:submit code="assistance-agent.tracking-log.form.button.publish" action="/assistance-agent/tracking-log/publish?claimId=${claimId}"/>
+    			<acme:submit code="assistance-agent.tracking-log.form.button.delete" action="/assistance-agent/tracking-log/delete?claimId=${claimId}&security=${id}"/>
+    			<acme:submit code="assistance-agent.tracking-log.form.button.update" action="/assistance-agent/tracking-log/update?claimId=${claimId}&security=${id}"/>
+    			<acme:submit code="assistance-agent.tracking-log.form.button.publish" action="/assistance-agent/tracking-log/publish?claimId=${claimId}&security=${id}"/>
     		</jstl:if>
 		</jstl:when>
 		<jstl:when test="${_command == 'create'}">

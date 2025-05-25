@@ -56,10 +56,7 @@ public class AirlineManagerLegLandService extends AbstractGuiService<AirlineMana
 
 			status &= leg.getStatus().equals(LegStatus.ON_TIME);
 
-			if (optionalFlight.isPresent()) {
-				Flight flight = optionalFlight.get();
-				status &= !flight.isDraftMode();
-			}
+			status &= !leg.isDraftMode();
 		}
 
 		super.getResponse().setAuthorised(status);
@@ -112,7 +109,7 @@ public class AirlineManagerLegLandService extends AbstractGuiService<AirlineMana
 		dataset.put("arrivalAirport", airportArrivalChoices.getSelected().getKey());
 
 		Collection<Aircraft> availableAircrafts = this.repository.findAllActiveAircrafts();
-		if (!availableAircrafts.contains(leg.getAircraft()))
+		if (!availableAircrafts.contains(leg.getAircraft()) && leg.getAircraft() != null)
 			availableAircrafts.add(leg.getAircraft());
 
 		SelectChoices aircraftChoices = SelectChoices.from(availableAircrafts, "registrationNumber", leg.getAircraft());

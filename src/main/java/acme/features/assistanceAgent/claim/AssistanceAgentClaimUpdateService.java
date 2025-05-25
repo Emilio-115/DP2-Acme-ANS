@@ -2,6 +2,7 @@
 package acme.features.assistanceAgent.claim;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -31,10 +32,20 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 		boolean status;
 
 		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
-		int claimId = super.getRequest().getData("id", int.class);
-		Claim claim = this.repository.findClaimById(claimId);
 
-		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && claim.getAssistanceAgent().getId() == agentId && claim.isDraftMode();
+		Optional<Claim> claim = this.getClaim(agentId);
+
+		boolean nullStatus = true;
+		Leg leg = null;
+
+		if (claim.isPresent())
+			leg = this.getLeg(claim.get());
+
+		Collection<Leg> legs = this.repository.findAllLandedLegs(LegStatus.LANDED);
+
+		boolean statusClaim = claim != null && this.securityId() && claim.get().isDraftMode();
+		boolean statusLeg = leg != null ? legs.contains(leg) : nullStatus;
+		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && statusClaim && statusLeg;
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -42,11 +53,9 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 	@Override
 	public void load() {
 		Claim claim;
-		int assistanceAgentId;
 		int claimId;
 
-		claimId = super.getRequest().getData("id", int.class);
-		assistanceAgentId = super.getRequest().getPrincipal().getAccountId();
+		claimId = super.getRequest().getData("claimId", int.class);
 		claim = this.repository.findClaimById(claimId);
 
 		super.getBuffer().addData(claim);
@@ -54,7 +63,6 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 
 	@Override
 	public void bind(final Claim claim) {
-		assert claim != null;
 
 		int legId;
 		Leg leg;
@@ -62,25 +70,22 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 		legId = super.getRequest().getData("leg", int.class);
 		leg = this.repository.findLegById(legId);
 
-		super.bindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "isAccepted");
+		super.bindObject(claim, "passengerEmail", "description", "type");
 		claim.setLeg(leg);
 	}
 
 	@Override
 	public void validate(final Claim claim) {
-		assert claim != null;
 	}
 
 	@Override
 	public void perform(final Claim claim) {
-		assert claim != null;
 
 		this.repository.save(claim);
 	}
 
 	@Override
 	public void unbind(final Claim claim) {
-		assert claim != null;
 		SelectChoices choices;
 		Dataset dataset;
 		SelectChoices legChoices;
@@ -96,7 +101,6 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 		dataset.put("types", choices);
 		dataset.put("status", status);
 		dataset.put("landedLegs", legChoices);
-		dataset.put("complete", claim.isComplete());
 
 		super.getResponse().addData(dataset);
 	}
@@ -105,5 +109,44 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 	public void onSuccess() {
 		if (super.getRequest().getMethod().equals("POST"))
 			PrincipalHelper.handleUpdate();
+	}
+
+	private Optional<Claim> getClaim(final int agentId) {
+		String method = super.getRequest().getMethod();
+
+		int claimId;
+		if (method.equals("GET"))
+			claimId = super.getRequest().getData("claimId", int.class);
+		else
+			claimId = super.getRequest().getData("id", int.class);
+		Optional<Claim> claim = this.repository.findByIdAndAssistanceAgentId(claimId, agentId);
+
+		return claim;
+	}
+
+	private Leg getLeg(final Claim claim) {
+		int legId;
+		Leg leg;
+
+		String method = super.getRequest().getMethod();
+
+		if (method.equals("GET"))
+			legId = claim.getLeg().getId();
+		else
+			legId = super.getRequest().getData("leg", int.class);
+		leg = this.repository.findLegById(legId);
+		return leg;
+	}
+
+	private boolean securityId() {
+		String method = super.getRequest().getMethod();
+		boolean status = true;
+		if (method.equals("POST")) {
+			int claimId = super.getRequest().getData("id", int.class);
+			int securityId = super.getRequest().getData("claimId", int.class);
+
+			status = claimId == securityId;
+		}
+		return status;
 	}
 }

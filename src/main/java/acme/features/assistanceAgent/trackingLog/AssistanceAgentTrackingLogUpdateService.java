@@ -26,16 +26,17 @@ public class AssistanceAgentTrackingLogUpdateService extends AbstractGuiService<
 
 		boolean status;
 
+		int claimId = super.getRequest().getData("claimId", int.class);
 		int trackingLogId = super.getRequest().getData("id", int.class);
 
+		Claim claim = this.repository.findClaimById(claimId);
 		TrackingLog trackingLog = this.repository.findTrackingLogById(trackingLogId);
-
-		Claim claim = trackingLog.getClaim();
 		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
 
-		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && claim.getAssistanceAgent().getId() == agentId;
+		boolean trackingLogStatus = trackingLog != null && trackingLog.isDraftMode();
+		status = claim != null && super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && claim.getAssistanceAgent().getId() == agentId;
 
-		super.getResponse().setAuthorised(status);
+		super.getResponse().setAuthorised(status && trackingLogStatus);
 	}
 
 	@Override
@@ -50,24 +51,18 @@ public class AssistanceAgentTrackingLogUpdateService extends AbstractGuiService<
 
 	@Override
 	public void bind(final TrackingLog trackingLog) {
-		assert trackingLog != null;
-		int claimId = super.getRequest().getData("claimId", int.class);
-		Claim claim = this.repository.findClaimById(claimId);
-
-		super.bindObject(trackingLog, "undergoingStep", "resolutionPercentage", "resolution", "status", "lastUpdateMoment");
+		super.bindObject(trackingLog, "undergoingStep", "resolutionPercentage", "resolution", "status");
 		trackingLog.setLastUpdateMoment(MomentHelper.getCurrentMoment());
 
-		trackingLog.setClaim(claim);
 	}
 
 	@Override
 	public void validate(final TrackingLog trackingLog) {
-		assert trackingLog != null;
+
 	}
 
 	@Override
 	public void perform(final TrackingLog trackingLog) {
-		assert trackingLog != null;
 
 		this.repository.save(trackingLog);
 		this.repository.save(trackingLog.getClaim());

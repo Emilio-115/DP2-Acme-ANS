@@ -42,16 +42,18 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 		}
 
 		if (leg.getDepartureDate() != null && leg.getArrivalDate() != null) {
-			boolean isDepartureAfterArrival = leg.getDepartureDate().after(leg.getArrivalDate());
-			super.state(context, !isDepartureAfterArrival, "departureDate", "acme.validation.leg.arrival-before-departure.message");
+			boolean isDepartureDateBeforeArrivalDate = leg.getDepartureDate().before(leg.getArrivalDate());
+			super.state(context, isDepartureDateBeforeArrivalDate, "departureDate", "acme.validation.leg.arrival-before-departure.message");
 		}
 
 		if (leg.getFlight() != null) {
 			boolean isLegOverlapping = legRepository.isLegOverlapping(leg.getId(), leg.getFlight().getId(), leg.getDepartureDate(), leg.getArrivalDate());
 			super.state(context, !isLegOverlapping, "departureDate", "acme.validation.leg.overlapping-legs.message");
 
-			boolean isLegStatusConsistentWithDraftMode = !leg.isDraftMode() || leg.getStatus().equals(LegStatus.ON_TIME);
-			super.state(context, isLegStatusConsistentWithDraftMode, "status", "acme.validation.leg.draft-mode-status.message");
+			if (leg.getStatus() != null) {
+				boolean isLegStatusConsistentWithDraftMode = !leg.isDraftMode() || leg.getStatus().equals(LegStatus.ON_TIME);
+				super.state(context, isLegStatusConsistentWithDraftMode, "status", "acme.validation.leg.draft-mode-status.message");
+			}
 
 		}
 

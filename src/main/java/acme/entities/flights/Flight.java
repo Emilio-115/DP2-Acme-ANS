@@ -4,7 +4,9 @@ package acme.entities.flights;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.Valid;
 
@@ -28,6 +30,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @ValidFlight
+@Table(indexes = {
+	@Index(columnList = "draftMode"),
+})
 public class Flight extends AbstractEntity {
 
 	/*
@@ -74,7 +79,7 @@ public class Flight extends AbstractEntity {
 	public Date scheduledDeparture() {
 		LegRepository legRepository = SpringHelper.getBean(LegRepository.class);
 		Leg leg = legRepository.findFirstLegByFlightIdOrderByDepartureDate(this.getId());
-		return leg != null ? leg.getArrivalDate() : null;
+		return leg != null ? leg.getDepartureDate() : null;
 	}
 
 	@Transient

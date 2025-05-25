@@ -82,6 +82,23 @@ public interface FlightCrewMemberFlightAssignmentRepository extends AbstractRepo
 		""")
 	List<Leg> findLegsDepartingAfterWhereFlightCrewMemberIsFree(Date cutoff, Integer flightAssignmentId, Integer flightCrewMemberId);
 
+	@Query("""
+		SELECT l FROM Leg l
+		WHERE l.id = :legId
+		AND l.departureDate > :cutoff
+		AND l.draftMode = false
+		AND NOT EXISTS(
+			SELECT fa
+			FROM FlightAssignment fa
+			WHERE fa.id <> :flightAssignmentId
+			AND fa.draftMode = false
+			AND fa.status = acme.entities.flightAssignment.FlightAssignmentStatus.CONFIRMED
+			AND fa.flightCrewMember.id = :flightCrewMemberId
+			AND (fa.leg.departureDate <= l.arrivalDate AND fa.leg.arrivalDate >= l.departureDate)
+		)
+		""")
+	Optional<Leg> findLegDepartingAfterWhereFlightCrewMemberIsFreeById(Integer legId, Date cutoff, Integer flightAssignmentId, Integer flightCrewMemberId);
+
 	@Query("SELECT fcm FROM FlightCrewMember fcm WHERE fcm.id = :id")
 	Optional<FlightCrewMember> findFlightCrewMemberById(Integer id);
 
