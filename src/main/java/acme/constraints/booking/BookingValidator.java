@@ -29,7 +29,6 @@ public class BookingValidator extends AbstractValidator<ValidBooking, Booking> {
 			return true;
 
 		BookingRepository bookingRepository = SpringHelper.getBean(BookingRepository.class);
-		Long numberPassegers = bookingRepository.countPassengersByBookingId(booking.getId());
 		Optional<String> foundLocatorCode = bookingRepository.findLocatorCodeFromDifferentBooking(booking.getId(), booking.getLocatorCode());
 
 		var flight = booking.getFlight();
@@ -38,6 +37,10 @@ public class BookingValidator extends AbstractValidator<ValidBooking, Booking> {
 
 			super.state(context, flightNoDraftMode, "flight", "acme.validation.booking.flight.future");
 		}
+
+		Long numberPassegers = bookingRepository.countPassengersByBookingId(booking.getId());
+		boolean needPassengers = !booking.isDraftMode() && numberPassegers.equals(0L);
+		super.state(context, !needPassengers, "flight", "acme.validation.booking.passenger");
 
 		boolean locatorNotUsed = foundLocatorCode.isEmpty();
 

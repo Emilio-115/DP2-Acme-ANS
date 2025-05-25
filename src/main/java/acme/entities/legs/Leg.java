@@ -32,7 +32,7 @@ import lombok.Setter;
 @ValidLeg
 @Table(indexes = {
 	@Index(columnList = "departureDate"), @Index(columnList = "arrivalDate"), @Index(columnList = "departureDate, arrivalDate"), @Index(columnList = "departureDate, draftMode"), @Index(columnList = "id, departureDate, draftMode"),
-	@Index(columnList = "departureDate, arrivalDate, draftMode"),
+	@Index(columnList = "departureDate, arrivalDate, draftMode"), @Index(columnList = "departureDate, flight_id")
 })
 public class Leg extends AbstractEntity {
 
