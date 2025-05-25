@@ -27,9 +27,8 @@ public class AssistanceAgentTrackingLogPublishService extends AbstractGuiService
 	public void authorise() {
 		boolean status;
 		Optional<TrackingLog> trackingLog = this.getTrackingLog();
-		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
 
-		status = trackingLog.isPresent() && trackingLog.get().getClaim().getAssistanceAgent().getId() == agentId && trackingLog.get().isDraftMode() && this.securityId();
+		status = trackingLog.isPresent() && trackingLog.get().isDraftMode() && this.securityId();
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -92,12 +91,13 @@ public class AssistanceAgentTrackingLogPublishService extends AbstractGuiService
 
 	private Optional<TrackingLog> getTrackingLog() {
 		String method = super.getRequest().getMethod();
+		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		int trackingLogId;
 		if (method.equals("GET"))
 			trackingLogId = super.getRequest().getData("trackingLogId", int.class);
 		else
 			trackingLogId = super.getRequest().getData("id", int.class);
-		return this.repository.findTrackingLogById(trackingLogId);
+		return this.repository.findTrackingLogById(trackingLogId, agentId);
 	}
 
 	private boolean securityId() {

@@ -27,6 +27,9 @@ acme.validation.activity-log.arrival-before-departure.message = Fecha de salida 
 
 acme.validation.airport.non-unique-iata-code.message = El código IATA ha de ser único
 
+acme.validation.activity-log.need-publish = Necesitas publicar el último registro antes de poder crear otro
+acme.validation.activity-log.update-status = Necesitas publicar el último registro para actualizar el estado de la reclamacion.
+
 acme.validation.tracking-log.not-good-update-date = La fecha de actualizacion tiene que ser despues de la creacion de la reclamacion
 acme.validation.tracking-log.update-before-other = La fecha de actualizacion tiene que ser despues de la fecha del ultimo registro
 

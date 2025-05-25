@@ -15,7 +15,8 @@ acme.validation.claim.not-completed-claim = The process of this claim is not com
 acme.validation.claim.not-status-claim = The process of this claim is complete, determine if it is accepted
 acme.validation.claim.moment-registration-before-arrival = The moment have to be before the leg landed
 
-acme.validation.activity-log.need-publish = You need to publish the tracking log to continue
+acme.validation.activity-log.need-publish = You need to publish the last tracking log to continue
+acme.validation.activity-log.update-status = You need to publish the last tracking log to update the claim status
 
 acme.validation.activity-log.assignment-not-published.message = Flight assignment is not published
 acme.validation.activity-log.assignment-not-confirmed.message = Flight assignment is not confirmed

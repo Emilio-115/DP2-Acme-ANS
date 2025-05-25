@@ -9,7 +9,6 @@ import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
-import acme.entities.claims.Claim;
 import acme.entities.trackingLogs.TrackingLog;
 import acme.entities.trackingLogs.TrackingLogStatus;
 import acme.realms.assistanceAgent.AssistanceAgent;
@@ -28,7 +27,7 @@ public class AssistanceAgentTrackingLogShowService extends AbstractGuiService<As
 
 		trackingLogId = super.getRequest().getData("id", int.class);
 
-		status = this.validDelete(trackingLogId);
+		status = this.validShow(trackingLogId);
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -37,10 +36,10 @@ public class AssistanceAgentTrackingLogShowService extends AbstractGuiService<As
 	public void load() {
 		int trackingLogId;
 		trackingLogId = super.getRequest().getData("id", int.class);
+		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
 
-		TrackingLog trackingLog = this.repository.findTrackingLogById(trackingLogId).get();
+		TrackingLog trackingLog = this.repository.findTrackingLogById(trackingLogId, agentId).get();
 
-		super.getBuffer().addGlobal("security", trackingLog.getId());
 		super.getBuffer().addData(trackingLog);
 	}
 
@@ -52,8 +51,6 @@ public class AssistanceAgentTrackingLogShowService extends AbstractGuiService<As
 
 		choices = SelectChoices.from(TrackingLogStatus.class, trackingLog.getStatus());
 
-		int claimId = trackingLog.getClaim().getId();
-		super.getResponse().addGlobal("claimId", claimId);
 		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "undergoingStep", "resolutionPercentage", "resolution", "status", "draftMode", "reclaim");
 		dataset.put("statuses", choices);
 
@@ -61,14 +58,9 @@ public class AssistanceAgentTrackingLogShowService extends AbstractGuiService<As
 
 	}
 
-	private boolean validDelete(final int trackingLogId) {
-		boolean status = false;
-		Optional<TrackingLog> trackingLog = this.repository.findTrackingLogById(trackingLogId);
-		if (trackingLog.isPresent()) {
-			Claim claim = trackingLog.get().getClaim();
-			int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
-			status = claim.getAssistanceAgent().getId() == agentId;
-		}
-		return status;
+	private boolean validShow(final int trackingLogId) {
+		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		Optional<TrackingLog> trackingLog = this.repository.findTrackingLogById(trackingLogId, agentId);
+		return trackingLog.isPresent();
 	}
 }

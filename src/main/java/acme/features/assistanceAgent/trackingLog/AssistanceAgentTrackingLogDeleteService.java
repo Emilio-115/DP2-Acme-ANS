@@ -10,7 +10,6 @@ import acme.client.components.views.SelectChoices;
 import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
-import acme.entities.claims.Claim;
 import acme.entities.trackingLogs.TrackingLog;
 import acme.entities.trackingLogs.TrackingLogStatus;
 import acme.realms.assistanceAgent.AssistanceAgent;
@@ -25,7 +24,11 @@ public class AssistanceAgentTrackingLogDeleteService extends AbstractGuiService<
 	@Override
 	public void authorise() {
 
-		boolean status = this.validDelete();
+		boolean status;
+
+		Optional<TrackingLog> trackingLog = this.getTrackingLog();
+
+		status = trackingLog.isPresent() && trackingLog.get().isDraftMode() && this.securityId();
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -71,26 +74,16 @@ public class AssistanceAgentTrackingLogDeleteService extends AbstractGuiService<
 
 	}
 
-	private boolean validDelete() {
-		boolean status = false;
-		Optional<TrackingLog> trackingLog = this.getTrackingLog();
-		if (trackingLog.isPresent()) {
-			Claim claim = trackingLog.get().getClaim();
-			int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
-			status = claim.getAssistanceAgent().getId() == agentId && trackingLog.get().isDraftMode();
-		}
-		return status && this.securityId();
-	}
-
 	private Optional<TrackingLog> getTrackingLog() {
 		String method = super.getRequest().getMethod();
+		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		int trackingLogId;
 		if (method.equals("GET"))
 			trackingLogId = super.getRequest().getData("trackingLogId", int.class);
 		else
 			trackingLogId = super.getRequest().getData("id", int.class);
 
-		return this.repository.findTrackingLogById(trackingLogId);
+		return this.repository.findTrackingLogById(trackingLogId, agentId);
 	}
 
 	private boolean securityId() {

@@ -6,7 +6,7 @@ tracking-log-04,2022/07/29 23:58,"Lorem ipsum dolor sit amet, consectetur adipis
 tracking-log-05,2021/08/23 14:20,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor",100.00,"REJECTED","EL PRIMERO",claim-02,false,false
 tracking-log-06,2022/07/30 00:00,"L",100.00,"ACCEPTED","EL SEGUNDO",claim-03,false,false
 tracking-log-07,2019/10/15 12:30,"Lo",100.00,"REJECTED","EL TERCERO",claim-04,false,false
-tracking-log-08,2022/07/29 23:59,,80.00,"PENDING","YA ME ABURRI",claim-05,true,false
+tracking-log-08,2022/07/29 23:59,,80.00,"PENDING","YA ME ABURRI",claim-05,false,false
 tracking-log-09,2019/11/07 13:39,"โลเร็ม อิปซัม",100.00,"ACCEPTED","โลเร็ม อิปซัม",claim-06,false,false
 tracking-log-10,2019/11/15 19:32,"لوريم إيبسوم",100.00,"REJECTED","لوريم إيبسوم",claim-07,false,false
 tracking-log-11,2019/12/13 13:16,"洛伦·伊普森",100.00,"ACCEPTED","洛伦·伊普森",claim-08,false,false

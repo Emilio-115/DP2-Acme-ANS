@@ -30,33 +30,14 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 	@Override
 	public void authorise() {
 		boolean status;
-
-		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
-
-		Optional<Claim> claim = this.getClaim(agentId);
-
-		boolean nullStatus = true;
-		Leg leg = null;
-
-		if (claim.isPresent())
-			leg = this.getLeg(claim.get());
-
-		Collection<Leg> legs = this.repository.findAllLandedLegs(LegStatus.LANDED);
-
-		boolean statusClaim = claim != null && this.securityId() && claim.get().isDraftMode();
-		boolean statusLeg = leg != null ? legs.contains(leg) : nullStatus;
-		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && statusClaim && statusLeg;
+		status = this.validUpdate();
 
 		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
 	public void load() {
-		Claim claim;
-		int claimId;
-
-		claimId = super.getRequest().getData("claimId", int.class);
-		claim = this.repository.findClaimById(claimId);
+		Claim claim = this.getClaim().get();
 
 		super.getBuffer().addData(claim);
 	}
@@ -111,9 +92,9 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 			PrincipalHelper.handleUpdate();
 	}
 
-	private Optional<Claim> getClaim(final int agentId) {
+	private Optional<Claim> getClaim() {
 		String method = super.getRequest().getMethod();
-
+		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		int claimId;
 		if (method.equals("GET"))
 			claimId = super.getRequest().getData("claimId", int.class);
@@ -147,6 +128,22 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 
 			status = claimId == securityId;
 		}
+		return status;
+	}
+
+	private boolean validUpdate() {
+		Optional<Claim> claim = this.getClaim();
+		boolean status = false;
+		if (claim.isPresent()) {
+			Leg leg = this.getLeg(claim.get());
+			status = this.securityId() && this.validLeg(leg) && claim.get().isDraftMode();
+		}
+		return status;
+	}
+
+	private boolean validLeg(final Leg leg) {
+		Collection<Leg> legs = this.repository.findAllLandedLegs(LegStatus.LANDED);
+		boolean status = leg != null && legs.contains(leg);
 		return status;
 	}
 }

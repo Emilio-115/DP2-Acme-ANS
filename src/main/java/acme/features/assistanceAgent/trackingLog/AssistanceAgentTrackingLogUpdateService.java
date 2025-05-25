@@ -11,7 +11,6 @@ import acme.client.helpers.MomentHelper;
 import acme.client.helpers.PrincipalHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
-import acme.entities.claims.Claim;
 import acme.entities.trackingLogs.TrackingLog;
 import acme.entities.trackingLogs.TrackingLogStatus;
 import acme.realms.assistanceAgent.AssistanceAgent;
@@ -26,18 +25,11 @@ public class AssistanceAgentTrackingLogUpdateService extends AbstractGuiService<
 	@Override
 	public void authorise() {
 
-		boolean status;
-
-		int claimId = super.getRequest().getData("claimId", int.class);
-
-		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
-		Optional<Claim> claim = this.repository.findByIdAndAssistanceAgentId(claimId, agentId);
 		Optional<TrackingLog> trackingLog = this.getTrackingLog();
 
 		boolean trackingLogStatus = trackingLog.isPresent() && trackingLog.get().isDraftMode() && this.securityId();
-		status = claim.isPresent();
 
-		super.getResponse().setAuthorised(status && trackingLogStatus);
+		super.getResponse().setAuthorised(trackingLogStatus);
 	}
 
 	@Override
@@ -74,8 +66,6 @@ public class AssistanceAgentTrackingLogUpdateService extends AbstractGuiService<
 
 		choices = SelectChoices.from(TrackingLogStatus.class, trackingLog.getStatus());
 
-		int claimId = trackingLog.getClaim().getId();
-		super.getResponse().addGlobal("claimId", claimId);
 		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "undergoingStep", "resolutionPercentage", "resolution", "draftMode", "status", "reclaim");
 		dataset.put("statuses", choices);
 
@@ -92,11 +82,12 @@ public class AssistanceAgentTrackingLogUpdateService extends AbstractGuiService<
 	private Optional<TrackingLog> getTrackingLog() {
 		String method = super.getRequest().getMethod();
 		int trackingLogId;
+		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		if (method.equals("GET"))
 			trackingLogId = super.getRequest().getData("trackingLogId", int.class);
 		else
 			trackingLogId = super.getRequest().getData("id", int.class);
-		return this.repository.findTrackingLogById(trackingLogId);
+		return this.repository.findTrackingLogById(trackingLogId, agentId);
 	}
 
 	private boolean securityId() {
