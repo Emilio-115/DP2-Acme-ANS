@@ -26,7 +26,6 @@ public class CustomerBookingRecordCreateService extends AbstractGuiService<Custo
 	public void authorise() {
 
 		boolean status = true;
-		var a = super.getRequest();
 
 		if (super.getRequest().hasData("id")) {
 			int id = super.getRequest().getData("id", int.class);

@@ -24,15 +24,11 @@ import acme.realms.airlineManager.AirlineManager;
 @GuiService
 public class AirlineManagerLegCreateService extends AbstractGuiService<AirlineManager, Leg> {
 
-	// Internal state ---------------------------------------------------------
-
 	@Autowired
 	private AirlineManagerLegRepository		repository;
 
 	@Autowired
 	private AirlineManagerFlightRepository	flightRepository;
-
-	// AbstractGuiService interface -------------------------------------------
 
 
 	@Override
@@ -57,6 +53,28 @@ public class AirlineManagerLegCreateService extends AbstractGuiService<AirlineMa
 		if (super.getRequest().hasData("id", boolean.class)) {
 			int aircraftId = super.getRequest().getData("id", int.class);
 			authorized &= aircraftId == 0;
+		}
+
+		if (super.getRequest().hasData("aircraft", int.class) && super.getRequest().getData("aircraft", int.class) != 0) {
+			int aircraftId = super.getRequest().getData("aircraft", int.class);
+			Aircraft aircraft = this.repository.findAircraftById(aircraftId).orElse(null);
+			Collection<Aircraft> availableAircrafts = this.repository.findAllActiveAircrafts();
+
+			authorized &= availableAircrafts.contains(aircraft);
+		}
+
+		if (super.getRequest().hasData("arrivalAirport", int.class) && super.getRequest().getData("arrivalAirport", int.class) != 0) {
+			int airportId = super.getRequest().getData("arrivalAirport", int.class);
+			Optional<Airport> airport = this.repository.findAirportById(airportId);
+
+			authorized &= airport.isPresent();
+		}
+
+		if (super.getRequest().hasData("departureAirport", int.class) && super.getRequest().getData("departureAirport", int.class) != 0) {
+			int airportId = super.getRequest().getData("departureAirport", int.class);
+			Optional<Airport> airport = this.repository.findAirportById(airportId);
+
+			authorized &= airport.isPresent();
 		}
 
 		super.getResponse().setAuthorised(authorized);
@@ -137,10 +155,11 @@ public class AirlineManagerLegCreateService extends AbstractGuiService<AirlineMa
 		dataset.put("arrivalAirport", airportArrivalChoices.getSelected().getKey());
 
 		Collection<Aircraft> availableAircrafts = this.repository.findAllActiveAircrafts();
-		if (!availableAircrafts.contains(leg.getAircraft()) && leg.getAircraft() != null)
-			availableAircrafts.add(leg.getAircraft());
+		Aircraft aircraft = leg.getAircraft();
+		if (!availableAircrafts.contains(leg.getAircraft()))
+			aircraft = null;
 
-		SelectChoices aircraftChoices = SelectChoices.from(availableAircrafts, "registrationNumber", leg.getAircraft());
+		SelectChoices aircraftChoices = SelectChoices.from(availableAircrafts, "registrationNumber", aircraft);
 		dataset.put("aircraftChoices", aircraftChoices);
 		dataset.put("aircraft", aircraftChoices.getSelected().getKey());
 

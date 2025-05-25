@@ -39,13 +39,13 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 	}
 
 	private boolean checkFlightIsPublished(boolean status) {
-		if (super.getRequest().hasData("flight")) {
-			int flightId = super.getRequest().getData("flight", int.class);
-			if (flightId != 0) {
-				Boolean flightIsAvailable = this.repository.checkFlightIsAvailableById(flightId, MomentHelper.getCurrentMoment());
-				status = flightIsAvailable;
-			}
+
+		int flightId = super.getRequest().getData("flight", int.class);
+		if (flightId != 0) {
+			Boolean flightIsAvailable = this.repository.checkFlightIsAvailableById(flightId, MomentHelper.getCurrentMoment());
+			status = flightIsAvailable;
 		}
+
 		return status;
 	}
 
@@ -106,7 +106,6 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 		dataset.put("destination", booking.getFlight() != null ? booking.getFlight().destination() : "No Data");
 		dataset.put("numberOfLayovers", booking.getFlight() != null ? booking.getFlight().numberOfLayovers() : "No Data");
 
-		super.getResponse().addData(dataset);
 		super.getResponse().addData(dataset);
 	}
 }
