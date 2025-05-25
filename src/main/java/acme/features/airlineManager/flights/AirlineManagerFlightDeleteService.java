@@ -66,7 +66,14 @@ public class AirlineManagerFlightDeleteService extends AbstractGuiService<Airlin
 
 	@Override
 	public void validate(final Flight flight) {
+		Collection<Leg> legs;
+		int flightId;
 
+		flightId = super.getRequest().getData("id", int.class);
+
+		legs = this.repository.findAllLegsByFlightId(flightId);
+		boolean allDraftMode = legs.stream().allMatch(Leg::isDraftMode);
+		super.state(allDraftMode, "*", "acme.validation.flight.published-leg.message");
 	}
 
 	@Override
