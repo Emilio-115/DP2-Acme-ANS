@@ -131,7 +131,7 @@ public class AssistanceAgentClaimPublishService extends AbstractGuiService<Assis
 
 	private boolean validLeg(final Leg leg) {
 		Collection<Leg> legs = this.repository.findAllLandedLegs(LegStatus.LANDED);
-		boolean status = leg != null && legs.contains(leg);
+		boolean status = leg == null || legs.contains(leg);
 
 		return status;
 	}
