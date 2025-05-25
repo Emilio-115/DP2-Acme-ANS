@@ -16,7 +16,7 @@ acme.validation.update.draftMode.claim = Esta reclamacion no se puede publicar p
 acme.validation.claim.not-completed-claim = El proceso de la reclamacion aun no ha terminado
 acme.validation.claim.not-status-claim = El proceso de la reclamacion esta terminado, comente si esta aceptada o no
 
-acme.validation.update.draftMode.tracking-log = Este registro no se puede publicar si hay registros previos sin publicar
+acme.validation.update.draftMode.tracking-log = Este registro no se puede publicar si la reclamacion no ha sido publicada.
 
 acme.validation.create.tracking-log.low-percentage = El porcentaje de resolucion debe ser mayor que el ultimo registro
 
@@ -26,6 +26,9 @@ acme.validation.activity-log.registered-before-landing.message = Fecha de regist
 acme.validation.activity-log.arrival-before-departure.message = Fecha de salida no valida, la llegada debe ser despues de la salida
 
 acme.validation.airport.non-unique-iata-code.message = El código IATA ha de ser único
+
+acme.validation.activity-log.need-publish = Necesitas publicar el último registro antes de poder crear otro
+acme.validation.activity-log.update-status = Necesitas publicar el último registro para actualizar el estado de la reclamacion.
 
 acme.validation.tracking-log.not-good-update-date = La fecha de actualizacion tiene que ser despues de la creacion de la reclamacion
 acme.validation.tracking-log.update-before-other = La fecha de actualizacion tiene que ser despues de la fecha del ultimo registro
