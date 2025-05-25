@@ -56,6 +56,8 @@ public class AirlineManagerLegCancelService extends AbstractGuiService<AirlineMa
 
 			status &= leg.getStatus().equals(LegStatus.ON_TIME);
 
+			status &= !leg.isDraftMode();
+
 		}
 
 		super.getResponse().setAuthorised(status);
@@ -107,7 +109,7 @@ public class AirlineManagerLegCancelService extends AbstractGuiService<AirlineMa
 		dataset.put("arrivalAirport", airportArrivalChoices.getSelected().getKey());
 
 		Collection<Aircraft> availableAircrafts = this.repository.findAllActiveAircrafts();
-		if (!availableAircrafts.contains(leg.getAircraft()))
+		if (!availableAircrafts.contains(leg.getAircraft()) && leg.getAircraft() != null)
 			availableAircrafts.add(leg.getAircraft());
 
 		SelectChoices aircraftChoices = SelectChoices.from(availableAircrafts, "registrationNumber", leg.getAircraft());

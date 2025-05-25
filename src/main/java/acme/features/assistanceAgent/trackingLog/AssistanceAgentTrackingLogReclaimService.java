@@ -31,6 +31,10 @@ public class AssistanceAgentTrackingLogReclaimService extends AbstractGuiService
 		int claimId = super.getRequest().getData("claimId", int.class);
 		Claim claim = this.repository.findClaimById(claimId);
 
+		String method = super.getRequest().getMethod();
+		boolean statusTrackingLog = true;
+		int trackingLogId;
+
 		List<TrackingLog> reclaimedTrackingLogs = this.repository.findTopPercentage(claimId, true);
 		List<TrackingLog> trackingLogs = this.repository.findTopPercentage(claimId, false);
 
@@ -39,7 +43,11 @@ public class AssistanceAgentTrackingLogReclaimService extends AbstractGuiService
 			canReclaim = true;
 
 		status = canReclaim && claim.getAssistanceAgent().getId() == agentId;
-		super.getResponse().setAuthorised(status);
+		if (method.equals("POST")) {
+			trackingLogId = super.getRequest().getData("id", int.class);
+			statusTrackingLog = trackingLogId == 0;
+		}
+		super.getResponse().setAuthorised(status && statusTrackingLog);
 	}
 
 	@Override

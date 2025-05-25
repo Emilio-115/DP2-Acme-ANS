@@ -38,6 +38,10 @@ public class BookingValidator extends AbstractValidator<ValidBooking, Booking> {
 			super.state(context, flightNoDraftMode, "flight", "acme.validation.booking.flight.future");
 		}
 
+		Long numberPassegers = bookingRepository.countPassengersByBookingId(booking.getId());
+		boolean needPassengers = !booking.isDraftMode() && numberPassegers.equals(0L);
+		super.state(context, !needPassengers, "flight", "acme.validation.booking.passenger");
+
 		boolean locatorNotUsed = foundLocatorCode.isEmpty();
 
 		super.state(context, locatorNotUsed, "locatorCode", "acme.validation.booking.locatorCode");

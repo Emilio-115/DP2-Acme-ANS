@@ -2,12 +2,14 @@
 package acme.features.airlineManager.legs;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
+import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.aircrafts.Aircraft;
@@ -39,16 +41,23 @@ public class AirlineManagerLegCreateService extends AbstractGuiService<AirlineMa
 		boolean authorized = true;
 
 		Integer flightId = super.getRequest().getData("flightId", int.class);
-		Flight flight = this.flightRepository.findFlightById(flightId).orElseThrow(() -> new RuntimeException("No flight with id: " + flightId));
-
-		if (!flight.isDraftMode())
-			authorized = false;
 
 		Integer airlineManagerId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		Optional<Flight> optionalFlight = this.flightRepository.findByIdAndManagerId(flightId, airlineManagerId);
 
 		if (optionalFlight.isEmpty())
 			authorized = false;
+
+		if (optionalFlight.isPresent()) {
+			Flight flight = optionalFlight.get();
+			if (!flight.isDraftMode())
+				authorized = false;
+		}
+
+		if (super.getRequest().hasData("id", boolean.class)) {
+			int aircraftId = super.getRequest().getData("id", int.class);
+			authorized &= aircraftId == 0;
+		}
 
 		super.getResponse().setAuthorised(authorized);
 	}
@@ -94,6 +103,12 @@ public class AirlineManagerLegCreateService extends AbstractGuiService<AirlineMa
 			boolean isAircraftActive = leg.getAircraft().getStatus().equals(AircraftStatus.ACTIVE);
 			super.state(isAircraftActive, "aircraft", "acme.validation.flight.aircraft-under-maintenance.message");
 		}
+
+		if (leg.getArrivalDate() != null && leg.getDepartureDate() != null) {
+			Date currentDate = MomentHelper.getCurrentMoment();
+			super.state(currentDate.before(leg.getDepartureDate()), "departureDate", "acme.validation.leg.past-departure-date.message");
+			super.state(currentDate.before(leg.getArrivalDate()), "arrivalDate", "acme.validation.leg.past-arrival-date.message");
+		}
 	}
 
 	@Override
@@ -122,6 +137,9 @@ public class AirlineManagerLegCreateService extends AbstractGuiService<AirlineMa
 		dataset.put("arrivalAirport", airportArrivalChoices.getSelected().getKey());
 
 		Collection<Aircraft> availableAircrafts = this.repository.findAllActiveAircrafts();
+		if (!availableAircrafts.contains(leg.getAircraft()) && leg.getAircraft() != null)
+			availableAircrafts.add(leg.getAircraft());
+
 		SelectChoices aircraftChoices = SelectChoices.from(availableAircrafts, "registrationNumber", leg.getAircraft());
 		dataset.put("aircraftChoices", aircraftChoices);
 		dataset.put("aircraft", aircraftChoices.getSelected().getKey());

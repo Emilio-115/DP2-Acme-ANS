@@ -68,9 +68,7 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 
 		Date currentMoment = MomentHelper.getCurrentMoment();
 		Collection<Flight> availableFlights = this.repository.findAvailableFlights(currentMoment);
-		boolean flightAvailable = false;
-		if (booking.getFlight() != null)
-			flightAvailable = this.repository.checkFlightIsAvailableById(booking.getFlight().getId(), currentMoment);
+		boolean flightAvailable = this.repository.checkFlightIsAvailableById(booking.getFlight().getId(), currentMoment);
 		Dataset dataset;
 		SelectChoices choices;
 		SelectChoices flightChoices;
@@ -83,13 +81,13 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 		dataset.put("flight", flightChoices.getSelected().getKey());
 		dataset.put("flightTagChoices", flightChoices);
 
-		dataset.put("flightSelfTransfer", booking.getFlight() != null ? booking.getFlight().isRequiresSelfTransfer() : "No Data");
-		dataset.put("flightDescription", booking.getFlight() != null ? booking.getFlight().getDescription() : "No Data");
-		dataset.put("departureDate", booking.getFlight() != null ? booking.getFlight().scheduledDeparture() : "No Data");
-		dataset.put("arrivalDate", booking.getFlight() != null ? booking.getFlight().scheduledArrival() : "No Data");
-		dataset.put("origin", booking.getFlight() != null ? booking.getFlight().origin() : "No Data");
-		dataset.put("destination", booking.getFlight() != null ? booking.getFlight().destination() : "No Data");
-		dataset.put("numberOfLayovers", booking.getFlight() != null ? booking.getFlight().numberOfLayovers() : "No Data");
+		dataset.put("flightSelfTransfer", flightAvailable ? booking.getFlight().isRequiresSelfTransfer() : "No Data");
+		dataset.put("flightDescription", flightAvailable ? booking.getFlight().getDescription() : "No Data");
+		dataset.put("departureDate", flightAvailable ? booking.getFlight().scheduledDeparture() : "No Data");
+		dataset.put("arrivalDate", flightAvailable ? booking.getFlight().scheduledArrival() : "No Data");
+		dataset.put("origin", flightAvailable ? booking.getFlight().origin() : "No Data");
+		dataset.put("destination", flightAvailable ? booking.getFlight().destination() : "No Data");
+		dataset.put("numberOfLayovers", flightAvailable ? booking.getFlight().numberOfLayovers() : "No Data");
 
 		super.getResponse().addData(dataset);
 		super.getResponse().addData(dataset);

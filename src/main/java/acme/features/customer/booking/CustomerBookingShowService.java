@@ -2,7 +2,7 @@
 package acme.features.customer.booking;
 
 import java.util.Collection;
-import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,12 +54,12 @@ public class CustomerBookingShowService extends AbstractGuiService<Customer, Boo
 	@Override
 	public void unbind(final Booking booking) {
 
-		Collection<Flight> availableFlights = Collections.emptyList();
+		Collection<Flight> availableFlights;
 
 		boolean selectedIsAvailable = this.repository.checkFlightIsAvailableById(booking.getFlight().getId(), MomentHelper.getCurrentMoment());
 
 		if (!booking.isDraftMode() && !selectedIsAvailable)
-			availableFlights.add(booking.getFlight());
+			availableFlights = List.of(booking.getFlight());
 		else
 			availableFlights = this.repository.findAvailableFlights(MomentHelper.getCurrentMoment());
 		Dataset dataset;

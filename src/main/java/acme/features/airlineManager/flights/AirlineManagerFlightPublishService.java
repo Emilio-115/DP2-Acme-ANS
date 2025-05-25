@@ -36,12 +36,11 @@ public class AirlineManagerFlightPublishService extends AbstractGuiService<Airli
 		boolean status;
 		int flightId;
 		Flight flight;
-		AirlineManager airlineManager;
 
 		flightId = super.getRequest().getData("id", int.class);
-		flight = this.repository.findFlightById(flightId).orElse(null);
-		airlineManager = flight == null ? null : flight.getManager();
-		status = flight != null && flight.isDraftMode() && super.getRequest().getPrincipal().hasRealm(airlineManager);
+		int airlineManagerId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		flight = this.repository.findByIdAndManagerId(flightId, airlineManagerId).orElse(null);
+		status = flight != null && flight.isDraftMode();
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -66,9 +65,6 @@ public class AirlineManagerFlightPublishService extends AbstractGuiService<Airli
 	@Override
 
 	public void validate(final Flight flight) {
-
-		boolean haveALeg = flight.numberOfLayovers() >= 0;
-		super.state(haveALeg, "*", "acme.validation.flight.no-legs.message");
 
 		List<Leg> legs = this.repository.findAllLegsByFlightId(flight.getId());
 		for (Leg leg : legs)
