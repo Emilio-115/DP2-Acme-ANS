@@ -13,7 +13,6 @@
           <acme:menu-bar>
             <acme:menu-left>
               <acme:menu-option code="master.menu.anonymous" access="isAnonymous()">
-                <acme:menu-suboption code="master.menu.anonymous.favourite-link" action="http://www.example.com/" />
                 <acme:menu-suboption code="master.menu.anonymous.student1-favourite-link"
                   action="https://es.wikipedia.org/wiki/Corporaci%C3%B3n_Acme?useskin=vector" />
                 <acme:menu-suboption code="master.menu.anonymous.student2-favourite-link"
