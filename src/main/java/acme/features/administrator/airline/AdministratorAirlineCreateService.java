@@ -16,7 +16,16 @@ public class AdministratorAirlineCreateService extends AdministratorAirlineServi
 	@Override
 	public void authorise() {
 
-		super.getResponse().setAuthorised(true);
+		boolean status;
+		String method = super.getRequest().getMethod();
+
+		if (method.equals("GET"))
+			status = true;
+		else {
+			int id = super.getRequest().getData("id", int.class);
+			status = id == 0;
+		}
+		super.getResponse().setAuthorised(status);
 
 	}
 
