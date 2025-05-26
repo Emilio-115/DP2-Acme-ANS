@@ -72,7 +72,7 @@ public class CustomerBookingDeleteService extends AbstractGuiService<Customer, B
 		SelectChoices choices;
 		SelectChoices flightChoices;
 		choices = SelectChoices.from(TravelClass.class, booking.getTravelClass());
-		flightChoices = SelectChoices.from(availableFlights, "tag", booking.getFlight());
+		flightChoices = SelectChoices.from(availableFlights, "tag", flightAvailable ? booking.getFlight() : null);
 		dataset = super.unbindObject(booking, "locatorCode", "purchaseMoment", "travelClass", "creditCardLastNibble", "draftMode");
 
 		dataset.put("price", booking.price());
