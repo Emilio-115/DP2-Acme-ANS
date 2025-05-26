@@ -47,8 +47,17 @@ public interface FlightCrewMemberFlightAssignmentRepository extends AbstractRepo
 		""")
 	List<FlightAssignment> findDraftFlightAssignmentsByFlightCrewMemberId(Integer flightCrewMemberId);
 
+	@Query("""
+		SELECT fa FROM FlightAssignment fa
+		WHERE fa.flightCrewMember.id = :flightCrewMemberId
+		""")
 	List<FlightAssignment> findAllByFlightCrewMemberId(Integer flightCrewMemberId);
 
+	@Query("""
+		SELECT fa FROM FlightAssignment fa
+		WHERE fa.id = :id
+		AND fa.flightCrewMember.id = :flightCrewMemberId
+		""")
 	Optional<FlightAssignment> findByIdAndFlightCrewMemberId(Integer id, Integer flightCrewMemberId);
 
 	@Query("""
