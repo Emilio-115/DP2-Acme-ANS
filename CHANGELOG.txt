@@ -8,6 +8,7 @@
 # purposes.  The copyright owner does not offer any warranties or representations, nor do
 # they accept any liabilities with respect to them.
 
-D01	Initial version of Acme-ANS.
-D02	Second version of Acme-ANS.
-D03	Third version of Acme-ANS, creation of the entities.
+D01 - Initial version of Acme-ANS.
+D02 - Second version of Acme-ANS. Added entities and dashboards.
+D03 - Third version of Acme-ANS. Added services and features for all entities.
+D04 - Fourth version of Acme-ANS. Added tests for all services and several critical bug fixes.
