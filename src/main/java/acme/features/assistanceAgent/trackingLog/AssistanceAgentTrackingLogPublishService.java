@@ -1,7 +1,7 @@
 
 package acme.features.assistanceAgent.trackingLog;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -25,23 +25,18 @@ public class AssistanceAgentTrackingLogPublishService extends AbstractGuiService
 
 	@Override
 	public void authorise() {
-		int trackingLogId = super.getRequest().getData("id", int.class);
 		boolean status;
-		TrackingLog trackingLog = this.repository.findTrackingLogById(trackingLogId);
-		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		Optional<TrackingLog> trackingLog = this.getTrackingLog();
 
-		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && trackingLog != null && trackingLog.getClaim().getAssistanceAgent().getId() == agentId;
-		;
+		status = trackingLog.isPresent() && trackingLog.get().isDraftMode() && this.securityId();
+
 		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
 	public void load() {
 		TrackingLog trackingLog;
-		int trackingLogId;
-
-		trackingLogId = super.getRequest().getData("id", int.class);
-		trackingLog = this.repository.findTrackingLogById(trackingLogId);
+		trackingLog = this.getTrackingLog().get();
 		super.getBuffer().addData(trackingLog);
 	}
 
@@ -50,7 +45,7 @@ public class AssistanceAgentTrackingLogPublishService extends AbstractGuiService
 
 		Claim claim = trackingLog.getClaim();
 
-		super.bindObject(trackingLog, "undergoingStep", "resolutionPercentage", "resolution", "status", "lastUpdateMoment");
+		super.bindObject(trackingLog, "undergoingStep", "resolutionPercentage", "resolution", "status");
 		trackingLog.setLastUpdateMoment(MomentHelper.getCurrentMoment());
 
 		Double per = trackingLog.getResolutionPercentage();
@@ -67,10 +62,7 @@ public class AssistanceAgentTrackingLogPublishService extends AbstractGuiService
 
 	@Override
 	public void validate(final TrackingLog trackingLog) {
-		boolean notPublished = trackingLog.isDraftMode();
-
-		List<TrackingLog> trackingLogs;
-		trackingLogs = this.repository.findTopPercentage(trackingLog.getClaim().getId(), trackingLog.isReclaim());
+		boolean notPublished = !trackingLog.getClaim().isDraftMode();
 
 		super.state(notPublished, "*", "acme.validation.update.draftMode.tracking-log");
 	}
@@ -95,5 +87,28 @@ public class AssistanceAgentTrackingLogPublishService extends AbstractGuiService
 
 		super.getResponse().addData(dataset);
 
+	}
+
+	private Optional<TrackingLog> getTrackingLog() {
+		String method = super.getRequest().getMethod();
+		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		int trackingLogId;
+		if (method.equals("GET"))
+			trackingLogId = super.getRequest().getData("trackingLogId", int.class);
+		else
+			trackingLogId = super.getRequest().getData("id", int.class);
+		return this.repository.findTrackingLogById(trackingLogId, agentId);
+	}
+
+	private boolean securityId() {
+		String method = super.getRequest().getMethod();
+		boolean status = true;
+		if (method.equals("POST")) {
+			int claimId = super.getRequest().getData("id", int.class);
+			int securityId = super.getRequest().getData("trackingLogId", int.class);
+
+			status = claimId == securityId;
+		}
+		return status;
 	}
 }

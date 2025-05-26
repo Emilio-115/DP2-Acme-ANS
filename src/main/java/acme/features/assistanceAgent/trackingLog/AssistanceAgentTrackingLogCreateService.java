@@ -2,6 +2,7 @@
 package acme.features.assistanceAgent.trackingLog;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -29,14 +30,23 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 
 		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		int claimId = super.getRequest().getData("claimId", int.class);
-		Claim claim = this.repository.findClaimById(claimId);
+		Optional<Claim> claim = this.repository.findByIdAndAssistanceAgentId(claimId, agentId);
+
+		String method = super.getRequest().getMethod();
+		boolean statusTrackingLog = true;
+		int trackingLogId;
 
 		List<TrackingLog> trackingLogs = this.repository.findTopPercentage(claimId, false);
 		if (!trackingLogs.isEmpty() && (trackingLogs.get(0).isDraftMode() || trackingLogs.get(0).getResolutionPercentage().equals(100.00)))
 			canCreate = false;
 
-		status = claim != null && canCreate && claim.getAssistanceAgent().getId() == agentId;
-		super.getResponse().setAuthorised(status);
+		if (method.equals("POST")) {
+			trackingLogId = super.getRequest().getData("id", int.class);
+			statusTrackingLog = trackingLogId == 0;
+		}
+
+		status = claim.isPresent() && canCreate;
+		super.getResponse().setAuthorised(status && statusTrackingLog);
 	}
 
 	@Override
@@ -54,21 +64,10 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 		int claimId;
 		Claim claim;
 
-		//Request hola = super.getRequest();
-
 		claimId = super.getRequest().getData("claimId", int.class);
 		claim = this.repository.findClaimById(claimId);
-
-		/*
-		 * double per = super.getRequest().getData("resolutionPercentage", double.class);
-		 * TrackingLogStatus st = super.getRequest().getData("status", TrackingLogStatus.class);
-		 * 
-		 * if (per == 100.0) {
-		 * ClaimStatus cs = st.equals(TrackingLogStatus.ACCEPTED) ? ClaimStatus.ACCEPTED : ClaimStatus.REJECTED;
-		 * claim.setIsAccepted(cs);
-		 * }
-		 */
 		super.bindObject(trackingLog, "undergoingStep", "resolutionPercentage", "resolution", "status");
+
 		trackingLog.setReclaim(false);
 		trackingLog.setDraftMode(true);
 		trackingLog.setLastUpdateMoment(MomentHelper.getCurrentMoment());
@@ -83,7 +82,6 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 	@Override
 	public void perform(final TrackingLog trackingLog) {
 		this.repository.save(trackingLog);
-		//this.repository.save(trackingLog.getClaim());
 	}
 
 	@Override

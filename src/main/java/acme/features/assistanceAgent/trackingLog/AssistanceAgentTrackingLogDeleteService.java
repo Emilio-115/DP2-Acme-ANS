@@ -1,6 +1,8 @@
 
 package acme.features.assistanceAgent.trackingLog;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
@@ -8,7 +10,6 @@ import acme.client.components.views.SelectChoices;
 import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
-import acme.entities.claims.Claim;
 import acme.entities.trackingLogs.TrackingLog;
 import acme.entities.trackingLogs.TrackingLogStatus;
 import acme.realms.assistanceAgent.AssistanceAgent;
@@ -25,28 +26,17 @@ public class AssistanceAgentTrackingLogDeleteService extends AbstractGuiService<
 
 		boolean status;
 
-		int trackingLogId = super.getRequest().getData("id", int.class);
-		TrackingLog trackingLog = this.repository.findTrackingLogById(trackingLogId);
+		Optional<TrackingLog> trackingLog = this.getTrackingLog();
 
-		if (trackingLog == null)
-			super.getResponse().setAuthorised(false);
-		else {
-			Claim claim = trackingLog.getClaim();
-			int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		status = trackingLog.isPresent() && trackingLog.get().isDraftMode() && this.securityId();
 
-			status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && claim.getAssistanceAgent().getId() == agentId && trackingLog.isDraftMode();
-
-			super.getResponse().setAuthorised(status);
-		}
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
 	public void load() {
 		TrackingLog trackingLog;
-		int trackingLogId;
-
-		trackingLogId = super.getRequest().getData("id", int.class);
-		trackingLog = this.repository.findTrackingLogById(trackingLogId);
+		trackingLog = this.getTrackingLog().get();
 		super.getBuffer().addData(trackingLog);
 	}
 
@@ -82,5 +72,29 @@ public class AssistanceAgentTrackingLogDeleteService extends AbstractGuiService<
 
 		super.getResponse().addData(dataset);
 
+	}
+
+	private Optional<TrackingLog> getTrackingLog() {
+		String method = super.getRequest().getMethod();
+		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		int trackingLogId;
+		if (method.equals("GET"))
+			trackingLogId = super.getRequest().getData("trackingLogId", int.class);
+		else
+			trackingLogId = super.getRequest().getData("id", int.class);
+
+		return this.repository.findTrackingLogById(trackingLogId, agentId);
+	}
+
+	private boolean securityId() {
+		String method = super.getRequest().getMethod();
+		boolean status = true;
+		if (method.equals("POST")) {
+			int claimId = super.getRequest().getData("id", int.class);
+			int securityId = super.getRequest().getData("trackingLogId", int.class);
+
+			status = claimId == securityId;
+		}
+		return status;
 	}
 }

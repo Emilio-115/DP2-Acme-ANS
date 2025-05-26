@@ -15,6 +15,9 @@ acme.validation.claim.not-completed-claim = The process of this claim is not com
 acme.validation.claim.not-status-claim = The process of this claim is complete, determine if it is accepted
 acme.validation.claim.moment-registration-before-arrival = The moment have to be before the leg landed
 
+acme.validation.activity-log.need-publish = You need to publish the last tracking log to continue
+acme.validation.activity-log.update-status = You need to publish the last tracking log to update the claim status
+
 acme.validation.activity-log.assignment-not-published.message = Flight assignment is not published
 acme.validation.activity-log.assignment-not-confirmed.message = Flight assignment is not confirmed
 acme.validation.activity-log.registered-before-landing.message = Invalid registeredAt date: registered before the respective leg landed
@@ -24,7 +27,7 @@ acme.validation.draftMode.tracking-log = This tracking log has already been publ
 
 acme.validation.update.draftMode.claim = This claim can not be publish with unpublished tracking logs
 
-acme.validation.update.draftMode.tracking-log = This tracking log can not be publish with unpublished tracking logs
+acme.validation.update.draftMode.tracking-log = This tracking log can not be publish with unpublished claim.
 
 acme.validation.create.tracking-log.low-percentage = The percentage is not valid, it has to be higher than the last tracking log
 
@@ -34,6 +37,8 @@ acme.validation.tracking-log.not-good-update-date = The update date has to be af
 acme.validation.tracking-log.update-before-other = The update date has to be after the date of the most recent tracking log
 
 acme.validation.aircraft.non-unique-registration-number = Registration Number already exist, registration number must be unique
+acme.validation.aircraft.busy-cant-be-under-maintenance = A busy aircraft cant be under maintenance
+
 
 acme.validation.flight-assignment.flight-crew-member-unavailable.message = Flight crew member is unavailable
 acme.validation.flight-assignment.member-already-in-leg-with-duty.message = Flight crew member is already assigned to this leg with this duty
@@ -45,6 +50,8 @@ acme.validation.flight-assignment.copilot-duty-taken.message = Copilot duty is a
 
 acme.validation.flight-crew-member.non-unique-employee-code = Employee code must be unique
 
+
+acme.validation.flight.no-leg.message = There is no leg in this flight
 acme.validation.assistance-agent.non-unique-employee-code = Employee code must be unique
 acme.validation.flight.leg-not-published.message = Every leg have to be published
 acme.validation.leg.overlapping-legs.message = Invalid dates of departure or arrival, legs cannot overlap
@@ -56,9 +63,9 @@ acme.validation.flight.no-legs.message = Flight need at least a leg to be publis
 acme.validation.leg.past-departure-date.message = Departure Date must be future
 acme.validation.leg.past-arrival-date.message = Arrival Date must be future
 acme.validation.leg.arrival-before-departure.message = Arrival date must be after departure date
-acme.validation.flight.cost-euro.message = Cost currency must be euros
 acme.validation.airline-manager.non-unique-identifier = Identifier must be unique
-
+acme.validation.leg.same-airport.message = Leg arrival and departure airport must be different
+acme.validation.flight.published-leg.message = Cannot delete flight there is a published leg
 
 # acme.validation.booking ############################
 

@@ -82,10 +82,14 @@ public class AirlineManagerLegShowService extends AbstractGuiService<AirlineMana
 		dataset.put("arrivalAirport", airportArrivalChoices.getSelected().getKey());
 
 		Collection<Aircraft> availableAircrafts = this.repository.findAllActiveAircrafts();
+		Aircraft aircraft = leg.getAircraft();
 		if (!availableAircrafts.contains(leg.getAircraft()))
-			availableAircrafts.add(leg.getAircraft());
+			if (!leg.isDraftMode())
+				availableAircrafts.add(leg.getAircraft());
+			else
+				aircraft = null;
 
-		SelectChoices aircraftChoices = SelectChoices.from(availableAircrafts, "registrationNumber", leg.getAircraft());
+		SelectChoices aircraftChoices = SelectChoices.from(availableAircrafts, "registrationNumber", aircraft);
 		dataset.put("aircraftChoices", aircraftChoices);
 		dataset.put("aircraft", aircraftChoices.getSelected().getKey());
 

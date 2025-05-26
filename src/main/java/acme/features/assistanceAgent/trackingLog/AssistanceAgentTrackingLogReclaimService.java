@@ -2,6 +2,7 @@
 package acme.features.assistanceAgent.trackingLog;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -25,21 +26,17 @@ public class AssistanceAgentTrackingLogReclaimService extends AbstractGuiService
 	@Override
 	public void authorise() {
 		boolean status;
-		boolean canReclaim = false;
 
-		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
-		int claimId = super.getRequest().getData("claimId", int.class);
-		Claim claim = this.repository.findClaimById(claimId);
+		String method = super.getRequest().getMethod();
+		boolean statusTrackingLog = true;
+		int trackingLogId;
 
-		List<TrackingLog> reclaimedTrackingLogs = this.repository.findTopPercentage(claimId, true);
-		List<TrackingLog> trackingLogs = this.repository.findTopPercentage(claimId, false);
-
-		if (reclaimedTrackingLogs.isEmpty() && !trackingLogs.isEmpty() && !trackingLogs.get(0).isDraftMode() && trackingLogs.get(0).getResolutionPercentage().equals(100.00)
-			|| !reclaimedTrackingLogs.isEmpty() && !reclaimedTrackingLogs.get(0).isDraftMode() && !reclaimedTrackingLogs.get(0).getResolutionPercentage().equals(100.00))
-			canReclaim = true;
-
-		status = canReclaim && claim.getAssistanceAgent().getId() == agentId;
-		super.getResponse().setAuthorised(status);
+		status = this.canReclaim();
+		if (method.equals("POST")) {
+			trackingLogId = super.getRequest().getData("id", int.class);
+			statusTrackingLog = trackingLogId == 0;
+		}
+		super.getResponse().setAuthorised(status && statusTrackingLog);
 	}
 
 	@Override
@@ -94,6 +91,24 @@ public class AssistanceAgentTrackingLogReclaimService extends AbstractGuiService
 		dataset.put("claimId", claimId);
 
 		super.getResponse().addData(dataset);
+
+	}
+
+	private boolean canReclaim() {
+		int claimId = super.getRequest().getData("claimId", int.class);
+		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		Optional<Claim> claim = this.repository.findByIdAndAssistanceAgentId(claimId, agentId);
+		boolean status = false;
+
+		if (claim.isPresent()) {
+			List<TrackingLog> reclaimedTrackingLogs = this.repository.findTopPercentage(claimId, true);
+			if (reclaimedTrackingLogs.isEmpty()) {
+				List<TrackingLog> trackingLogs = this.repository.findTopPercentage(claimId, false);
+				status = !trackingLogs.isEmpty() && !trackingLogs.get(0).isDraftMode() && trackingLogs.get(0).getResolutionPercentage().equals(100.00);
+			} else
+				status = !reclaimedTrackingLogs.get(0).isDraftMode() && !reclaimedTrackingLogs.get(0).getResolutionPercentage().equals(100.00);
+		}
+		return status;
 
 	}
 }

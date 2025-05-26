@@ -3,6 +3,7 @@ package acme.features.assistanceAgent.claim;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -30,10 +31,10 @@ public class AssistanceAgentClaimDeleteService extends AbstractGuiService<Assist
 		boolean status;
 
 		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
-		int claimId = super.getRequest().getData("id", int.class);
-		Claim claim = this.repository.findClaimById(claimId);
 
-		status = claim != null && claim.getAssistanceAgent().getId() == agentId && claim.isDraftMode();
+		Optional<Claim> claim = this.getClaim(agentId);
+
+		status = claim.isPresent() && this.securityId() && claim.get().isDraftMode();
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -41,24 +42,18 @@ public class AssistanceAgentClaimDeleteService extends AbstractGuiService<Assist
 	@Override
 	public void load() {
 		Claim claim;
-		int assistanceAgentId;
-		int claimId;
 
-		claimId = super.getRequest().getData("id", int.class);
+		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
 
-		assistanceAgentId = super.getRequest().getPrincipal().getActiveRealm().getId();
-		claim = this.repository.findByIdAndAssistanceAgentId(claimId, assistanceAgentId).get();
+		claim = this.getClaim(agentId).get();
 
 		super.getBuffer().addData(claim);
 	}
 
 	@Override
 	public void bind(final Claim claim) {
-		int legId;
-		Leg leg;
-
-		legId = super.getRequest().getData("leg", int.class);
-		leg = this.repository.findLegById(legId);
+		int legId = super.getRequest().getData("leg", int.class);
+		Leg leg = this.repository.findLegById(legId);
 
 		super.bindObject(claim, "registrationMoment", "passengerEmail", "description", "type");
 		claim.setLeg(leg);
@@ -66,17 +61,6 @@ public class AssistanceAgentClaimDeleteService extends AbstractGuiService<Assist
 
 	@Override
 	public void validate(final Claim claim) {
-		/*
-		 * boolean status;
-		 * int claimId = super.getRequest().getData("id", int.class);
-		 * 
-		 * List<TrackingLog> trackingLogs = this.repository.findAllTrackingLogsByClaimId(claimId);
-		 * 
-		 * status = trackingLogs.size() == 0;
-		 * 
-		 * super.state(status, "*", "assistance-agent.claim.delete.claim-linked");
-		 */
-		;
 	}
 
 	@Override
@@ -107,4 +91,30 @@ public class AssistanceAgentClaimDeleteService extends AbstractGuiService<Assist
 
 		super.getResponse().addData(dataset);
 	}
+
+	private boolean securityId() {
+		String method = super.getRequest().getMethod();
+		boolean status = true;
+		if (method.equals("POST")) {
+			int claimId = super.getRequest().getData("id", int.class);
+			int securityId = super.getRequest().getData("claimId", int.class);
+
+			status = claimId == securityId;
+		}
+		return status;
+	}
+
+	private Optional<Claim> getClaim(final int agentId) {
+		String method = super.getRequest().getMethod();
+
+		int claimId;
+		if (method.equals("GET"))
+			claimId = super.getRequest().getData("claimId", int.class);
+		else
+			claimId = super.getRequest().getData("id", int.class);
+		Optional<Claim> claim = this.repository.findByIdAndAssistanceAgentId(claimId, agentId);
+
+		return claim;
+	}
+
 }

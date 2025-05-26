@@ -2,6 +2,7 @@
 package acme.features.assistanceAgent.claim;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -29,25 +30,14 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 	@Override
 	public void authorise() {
 		boolean status;
-
-		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
-		int claimId = super.getRequest().getData("id", int.class);
-		Claim claim = this.repository.findClaimById(claimId);
-
-		status = claim != null && super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && claim.getAssistanceAgent().getId() == agentId && claim.isDraftMode();
+		status = this.validUpdate();
 
 		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
 	public void load() {
-		Claim claim;
-		int assistanceAgentId;
-		int claimId;
-
-		claimId = super.getRequest().getData("id", int.class);
-		assistanceAgentId = super.getRequest().getPrincipal().getAccountId();
-		claim = this.repository.findClaimById(claimId);
+		Claim claim = this.getClaim().get();
 
 		super.getBuffer().addData(claim);
 	}
@@ -61,7 +51,7 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 		legId = super.getRequest().getData("leg", int.class);
 		leg = this.repository.findLegById(legId);
 
-		super.bindObject(claim, "registrationMoment", "passengerEmail", "description", "type", "isAccepted");
+		super.bindObject(claim, "passengerEmail", "description", "type");
 		claim.setLeg(leg);
 	}
 
@@ -100,5 +90,60 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 	public void onSuccess() {
 		if (super.getRequest().getMethod().equals("POST"))
 			PrincipalHelper.handleUpdate();
+	}
+
+	private Optional<Claim> getClaim() {
+		String method = super.getRequest().getMethod();
+		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		int claimId;
+		if (method.equals("GET"))
+			claimId = super.getRequest().getData("claimId", int.class);
+		else
+			claimId = super.getRequest().getData("id", int.class);
+		Optional<Claim> claim = this.repository.findByIdAndAssistanceAgentId(claimId, agentId);
+
+		return claim;
+	}
+
+	private Leg getLeg(final Claim claim) {
+		int legId;
+		Leg leg;
+
+		String method = super.getRequest().getMethod();
+
+		if (method.equals("GET"))
+			legId = claim.getLeg().getId();
+		else
+			legId = super.getRequest().getData("leg", int.class);
+		leg = this.repository.findLegById(legId);
+		return leg;
+	}
+
+	private boolean securityId() {
+		String method = super.getRequest().getMethod();
+		boolean status = true;
+		if (method.equals("POST")) {
+			int claimId = super.getRequest().getData("id", int.class);
+			int securityId = super.getRequest().getData("claimId", int.class);
+
+			status = claimId == securityId;
+		}
+		return status;
+	}
+
+	private boolean validUpdate() {
+		Optional<Claim> claim = this.getClaim();
+		boolean status = false;
+		if (claim.isPresent()) {
+			Leg leg = this.getLeg(claim.get());
+			status = this.securityId() && this.validLeg(leg) && claim.get().isDraftMode();
+		}
+		return status;
+	}
+
+	private boolean validLeg(final Leg leg) {
+		Collection<Leg> legs = this.repository.findAllLandedLegs(LegStatus.LANDED);
+		boolean status = leg == null || legs.contains(leg);
+		return status;
 	}
 }

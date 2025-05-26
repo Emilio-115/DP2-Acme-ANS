@@ -1,6 +1,8 @@
 
 package acme.features.assistanceAgent.trackingLog;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
@@ -9,7 +11,6 @@ import acme.client.helpers.MomentHelper;
 import acme.client.helpers.PrincipalHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
-import acme.entities.claims.Claim;
 import acme.entities.trackingLogs.TrackingLog;
 import acme.entities.trackingLogs.TrackingLogStatus;
 import acme.realms.assistanceAgent.AssistanceAgent;
@@ -24,38 +25,25 @@ public class AssistanceAgentTrackingLogUpdateService extends AbstractGuiService<
 	@Override
 	public void authorise() {
 
-		boolean status;
+		Optional<TrackingLog> trackingLog = this.getTrackingLog();
 
-		int claimId = super.getRequest().getData("claimId", int.class);
+		boolean trackingLogStatus = trackingLog.isPresent() && trackingLog.get().isDraftMode() && this.securityId();
 
-		Claim claim = this.repository.findClaimById(claimId);
-		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
-
-		status = claim != null && super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && claim.getAssistanceAgent().getId() == agentId;
-
-		super.getResponse().setAuthorised(status);
+		super.getResponse().setAuthorised(trackingLogStatus);
 	}
 
 	@Override
 	public void load() {
 		TrackingLog trackingLog;
-		int trackingLogId;
-
-		trackingLogId = super.getRequest().getData("id", int.class);
-		trackingLog = this.repository.findTrackingLogById(trackingLogId);
+		trackingLog = this.getTrackingLog().get();
 		super.getBuffer().addData(trackingLog);
 	}
 
 	@Override
 	public void bind(final TrackingLog trackingLog) {
-
-		int claimId = super.getRequest().getData("claimId", int.class);
-		Claim claim = this.repository.findClaimById(claimId);
-
-		super.bindObject(trackingLog, "undergoingStep", "resolutionPercentage", "resolution", "status", "lastUpdateMoment");
+		super.bindObject(trackingLog, "undergoingStep", "resolutionPercentage", "resolution", "status");
 		trackingLog.setLastUpdateMoment(MomentHelper.getCurrentMoment());
 
-		trackingLog.setClaim(claim);
 	}
 
 	@Override
@@ -78,8 +66,6 @@ public class AssistanceAgentTrackingLogUpdateService extends AbstractGuiService<
 
 		choices = SelectChoices.from(TrackingLogStatus.class, trackingLog.getStatus());
 
-		int claimId = trackingLog.getClaim().getId();
-		super.getResponse().addGlobal("claimId", claimId);
 		dataset = super.unbindObject(trackingLog, "lastUpdateMoment", "undergoingStep", "resolutionPercentage", "resolution", "draftMode", "status", "reclaim");
 		dataset.put("statuses", choices);
 
@@ -91,5 +77,28 @@ public class AssistanceAgentTrackingLogUpdateService extends AbstractGuiService<
 	public void onSuccess() {
 		if (super.getRequest().getMethod().equals("POST"))
 			PrincipalHelper.handleUpdate();
+	}
+
+	private Optional<TrackingLog> getTrackingLog() {
+		String method = super.getRequest().getMethod();
+		int trackingLogId;
+		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		if (method.equals("GET"))
+			trackingLogId = super.getRequest().getData("trackingLogId", int.class);
+		else
+			trackingLogId = super.getRequest().getData("id", int.class);
+		return this.repository.findTrackingLogById(trackingLogId, agentId);
+	}
+
+	private boolean securityId() {
+		String method = super.getRequest().getMethod();
+		boolean status = true;
+		if (method.equals("POST")) {
+			int claimId = super.getRequest().getData("id", int.class);
+			int securityId = super.getRequest().getData("trackingLogId", int.class);
+
+			status = claimId == securityId;
+		}
+		return status;
 	}
 }

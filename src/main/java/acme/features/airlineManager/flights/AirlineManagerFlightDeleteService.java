@@ -39,12 +39,11 @@ public class AirlineManagerFlightDeleteService extends AbstractGuiService<Airlin
 		boolean status;
 		int flightId;
 		Flight flight;
-		AirlineManager airlineManager;
 
 		flightId = super.getRequest().getData("id", int.class);
-		flight = this.repository.findFlightById(flightId).orElse(null);
-		airlineManager = flight == null ? null : flight.getManager();
-		status = flight != null && flight.isDraftMode() && super.getRequest().getPrincipal().hasRealm(airlineManager);
+		int airlineManagerId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		flight = this.repository.findByIdAndManagerId(flightId, airlineManagerId).orElse(null);
+		status = flight != null && flight.isDraftMode();
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -67,7 +66,14 @@ public class AirlineManagerFlightDeleteService extends AbstractGuiService<Airlin
 
 	@Override
 	public void validate(final Flight flight) {
+		Collection<Leg> legs;
+		int flightId;
 
+		flightId = super.getRequest().getData("id", int.class);
+
+		legs = this.repository.findAllLegsByFlightId(flightId);
+		boolean allDraftMode = legs.stream().allMatch(Leg::isDraftMode);
+		super.state(allDraftMode, "*", "acme.validation.flight.published-leg.message");
 	}
 
 	@Override

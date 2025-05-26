@@ -2,6 +2,7 @@
 package acme.features.customer.booking;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,14 +54,22 @@ public class CustomerBookingShowService extends AbstractGuiService<Customer, Boo
 	@Override
 	public void unbind(final Booking booking) {
 
-		Collection<Flight> availableFlights = this.repository.findAvailableFlights(MomentHelper.getCurrentMoment());
-		if (!availableFlights.contains(booking.getFlight()))
-			availableFlights.add(booking.getFlight());
+		Collection<Flight> availableFlights;
+
+		boolean selectedIsAvailable = this.repository.checkFlightIsAvailableById(booking.getFlight().getId(), MomentHelper.getCurrentMoment());
+
+		if (!booking.isDraftMode() && !selectedIsAvailable)
+			availableFlights = List.of(booking.getFlight());
+		else
+			availableFlights = this.repository.findAvailableFlights(MomentHelper.getCurrentMoment());
 		Dataset dataset;
 		SelectChoices choices;
 		SelectChoices flightChoices;
+
+		boolean hideFlight = booking.isDraftMode() && !selectedIsAvailable;
+
 		choices = SelectChoices.from(TravelClass.class, booking.getTravelClass());
-		flightChoices = SelectChoices.from(availableFlights, "tag", booking.getFlight());
+		flightChoices = SelectChoices.from(availableFlights, "tag", hideFlight ? null : booking.getFlight());
 		dataset = super.unbindObject(booking, "locatorCode", "purchaseMoment", "travelClass", "creditCardLastNibble", "draftMode");
 
 		dataset.put("price", booking.price());
