@@ -2,7 +2,6 @@
 package acme.features.assistanceAgent.claim;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import acme.entities.claims.ClaimStatus;
 import acme.entities.claims.ClaimType;
 import acme.entities.legs.Leg;
 import acme.entities.legs.LegStatus;
-import acme.entities.trackingLogs.TrackingLog;
 import acme.realms.assistanceAgent.AssistanceAgent;
 
 @GuiService
@@ -57,12 +55,6 @@ public class AssistanceAgentClaimPublishService extends AbstractGuiService<Assis
 
 	@Override
 	public void validate(final Claim claim) {
-
-		List<TrackingLog> trackingLogs = this.repository.findAllTrackingLogsByClaimId(claim.getId());
-
-		boolean status = trackingLogs.stream().allMatch(x -> !x.isDraftMode());
-
-		super.state(status, "*", "acme.validation.update.draftMode.claim");
 	}
 
 	@Override
@@ -121,22 +113,25 @@ public class AssistanceAgentClaimPublishService extends AbstractGuiService<Assis
 		int legId;
 		Leg leg = null;
 		boolean status;
+		boolean draftStatus = false;
 
 		Optional<Claim> claim = this.getClaim(agentId);
 
-		if (claim.isPresent())
+		if (claim.isPresent()) {
+			draftStatus = claim.get().isDraftMode();
 			if (super.getRequest().getMethod().equals("POST")) {
 				legId = super.getRequest().getData("leg", int.class);
 				leg = this.repository.findLegById(legId);
 			} else
 				leg = claim.get().getLeg();
-		status = this.validLeg(leg);
+		}
+		status = this.validLeg(leg) && draftStatus;
 		return status;
 	}
 
 	private boolean validLeg(final Leg leg) {
 		Collection<Leg> legs = this.repository.findAllLandedLegs(LegStatus.LANDED);
-		boolean status = leg != null && legs.contains(leg);
+		boolean status = leg == null || legs.contains(leg);
 
 		return status;
 	}

@@ -3,6 +3,7 @@ package acme.features.assistanceAgent.trackingLog;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -26,8 +27,8 @@ public class AssistanceAgentTrackingLogListService extends AbstractGuiService<As
 
 		int claimId = super.getRequest().getData("claimId", int.class);
 		int agentId = super.getRequest().getPrincipal().getActiveRealm().getId();
-		Claim claim = this.repository.findClaimById(claimId);
-		status = super.getRequest().getPrincipal().hasRealmOfType(AssistanceAgent.class) && claim != null && claim.getAssistanceAgent().getId() == agentId;
+		Optional<Claim> claim = this.repository.findByIdAndAssistanceAgentId(claimId, agentId);
+		status = claim.isPresent();
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -65,25 +66,17 @@ public class AssistanceAgentTrackingLogListService extends AbstractGuiService<As
 		List<TrackingLog> TLs = this.repository.findTopPercentage(claimId, reclaimed);
 		double topPercentage = 0.0;
 		boolean published = true;
-		boolean end = false;
 		if (!TLs.isEmpty()) {
 			topPercentage = TLs.get(0).getResolutionPercentage();
 			published = !TLs.get(0).isDraftMode();
 		}
-		boolean finish = false;
-		if (!reclaimed)
-			finish = topPercentage == 100.00;
-		else {
-			finish = true;
-			if (topPercentage == 100.00)
-				end = true;
-		}
+		boolean finish = topPercentage == 100.00;
+		boolean boton = finish != reclaimed;
+		super.getResponse().addGlobal("reclaimed", reclaimed);
 		super.getResponse().addGlobal("finish", finish);
 		super.getResponse().addGlobal("published", published);
 		super.getResponse().addGlobal("claimId", claimId);
-		super.getResponse().addGlobal("end", end);
+		super.getResponse().addGlobal("boton", boton);
 
-		Claim claim = this.repository.findClaimById(claimId);
-		super.getResponse().addGlobal("claimDraftMode", claim.isDraftMode());
 	}
 }
